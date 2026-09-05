@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NBSC PRIME-HRM Candidate Docket Review — Document screening, Qualification Standards verification, and credential inspection.">
+  <title>Applicant Review — NBSC PRIME-HRM Intelligence Hub</title>
+  <link rel="stylesheet" href="../../../shared/css/global.css">
+  <link rel="stylesheet" href="../../../shared/css/components.css">
+  <link rel="stylesheet" href="../../../shared/css/modules/animations.css">
+  <link rel="stylesheet" href="../../../shared/css/modules/buttons.css">
+  <link rel="stylesheet" href="../../../shared/css/modules/badges.css">
+  <link rel="stylesheet" href="../../../shared/css/modules/cards.css">
+  <link rel="stylesheet" href="../../../shared/css/modules/forms.css">
+  <link rel="stylesheet" href="../../../shared/css/modules/tables.css">
+  <link rel="stylesheet" href="../../../shared/css/modules/navigation.css">
+  <link rel="stylesheet" href="../../../shared/css/modules/modals.css">
+  <link rel="stylesheet" href="../../../shared/css/layout.css">
+  <link rel="stylesheet" href="../../../shared/css/utilities.css">
+  <link rel="stylesheet" href="applicant-review.css">
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="app-sidebar" aria-label="Main Navigation">
+      <div class="sidebar__brand">
+        <div class="sidebar__logo-icon">N</div>
+        <div class="sidebar__brand-text">
+          <span class="sidebar__brand-title">NBSC HRMS</span>
+          <span class="sidebar__brand-badge">PRIME-HRM Level 2</span>
+        </div>
+      </div>
+
+      <nav class="sidebar__nav">
+        <span class="sidebar__section-title">Core Operations</span>
+        <a href="../../dashboard/dashboard/dashboard.html" class="sidebar__link" id="nav-dashboard">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#9638;</span>
+            <span>Dashboard</span>
+          </div>
+        </a>
+        <a href="../../employees/employee-list/employee-list.html" class="sidebar__link" id="nav-employees">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128101;</span>
+            <span>Employees</span>
+          </div>
+        </a>
+        <a href="../../programs/program-list/program-list.html" class="sidebar__link" id="nav-programs">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#127891;</span>
+            <span>Programs</span>
+          </div>
+        </a>
+
+        <span class="sidebar__section-title">Recruitment & Hiring</span>
+        <a href="../../vacancies/vacancy-list/vacancy-list.html" class="sidebar__link" id="nav-vacancies">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128188;</span>
+            <span>Vacancies</span>
+          </div>
+        </a>
+        <a href="../hiring-pipeline/hiring-pipeline.html" class="sidebar__link sidebar__link--active" id="nav-hiring-pipeline">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#9640;</span>
+            <span>Hiring Pipeline</span>
+          </div>
+        </a>
+        <a href="../deliberation/deliberation.html" class="sidebar__link" id="nav-deliberation">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#9878;</span>
+            <span>HRMPSB Voting</span>
+          </div>
+        </a>
+
+        <span class="sidebar__section-title">Compliance & Payroll</span>
+        <a href="../../audit/audit-chain/audit-chain.html" class="sidebar__link" id="nav-audit">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128279;</span>
+            <span>Audit Trail (SHA256)</span>
+          </div>
+        </a>
+        <a href="../../payroll/payroll-list/payroll-list.html" class="sidebar__link" id="nav-payroll-batches">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128176;</span>
+            <span>Payroll Batches</span>
+          </div>
+        </a>
+        <a href="../../payroll/payroll-upload/payroll-upload.html" class="sidebar__link" id="nav-payroll-upload">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128196;</span>
+            <span>Upload & Generate</span>
+          </div>
+        </a>
+        <a href="../../payroll/payslip-download/payslip-download.html" class="sidebar__link" id="nav-payslip-download">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128274;</span>
+            <span>My Payslips</span>
+          </div>
+        </a>
+        <a href="../../sara/sara-chat/sara-chat.html" class="sidebar__link" id="nav-sara">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#129302;</span>
+            <span>SARA Voice AI</span>
+          </div>
+        </a>
+      </nav>
+
+      <div class="sidebar__footer">
+        <div class="sidebar__user">
+          <div class="sidebar__user-avatar" id="user-avatar">AD</div>
+          <div class="sidebar__user-info">
+            <span class="sidebar__user-name" id="user-display-name">HR Administrator</span>
+            <span class="sidebar__user-role" id="user-display-role">HR Admin</span>
+          </div>
+        </div>
+        <button class="btn btn--icon btn--ghost" id="btn-logout" title="Sign out" aria-label="Sign out">&#10150;</button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <!-- Main Content -->
+    <main class="pipeline-main" id="main-content">
+      <div class="topbar">
+        <div>
+          <div class="crumb">Recruitment &amp; Hiring / <b>Candidate Dossier</b></div>
+          <h1>Candidate Dossier &amp; Credentials</h1>
+          <div class="sub">CSC Qualification Standards verification, authentic compliance documents, and applicant profile.</div>
+        </div>
+        <div class="pipeline-stepper">
+          <a href="../hiring-pipeline/hiring-pipeline.html" class="stepper-item">&larr; Pipeline</a>
+          <a href="../applicant-review/applicant-review.html" class="stepper-item stepper-item--active" id="link-candidate-review">1. Dossier</a>
+          <a href="../dss-scoring/dss-scoring.html" class="stepper-item" id="link-dss-scoring">2. 4-Pillar DSS</a>
+          <a href="../evaluation/evaluation.html" class="stepper-item" id="link-dept-eval">3. Dept Head Rubric</a>
+          <a href="../deliberation/deliberation.html" class="stepper-item" id="link-deliberation">4. HRMPSB Deliberation</a>
+          <a href="../final-decision/final-decision.html" class="stepper-item stepper-item--gold" id="link-final-decision">5. Appointment Resolution &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Universal Docket Selector Bar -->
+      <section class="docket-selector-bar" aria-label="Docket Candidate and Vacancy Filter">
+        <div class="docket-selector-left">
+          <span class="docket-selector-label">&#128269; Docket Filter:</span>
+          <input type="text" id="input-docket-search" class="docket-search-input" placeholder="Search applicant, ID, date..." aria-label="Search Applicant">
+          <select id="select-docket-vacancy" class="docket-select" aria-label="Select Hiring Vacancy">
+            <option value="">All Positions / Vacancies</option>
+          </select>
+          <select id="select-docket-stage" class="docket-select" aria-label="Filter by Pipeline Stage">
+            <option value="">All Pipeline Stages</option>
+            <option value="SCREENING">1. Screening / Dossier</option>
+            <option value="DSS_SCORED">2. 4-Pillar DSS</option>
+            <option value="DEPT_EVAL">3. Dept Head Rubric</option>
+            <option value="DELIBERATION">4. HRMPSB Deliberation</option>
+            <option value="FINAL_DECISION">5. Appointment Resolution</option>
+          </select>
+          <select id="select-docket-candidate" class="docket-select docket-select--candidate" aria-label="Select Candidate Docket">
+            <!-- Dynamically populated -->
+          </select>
+          <span class="docket-count-indicator" id="docket-count-indicator">Showing 0 of 0</span>
+        </div>
+        <div class="docket-chips-container" id="candidate-chips-container">
+          <!-- Quick candidate pills -->
+        </div>
+      </section>
+
+      <!-- Candidate Identity Hero Strip -->
+      <section class="candidate-hero-strip animate-fade-in" aria-label="Candidate Summary">
+        <div class="candidate-hero-left">
+          <div class="candidate-hero-avatar" id="dossier-hero-avatar">CM</div>
+          <div>
+            <h2 class="candidate-hero-title" id="applicant-header-name">Loading Candidate...</h2>
+            <div class="candidate-hero-meta">
+              <span id="applicant-header-position">Position applied &bull; Department</span>
+              <span>&bull;</span>
+              <span class="badge badge--primary" id="dossier-tracking-badge">NBSC-APP-2026-00001</span>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex align-center gap-3">
+          <span class="badge badge--warning font-sm" id="dossier-stage-badge">Stage: Screening</span>
+          <a href="#" class="btn btn--primary btn--sm" id="btn-goto-dss">Proceed to 4-Pillar DSS &rarr;</a>
+        </div>
+      </section>
+
+      <div class="review-split-grid animate-stagger-1">
+          <!-- Left Column: Dossier & Credentials -->
+          <div class="dossier-column">
+            <!-- Summary Profile Card -->
+            <section class="card mb-4" aria-labelledby="heading-profile-summary">
+              <div class="card__header">
+                <h2 class="card__title" id="heading-profile-summary">Applicant Profile & Credentials</h2>
+              </div>
+              <div class="card__body">
+                <div class="profile-meta-grid">
+                  <div class="profile-field-block profile-field-block--primary">
+                    <span class="profile-field-label">
+                      <span class="profile-field-icon">&#128100;</span>
+                      Full Legal Name
+                    </span>
+                    <div class="profile-field-value text-primary font-bold" id="dossier-name">—</div>
+                  </div>
+                  <div class="profile-field-block">
+                    <span class="profile-field-label">
+                      <span class="profile-field-icon">&#9993;</span>
+                      Email Address
+                    </span>
+                    <div class="profile-field-value" id="dossier-email">—</div>
+                  </div>
+                  <div class="profile-field-block">
+                    <span class="profile-field-label">
+                      <span class="profile-field-icon">&#128222;</span>
+                      Contact Phone
+                    </span>
+                    <div class="profile-field-value" id="dossier-phone">—</div>
+                  </div>
+                  <div class="profile-field-block">
+                    <span class="profile-field-label">
+                      <span class="profile-field-icon">&#128205;</span>
+                      Residence Address
+                    </span>
+                    <div class="profile-field-value" id="dossier-address">—</div>
+                  </div>
+                  <div class="profile-field-block">
+                    <span class="profile-field-label">
+                      <span class="profile-field-icon">&#127891;</span>
+                      Educational Attainment
+                    </span>
+                    <div class="profile-field-value font-bold" id="dossier-education">—</div>
+                  </div>
+                  <div class="profile-field-block">
+                    <span class="profile-field-label">
+                      <span class="profile-field-icon">&#127963;</span>
+                      Graduated Institution
+                    </span>
+                    <div class="profile-field-value" id="dossier-school">—</div>
+                  </div>
+                  <div class="profile-field-block profile-field-block--gold">
+                    <span class="profile-field-label">
+                      <span class="profile-field-icon" style="background: rgba(212, 168, 67, 0.15); color: #936B15;">&#128220;</span>
+                      Civil Service Eligibility
+                    </span>
+                    <div class="profile-field-value font-bold text-accent" id="dossier-eligibility">—</div>
+                  </div>
+                  <div class="profile-field-block">
+                    <span class="profile-field-label">
+                      <span class="profile-field-icon">&#128188;</span>
+                      Relevant Experience
+                    </span>
+                    <div class="profile-field-value" id="dossier-experience">—</div>
+                  </div>
+                </div>
+
+                <div class="statement-intent-card">
+                  <div class="statement-intent-label">&#10077; Statement of Intent &amp; Academic Philosophy</div>
+                  <p class="statement-intent-text" id="dossier-cover-letter">No statement provided.</p>
+                </div>
+              </div>
+            </section>
+
+            <!-- Uploaded Documents Card -->
+            <section class="card" aria-labelledby="heading-documents">
+              <div class="card__header">
+                <h2 class="card__title" id="heading-documents">Submitted Compliance Documents</h2>
+              </div>
+              <div class="card__body">
+                <div class="document-list" id="document-list-container">
+                  <!-- Dynamically populated -->
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- Right Column: Verification & Stage Actions -->
+          <div class="actions-column">
+            <!-- Screening Verification Card -->
+            <section class="card mb-4" aria-labelledby="heading-screening">
+              <div class="card__header">
+                <h2 class="card__title" id="heading-screening">CSC Qualification Verification</h2>
+              </div>
+              <div class="card__body">
+                <div class="checklist">
+                  <label class="check-item">
+                    <input type="checkbox" id="check-qs-education" checked>
+                    <span>Education meets minimum QS requirements</span>
+                  </label>
+                  <label class="check-item">
+                    <input type="checkbox" id="check-qs-experience" checked>
+                    <span>Experience aligns with vacancy specifications</span>
+                  </label>
+                  <label class="check-item">
+                    <input type="checkbox" id="check-qs-eligibility" checked>
+                    <span>Civil Service / Professional license authenticated</span>
+                  </label>
+                  <label class="check-item">
+                    <input type="checkbox" id="check-qs-pds" checked>
+                    <span>PDS Form 212 complete with passport photograph</span>
+                  </label>
+                </div>
+
+                <div class="mt-4">
+                  <label for="textarea-screening-notes" class="form-label font-bold mb-1">Screening Evaluator Remarks</label>
+                  <div class="d-flex gap-2 mb-2 flex-wrap">
+                    <span class="quick-tag-chip" onclick="document.getElementById('textarea-screening-notes').value='All minimum CSC Qualification Standards authenticated and verified.'">+ Validated</span>
+                    <span class="quick-tag-chip" onclick="document.getElementById('textarea-screening-notes').value='PDS Form 212 complete with passport photograph and authenticated credentials.'">+ Complete</span>
+                  </div>
+                  <textarea id="textarea-screening-notes" class="form-control" rows="4" placeholder="Notes on document validity or initial findings..."></textarea>
+                </div>
+
+                <button class="btn btn--primary w-100 mt-4 font-bold" id="btn-save-screening">
+                  &#10004; Save Qualification Verification
+                </button>
+              </div>
+            </section>
+
+            <!-- Stage Transition Quick Actions Card -->
+            <section class="card" aria-labelledby="heading-stage-actions">
+              <div class="card__header">
+                <h2 class="card__title" id="heading-stage-actions">Stage Management</h2>
+              </div>
+              <div class="card__body">
+                <div class="form-group">
+                  <label for="select-advance-stage" class="form-label">Advance Candidate To:</label>
+                  <select id="select-advance-stage" class="form-control">
+                    <option value="SCREENING">Screening</option>
+                    <option value="DSS_SCORED">4-Pillar DSS Scoring</option>
+                    <option value="DEPT_EVAL">Department Head Evaluation</option>
+                    <option value="DELIBERATION">HRMPSB Deliberation & Voting</option>
+                    <option value="FINAL_DECISION">Final Appointment Resolution</option>
+                    <option value="REJECTED">Disqualify / Close Application</option>
+                  </select>
+                </div>
+
+                <button class="btn btn--secondary w-100 mb-2 font-bold" id="btn-confirm-stage-advance">
+                  &#10148; Update Application Stage
+                </button>
+              </div>
+            </section>
+          </div>
+        </div>
+    </main>
+  </div>
+
+  <script src="../../../shared/js/constants.js"></script>
+  <script src="../../../shared/js/utils.js"></script>
+  <script src="../../../shared/js/components.js"></script>
+  <script src="../../../shared/js/db.js"></script>
+  <script src="../../../shared/js/api.js"></script>
+  <script src="../../../shared/js/auth.js"></script>
+  <script src="../../../shared/js/docket-filter.js"></script>
+  <script src="applicant-review.js"></script>
+</body>
+</html>

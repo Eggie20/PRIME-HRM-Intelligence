@@ -1,0 +1,23 @@
+/**
+ * NBSC PRIME-HRM Intelligence Hub — Component Library
+ * Modular Architecture by Feature & Element
+ * 
+ * Sub-modules located in ./modules/:
+ * - animations.css: Keyframes, pulse beacons, entrance cascades, spinners
+ * - buttons.css: Primary, secondary, outline, gold, danger, sizes
+ * - badges.css: Role/status badges, beacons, chips, notification bell
+ * - cards.css: Base card, KPI metric card, stat strip, empty states
+ * - forms.css: Universal .form-control, selects, textareas, range sliders, check/radio tiles
+ * - tables.css: Responsive data tables, sortable headers, table footers, pagination
+ * - navigation.css: Topbar, pipeline stepper, docket filters, candidate hero strip
+ * - modals.css: Dialogs, toast alerts, notification dropdowns
+ */
+
+@import './modules/animations.css';
+@import './modules/buttons.css';
+@import './modules/badges.css';
+@import './modules/cards.css';
+@import './modules/forms.css';
+@import './modules/tables.css';
+@import './modules/navigation.css';
+@import './modules/modals.css';

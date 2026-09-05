@@ -1,0 +1,121 @@
+# Implementation Plan — High-Precision Universal Docket Filter
+
+Design and implement an executive-grade, multi-attribute Docket Filter across all 5 hiring pipeline stages (**1. Dossier**, **2. 4-Pillar DSS**, **3. Dept Head Rubric**, **4. HRMPSB Deliberation**, and **5. Appointment Resolution**) to uniquely identify every applicant, resolve duplicate/matching names, and enable instant search by Name, Application ID, Filing Date, or Target Position.
+
+## User Requirements & Problem Analysis
+1. **Duplicate / Matching Names**: Multiple applicants may share identical or similar names. The system must display **Full Name + Unique Tracking ID (`NBSC-APP-2026-XXXXX`) + Filing Date (`Aug 20, 2026`) + Vacancy Item** in the selector and pills.
+2. **High Applicant Volume**: Evaluators need instant filtering rather than scrolling through dozens or hundreds of entries.
+3. **Multi-Attribute Search**: Real-time search by typing any fragment of the applicant's name, tracking ID number, application date, or position.
+4. **Consistency**: The filter must be seamlessly synchronized across all 5 pipeline stage pages so moving from Stage 1 to 5 preserves the selected candidate.
+
+---
+
+## Proposed Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ 🔍 DOCKET FILTER                                                                                            │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ [ 🔎 Search Name, ID, Date... ] [ 🏢 All Vacancies ▾ ] [ 🚦 Stage / Status ▾ ] [ 👤 Candidate Selector ▾ ]  │
+│                                                                                                             │
+│ Candidate Option Format:                                                                                    │
+│ "Carlo Mendoza • ID: NBSC-APP-2026-00001 • Filed: Aug 20, 2026 • Instructor I [DSS: 85.5]"                 │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ Quick Chips:                                                                                                │
+│ [CM] Carlo Mendoza (#00001)   [MC] Maria Elena Cruz (#00002)   [JR] John Patrick Reyes (#00003)             │
+│ Showing 5 of 18 Candidates                                                                                  │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Proposed Changes
+
+### 1. Navigation & Docket Styles
+#### [MODIFY] [`frontend/shared/css/modules/navigation.css`](file:///c:/NBSC%20PRIME-HRM%20Intelligence%20Hub/frontend/shared/css/modules/navigation.css)
+- Add styles for `.docket-search-input` with integrated search icon.
+- Add `.docket-meta-badge` and `.docket-count-indicator` (`Showing X of Y`).
+- Enhance `.candidate-chip` to display name + tracking ID snippet (`#00001`) with hover tooltip containing date and vacancy details.
+- Responsive layout adjustments ensuring the filter controls wrap cleanly on smaller viewports.
+
+---
+
+### 2. Universal Docket Filter Logic
+#### [MODIFY] Shared Helper Function or Page Scripts
+Create a reusable docket initialization helper or integrate across:
+- [`applicant-review.js`](file:///c:/NBSC%20PRIME-HRM%20Intelligence%20Hub/frontend/pages/hiring/applicant-review/applicant-review.js) (Stage 1)
+- [`dss-scoring.js`](file:///c:/NBSC%20PRIME-HRM%20Intelligence%20Hub/frontend/pages/hiring/dss-scoring/dss-scoring.js) (Stage 2)
+- [`evaluation.js`](file:///c:/NBSC%20PRIME-HRM%20Intelligence%20Hub/frontend/pages/hiring/evaluation/evaluation.js) (Stage 3)
+- [`deliberation.js`](file:///c:/NBSC%20PRIME-HRM%20Intelligence%20Hub/frontend/pages/hiring/deliberation/deliberation.js) (Stage 4)
+- [`final-decision.js`](file:///c:/NBSC%20PRIME-HRM%20Intelligence%20Hub/frontend/pages/hiring/final-decision/final-decision.js) (Stage 5)
+
+**Features**:
+1. **Disambiguated Label Generator**:
+   ```javascript
+   function formatCandidateOption(app, vacancy) {
+     const dateStr = app.created_at ? new Date(app.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'No Date';
+     const posTitle = vacancy ? vacancy.title : 'General';
+     return `${app.applicant_name} • [${app.tracking_number}] • Filed: ${dateStr} • ${posTitle}`;
+   }
+   ```
+2. **Instant Search Listener (`input-docket-search`)**:
+   - Matches against `applicant_name`, `tracking_number`, `created_at` (both ISO and formatted string), and `vacancy.title`.
+   - Debounced for performance.
+3. **Vacancy & Stage Filter Synchronization**:
+   - Filter by position and/or pipeline stage (`All Stages`, `Screening`, `DSS Scored`, `Dept Eval`, `Deliberation`, `Appointed`).
+4. **Live Counter**:
+   - Dynamically displays `Showing ${filtered.length} of ${allApplications.length} Applicants`.
+
+---
+
+### 3. HTML Markup Integration
+#### [MODIFY]
+- [`applicant-review.html`](file:///c:/NBSC%20PRIME-HRM%20Intelligence%20Hub/frontend/pages/hiring/applicant-review/applicant-review.html)
+- [`dss-scoring.html`](file:///c:/NBSC%20PRIME-HRM%20Intelligence%20Hub/frontend/pages/hiring/dss-scoring/dss-scoring.html)
+- [`evaluation.html`](file:///c:/NBSC%20PRIME-HRM%20Intelligence%20Hub/frontend/pages/hiring/evaluation/evaluation.html)
+- [`deliberation.html`](file:///c:/NBSC%20PRIME-HRM%20Intelligence%20Hub/frontend/pages/hiring/deliberation/deliberation.html)
+- [`final-decision.html`](file:///c:/NBSC%20PRIME-HRM%20Intelligence%20Hub/frontend/pages/hiring/final-decision/final-decision.html)
+
+Add the search input and stage selector into the `.docket-selector-left` container:
+```html
+<section class="docket-selector-bar" aria-label="Docket Candidate and Vacancy Filter">
+  <div class="docket-selector-left">
+    <span class="docket-selector-label">&#128269; Docket Filter:</span>
+    <input type="text" id="input-docket-search" class="docket-search-input" placeholder="Search applicant, ID, date...">
+    <select id="select-docket-vacancy" class="docket-select" aria-label="Select Hiring Vacancy">
+      <option value="">All Positions / Vacancies</option>
+    </select>
+    <select id="select-docket-stage" class="docket-select" aria-label="Select Stage">
+      <option value="">All Pipeline Stages</option>
+      <option value="SCREENING">1. Screening / Dossier</option>
+      <option value="DSS_SCORED">2. 4-Pillar DSS</option>
+      <option value="DEPT_EVAL">3. Dept Head Rubric</option>
+      <option value="DELIBERATION">4. HRMPSB Deliberation</option>
+      <option value="FINAL_DECISION">5. Appointment Resolution</option>
+    </select>
+    <select id="select-docket-candidate" class="docket-select docket-select--candidate" aria-label="Select Candidate Docket">
+      <!-- Populated with Full Name + Unique Tracking ID + Filed Date + Vacancy -->
+    </select>
+    <span class="docket-count-indicator" id="docket-count-indicator">Showing 0 of 0</span>
+  </div>
+  <div class="docket-chips-container" id="candidate-chips-container">
+    <!-- Quick candidate pills with unique ID badge -->
+  </div>
+</section>
+```
+
+---
+
+## Verification Plan
+
+### Manual Verification
+1. Open `applicant-review.html` in Brave browser (`file:///...`).
+2. Verify the Candidate Dropdown displays: `Name • [Tracking ID] • Filed: Date • Vacancy`.
+3. Test the Instant Search box:
+   - Type a name fragment (e.g. `Mendoza`) -> List updates immediately to show matching applicant.
+   - Type an ID fragment (e.g. `00002` or `APP-2026`) -> List filters to that specific ID.
+   - Type a date (e.g. `Aug 20`) -> Filters candidates who applied on that date.
+4. Test Vacancy and Stage filters:
+   - Select a vacancy -> only applicants for that vacancy appear.
+   - Select a stage -> only applicants in that stage appear.
+5. Click between candidates and switch across pipeline stages (1 -> 2 -> 3 -> 4 -> 5) to verify candidate context persists seamlessly via URL parameter `?id=app-XXX`.

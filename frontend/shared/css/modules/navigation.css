@@ -1,0 +1,449 @@
+/**
+ * NBSC PRIME-HRM Intelligence Hub — Navigation & Pipeline Modules
+ * Executive topbars, pipeline steppers, universal docket filters, candidate hero strip, and horizontal timelines.
+ */
+
+/* ── Standardized Executive Layout System ─────────────────── */
+.pipeline-main,
+.exec-main {
+  flex: 1;
+  padding: 26px 30px;
+  overflow-x: auto;
+  background: var(--canvas, #F5F6F9);
+  min-height: 100vh;
+  margin-left: var(--sidebar-width) !important;
+  width: calc(100% - var(--sidebar-width)) !important;
+  box-sizing: border-box;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 4px;
+}
+
+.crumb {
+  font-size: 12px;
+  color: #5B6272;
+  margin-bottom: 6px;
+}
+
+.crumb b {
+  color: #14192B;
+}
+
+.topbar h1,
+.pipeline-main h1,
+.exec-main h1 {
+  font-size: 23px;
+  font-weight: 650;
+  letter-spacing: -0.3px;
+  color: #14192B;
+  margin: 0;
+}
+
+.topbar .sub {
+  color: #5B6272;
+  font-size: 13px;
+  margin-top: 4px;
+  max-width: 650px;
+  line-height: 1.4;
+}
+
+.top-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* ── Controls Row ─────────────────────────────────────────── */
+.controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.select, .search {
+  border: 1px solid #E4E7EE;
+  background: #fff;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 12.5px;
+  color: #14192B;
+}
+
+.select {
+  cursor: pointer;
+  outline: none;
+  min-width: 180px;
+}
+
+.search {
+  flex: 1;
+  min-width: 220px;
+  max-width: 340px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #5B6272;
+}
+
+.search input {
+  border: none;
+  outline: none;
+  font-size: 12.5px;
+  width: 100%;
+  font-family: inherit;
+  color: #14192B;
+}
+
+/* ── Unified Candidate Stepper Navigation ─────────────────── */
+.pipeline-stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.stepper-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #475569;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+
+.stepper-item:hover {
+  background-color: #F8FAFC;
+  border-color: #CBD5E1;
+  color: #0F1B2D;
+  transform: translateY(-1px);
+}
+
+.stepper-item--active {
+  background: linear-gradient(135deg, #0F1B2D 0%, #1E293B 100%) !important;
+  color: #FFFFFF !important;
+  border-color: #0F1B2D !important;
+  box-shadow: 0 2px 8px rgba(15, 27, 45, 0.22);
+}
+
+.stepper-item--gold {
+  background: linear-gradient(135deg, #FDF9EE 0%, #FAF1D4 100%);
+  color: #8C6510;
+  border-color: #D4A843;
+}
+
+.stepper-item--gold:hover {
+  background: linear-gradient(135deg, #D4A843 0%, #C49835 100%);
+  color: #FFFFFF;
+}
+
+.stepper-item--gold.stepper-item--active {
+  background: linear-gradient(135deg, #D4A843 0%, #B88E2C 100%) !important;
+  color: #FFFFFF !important;
+  border-color: #B88E2C !important;
+  box-shadow: 0 2px 10px rgba(212, 168, 67, 0.35);
+}
+
+/* ── Universal Docket Selector Bar ────────────────────────── */
+.docket-selector-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 0.75rem 1.15rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 2px 8px rgba(15, 27, 45, 0.04);
+}
+
+.docket-selector-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.docket-selector-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748B;
+}
+
+.docket-select {
+  padding: 0.42rem 0.85rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #0F1B2D;
+  background-color: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  min-width: 170px;
+}
+
+.docket-select:focus {
+  border-color: #D4A843;
+  box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.15);
+}
+
+.docket-select--candidate {
+  min-width: 280px;
+  max-width: 420px;
+}
+
+.docket-search-input {
+  padding: 0.42rem 0.85rem 0.42rem 2rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #0F1B2D;
+  background-color: #FFFFFF;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='%2364748B' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 0.65rem center;
+  border: 1px solid #CBD5E1;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.15s ease;
+  min-width: 190px;
+  max-width: 240px;
+}
+
+.docket-search-input:focus {
+  border-color: #D4A843;
+  box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.15);
+  background-color: #FFFFFF;
+}
+
+.docket-count-indicator {
+  font-size: 0.725rem;
+  font-weight: 700;
+  color: #64748B;
+  background: #F1F5F9;
+  padding: 0.32rem 0.65rem;
+  border-radius: 6px;
+  border: 1px solid #E2E8F0;
+  white-space: nowrap;
+}
+
+.docket-chips-container {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.candidate-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.32rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #475569;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 20px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.candidate-chip:hover {
+  background: #F1F5F9;
+  color: #0F1B2D;
+  border-color: #CBD5E1;
+  transform: translateY(-1px);
+}
+
+.candidate-chip--active {
+  background: rgba(212, 168, 67, 0.15) !important;
+  color: #936B15 !important;
+  border-color: #D4A843 !important;
+  font-weight: 700;
+  box-shadow: 0 1px 4px rgba(212, 168, 67, 0.2);
+}
+
+.candidate-chip__avatar {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #0F1B2D;
+  color: #D4A843;
+  font-size: 0.625rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.candidate-chip__id {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #94A3B8;
+  font-family: var(--font-mono), monospace;
+}
+
+.candidate-chip--active .candidate-chip__id {
+  color: #B88E2C;
+}
+
+/* ── Candidate Identity Hero Strip ────────────────────────── */
+.candidate-hero-strip {
+  background: #FFFFFF;
+  border: 1px solid #E4E7EE;
+  border-radius: 12px;
+  padding: 1.15rem 1.4rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  box-shadow: 0 2px 6px rgba(15, 27, 45, 0.03);
+}
+
+.candidate-hero-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.candidate-hero-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #0F1B2D 0%, #1E293B 100%);
+  color: #D4A843;
+  font-size: 1.25rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(15, 27, 45, 0.2);
+  flex-shrink: 0;
+  transition: transform var(--transition-fast);
+}
+
+.candidate-hero-strip:hover .candidate-hero-avatar {
+  transform: scale(1.05);
+}
+
+.candidate-hero-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0F1B2D;
+  margin: 0 0 0.25rem 0;
+  line-height: 1.2;
+}
+
+.candidate-hero-meta {
+  font-size: 0.8125rem;
+  color: #64748B;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* ── Horizontal Stage Timeline ────────────────────────────── */
+.timeline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
+  padding: 1rem 0;
+}
+
+.timeline__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  flex: 1;
+}
+
+.timeline__bullet {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-neutral-200);
+  color: var(--color-neutral-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  transition: all var(--transition-base);
+}
+
+.timeline__label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-neutral-500);
+  text-align: center;
+}
+
+.timeline__item--completed .timeline__bullet {
+  background-color: var(--color-success-500);
+  color: var(--color-white);
+}
+
+.timeline__item--completed .timeline__label {
+  color: var(--color-success-700);
+  font-weight: 600;
+}
+
+.timeline__item--active .timeline__bullet {
+  background-color: var(--color-accent-500);
+  color: var(--color-primary-900);
+  box-shadow: 0 0 0 4px var(--color-accent-100);
+}
+
+.timeline__item--active .timeline__label {
+  color: var(--color-primary-800);
+  font-weight: 700;
+}
+
+.timeline__bar {
+  position: absolute;
+  top: 24px;
+  left: 5%;
+  right: 5%;
+  height: 4px;
+  background-color: var(--color-neutral-200);
+  z-index: 1;
+}
+
+.timeline__bar-progress {
+  height: 100%;
+  background-color: var(--color-success-500);
+  transition: width var(--transition-slow);
+}

@@ -1,0 +1,300 @@
+/**
+ * NBSC PRIME-HRM Intelligence Hub — Applicant Portal Styles
+ */
+
+.applicant-body {
+  background-color: var(--color-surface);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.applicant-nav {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  padding: var(--space-3) 0;
+  border-bottom: 2px solid var(--color-accent);
+}
+
+.applicant-nav__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.applicant-nav__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.applicant-nav__logo {
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, var(--color-accent), #B3862A);
+  color: var(--color-primary);
+  font-weight: 800;
+  font-size: 1.25rem;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.applicant-nav__title {
+  display: block;
+  font-size: var(--font-size-base);
+  font-weight: 700;
+}
+
+.applicant-nav__subtitle {
+  display: block;
+  font-size: var(--font-size-xs);
+  color: var(--color-accent);
+}
+
+.applicant-nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.applicant-nav__link {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  transition: color var(--transition-fast);
+}
+
+.applicant-nav__link:hover {
+  color: var(--color-accent);
+}
+
+.applicant-nav__profile {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  padding-left: var(--space-4);
+}
+
+.applicant-nav__user {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* Main Layout */
+.applicant-main {
+  flex: 1;
+  padding: var(--space-6) 0 var(--space-10);
+}
+
+.applicant-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+.portal-welcome-banner {
+  background: linear-gradient(135deg, var(--color-primary), #1a2c47);
+  color: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  justify-content: space-between;
+  border-left: 5px solid var(--color-accent);
+}
+
+@media (min-width: 768px) {
+  .portal-welcome-banner {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.portal-welcome-banner__title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: var(--space-1);
+}
+
+.portal-welcome-banner__text {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: var(--font-size-sm);
+}
+
+.portal-section__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: var(--space-4);
+}
+
+.portal-section__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+
+/* Application Card */
+.application-card {
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin-bottom: var(--space-5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.application-card__top {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+@media (min-width: 768px) {
+  .application-card__top {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.application-card__position {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.application-card__dept {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+/* 7-Step Timeline Stepper */
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: var(--space-6) 0 var(--space-6);
+  position: relative;
+  overflow-x: auto;
+  padding-bottom: var(--space-2);
+}
+
+.stepper__track {
+  position: absolute;
+  top: 18px;
+  left: 30px;
+  right: 30px;
+  height: 4px;
+  background-color: var(--color-border);
+  z-index: 1;
+}
+
+.stepper__track-fill {
+  height: 100%;
+  background-color: #059669;
+  transition: width var(--transition-normal);
+}
+
+.stepper__step {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 90px;
+  text-align: center;
+}
+
+.stepper__circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 3px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-2);
+  transition: all var(--transition-fast);
+}
+
+.stepper__label {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  line-height: 1.2;
+}
+
+/* Stepper States */
+.stepper__step--completed .stepper__circle {
+  background-color: #059669;
+  border-color: #059669;
+  color: #ffffff;
+}
+
+.stepper__step--completed .stepper__label {
+  color: #059669;
+}
+
+.stepper__step--active .stepper__circle {
+  background-color: var(--color-accent);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(212, 168, 67, 0.25);
+  animation: pulse-ring 1.8s infinite;
+}
+
+.stepper__step--active .stepper__label {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(212, 168, 67, 0.4); }
+  70% { box-shadow: 0 0 0 8px rgba(212, 168, 67, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(212, 168, 67, 0); }
+}
+
+.application-card__status-banner {
+  background-color: rgba(15, 27, 45, 0.04);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+@media (min-width: 768px) {
+  .application-card__status-banner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.recommended-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .recommended-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

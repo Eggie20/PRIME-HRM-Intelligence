@@ -1,0 +1,198 @@
+/**
+ * NBSC PRIME-HRM Intelligence Hub — Badges & Status Indicators Module
+ * Category tags, civil service compliance badges, and pulsing beacons.
+ */
+
+/* ── Badges ───────────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+.badge--teaching {
+  background-color: #FEF3C7;
+  color: #92400E;
+  border: 1px solid #FCD34D;
+}
+
+.badge--non-teaching {
+  background-color: #EEF2FF;
+  color: #4338CA;
+  border: 1px solid #C7D2FE;
+}
+
+.badge--permanent {
+  background-color: #ECFDF5;
+  color: #065F46;
+  border: 1px solid #A7F3D0;
+}
+
+.badge--cos {
+  background-color: #FFFBEB;
+  color: #B45309;
+  border: 1px solid #FDE68A;
+}
+
+.badge--open,
+.badge--status-open {
+  background-color: #ECFDF5;
+  color: #065F46;
+  border: 1px solid #A7F3D0;
+}
+
+.badge--closed,
+.badge--status-closed {
+  background-color: #F1F5F9;
+  color: #475569;
+  border: 1px solid #CBD5E1;
+}
+
+.badge--active,
+.badge--status-active {
+  background-color: #ECFDF5;
+  color: #065F46;
+  border: 1px solid #A7F3D0;
+}
+
+.badge--inactive,
+.badge--status-inactive {
+  background-color: #FEF2F2;
+  color: #991B1B;
+  border: 1px solid #FECACA;
+}
+
+.badge--deliberation,
+.badge--status-deliberation {
+  background-color: #F3E8FF;
+  color: #6B21A8;
+  border: 1px solid #D8B4FE;
+}
+
+.badge--appointed,
+.badge--status-appointed {
+  background-color: #CCFBF1;
+  color: #0F766E;
+  border: 1px solid #99F6E4;
+}
+
+.badge--neutral {
+  background-color: #F1F5F9;
+  color: #334155;
+  border: 1px solid #E2E8F0;
+}
+
+.badge--gold {
+  background-color: rgba(212, 168, 67, 0.15);
+  color: #8C6510;
+  border: 1px solid rgba(212, 168, 67, 0.35);
+}
+
+.badge--primary {
+  background-color: rgba(15, 27, 45, 0.08);
+  color: #0F1B2D;
+  border: 1px solid rgba(15, 27, 45, 0.18);
+}
+
+.badge--success {
+  background-color: #ECFDF5;
+  color: #065F46;
+  border: 1px solid #10B981;
+}
+
+.badge--warning {
+  background-color: #FFFBEB;
+  color: #92400E;
+  border: 1px solid #F59E0B;
+}
+
+/* ── Live Status Beacons ──────────────────────────────────── */
+.status-beacon-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.status-beacon-live--active {
+  background: rgba(16, 185, 129, 0.12);
+  color: #065F46;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.status-beacon-live__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #10B981;
+  animation: pulseBadgeDot 1.6s infinite ease-in-out;
+}
+
+/* ── Stat Flags ───────────────────────────────────────────── */
+.stat-flag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 650;
+  margin-top: 6px;
+  padding: 2px 7px;
+  border-radius: 20px;
+}
+
+.flag-red {
+  background: #FBEAE8;
+  color: #C0392B;
+}
+
+.flag-green {
+  background: #E6F7EE;
+  color: #1E8A54;
+}
+
+.flag-neutral {
+  background: #F0F1F5;
+  color: #5B6272;
+}
+
+.flag-gold {
+  background: #FBF1D9;
+  color: #B5820C;
+}
+
+/* ── Notification Bell ────────────────────────────────────── */
+.notification-bell {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notification-bell__badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background-color: var(--color-danger-500);
+  color: #FFFFFF;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  border: 2px solid #FFFFFF;
+  pointer-events: none;
+}

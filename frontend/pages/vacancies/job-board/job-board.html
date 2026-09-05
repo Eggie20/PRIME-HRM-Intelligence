@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore academic faculty and administrative career opportunities at Northern Bukidnon State College. Apply online under CSC PRIME-HRM standards.">
+  <title>Career Opportunities — Northern Bukidnon State College</title>
+  <link rel="stylesheet" href="../../../shared/css/global.css">
+  <link rel="stylesheet" href="../../../shared/css/components.css">
+  <link rel="stylesheet" href="../../../shared/css/layout.css">
+  <link rel="stylesheet" href="../../../shared/css/utilities.css">
+  <link rel="stylesheet" href="job-board.css">
+</head>
+<body class="public-page">
+  <!-- Public Navigation (Responsive Header with Mobile Toggle) -->
+  <header class="public-nav" role="banner">
+    <div class="public-nav__container">
+      <a href="../../../index.html" class="public-nav__brand">
+        <div class="public-nav__logo">N</div>
+        <div class="public-nav__brand-text">
+          <span class="public-nav__title">Northern Bukidnon State College</span>
+          <span class="public-nav__subtitle">PRIME-HRM Career Portal</span>
+        </div>
+      </a>
+
+      <!-- Mobile Hamburger Button -->
+      <button class="public-nav__toggle" id="nav-toggle-btn" aria-label="Toggle Navigation Menu" aria-expanded="false">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+
+      <!-- Navigation Links (Collapsible Drawer on Mobile) -->
+      <nav class="public-nav__links" id="public-nav-links" aria-label="Public Navigation">
+        <a href="../../../index.html" class="public-nav__link">
+          <span>Home</span>
+        </a>
+        <a href="job-board.html" class="public-nav__link public-nav__link--active" aria-current="page">
+          <span>Open Vacancies</span>
+        </a>
+        <a href="../../applicants/application-track/application-track.html" class="public-nav__link">
+          <span>Track Application</span>
+        </a>
+        <a href="../../auth/applicant-login/applicant-login.html" class="public-nav__link">
+          <span>Applicant Portal</span>
+        </a>
+        <a href="../../auth/admin-login/admin-login.html" class="public-nav__btn-staff">
+          <span>Staff Portal</span>
+          <span>&rarr;</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="job-hero">
+    <div class="job-hero__container">
+      <div class="job-hero__badge">
+        <span>&#9733;</span>
+        <span>CSC PRIME-HRM Merit Selection</span>
+      </div>
+      <h1 class="job-hero__title">
+        Build Your Career in <span class="job-hero__title-accent">Higher Education</span>
+      </h1>
+      <p class="job-hero__subtitle">
+        Discover faculty and administrative positions committed to academic excellence, research innovation, and ethical public service at NBSC.
+      </p>
+    </div>
+  </section>
+
+  <!-- Executive Institutional Job Summary Strip -->
+  <section class="job-stats-strip" aria-label="Job Summary Highlights">
+    <!-- Metric 1: Total Active Vacancies -->
+    <div class="job-stat-card">
+      <div class="job-stat-card__icon job-stat-card__icon--gold">&#128188;</div>
+      <div class="job-stat-card__content">
+        <div class="job-stat-card__value" id="stat-total-vacancies">6</div>
+        <div class="job-stat-card__label">Active Vacancies</div>
+      </div>
+    </div>
+
+    <!-- Metric 2: Career Stream Breakdown -->
+    <div class="job-stat-card">
+      <div class="job-stat-card__icon job-stat-card__icon--navy">&#127891;</div>
+      <div class="job-stat-card__content">
+        <div class="job-stat-card__value" id="stat-streams">4 Faculty &bull; 2 Staff</div>
+        <div class="job-stat-card__label">Academic &amp; Admin</div>
+      </div>
+    </div>
+
+    <!-- Metric 3: Academic & Administrative Units -->
+    <div class="job-stat-card">
+      <div class="job-stat-card__icon job-stat-card__icon--green">&#127963;</div>
+      <div class="job-stat-card__content">
+        <div class="job-stat-card__value" id="stat-units">5 Units</div>
+        <div class="job-stat-card__label">Colleges &amp; Divisions</div>
+      </div>
+    </div>
+
+    <!-- Metric 4: Government Accreditation -->
+    <div class="job-stat-card">
+      <div class="job-stat-card__icon job-stat-card__icon--blue">&#9878;</div>
+      <div class="job-stat-card__content">
+        <div class="job-stat-card__value">Level 2</div>
+        <div class="job-stat-card__label">PRIME-HRM Accredited</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Listings Section -->
+  <main class="job-board-content" id="main-content">
+    <div class="job-board-container">
+      <!-- Full-Width Responsive Filter Toolbar -->
+      <div class="job-controls-bar">
+        <!-- Horizontal Scrollable Category Filter Tabs -->
+        <div class="job-tabs" role="tablist">
+          <button class="job-tab job-tab--active" data-category="" role="tab" aria-selected="true">
+            <span>All Opportunities</span>
+            <span class="job-tab__badge" id="count-all">0</span>
+          </button>
+          <button class="job-tab" data-category="TEACHING" role="tab" aria-selected="false">
+            <span>Faculty / Teaching</span>
+            <span class="job-tab__badge" id="count-teaching">0</span>
+          </button>
+          <button class="job-tab" data-category="NON_TEACHING" role="tab" aria-selected="false">
+            <span>Staff / Administrative</span>
+            <span class="job-tab__badge" id="count-non-teaching">0</span>
+          </button>
+        </div>
+
+        <!-- Search, Department, and Sorting Group -->
+        <div class="job-search-group">
+          <div class="job-search-input-wrap">
+            <span style="color: #64748b; font-size: 1rem;">&#128269;</span>
+            <input type="text" id="input-search-jobs" placeholder="Search position or qualification..." aria-label="Search open jobs">
+          </div>
+
+          <!-- Dual Select Row for Mobile & Tablet -->
+          <div class="job-select-row">
+            <select id="select-dept-filter" class="job-select-dept" aria-label="Filter by department">
+              <option value="">All Academic &amp; Administrative Units</option>
+            </select>
+            <select id="select-sort-order" class="job-select-sort" aria-label="Sort vacancies">
+              <option value="default">Default Order</option>
+              <option value="title-asc">Position Title (A &rarr; Z)</option>
+              <option value="deadline-asc">Closing Soonest</option>
+              <option value="sg-desc">Salary Grade (Highest)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Live Results Count -->
+        <div class="job-results-summary" id="job-results-summary">
+          Showing <strong>6 active opportunities</strong>
+        </div>
+      </div>
+
+      <!-- Responsive Fluid Job Cards Grid Container -->
+      <div class="job-grid" id="job-grid-container">
+        <!-- Dynamically rendered via job-board.js -->
+      </div>
+
+      <!-- Empty State Container -->
+      <div id="job-empty-state" class="d-none"></div>
+    </div>
+  </main>
+
+  <!-- Interactive Vacancy Details Modal Dialog -->
+  <div class="job-modal-backdrop d-none" id="job-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-job-title">
+    <div class="job-modal">
+      <div class="job-modal__header">
+        <div class="job-modal__header-info">
+          <div class="job-modal__tags" id="modal-job-tags">
+            <!-- Category and status tags -->
+          </div>
+          <h2 class="job-modal__title" id="modal-job-title">Position Title</h2>
+          <div class="job-modal__dept" id="modal-job-dept">Department &bull; Permanent (Plantilla)</div>
+        </div>
+        <button type="button" class="job-modal__close-btn" id="modal-close-btn" aria-label="Close vacancy details">&times;</button>
+      </div>
+
+      <div class="job-modal__body" id="modal-job-body">
+        <!-- Dynamically injected via job-board.js -->
+      </div>
+
+      <div class="job-modal__footer">
+        <button type="button" class="job-modal__btn-close" id="modal-footer-close-btn">Close</button>
+        <a href="#" class="job-modal__btn-apply" id="modal-apply-btn">
+          <span>Apply for this Position</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Public Footer -->
+  <footer class="public-footer">
+    <div class="public-footer__container">
+      <p>
+        &copy; 2026 Northern Bukidnon State College &bull; 
+        <span class="public-footer__accreditation">Civil Service Commission PRIME-HRM Level 2 Accredited</span>
+      </p>
+      <p class="public-footer__sub">Kihare, Manolo Fortich, Bukidnon, Philippines 8703 &bull; Merit Promotion &amp; Selection Plan Compliant</p>
+    </div>
+  </footer>
+
+  <script src="../../../shared/js/constants.js"></script>
+  <script src="../../../shared/js/utils.js"></script>
+  <script src="../../../shared/js/components.js"></script>
+  <script src="../../../shared/js/db.js"></script>
+  <script src="../../../shared/js/api.js"></script>
+  <script src="job-board.js"></script>
+</body>
+</html>

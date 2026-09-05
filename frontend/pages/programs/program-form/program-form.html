@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Add or update academic and operational programs in NBSC PRIME-HRM.">
+  <title>Program Details — NBSC PRIME-HRM Intelligence Hub</title>
+  <link rel="stylesheet" href="../../../shared/css/global.css">
+  <link rel="stylesheet" href="../../../shared/css/components.css">
+  <link rel="stylesheet" href="../../../shared/css/layout.css">
+  <link rel="stylesheet" href="../../../shared/css/utilities.css">
+  <link rel="stylesheet" href="program-form.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="app-sidebar" aria-label="Main Navigation">
+      <div class="sidebar__brand">
+        <div class="sidebar__logo-icon">N</div>
+        <div class="sidebar__brand-text">
+          <span class="sidebar__brand-title">NBSC HRMS</span>
+          <span class="sidebar__brand-badge">PRIME-HRM Level 2</span>
+        </div>
+      </div>
+      <nav class="sidebar__nav">
+        <a href="../../dashboard/dashboard/dashboard.html" class="sidebar__link" id="nav-dashboard">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#9638;</span>
+            <span>Dashboard</span>
+          </div>
+        </a>
+        <a href="../program-list/program-list.html" class="sidebar__link sidebar__link--active" id="nav-programs">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#127891;</span>
+            <span>Programs</span>
+          </div>
+        </a>
+      </nav>
+      <div class="sidebar__footer">
+        <div class="sidebar__user">
+          <div class="sidebar__user-avatar" id="user-avatar">AD</div>
+          <div class="sidebar__user-info">
+            <span class="sidebar__user-name" id="user-display-name">HR Administrator</span>
+            <span class="sidebar__user-role" id="user-display-role">HR Admin</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <header class="app-header">
+        <div class="app-header__left">
+          <h2 class="app-header__title" id="page-heading">Add Degree / Unit Program</h2>
+        </div>
+        <div class="app-header__right">
+          <a href="../program-list/program-list.html" class="btn btn--outline btn--sm" id="btn-back-programs">&larr; Back to Directory</a>
+        </div>
+      </header>
+
+      <div class="page-container">
+        <div class="card program-form-card">
+          <header class="card__header">
+            <div>
+              <h3 class="card__title" id="card-heading">Program Registration</h3>
+              <p class="card__subtitle">Used to associate teaching faculty vacancies and curricula</p>
+            </div>
+          </header>
+
+          <div class="card__body">
+            <form id="form-program" novalidate>
+              <div class="grid-2col">
+                <div class="form-group">
+                  <label for="input-program-code" class="form-group__label form-group__label--required">Program Code</label>
+                  <input type="text" id="input-program-code" name="code" class="form-group__input" placeholder="e.g. BSIT" required>
+                  <span class="form-group__error" id="input-program-code-error"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="select-program-dept" class="form-group__label form-group__label--required">Institute / Department</label>
+                  <select id="select-program-dept" name="department" class="form-group__select" required>
+                    <option value="">Select Institute...</option>
+                    <option value="DGEC">Department of General Education (DGEC)</option>
+                    <option value="IBM">Institute of Business & Management (IBM)</option>
+                    <option value="ICS">Institute of Computer Studies (ICS)</option>
+                    <option value="ITE">Institute of Teacher Education (ITE)</option>
+                    <option value="ADMIN">Administrative Services</option>
+                  </select>
+                  <span class="form-group__error" id="select-program-dept-error"></span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="input-program-name" class="form-group__label form-group__label--required">Program Full Name</label>
+                <input type="text" id="input-program-name" name="name" class="form-group__input" placeholder="e.g. Bachelor of Science in Information Technology" required>
+                <span class="form-group__error" id="input-program-name-error"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="input-program-desc" class="form-group__label">Curriculum / Unit Description</label>
+                <textarea id="input-program-desc" name="description" rows="3" class="form-group__textarea" placeholder="Brief summary of degree focus or division mandate..."></textarea>
+              </div>
+
+              <div class="d-flex justify-end gap-3 mt-6 pt-4 border-top">
+                <a href="../program-list/program-list.html" class="btn btn--outline" id="btn-cancel">Cancel</a>
+                <button type="submit" class="btn btn--primary btn--lg" id="btn-submit-program">
+                  <span id="btn-save-text">Save Program</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../../../shared/js/constants.js"></script>
+  <script src="../../../shared/js/utils.js"></script>
+  <script src="../../../shared/js/components.js"></script>
+  <script src="../../../shared/js/db.js"></script>
+  <script src="../../../shared/js/api.js"></script>
+  <script src="../../../shared/js/auth.js"></script>
+  <script src="program-form.js"></script>
+</body>
+</html>

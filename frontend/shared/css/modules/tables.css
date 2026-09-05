@@ -1,0 +1,379 @@
+/**
+ * NBSC PRIME-HRM Intelligence Hub — Tables & Pagination Module
+ * High-density data tables, sortable column headers, pagination bar, and rate limit selectors.
+ */
+
+/* ── Table Containers ─────────────────────────────────────── */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-neutral-200);
+  background-color: var(--color-white);
+  box-shadow: 0 1px 3px rgba(15, 27, 45, 0.02);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.data-table thead {
+  background-color: #F8FAFC;
+  border-bottom: 2px solid #E2E8F0;
+}
+
+.data-table th {
+  padding: 0.875rem 1.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #475569;
+  white-space: nowrap;
+}
+
+.data-table td {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #F1F5F9;
+  color: #1E293B;
+  vertical-align: middle;
+}
+
+.data-table tbody tr {
+  transition: background-color var(--transition-fast);
+}
+
+.data-table tbody tr:hover {
+  background-color: #F8FAFC;
+}
+
+/* ── Sortable Column Headers ──────────────────────────────── */
+.sortable-th {
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
+}
+
+.sortable-th:hover {
+  background-color: rgba(241, 245, 249, 0.8);
+  color: #0F1B2D;
+}
+
+.sortable-th .sort-icon {
+  display: inline-block;
+  margin-left: 0.35rem;
+  font-size: 0.75rem;
+  color: #94A3B8;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.sortable-th.sort-active {
+  color: #0F1B2D;
+}
+
+.sortable-th.sort-active .sort-icon {
+  color: #D4A843;
+  font-weight: 800;
+}
+
+/* ── Table Footer & Pagination ────────────────────────────── */
+.table-footer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0.875rem 1.25rem;
+  background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFA 100%);
+  border-top: 1px solid #E2E8F0;
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.page-size-control {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.page-size-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #64748B;
+  white-space: nowrap;
+}
+
+.page-size-select-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.page-size-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 6px;
+  padding: 0.35rem 1.75rem 0.35rem 0.65rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #1E293B;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.page-size-select:hover {
+  border-color: #94A3B8;
+}
+
+.page-size-select:focus {
+  outline: none;
+  border-color: #D4A843;
+  box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.2);
+}
+
+.page-size-select-wrap::after {
+  content: "▾";
+  position: absolute;
+  right: 0.55rem;
+  font-size: 0.75rem;
+  color: #64748B;
+  pointer-events: none;
+}
+
+.footer-v-divider {
+  width: 1px;
+  height: 18px;
+  background-color: #E2E8F0;
+}
+
+.range-indicator {
+  font-size: 0.8125rem;
+  color: #64748B;
+  white-space: nowrap;
+}
+
+.range-indicator strong {
+  color: #0F1B2D;
+  font-weight: 700;
+}
+
+.footer-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-summary-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(241, 245, 249, 0.8);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  color: #475569;
+}
+
+.footer-summary-chip .chip-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #D4A843;
+}
+
+.footer-summary-chip strong {
+  color: #0F1B2D;
+  font-weight: 700;
+}
+
+.footer-right {
+  display: flex;
+  align-items: center;
+}
+
+.pagination-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.btn-page {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #334155;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 6px;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.15s ease;
+}
+
+.btn-page:hover:not(:disabled) {
+  background-color: #F8FAFC;
+  border-color: #CBD5E1;
+  color: #0F1B2D;
+  transform: translateY(-1px);
+}
+
+.btn-page--active {
+  background: linear-gradient(135deg, #0F1B2D 0%, #1E293B 100%) !important;
+  color: #FFFFFF !important;
+  border-color: #0F1B2D !important;
+  box-shadow: 0 2px 6px rgba(15, 27, 45, 0.25);
+  font-weight: 700;
+}
+
+.btn-page:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background-color: #F8FAFC;
+  border-color: #E2E8F0;
+  color: #94A3B8;
+  transform: none !important;
+}
+
+.btn-page-nav {
+  font-size: 0.75rem;
+  letter-spacing: -0.02em;
+}
+
+/* ── Live Roster Premium Indicator ────────────────────────── */
+.roster-indicator-wrapper {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.premium-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+  border: 1px solid rgba(203, 213, 225, 0.85);
+  padding: 0.35rem 0.85rem 0.35rem 0.65rem;
+  border-radius: 9999px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05), 0 4px 12px rgba(15, 23, 42, 0.02);
+  user-select: none;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.premium-indicator:hover {
+  border-color: rgba(212, 168, 67, 0.6);
+  box-shadow: 0 4px 14px rgba(212, 168, 67, 0.12);
+  transform: translateY(-1px);
+}
+
+.indicator-pulse-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+}
+
+.indicator-pulse-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #10B981;
+  opacity: 0.5;
+  animation: indicatorPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.indicator-pulse-core {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10B981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
+}
+
+.indicator-info {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
+.indicator-num {
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 0.9375rem;
+  color: #0F1B2D;
+  line-height: 1;
+}
+
+.indicator-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.indicator-tag {
+  background: rgba(212, 168, 67, 0.12);
+  color: #854D0E;
+  border: 1px solid rgba(212, 168, 67, 0.28);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  line-height: 1.2;
+}
+
+.btn-reset-premium {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #475569;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-reset-premium:hover {
+  background: #F8FAFC;
+  border-color: #CBD5E1;
+  color: #0F1B2D;
+  transform: translateY(-1px);
+}
+
+.btn-reset-icon {
+  font-size: 0.95rem;
+  transition: transform 0.3s ease;
+}
+
+.btn-reset-premium:hover .btn-reset-icon {
+  transform: rotate(-90deg);
+}

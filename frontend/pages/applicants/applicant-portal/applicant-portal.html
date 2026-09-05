@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NBSC Applicant Portal — Track your active job applications across all 8 Civil Service merit selection stages.">
+  <title>Applicant Dashboard — NBSC PRIME-HRM Intelligence Hub</title>
+  <link rel="stylesheet" href="../../../shared/css/global.css">
+  <link rel="stylesheet" href="../../../shared/css/components.css">
+  <link rel="stylesheet" href="../../../shared/css/layout.css">
+  <link rel="stylesheet" href="../../../shared/css/utilities.css">
+  <link rel="stylesheet" href="applicant-portal.css">
+</head>
+<body class="applicant-body">
+  <!-- Applicant Header -->
+  <header class="applicant-nav" role="banner">
+    <div class="applicant-nav__container">
+      <div class="applicant-nav__brand">
+        <div class="applicant-nav__logo">N</div>
+        <div>
+          <span class="applicant-nav__title">NBSC Candidate Portal</span>
+          <span class="applicant-nav__subtitle">PRIME-HRM Recruitment Suite</span>
+        </div>
+      </div>
+
+      <nav class="applicant-nav__links" aria-label="Portal Navigation">
+        <a href="../../vacancies/job-board/job-board.html" class="applicant-nav__link">Browse Jobs</a>
+        <a href="../application-track/application-track.html" class="applicant-nav__link">Quick Tracking</a>
+        <div class="applicant-nav__profile">
+          <span class="applicant-nav__user" id="applicant-name">Applicant</span>
+          <button class="btn btn--sm btn--ghost text-danger" id="btn-applicant-logout" title="Sign out">&#10150; Exit</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="applicant-main" id="main-content">
+    <div class="applicant-container">
+      <!-- Welcome Banner -->
+      <section class="portal-welcome-banner mb-6">
+        <div>
+          <h1 class="portal-welcome-banner__title">Application Status & History</h1>
+          <p class="portal-welcome-banner__text">Track your recruitment trajectory through the 4 Pillars of CSC PRIME-HRM Level 2 Merit Selection.</p>
+        </div>
+        <div>
+          <a href="../../vacancies/job-board/job-board.html" class="btn btn--primary">
+            + Explore Openings
+          </a>
+        </div>
+      </section>
+
+      <!-- Active Applications Section -->
+      <section class="portal-section mb-8" aria-labelledby="heading-active-apps">
+        <h2 class="portal-section__title" id="heading-active-apps">My Active Applications</h2>
+
+        <div id="applications-container" class="applications-stack">
+          <!-- Rendered dynamically via applicant-portal.js -->
+        </div>
+
+        <div id="applications-empty-state" class="d-none"></div>
+      </section>
+
+      <!-- Recommended Vacancies Section -->
+      <section class="portal-section" aria-labelledby="heading-recommended-jobs">
+        <div class="portal-section__header">
+          <h2 class="portal-section__title" id="heading-recommended-jobs">Other Open Opportunities</h2>
+          <a href="../../vacancies/job-board/job-board.html" class="font-sm text-accent">View All &rarr;</a>
+        </div>
+
+        <div id="recommended-grid" class="recommended-grid">
+          <!-- Rendered dynamically -->
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="../../../shared/js/constants.js"></script>
+  <script src="../../../shared/js/utils.js"></script>
+  <script src="../../../shared/js/components.js"></script>
+  <script src="../../../shared/js/db.js"></script>
+  <script src="../../../shared/js/api.js"></script>
+  <script src="../../../shared/js/auth.js"></script>
+  <script src="applicant-portal.js"></script>
+</body>
+</html>

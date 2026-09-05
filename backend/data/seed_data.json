@@ -1,0 +1,1554 @@
+{
+  "version": "1.0.0",
+  "exported_at": "2026-09-05T09:45:00+08:00",
+  "database_target": "PostgreSQL 12+",
+  "tables": {
+    "users": [
+      {
+        "id": "usr-001",
+        "email": "admin@nbsc.edu.ph",
+        "password_hash": "AdminPassword123!",
+        "full_name": "Dr. Maria Santos",
+        "role": "HR_ADMIN",
+        "department_code": "ADMIN",
+        "position_title": "HR Director / College President",
+        "is_active": true,
+        "requires_2fa": false,
+        "created_at": "2026-01-15T08:00:00+08:00",
+        "updated_at": "2026-09-01T10:00:00+08:00"
+      },
+      {
+        "id": "usr-002",
+        "email": "hrmpsb@nbsc.edu.ph",
+        "password_hash": "MemberPassword123!",
+        "full_name": "Prof. Juan Dela Cruz",
+        "role": "HRMPSB_MEMBER",
+        "department_code": "ICS",
+        "position_title": "HRMPSB Board Member / Senior Faculty",
+        "is_active": true,
+        "requires_2fa": false,
+        "created_at": "2026-02-01T08:00:00+08:00",
+        "updated_at": "2026-09-01T10:00:00+08:00"
+      },
+      {
+        "id": "usr-003",
+        "email": "depthead.ics@nbsc.edu.ph",
+        "password_hash": "DeptPassword123!",
+        "full_name": "Dr. Ana Reyes",
+        "role": "DEPT_HEAD",
+        "department_code": "ICS",
+        "position_title": "Dean, Institute of Computer Studies",
+        "is_active": true,
+        "requires_2fa": false,
+        "created_at": "2026-02-15T08:00:00+08:00",
+        "updated_at": "2026-09-01T10:00:00+08:00"
+      },
+      {
+        "id": "usr-004",
+        "email": "applicant@gmail.com",
+        "password_hash": "ApplicantPass123!",
+        "full_name": "Carlo Mendoza",
+        "role": "APPLICANT",
+        "department_code": null,
+        "position_title": null,
+        "is_active": true,
+        "requires_2fa": false,
+        "created_at": "2026-08-20T14:30:00+08:00",
+        "updated_at": "2026-08-20T14:30:00+08:00"
+      },
+      {
+        "id": "usr-005",
+        "email": "employee.dgec@nbsc.edu.ph",
+        "password_hash": "EmpPassword123!",
+        "full_name": "Liza Fernandez",
+        "role": "EMPLOYEE",
+        "department_code": "DGEC",
+        "position_title": "Instructor I",
+        "is_active": true,
+        "requires_2fa": false,
+        "created_at": "2026-03-01T08:00:00+08:00",
+        "updated_at": "2026-09-01T10:00:00+08:00"
+      },
+      {
+        "id": "usr-006",
+        "email": "employee.ibm@nbsc.edu.ph",
+        "password_hash": "EmpPassword123!",
+        "full_name": "Mark Anthony Torres",
+        "role": "EMPLOYEE",
+        "department_code": "IBM",
+        "position_title": "Associate Professor II",
+        "is_active": true,
+        "requires_2fa": false,
+        "created_at": "2026-03-15T08:00:00+08:00",
+        "updated_at": "2026-09-01T10:00:00+08:00"
+      },
+      {
+        "id": "usr-007",
+        "email": "depthead.ite@nbsc.edu.ph",
+        "password_hash": "DeptPassword123!",
+        "full_name": "Dr. Roberto Villanueva",
+        "role": "DEPT_HEAD",
+        "department_code": "ITE",
+        "position_title": "Dean, Institute of Teacher Education",
+        "is_active": true,
+        "requires_2fa": false,
+        "created_at": "2026-02-15T08:00:00+08:00",
+        "updated_at": "2026-09-01T10:00:00+08:00"
+      },
+      {
+        "id": "usr-008",
+        "email": "employee.fin@nbsc.edu.ph",
+        "password_hash": "EmpPassword123!",
+        "full_name": "Grace Magbanua",
+        "role": "EMPLOYEE",
+        "department_code": "FIN",
+        "position_title": "Administrative Officer III",
+        "is_active": true,
+        "requires_2fa": false,
+        "created_at": "2026-04-01T08:00:00+08:00",
+        "updated_at": "2026-09-01T10:00:00+08:00"
+      }
+    ],
+    "programs": [
+      {
+        "id": "prg-001",
+        "code": "BSIT",
+        "name": "Bachelor of Science in Information Technology",
+        "department_code": "ICS",
+        "department": "Institute of Computer Studies (ICS)",
+        "description": "Focuses on enterprise cloud infrastructure, cybersecurity systems, and web architecture.",
+        "level": "BACHELOR",
+        "is_active": true,
+        "created_at": "2020-06-01T08:00:00+08:00"
+      },
+      {
+        "id": "prg-002",
+        "code": "BSCS",
+        "name": "Bachelor of Science in Computer Science",
+        "department_code": "ICS",
+        "department": "Institute of Computer Studies (ICS)",
+        "description": "Deep specialization in algorithmic optimization, machine intelligence, and software engineering.",
+        "level": "BACHELOR",
+        "is_active": true,
+        "created_at": "2020-06-01T08:00:00+08:00"
+      },
+      {
+        "id": "prg-003",
+        "code": "BSBA",
+        "name": "Bachelor of Science in Business Administration",
+        "department_code": "IBM",
+        "department": "Institute of Business and Management (IBM)",
+        "description": "Prepares leaders in fiscal governance, human capital logistics, and agribusiness commerce.",
+        "level": "BACHELOR",
+        "is_active": true,
+        "created_at": "2020-06-01T08:00:00+08:00"
+      },
+      {
+        "id": "prg-004",
+        "code": "BEED",
+        "name": "Bachelor of Elementary Education",
+        "department_code": "ITE",
+        "department": "Institute of Teacher Education (ITE)",
+        "description": "Developmental pedagogy for foundational literacy, curriculum design, and primary education.",
+        "level": "BACHELOR",
+        "is_active": true,
+        "created_at": "2020-06-01T08:00:00+08:00"
+      },
+      {
+        "id": "prg-005",
+        "code": "BSED",
+        "name": "Bachelor of Secondary Education",
+        "department_code": "ITE",
+        "department": "Institute of Teacher Education (ITE)",
+        "description": "Secondary teaching licensure tracks in Mathematics, Physical Sciences, and Social Studies.",
+        "level": "BACHELOR",
+        "is_active": true,
+        "created_at": "2020-06-01T08:00:00+08:00"
+      },
+      {
+        "id": "prg-006",
+        "code": "DGEC-GE",
+        "name": "General Education Core Curriculum",
+        "department_code": "DGEC",
+        "department": "Dept. of General Education (DGEC)",
+        "description": "CHED-mandated foundational coursework in ethics, science, culture, and purposive communication.",
+        "level": "SERVICE",
+        "is_active": true,
+        "created_at": "2020-06-01T08:00:00+08:00"
+      }
+    ],
+    "employees": [
+      {
+        "id": "emp-001",
+        "user_id": "usr-005",
+        "employee_id": "NBSC-2023-0042",
+        "employee_number": "NBSC-2023-0042",
+        "full_name": "Liza Fernandez, M.A.Ed.",
+        "email": "employee.dgec@nbsc.edu.ph",
+        "department": "DGEC",
+        "department_code": "DGEC",
+        "position": "Instructor I",
+        "position_title": "Instructor I",
+        "category": "TEACHING",
+        "salary_grade": 12,
+        "daily_rate": 1425.5,
+        "monthly_salary": 31361,
+        "employment_status": "PERMANENT",
+        "date_hired": "2023-06-15",
+        "date_of_birth": "1990-03-22",
+        "phone": "09171234567",
+        "address": "Malaybalay City, Bukidnon",
+        "is_active": true,
+        "created_at": "2023-06-15T08:00:00+08:00",
+        "updated_at": "2026-09-01T10:00:00+08:00"
+      },
+      {
+        "id": "emp-002",
+        "user_id": "usr-006",
+        "employee_id": "NBSC-2021-0018",
+        "employee_number": "NBSC-2021-0018",
+        "full_name": "Mark Anthony Torres, MBA",
+        "email": "employee.ibm@nbsc.edu.ph",
+        "department": "IBM",
+        "department_code": "IBM",
+        "position": "Associate Professor II",
+        "position_title": "Associate Professor II",
+        "category": "TEACHING",
+        "salary_grade": 16,
+        "daily_rate": 1950,
+        "monthly_salary": 42900,
+        "employment_status": "PERMANENT",
+        "date_hired": "2021-01-10",
+        "date_of_birth": "1985-11-08",
+        "phone": "09189876543",
+        "address": "Valencia City, Bukidnon",
+        "is_active": true,
+        "created_at": "2021-01-10T08:00:00+08:00",
+        "updated_at": "2026-09-01T10:00:00+08:00"
+      },
+      {
+        "id": "emp-003",
+        "user_id": "usr-008",
+        "employee_id": "NBSC-2022-0031",
+        "employee_number": "NBSC-2022-0031",
+        "full_name": "Roberto Gomez, CPA",
+        "email": "roberto.gomez@nbsc.edu.ph",
+        "department": "FIN",
+        "department_code": "FIN",
+        "position": "Administrative Officer III",
+        "position_title": "Administrative Officer III",
+        "category": "NON_TEACHING",
+        "salary_grade": 14,
+        "daily_rate": 1680,
+        "monthly_salary": 36960,
+        "employment_status": "PERMANENT",
+        "date_hired": "2022-07-01",
+        "date_of_birth": "1988-05-14",
+        "phone": "09201112233",
+        "address": "Don Carlos, Bukidnon",
+        "is_active": true,
+        "created_at": "2022-07-01T08:00:00+08:00",
+        "updated_at": "2026-09-01T10:00:00+08:00"
+      },
+      {
+        "id": "emp-004",
+        "user_id": null,
+        "employee_id": "NBSC-2024-0055",
+        "employee_number": "NBSC-2024-0055",
+        "full_name": "Engr. Danica Flores, MSCS",
+        "email": "danica.flores@nbsc.edu.ph",
+        "department": "ICS",
+        "department_code": "ICS",
+        "position": "Instructor I",
+        "position_title": "Instructor I",
+        "category": "TEACHING",
+        "salary_grade": 12,
+        "daily_rate": 1350,
+        "monthly_salary": 29700,
+        "employment_status": "COS",
+        "date_hired": "2024-08-01",
+        "date_of_birth": "1995-09-30",
+        "phone": "09334445566",
+        "address": "Quezon, Bukidnon",
+        "is_active": true,
+        "created_at": "2024-08-01T08:00:00+08:00",
+        "updated_at": "2026-09-01T10:00:00+08:00"
+      },
+      {
+        "id": "emp-005",
+        "user_id": null,
+        "employee_id": "NBSC-2020-0009",
+        "employee_number": "NBSC-2020-0009",
+        "full_name": "Dr. Eduardo Ramirez, Ph.D.",
+        "email": "eduardo.ramirez@nbsc.edu.ph",
+        "department": "ITE",
+        "department_code": "ITE",
+        "position": "Associate Professor I",
+        "position_title": "Associate Professor I",
+        "category": "TEACHING",
+        "salary_grade": 15,
+        "daily_rate": 1810,
+        "monthly_salary": 39820,
+        "employment_status": "PERMANENT",
+        "date_hired": "2020-06-01",
+        "date_of_birth": "1982-12-01",
+        "phone": "09456677889",
+        "address": "Maramag, Bukidnon",
+        "is_active": true,
+        "created_at": "2020-06-01T08:00:00+08:00",
+        "updated_at": "2026-09-01T10:00:00+08:00"
+      },
+      {
+        "id": "emp-006",
+        "user_id": null,
+        "employee_id": "NBSC-2025-0061",
+        "employee_number": "NBSC-2025-0061",
+        "full_name": "Maria Kristina Velasco",
+        "email": "kristina.velasco@nbsc.edu.ph",
+        "department": "REG",
+        "department_code": "REG",
+        "position": "Administrative Assistant II",
+        "position_title": "Administrative Assistant II",
+        "category": "NON_TEACHING",
+        "salary_grade": 8,
+        "daily_rate": 980,
+        "monthly_salary": 21560,
+        "employment_status": "JOB_ORDER",
+        "date_hired": "2025-01-15",
+        "date_of_birth": "1997-07-19",
+        "phone": "09567788990",
+        "address": "Manolo Fortich, Bukidnon",
+        "is_active": true,
+        "created_at": "2025-01-15T08:00:00+08:00",
+        "updated_at": "2026-09-01T10:00:00+08:00"
+      },
+      {
+        "id": "emp-007",
+        "user_id": null,
+        "employee_id": "NBSC-2019-0005",
+        "employee_number": "NBSC-2019-0005",
+        "full_name": "Prof. Armando Reyes, Ed.D.",
+        "email": "armando.reyes@nbsc.edu.ph",
+        "department": "DGEC",
+        "department_code": "DGEC",
+        "position": "Professor I",
+        "position_title": "Professor I",
+        "category": "TEACHING",
+        "salary_grade": 19,
+        "daily_rate": 2450,
+        "monthly_salary": 53900,
+        "employment_status": "PERMANENT",
+        "date_hired": "2019-06-01",
+        "date_of_birth": "1978-02-28",
+        "phone": "09678899001",
+        "address": "Malaybalay City, Bukidnon",
+        "is_active": true,
+        "created_at": "2019-06-01T08:00:00+08:00",
+        "updated_at": "2026-09-01T10:00:00+08:00"
+      },
+      {
+        "id": "emp-008",
+        "user_id": null,
+        "employee_id": "NBSC-2023-0048",
+        "employee_number": "NBSC-2023-0048",
+        "full_name": "Clarisse Joy Dizon",
+        "email": "clarisse.dizon@nbsc.edu.ph",
+        "department": "ADMIN",
+        "department_code": "ADMIN",
+        "position": "Administrative Aide IV",
+        "position_title": "Administrative Aide IV",
+        "category": "NON_TEACHING",
+        "salary_grade": 4,
+        "daily_rate": 650,
+        "monthly_salary": 14300,
+        "employment_status": "TEMPORARY",
+        "date_hired": "2023-09-01",
+        "date_of_birth": "1999-04-10",
+        "phone": "09789900112",
+        "address": "Lantapan, Bukidnon",
+        "is_active": true,
+        "created_at": "2023-09-01T08:00:00+08:00",
+        "updated_at": "2026-09-01T10:00:00+08:00"
+      }
+    ],
+    "vacancies": [
+      {
+        "id": "vac-001",
+        "title": "Instructor I (Computer Science)",
+        "department_code": "ICS",
+        "department": "Institute of Computer Studies (ICS)",
+        "category": "TEACHING",
+        "salary_grade": 12,
+        "monthly_salary": 29165,
+        "daily_rate": 1325.68,
+        "slots": 2,
+        "employment_status": "Permanent (Plantilla)",
+        "description": "Full-time teaching position for BS Computer Science program. Must teach core CS subjects including Data Structures, Algorithms, and Software Engineering.",
+        "qualification_standards": {
+          "education": "Bachelor's degree in Computer Science or Information Technology",
+          "experience": "1 year relevant teaching experience",
+          "training": "4 hours relevant training",
+          "eligibility": "RA 1080 (LET) or CSC Professional"
+        },
+        "status": "OPEN",
+        "applicant_count": 3,
+        "posted_by": "usr-001",
+        "deadline": "2026-10-15",
+        "created_at": "2026-08-15T08:00:00+08:00",
+        "updated_at": "2026-09-01T10:00:00+08:00"
+      },
+      {
+        "id": "vac-002",
+        "title": "Instructor I (English & Purposive Comm)",
+        "department_code": "DGEC",
+        "department": "Dept. of General Education (DGEC)",
+        "category": "TEACHING",
+        "salary_grade": 12,
+        "monthly_salary": 29165,
+        "daily_rate": 1325.68,
+        "slots": 1,
+        "employment_status": "Permanent (Plantilla)",
+        "description": "Teaching position for General Education English courses including Purposive Communication and Technical Writing.",
+        "qualification_standards": {
+          "education": "Bachelor's degree in English, Literature, or Communication Arts",
+          "experience": "None required",
+          "training": "None required",
+          "eligibility": "RA 1080 (LET)"
+        },
+        "status": "OPEN",
+        "applicant_count": 2,
+        "posted_by": "usr-001",
+        "deadline": "2026-10-30",
+        "created_at": "2026-08-20T08:00:00+08:00",
+        "updated_at": "2026-09-01T10:00:00+08:00"
+      },
+      {
+        "id": "vac-003",
+        "title": "Associate Professor I (Business Admin)",
+        "department_code": "IBM",
+        "department": "Institute of Business and Management (IBM)",
+        "category": "TEACHING",
+        "salary_grade": 15,
+        "monthly_salary": 36619,
+        "daily_rate": 1664.5,
+        "slots": 1,
+        "employment_status": "Permanent (Plantilla)",
+        "description": "Senior faculty position for BS Business Administration program specializing in Financial Management and Entrepreneurship.",
+        "qualification_standards": {
+          "education": "Master's degree in Business Administration or related field",
+          "experience": "3 years relevant teaching experience",
+          "training": "16 hours relevant training",
+          "eligibility": "RA 1080 (LET) or CSC Professional"
+        },
+        "status": "DELIBERATION",
+        "applicant_count": 2,
+        "posted_by": "usr-001",
+        "deadline": "2026-11-15",
+        "created_at": "2026-08-25T08:00:00+08:00",
+        "updated_at": "2026-09-01T10:00:00+08:00"
+      },
+      {
+        "id": "vac-004",
+        "title": "Administrative Assistant III (President Office)",
+        "department_code": "ADMIN",
+        "department": "Administrative & General Support (ADMIN)",
+        "category": "NON_TEACHING",
+        "salary_grade": 9,
+        "monthly_salary": 21211,
+        "daily_rate": 964.14,
+        "slots": 1,
+        "employment_status": "Permanent (Plantilla)",
+        "description": "Administrative support position for the Office of the College President. Handles correspondence, scheduling, and records management.",
+        "qualification_standards": {
+          "education": "Bachelor's degree",
+          "experience": "1 year relevant experience",
+          "training": "4 hours relevant training",
+          "eligibility": "Career Service Professional / Second Level Eligibility"
+        },
+        "status": "OPEN",
+        "applicant_count": 1,
+        "posted_by": "usr-001",
+        "deadline": "2026-10-20",
+        "created_at": "2026-08-28T08:00:00+08:00",
+        "updated_at": "2026-09-01T10:00:00+08:00"
+      },
+      {
+        "id": "vac-005",
+        "title": "Accountant II",
+        "department_code": "FIN",
+        "department": "Finance & Accounting Division (FIN)",
+        "category": "NON_TEACHING",
+        "salary_grade": 15,
+        "monthly_salary": 36619,
+        "daily_rate": 1664.5,
+        "slots": 1,
+        "employment_status": "Permanent (Plantilla)",
+        "description": "Accounting position responsible for budget preparation, financial reporting, and compliance with COA regulations.",
+        "qualification_standards": {
+          "education": "Bachelor's degree in Accountancy",
+          "experience": "2 years relevant experience",
+          "training": "8 hours relevant training",
+          "eligibility": "RA 1080 (CPA)"
+        },
+        "status": "CLOSED",
+        "applicant_count": 1,
+        "posted_by": "usr-001",
+        "deadline": "2026-09-01",
+        "created_at": "2026-07-15T08:00:00+08:00",
+        "updated_at": "2026-09-01T10:00:00+08:00"
+      },
+      {
+        "id": "vac-006",
+        "title": "Instructor I (Elementary Education)",
+        "department_code": "ITE",
+        "department": "Institute of Teacher Education (ITE)",
+        "category": "TEACHING",
+        "salary_grade": 12,
+        "monthly_salary": 29165,
+        "daily_rate": 1325.68,
+        "slots": 2,
+        "employment_status": "Permanent (Plantilla)",
+        "description": "Teaching position for Bachelor of Elementary Education program. Focus on professional education and field study courses.",
+        "qualification_standards": {
+          "education": "Bachelor's degree in Elementary Education or related field",
+          "experience": "None required",
+          "training": "None required",
+          "eligibility": "RA 1080 (LET)"
+        },
+        "status": "OPEN",
+        "applicant_count": 1,
+        "posted_by": "usr-001",
+        "deadline": "2026-11-01",
+        "created_at": "2026-09-01T08:00:00+08:00",
+        "updated_at": "2026-09-01T10:00:00+08:00"
+      }
+    ],
+    "applications": [
+      {
+        "id": "app-001",
+        "tracking_number": "NBSC-APP-2026-10011",
+        "applicant_id": "usr-004",
+        "applicant_name": "Dave Kevin M. Alcantara",
+        "applicant_email": "dalcantara@example.com",
+        "vacancy_id": "vac-005",
+        "stage": "APPLIED",
+        "personal_info": {
+          "full_name": "Dave Kevin M. Alcantara",
+          "email": "dalcantara@example.com",
+          "phone": "0917 555 0191",
+          "address": "Malaybalay City, Bukidnon",
+          "highest_education": "Master of Arts in Education",
+          "school": "Bukidnon State University",
+          "years_experience": "2 years elementary instruction",
+          "eligibility": "RA 1080 (LET)"
+        },
+        "education": {
+          "degree": "Master of Arts in Education",
+          "institution": "Bukidnon State University",
+          "year": 2023
+        },
+        "documents": [
+          {
+            "doc_type": "PDS_CS_FORM_212",
+            "file_name": "Alcantara_PDS_2026.pdf",
+            "file_size": 1450000,
+            "verified": true
+          },
+          {
+            "doc_type": "TRANSCRIPT_OF_RECORDS",
+            "file_name": "Alcantara_TOR.pdf",
+            "file_size": 2200000,
+            "verified": true
+          }
+        ],
+        "stage_history": [
+          {
+            "stage": "APPLIED",
+            "updated_at": "2026-08-25T09:00:00+08:00",
+            "remarks": "Application submitted via career portal."
+          }
+        ],
+        "created_at": "2026-08-25T09:00:00+08:00",
+        "updated_at": "2026-08-25T09:00:00+08:00"
+      },
+      {
+        "id": "app-002",
+        "tracking_number": "NBSC-APP-2026-10042",
+        "applicant_id": "usr-004",
+        "applicant_name": "April Anne Elizabeth A. Bajao",
+        "applicant_email": "applicant@gmail.com",
+        "vacancy_id": "vac-001",
+        "stage": "SCREENING",
+        "personal_info": {
+          "full_name": "April Anne Elizabeth A. Bajao",
+          "email": "applicant@gmail.com",
+          "phone": "0917 555 0192",
+          "address": "Manolo Fortich, Bukidnon",
+          "highest_education": "MS in Information Technology",
+          "school": "University of Science and Technology of Southern Philippines",
+          "years_experience": "3 years full-stack development & tertiary instruction",
+          "eligibility": "RA 1080 / CS Professional"
+        },
+        "education": {
+          "degree": "MS in Information Technology",
+          "institution": "USTP",
+          "year": 2024
+        },
+        "documents": [
+          {
+            "doc_type": "PDS_CS_FORM_212",
+            "file_name": "Bajao_PDS_2026.pdf",
+            "file_size": 1480000,
+            "verified": true
+          },
+          {
+            "doc_type": "TRANSCRIPT_OF_RECORDS",
+            "file_name": "Bajao_TOR.pdf",
+            "file_size": 2100000,
+            "verified": true
+          },
+          {
+            "doc_type": "ELIGIBILITY_CERT",
+            "file_name": "Bajao_CSP_Cert.pdf",
+            "file_size": 890000,
+            "verified": true
+          }
+        ],
+        "stage_history": [
+          {
+            "stage": "APPLIED",
+            "updated_at": "2026-08-20T14:30:00+08:00",
+            "remarks": "Online submission."
+          },
+          {
+            "stage": "SCREENING",
+            "updated_at": "2026-08-22T10:00:00+08:00",
+            "remarks": "Passed initial Qualification Standards screening against CSC matrix."
+          }
+        ],
+        "created_at": "2026-08-20T14:30:00+08:00",
+        "updated_at": "2026-08-22T10:00:00+08:00"
+      },
+      {
+        "id": "app-003",
+        "tracking_number": "NBSC-APP-2026-10088",
+        "applicant_id": "usr-004",
+        "applicant_name": "John Paul D. Tan",
+        "applicant_email": "jptan@example.com",
+        "vacancy_id": "vac-002",
+        "stage": "DSS_SCORED",
+        "personal_info": {
+          "full_name": "John Paul D. Tan",
+          "email": "jptan@example.com",
+          "phone": "0917 555 0193",
+          "address": "Cagayan de Oro City",
+          "highest_education": "Master in Business Administration",
+          "school": "Xavier University - Ateneo de Cagayan",
+          "years_experience": "4 years corporate banking and lecturing",
+          "eligibility": "RA 1080 / CS Professional"
+        },
+        "education": {
+          "degree": "Master in Business Administration",
+          "institution": "XU",
+          "year": 2022
+        },
+        "documents": [
+          {
+            "doc_type": "PDS_CS_FORM_212",
+            "file_name": "Tan_PDS_2026.pdf",
+            "file_size": 1520000,
+            "verified": true
+          },
+          {
+            "doc_type": "TRANSCRIPT_OF_RECORDS",
+            "file_name": "Tan_TOR.pdf",
+            "file_size": 1980000,
+            "verified": true
+          }
+        ],
+        "stage_history": [
+          {
+            "stage": "APPLIED",
+            "updated_at": "2026-08-15T11:00:00+08:00",
+            "remarks": "Submitted application."
+          },
+          {
+            "stage": "SCREENING",
+            "updated_at": "2026-08-18T14:00:00+08:00",
+            "remarks": "QS verified compliant."
+          },
+          {
+            "stage": "DSS_SCORED",
+            "updated_at": "2026-08-28T16:00:00+08:00",
+            "remarks": "4-Pillar Decision Support System score computed: 88.40/100."
+          }
+        ],
+        "created_at": "2026-08-15T11:00:00+08:00",
+        "updated_at": "2026-08-28T16:00:00+08:00"
+      },
+      {
+        "id": "app-004",
+        "tracking_number": "NBSC-APP-2026-10103",
+        "applicant_id": "usr-004",
+        "applicant_name": "Maria Teresa C. Santos",
+        "applicant_email": "msantos.candidate@example.com",
+        "vacancy_id": "vac-004",
+        "stage": "DEPT_EVALUATION",
+        "personal_info": {
+          "full_name": "Maria Teresa C. Santos",
+          "email": "msantos.candidate@example.com",
+          "phone": "0917 555 0194",
+          "address": "Manolo Fortich, Bukidnon",
+          "highest_education": "BS in Office Administration",
+          "school": "Central Mindanao University",
+          "years_experience": "3 years public records management",
+          "eligibility": "Career Service Subprofessional"
+        },
+        "education": {
+          "degree": "BS in Office Administration",
+          "institution": "CMU",
+          "year": 2021
+        },
+        "documents": [
+          {
+            "doc_type": "PDS_CS_FORM_212",
+            "file_name": "Santos_PDS_2026.pdf",
+            "file_size": 1420000,
+            "verified": true
+          },
+          {
+            "doc_type": "CIVIL_SERVICE_ELIGIBILITY",
+            "file_name": "Santos_CSE.pdf",
+            "file_size": 910000,
+            "verified": true
+          }
+        ],
+        "stage_history": [
+          {
+            "stage": "APPLIED",
+            "updated_at": "2026-08-10T10:00:00+08:00",
+            "remarks": "Application filed."
+          },
+          {
+            "stage": "SCREENING",
+            "updated_at": "2026-08-12T13:30:00+08:00",
+            "remarks": "Screening passed."
+          },
+          {
+            "stage": "DSS_SCORED",
+            "updated_at": "2026-08-20T15:00:00+08:00",
+            "remarks": "DSS score 86.20."
+          },
+          {
+            "stage": "DEPT_EVALUATION",
+            "updated_at": "2026-08-29T11:30:00+08:00",
+            "remarks": "Department Head rubric evaluation completed with 91.50% rating."
+          }
+        ],
+        "created_at": "2026-08-10T10:00:00+08:00",
+        "updated_at": "2026-08-29T11:30:00+08:00"
+      },
+      {
+        "id": "app-005",
+        "tracking_number": "NBSC-APP-2026-10145",
+        "applicant_id": "usr-004",
+        "applicant_name": "Christian P. Villanueva",
+        "applicant_email": "cvillanueva.candidate@example.com",
+        "vacancy_id": "vac-003",
+        "stage": "DELIBERATION",
+        "personal_info": {
+          "full_name": "Christian P. Villanueva",
+          "email": "cvillanueva.candidate@example.com",
+          "phone": "0917 555 0195",
+          "address": "Valencia City, Bukidnon",
+          "highest_education": "Master of Arts in History",
+          "school": "University of the Philippines Diliman",
+          "years_experience": "3 years tertiary Philippine history teaching",
+          "eligibility": "RA 1080 / CS Professional"
+        },
+        "education": {
+          "degree": "Master of Arts in History",
+          "institution": "UP Diliman",
+          "year": 2022
+        },
+        "documents": [
+          {
+            "doc_type": "PDS_CS_FORM_212",
+            "file_name": "Villanueva_PDS_2026.pdf",
+            "file_size": 1620000,
+            "verified": true
+          },
+          {
+            "doc_type": "TEACHING_DEMO_RUBRIC",
+            "file_name": "Demo_Evaluation.pdf",
+            "file_size": 780000,
+            "verified": true
+          }
+        ],
+        "stage_history": [
+          {
+            "stage": "APPLIED",
+            "updated_at": "2026-08-01T09:00:00+08:00",
+            "remarks": "Filing confirmed."
+          },
+          {
+            "stage": "SCREENING",
+            "updated_at": "2026-08-05T14:00:00+08:00",
+            "remarks": "QS approved."
+          },
+          {
+            "stage": "DSS_SCORED",
+            "updated_at": "2026-08-15T16:00:00+08:00",
+            "remarks": "DSS score 92.10."
+          },
+          {
+            "stage": "DEPT_EVALUATION",
+            "updated_at": "2026-08-22T10:00:00+08:00",
+            "remarks": "Dept evaluation: 94.00%."
+          },
+          {
+            "stage": "DELIBERATION",
+            "updated_at": "2026-08-30T14:00:00+08:00",
+            "remarks": "HRMPSB Board deliberation conducted; consensus ranking: Rank 1."
+          }
+        ],
+        "created_at": "2026-08-01T09:00:00+08:00",
+        "updated_at": "2026-08-30T14:00:00+08:00"
+      },
+      {
+        "id": "app-006",
+        "tracking_number": "NBSC-APP-2026-10179",
+        "applicant_id": "usr-004",
+        "applicant_name": "Elena R. Cruz",
+        "applicant_email": "ecruz.candidate@example.com",
+        "vacancy_id": "vac-006",
+        "stage": "APPOINTMENT_ISSUED",
+        "personal_info": {
+          "full_name": "Elena R. Cruz",
+          "email": "ecruz.candidate@example.com",
+          "phone": "0917 555 0196",
+          "address": "Malaybalay City, Bukidnon",
+          "highest_education": "BS in Accountancy (CPA)",
+          "school": "Ateneo de Davao University",
+          "years_experience": "5 years government financial disbursement",
+          "eligibility": "RA 1080 (Certified Public Accountant - CPA)"
+        },
+        "education": {
+          "degree": "BS in Accountancy (CPA)",
+          "institution": "ADDU",
+          "year": 2019
+        },
+        "documents": [
+          {
+            "doc_type": "PDS_CS_FORM_212",
+            "file_name": "Cruz_PDS_2026.pdf",
+            "file_size": 1550000,
+            "verified": true
+          },
+          {
+            "doc_type": "CPA_BOARD_RATING",
+            "file_name": "PRC_CPA_License.pdf",
+            "file_size": 890000,
+            "verified": true
+          }
+        ],
+        "stage_history": [
+          {
+            "stage": "APPLIED",
+            "updated_at": "2026-07-20T08:00:00+08:00",
+            "remarks": "Applied."
+          },
+          {
+            "stage": "SCREENING",
+            "updated_at": "2026-07-25T11:00:00+08:00",
+            "remarks": "Screened."
+          },
+          {
+            "stage": "DSS_SCORED",
+            "updated_at": "2026-08-05T15:00:00+08:00",
+            "remarks": "DSS scored: 90.40."
+          },
+          {
+            "stage": "DEPT_EVALUATION",
+            "updated_at": "2026-08-12T14:00:00+08:00",
+            "remarks": "Dept eval: 93.00%."
+          },
+          {
+            "stage": "DELIBERATION",
+            "updated_at": "2026-08-20T16:00:00+08:00",
+            "remarks": "HRMPSB approved Rank 1."
+          },
+          {
+            "stage": "APPOINTMENT_ISSUED",
+            "updated_at": "2026-08-28T10:00:00+08:00",
+            "remarks": "Appointment resolution signed by College President; Block committed to Audit Chain."
+          }
+        ],
+        "created_at": "2026-07-20T08:00:00+08:00",
+        "updated_at": "2026-08-28T10:00:00+08:00"
+      },
+      {
+        "id": "app-007",
+        "tracking_number": "NBSC-APP-2026-10204",
+        "applicant_id": "usr-004",
+        "applicant_name": "Mark Anthony L. Reyes",
+        "applicant_email": "mreyes.candidate@example.com",
+        "vacancy_id": "vac-001",
+        "stage": "DOCUMENT_VERIFICATION",
+        "personal_info": {
+          "full_name": "Mark Anthony L. Reyes",
+          "email": "mreyes.candidate@example.com",
+          "phone": "0917 555 0197",
+          "address": "Malaybalay City, Bukidnon",
+          "highest_education": "Master of Information Systems",
+          "school": "Mindanao State University - IIT",
+          "years_experience": "4 years database engineering",
+          "eligibility": "RA 1080 / CS Professional"
+        },
+        "education": {
+          "degree": "Master of Information Systems",
+          "institution": "MSU-IIT",
+          "year": 2021
+        },
+        "documents": [
+          {
+            "doc_type": "PDS_CS_FORM_212",
+            "file_name": "Reyes_PDS_2026.pdf",
+            "file_size": 1600000,
+            "verified": true
+          },
+          {
+            "doc_type": "NBI_CLEARANCE",
+            "file_name": "NBI_Clearance_2026.pdf",
+            "file_size": 750000,
+            "verified": true
+          },
+          {
+            "doc_type": "MEDICAL_CERTIFICATE",
+            "file_name": "Medical_CS_Form_211.pdf",
+            "file_size": 920000,
+            "verified": true
+          }
+        ],
+        "stage_history": [
+          {
+            "stage": "APPLIED",
+            "updated_at": "2026-07-15T09:00:00+08:00",
+            "remarks": "Filed."
+          },
+          {
+            "stage": "DELIBERATION",
+            "updated_at": "2026-08-15T15:00:00+08:00",
+            "remarks": "Deliberation cleared."
+          },
+          {
+            "stage": "APPOINTMENT_ISSUED",
+            "updated_at": "2026-08-22T11:00:00+08:00",
+            "remarks": "Conditional appointment issued."
+          },
+          {
+            "stage": "DOCUMENT_VERIFICATION",
+            "updated_at": "2026-08-31T14:00:00+08:00",
+            "remarks": "Medical clearance, NBI check, and notarized PDS verified."
+          }
+        ],
+        "created_at": "2026-07-15T09:00:00+08:00",
+        "updated_at": "2026-08-31T14:00:00+08:00"
+      },
+      {
+        "id": "app-008",
+        "tracking_number": "NBSC-APP-2026-10250",
+        "applicant_id": "usr-004",
+        "applicant_name": "Noreen Faye S. Esta",
+        "applicant_email": "nesta.candidate@example.com",
+        "vacancy_id": "vac-002",
+        "stage": "ONBOARDED",
+        "personal_info": {
+          "full_name": "Noreen Faye S. Esta",
+          "email": "nesta.candidate@example.com",
+          "phone": "0917 555 0198",
+          "address": "Manolo Fortich, Bukidnon",
+          "highest_education": "Ph.D. in Business Administration units earned",
+          "school": "University of San Carlos",
+          "years_experience": "5 years tertiary academic leadership",
+          "eligibility": "RA 1080 / CS Professional"
+        },
+        "education": {
+          "degree": "Ph.D. units earned / MBA",
+          "institution": "USC",
+          "year": 2020
+        },
+        "documents": [
+          {
+            "doc_type": "PDS_CS_FORM_212",
+            "file_name": "Esta_PDS_2026.pdf",
+            "file_size": 1540000,
+            "verified": true
+          },
+          {
+            "doc_type": "OATH_OF_OFFICE",
+            "file_name": "Oath_Of_Office_Signed.pdf",
+            "file_size": 1100000,
+            "verified": true
+          }
+        ],
+        "stage_history": [
+          {
+            "stage": "APPLIED",
+            "updated_at": "2026-06-10T09:00:00+08:00",
+            "remarks": "Filed."
+          },
+          {
+            "stage": "DELIBERATION",
+            "updated_at": "2026-07-12T14:00:00+08:00",
+            "remarks": "Approved."
+          },
+          {
+            "stage": "APPOINTMENT_ISSUED",
+            "updated_at": "2026-07-28T10:00:00+08:00",
+            "remarks": "Appointed."
+          },
+          {
+            "stage": "DOCUMENT_VERIFICATION",
+            "updated_at": "2026-08-10T11:00:00+08:00",
+            "remarks": "Pre-employment compliance verified."
+          },
+          {
+            "stage": "ONBOARDED",
+            "updated_at": "2026-08-18T08:30:00+08:00",
+            "remarks": "Plantilla induction completed; 201 Personnel file active and enrolled in payroll."
+          }
+        ],
+        "created_at": "2026-06-10T09:00:00+08:00",
+        "updated_at": "2026-08-18T08:30:00+08:00"
+      }
+    ],
+    "dss_scores": [
+      {
+        "id": "dss-001",
+        "application_id": "app-003",
+        "merit_score": 26.5,
+        "competence_score": 27,
+        "ethics_score": 17.5,
+        "service_score": 17.4,
+        "total_score": 88.4,
+        "rank": 1,
+        "qs_compliant": true,
+        "details": {
+          "education_pts": 14,
+          "experience_pts": 8.5,
+          "training_pts": 4
+        },
+        "scored_by": "usr-003",
+        "created_at": "2026-08-28T16:00:00+08:00"
+      },
+      {
+        "id": "dss-002",
+        "application_id": "app-005",
+        "merit_score": 28,
+        "competence_score": 28.5,
+        "ethics_score": 18,
+        "service_score": 17.6,
+        "total_score": 92.1,
+        "rank": 1,
+        "qs_compliant": true,
+        "details": {
+          "education_pts": 15,
+          "experience_pts": 9,
+          "training_pts": 4
+        },
+        "scored_by": "usr-003",
+        "created_at": "2026-08-15T16:00:00+08:00"
+      }
+    ],
+    "dept_head_evaluations": [
+      {
+        "id": "dhe-001",
+        "application_id": "app-004",
+        "evaluator_id": "usr-003",
+        "evaluator_name": "Dr. Ana Reyes",
+        "ratings": {
+          "technical_mastery": 5,
+          "instructional_clarity": 4,
+          "communication": 5,
+          "professionalism": 5
+        },
+        "total_score": 91.5,
+        "recommendation": "STRONGLY_RECOMMEND",
+        "remarks": "Demonstrated exceptional institutional record organization and technical competence.",
+        "created_at": "2026-08-29T11:30:00+08:00"
+      },
+      {
+        "id": "dhe-002",
+        "application_id": "app-005",
+        "evaluator_id": "usr-003",
+        "evaluator_name": "Dr. Ana Reyes",
+        "ratings": {
+          "technical_mastery": 5,
+          "instructional_clarity": 5,
+          "communication": 4,
+          "professionalism": 5
+        },
+        "total_score": 94,
+        "recommendation": "STRONGLY_RECOMMEND",
+        "remarks": "Exceptional teaching demonstration on Philippine historiography and high student engagement.",
+        "created_at": "2026-08-22T10:00:00+08:00"
+      }
+    ],
+    "deliberation_ballots": [
+      {
+        "id": "dlb-001",
+        "application_id": "app-005",
+        "voter_id": "usr-002",
+        "voter_name": "Prof. Juan Dela Cruz",
+        "vote": "APPROVE",
+        "rank_priority": 1,
+        "deliberation_notes": "Strong teaching demonstration and exemplary peer references.",
+        "created_at": "2026-08-30T14:15:00+08:00"
+      },
+      {
+        "id": "dlb-002",
+        "application_id": "app-005",
+        "voter_id": "usr-003",
+        "voter_name": "Dr. Ana Reyes",
+        "vote": "APPROVE",
+        "rank_priority": 1,
+        "deliberation_notes": "Recommended for DGEC faculty plantilla with unanimous department backing.",
+        "created_at": "2026-08-30T14:20:00+08:00"
+      }
+    ],
+    "hiring_decisions": [
+      {
+        "id": "dec-001",
+        "application_id": "app-006",
+        "decision": "APPOINTED",
+        "resolution_number": "BOR-RES-2026-089",
+        "appointed_by": "usr-001",
+        "audit_block_index": 5,
+        "audit_block_hash": "d7f4a2189c4e09f58a719c8114f2e185038c92b23a1a9e88d6ef92a0134b210a",
+        "created_at": "2026-08-28T10:00:00+08:00"
+      }
+    ],
+    "audit_blocks": [
+      {
+        "id": "blk-000",
+        "block_index": 0,
+        "timestamp": "2026-01-01T08:00:00+08:00",
+        "action": "GENESIS",
+        "actor_email": "system@nbsc.edu.ph",
+        "actor_role": "SYSTEM",
+        "target_id": "GENESIS-ROOT",
+        "data": {
+          "message": "NBSC PRIME-HRM Cryptographic Audit Ledger Initialized"
+        },
+        "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "hash": "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2"
+      },
+      {
+        "id": "blk-001",
+        "block_index": 1,
+        "timestamp": "2026-08-15T08:30:00+08:00",
+        "action": "VACANCY_CREATED",
+        "actor_email": "admin@nbsc.edu.ph",
+        "actor_role": "HR_ADMIN",
+        "target_id": "vac-001",
+        "data": {
+          "vacancy_id": "vac-001",
+          "title": "Instructor I (Computer Science)",
+          "department": "ICS"
+        },
+        "previous_hash": "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2",
+        "hash": "b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3"
+      },
+      {
+        "id": "blk-002",
+        "block_index": 2,
+        "timestamp": "2026-08-20T14:30:00+08:00",
+        "action": "APPLICATION_SUBMITTED",
+        "actor_email": "applicant@gmail.com",
+        "actor_role": "APPLICANT",
+        "target_id": "app-001",
+        "data": {
+          "application_id": "app-001",
+          "tracking_number": "NBSC-APP-2026-00001",
+          "vacancy_id": "vac-001"
+        },
+        "previous_hash": "b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3",
+        "hash": "c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4"
+      },
+      {
+        "id": "blk-003",
+        "block_index": 3,
+        "timestamp": "2026-08-25T11:00:00+08:00",
+        "action": "DSS_SCORED",
+        "actor_email": "admin@nbsc.edu.ph",
+        "actor_role": "HR_ADMIN",
+        "target_id": "app-001",
+        "data": {
+          "application_id": "app-001",
+          "composite_score": 86.15,
+          "rank": 1
+        },
+        "previous_hash": "c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4",
+        "hash": "d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5"
+      },
+      {
+        "id": "blk-004",
+        "block_index": 4,
+        "timestamp": "2026-08-30T10:15:00+08:00",
+        "action": "HRMPSB_DELIBERATION",
+        "actor_email": "board@nbsc.edu.ph",
+        "actor_role": "HRMPSB_MEMBER",
+        "target_id": "app-001",
+        "data": {
+          "application_id": "app-001",
+          "vote": "APPROVE",
+          "resolution": "Certified compliant with CSC ORAOHRA standards"
+        },
+        "previous_hash": "d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5",
+        "hash": "e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6"
+      },
+      {
+        "id": "blk-005",
+        "block_index": 5,
+        "timestamp": "2026-09-01T14:00:00+08:00",
+        "action": "HIRING_APPOINTED",
+        "actor_email": "admin@nbsc.edu.ph",
+        "actor_role": "HR_ADMIN",
+        "target_id": "app-001",
+        "data": {
+          "application_id": "app-001",
+          "plantillano": "NBSC-PLANTILLA-2026-042",
+          "status": "CONFIRMED"
+        },
+        "previous_hash": "e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6",
+        "hash": "f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7"
+      }
+    ],
+    "payroll_batches": [
+      {
+        "id": "batch-2026-08-b",
+        "batch_id": "PR-2026-08-B",
+        "period_label": "August 16–31, 2026",
+        "start_date": "2026-08-16",
+        "end_date": "2026-08-31",
+        "department": "ALL",
+        "employee_count": 8,
+        "total_gross": 248600,
+        "total_deductions": 32450,
+        "total_net": 216150,
+        "status": "PROCESSED",
+        "uploaded_by": "admin@nbsc.edu.ph",
+        "audit_block_hash": "d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5",
+        "processed_at": "2026-08-31T17:00:00+08:00",
+        "created_at": "2026-08-31T17:00:00+08:00"
+      },
+      {
+        "id": "batch-2026-08-a",
+        "batch_id": "PR-2026-08-A",
+        "period_label": "August 01–15, 2026",
+        "start_date": "2026-08-16",
+        "end_date": "2026-08-31",
+        "department": "ALL",
+        "employee_count": 8,
+        "total_gross": 248600,
+        "total_deductions": 32450,
+        "total_net": 216150,
+        "status": "DISTRIBUTED",
+        "uploaded_by": "admin@nbsc.edu.ph",
+        "audit_block_hash": "e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6"
+      }
+    ],
+    "payslips": [
+      {
+        "id": "pslip-001",
+        "batch_id": "batch-2026-08-b",
+        "employee_id": "NBSC-2023-0042",
+        "full_name": "Liza Fernandez, M.A.Ed.",
+        "department": "DGEC",
+        "salary_grade": 12,
+        "date_of_birth": "1990-01-01",
+        "pera": 1000,
+        "gross_pay": 31361,
+        "gsis": 0,
+        "philhealth": 0,
+        "pagibig": 100,
+        "withholding_tax": 0,
+        "net_pay": 27284.07,
+        "encrypted_pdf_filename": "Payslip_NBSC-2023-0042_PR-2026-08-B.pdf",
+        "encrypted_pdf_path": "media/payslips/PR-2026-08-B/NBSC-2023-0042.pdf",
+        "created_at": "2026-08-31T17:00:00+08:00"
+      },
+      {
+        "id": "pslip-002",
+        "batch_id": "batch-2026-08-b",
+        "employee_id": "NBSC-2022-0018",
+        "full_name": "Engr. Carlos Mendoza",
+        "department": "ICS",
+        "salary_grade": 12,
+        "date_of_birth": "1990-01-01",
+        "pera": 1000,
+        "gross_pay": 38400,
+        "gsis": 0,
+        "philhealth": 0,
+        "pagibig": 100,
+        "withholding_tax": 0,
+        "net_pay": 32208,
+        "encrypted_pdf_filename": "Payslip_NBSC-2022-0018_PR-2026-08-B.pdf",
+        "encrypted_pdf_path": "media/payslips/PR-2026-08-B/NBSC-2022-0018.pdf",
+        "created_at": "2026-08-31T17:00:00+08:00"
+      },
+      {
+        "id": "pslip-003",
+        "batch_id": "batch-2026-08-b",
+        "employee_id": "NBSC-2021-0012",
+        "full_name": "Mark Anthony Torres",
+        "department": "IBM",
+        "salary_grade": 12,
+        "date_of_birth": "1990-01-01",
+        "pera": 1000,
+        "gross_pay": 42000,
+        "gsis": 0,
+        "philhealth": 0,
+        "pagibig": 100,
+        "withholding_tax": 0,
+        "net_pay": 34690,
+        "encrypted_pdf_filename": "Payslip_NBSC-2021-0012_PR-2026-08-B.pdf",
+        "encrypted_pdf_path": "media/payslips/PR-2026-08-B/NBSC-2021-0012.pdf",
+        "created_at": "2026-08-31T17:00:00+08:00"
+      },
+      {
+        "id": "pslip-004",
+        "batch_id": "batch-2026-08-b",
+        "employee_id": "NBSC-2020-0008",
+        "full_name": "Dr. Roberto Villanueva",
+        "department": "ITE",
+        "salary_grade": 12,
+        "date_of_birth": "1990-01-01",
+        "pera": 1000,
+        "gross_pay": 48500,
+        "gsis": 0,
+        "philhealth": 0,
+        "pagibig": 100,
+        "withholding_tax": 0,
+        "net_pay": 38995,
+        "encrypted_pdf_filename": "Payslip_NBSC-2020-0008_PR-2026-08-B.pdf",
+        "encrypted_pdf_path": "media/payslips/PR-2026-08-B/NBSC-2020-0008.pdf",
+        "created_at": "2026-08-31T17:00:00+08:00"
+      },
+      {
+        "id": "pslip-005",
+        "batch_id": "batch-2026-08-b",
+        "employee_id": "NBSC-2024-0055",
+        "full_name": "Grace Magbanua, CPA",
+        "department": "FIN",
+        "salary_grade": 12,
+        "date_of_birth": "1990-01-01",
+        "pera": 1000,
+        "gross_pay": 36619,
+        "gsis": 0,
+        "philhealth": 0,
+        "pagibig": 100,
+        "withholding_tax": 0,
+        "net_pay": 30758.53,
+        "encrypted_pdf_filename": "Payslip_NBSC-2024-0055_PR-2026-08-B.pdf",
+        "encrypted_pdf_path": "media/payslips/PR-2026-08-B/NBSC-2024-0055.pdf",
+        "created_at": "2026-08-31T17:00:00+08:00"
+      },
+      {
+        "id": "pslip-006",
+        "batch_id": "batch-2026-08-b",
+        "employee_id": "NBSC-2025-0061",
+        "full_name": "Maria Kristina Velasco",
+        "department": "REG",
+        "salary_grade": 12,
+        "date_of_birth": "1990-01-01",
+        "pera": 1000,
+        "gross_pay": 19600,
+        "gsis": 0,
+        "philhealth": 0,
+        "pagibig": 100,
+        "withholding_tax": 0,
+        "net_pay": 17052,
+        "encrypted_pdf_filename": "Payslip_NBSC-2025-0061_PR-2026-08-B.pdf",
+        "encrypted_pdf_path": "media/payslips/PR-2026-08-B/NBSC-2025-0061.pdf",
+        "created_at": "2026-08-31T17:00:00+08:00"
+      },
+      {
+        "id": "pslip-007",
+        "batch_id": "batch-2026-08-b",
+        "employee_id": "NBSC-2019-0005",
+        "full_name": "Prof. Armando Reyes, Ed.D.",
+        "department": "DGEC",
+        "salary_grade": 12,
+        "date_of_birth": "1990-01-01",
+        "pera": 1000,
+        "gross_pay": 49000,
+        "gsis": 0,
+        "philhealth": 0,
+        "pagibig": 100,
+        "withholding_tax": 0,
+        "net_pay": 39230,
+        "encrypted_pdf_filename": "Payslip_NBSC-2019-0005_PR-2026-08-B.pdf",
+        "encrypted_pdf_path": "media/payslips/PR-2026-08-B/NBSC-2019-0005.pdf",
+        "created_at": "2026-08-31T17:00:00+08:00"
+      },
+      {
+        "id": "pslip-008",
+        "batch_id": "batch-2026-08-b",
+        "employee_id": "NBSC-2023-0048",
+        "full_name": "Clarisse Joy Dizon",
+        "department": "ADMIN",
+        "salary_grade": 12,
+        "date_of_birth": "1990-01-01",
+        "pera": 1000,
+        "gross_pay": 13000,
+        "gsis": 0,
+        "philhealth": 0,
+        "pagibig": 100,
+        "withholding_tax": 0,
+        "net_pay": 11310,
+        "encrypted_pdf_filename": "Payslip_NBSC-2023-0048_PR-2026-08-B.pdf",
+        "encrypted_pdf_path": "media/payslips/PR-2026-08-B/NBSC-2023-0048.pdf",
+        "created_at": "2026-08-31T17:00:00+08:00"
+      },
+      {
+        "id": "pslip-009",
+        "batch_id": "batch-2026-08-a",
+        "employee_id": "NBSC-2023-0042",
+        "full_name": "Liza Fernandez, M.A.Ed.",
+        "department": "DGEC",
+        "salary_grade": 12,
+        "date_of_birth": "1990-01-01",
+        "pera": 1000,
+        "gross_pay": 31361,
+        "gsis": 0,
+        "philhealth": 0,
+        "pagibig": 100,
+        "withholding_tax": 0,
+        "net_pay": 27284.07,
+        "encrypted_pdf_filename": "Payslip_NBSC-2023-0042_PR-2026-08-A.pdf",
+        "encrypted_pdf_path": "media/payslips/PR-2026-08-A/NBSC-2023-0042.pdf"
+      },
+      {
+        "id": "pslip-010",
+        "batch_id": "batch-2026-08-a",
+        "employee_id": "NBSC-2022-0018",
+        "full_name": "Engr. Carlos Mendoza",
+        "department": "ICS",
+        "salary_grade": 12,
+        "date_of_birth": "1990-01-01",
+        "pera": 1000,
+        "gross_pay": 38400,
+        "gsis": 0,
+        "philhealth": 0,
+        "pagibig": 100,
+        "withholding_tax": 0,
+        "net_pay": 32208,
+        "encrypted_pdf_filename": "Payslip_NBSC-2022-0018_PR-2026-08-A.pdf",
+        "encrypted_pdf_path": "media/payslips/PR-2026-08-A/NBSC-2022-0018.pdf"
+      },
+      {
+        "id": "pslip-011",
+        "batch_id": "batch-2026-08-a",
+        "employee_id": "NBSC-2021-0012",
+        "full_name": "Mark Anthony Torres",
+        "department": "IBM",
+        "salary_grade": 12,
+        "date_of_birth": "1990-01-01",
+        "pera": 1000,
+        "gross_pay": 42000,
+        "gsis": 0,
+        "philhealth": 0,
+        "pagibig": 100,
+        "withholding_tax": 0,
+        "net_pay": 34690,
+        "encrypted_pdf_filename": "Payslip_NBSC-2021-0012_PR-2026-08-A.pdf",
+        "encrypted_pdf_path": "media/payslips/PR-2026-08-A/NBSC-2021-0012.pdf"
+      }
+    ],
+    "notifications": [
+      {
+        "id": "ntf-001",
+        "recipient_email": "admin@nbsc.edu.ph",
+        "recipient_id": "usr-001",
+        "title": "New Application Received",
+        "message": "Carlo Mendoza submitted an application for Instructor I (Computer Science) — ICS.",
+        "category": "APPLICATION_STAGE",
+        "target_link": "/pages/hiring/hiring-pipeline/hiring-pipeline.html",
+        "is_read": false,
+        "created_at": "2026-08-20T14:30:00+08:00"
+      },
+      {
+        "id": "ntf-002",
+        "recipient_email": "admin@nbsc.edu.ph",
+        "recipient_id": "usr-002",
+        "title": "Deliberation Request",
+        "message": "Vacancy \"Instructor I (Computer Science)\" has 3 applicants ready for HRMPSB deliberation.",
+        "category": "EVALUATION_REQUEST",
+        "target_link": "/pages/hiring/deliberation/deliberation.html",
+        "is_read": false,
+        "created_at": "2026-08-26T09:00:00+08:00"
+      },
+      {
+        "id": "ntf-003",
+        "recipient_email": "admin@nbsc.edu.ph",
+        "recipient_id": "usr-003",
+        "title": "Evaluation Required",
+        "message": "Please submit your Department Head evaluation for applicant Carlo Mendoza (ICS position).",
+        "category": "EVALUATION_REQUEST",
+        "target_link": "/pages/hiring/evaluation/evaluation.html",
+        "is_read": true,
+        "created_at": "2026-08-25T11:30:00+08:00"
+      },
+      {
+        "id": "ntf-004",
+        "recipient_email": "admin@nbsc.edu.ph",
+        "recipient_id": "usr-001",
+        "title": "System Update",
+        "message": "PRIME-HRM Intelligence Hub v2.0 has been deployed with SARA AI Assistant and 4-Pillar DSS Engine.",
+        "category": "SYSTEM",
+        "target_link": null,
+        "is_read": true,
+        "created_at": "2026-09-01T08:00:00+08:00"
+      }
+    ],
+    "settings": [
+      {
+        "id": "set-001",
+        "key": "dss_weights",
+        "value": {
+          "merit": 30,
+          "competence": 30,
+          "ethics": 20,
+          "service": 20
+        },
+        "updated_by": "usr-001",
+        "updated_at": "2026-01-15T08:00:00+08:00"
+      },
+      {
+        "id": "set-002",
+        "key": "institution_info",
+        "value": {
+          "name": "Northern Bukidnon State College",
+          "abbreviation": "NBSC",
+          "address": "Malaybalay City, Bukidnon 8700",
+          "president": "Dr. Maria Santos",
+          "website": "https://nbsc.edu.ph"
+        },
+        "updated_by": "usr-001",
+        "updated_at": "2026-01-15T08:00:00+08:00"
+      },
+      {
+        "id": "set-003",
+        "key": "payslip_password_formula",
+        "value": {
+          "pattern": "last4_of_employee_id + MMDDYYYY_of_DOB",
+          "example": "004203221990"
+        },
+        "updated_by": "usr-001",
+        "updated_at": "2026-01-15T08:00:00+08:00"
+      }
+    ]
+  }
+}

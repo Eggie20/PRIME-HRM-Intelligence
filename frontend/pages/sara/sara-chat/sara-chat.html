@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SARA Voice AI Assistant — Smart Assistant for Recruitment & Analytics at Northern Bukidnon State College.">
+  <title>SARA Voice AI Assistant — NBSC PRIME-HRM Intelligence Hub</title>
+  <link rel="stylesheet" href="../../../shared/css/global.css">
+  <link rel="stylesheet" href="../../../shared/css/components.css">
+  <link rel="stylesheet" href="../../../shared/css/layout.css">
+  <link rel="stylesheet" href="../../../shared/css/utilities.css">
+  <link rel="stylesheet" href="sara-chat.css">
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="app-sidebar" aria-label="Main Navigation">
+      <div class="sidebar__brand">
+        <div class="sidebar__logo-icon">N</div>
+        <div class="sidebar__brand-text">
+          <span class="sidebar__brand-title">NBSC HRMS</span>
+          <span class="sidebar__brand-badge">PRIME-HRM Level 2</span>
+        </div>
+      </div>
+
+      <nav class="sidebar__nav">
+        <span class="sidebar__section-title">Core Operations</span>
+        <a href="../../dashboard/dashboard/dashboard.html" class="sidebar__link" id="nav-dashboard">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#9638;</span>
+            <span>Dashboard</span>
+          </div>
+        </a>
+        <a href="../../employees/employee-list/employee-list.html" class="sidebar__link" id="nav-employees">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128101;</span>
+            <span>Employees</span>
+          </div>
+        </a>
+        <a href="../../programs/program-list/program-list.html" class="sidebar__link" id="nav-programs">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#127891;</span>
+            <span>Programs</span>
+          </div>
+        </a>
+
+        <span class="sidebar__section-title">Recruitment & Hiring</span>
+        <a href="../../vacancies/vacancy-list/vacancy-list.html" class="sidebar__link" id="nav-vacancies">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128188;</span>
+            <span>Vacancies</span>
+          </div>
+        </a>
+        <a href="../../hiring/hiring-pipeline/hiring-pipeline.html" class="sidebar__link" id="nav-hiring-pipeline">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#9640;</span>
+            <span>Hiring Pipeline</span>
+          </div>
+        </a>
+        <a href="../../hiring/deliberation/deliberation.html" class="sidebar__link" id="nav-deliberation">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#9878;</span>
+            <span>HRMPSB Voting</span>
+          </div>
+        </a>
+
+        <span class="sidebar__section-title">Compliance & Payroll</span>
+        <a href="../../audit/audit-chain/audit-chain.html" class="sidebar__link" id="nav-audit">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128279;</span>
+            <span>Audit Trail (SHA256)</span>
+          </div>
+        </a>
+        <a href="../../payroll/payroll-list/payroll-list.html" class="sidebar__link" id="nav-payroll-batches">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128176;</span>
+            <span>Payroll Batches</span>
+          </div>
+        </a>
+        <a href="../../payroll/payroll-upload/payroll-upload.html" class="sidebar__link" id="nav-payroll-upload">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128196;</span>
+            <span>Upload & Generate</span>
+          </div>
+        </a>
+        <a href="../../payroll/payslip-download/payslip-download.html" class="sidebar__link" id="nav-payslip-download">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128274;</span>
+            <span>My Payslips</span>
+          </div>
+        </a>
+        <a href="sara-chat.html" class="sidebar__link sidebar__link--active" id="nav-sara">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#129302;</span>
+            <span>SARA Voice AI</span>
+          </div>
+        </a>
+      </nav>
+
+      <div class="sidebar__footer">
+        <div class="sidebar__user">
+          <div class="sidebar__user-avatar" id="user-avatar">AD</div>
+          <div class="sidebar__user-info">
+            <span class="sidebar__user-name" id="user-display-name">HR Administrator</span>
+            <span class="sidebar__user-role" id="user-display-role">HR Admin</span>
+          </div>
+        </div>
+        <button class="btn btn--icon btn--ghost" id="btn-logout" title="Sign out"
+          aria-label="Sign out">&#10150;</button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="pipeline-main sara-main" id="main-content">
+      <div class="topbar">
+        <div>
+          <div class="crumb">AI Intelligence / <b>SARA Voice AI Copilot</b></div>
+          <h1>SARA AI Copilot</h1>
+          <div class="sub">CSC PRIME-HRM Level 2 intelligent assistant with natural speech synthesis and RAG policy retrieval.</div>
+        </div>
+        <div class="top-actions">
+          <button type="button" class="btn-outline" id="btn-toggle-tts" title="Toggle Vocal Responses">
+            <span id="tts-icon">&#128266;</span> Voice Audio: <strong id="tts-status">ON</strong>
+          </button>
+          <span class="stat-flag flag-green">&#9679; SARA Online</span>
+        </div>
+      </div>
+
+      <!-- AI Performance & Architecture Stats -->
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-num">CSC RAG v2</div>
+          <div class="stat-lbl">Knowledge Retrieval Engine</div>
+          <span class="stat-flag flag-green">PRIME-HRM Level 2</span>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">Web Speech</div>
+          <div class="stat-lbl">Voice Recognition &amp; TTS</div>
+          <span class="stat-flag flag-gold">Two-Way Voice</span>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">SHA-256</div>
+          <div class="stat-lbl">Conversation Ledger</div>
+          <span class="stat-flag flag-neutral">Audit Linked</span>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">&lt; 450ms</div>
+          <div class="stat-lbl">Response Velocity</div>
+          <span class="stat-flag flag-green">Real-Time Inference</span>
+        </div>
+      </div>
+
+      <div class="mt-2">
+        <!-- Interactive Voice Aura / Waveform Visualizer Banner -->
+        <section class="sara-banner mb-4" aria-label="Voice Waveform Visualizer">
+          <div class="sara-banner__glow"></div>
+          <div class="d-flex align-center justify-between flex-wrap gap-4 relative-z">
+            <div class="d-flex align-center gap-4">
+              <div class="sara-avatar-container" id="sara-avatar-aura">
+                <div class="sara-avatar">&#129302;</div>
+                <div class="sara-pulse-ring"></div>
+              </div>
+              <div>
+                <div class="d-flex align-center gap-2 mb-1">
+                  <h2 class="sara-banner__title font-lg text-white" style="margin:0;">SARA AI Copilot</h2>
+                  <span class="badge badge--gold">PRIME-HRM Level 2</span>
+                </div>
+                <p class="font-xs text-muted-light" id="sara-status-caption" style="margin:0;">
+                  Listening for questions on merit selection, CSC QS standards, or candidate tracking...
+                </p>
+              </div>
+            </div>
+
+            <!-- Canvas Audio Waveform -->
+            <div class="sara-visualizer-container">
+              <canvas id="voice-canvas" width="280" height="48" aria-label="Voice Frequency Visualizer"></canvas>
+            </div>
+          </div>
+        </section>
+
+        <!-- Chat Conversation Card -->
+        <section class="card sara-chat-card" aria-label="Chat Conversation Stream">
+          <!-- Messages Stream Container -->
+          <div class="sara-messages-stream" id="chat-stream">
+            <!-- Initial Welcome Message from SARA -->
+            <div class="chat-message chat-message--assistant">
+              <div class="chat-message__avatar">&#129302;</div>
+              <div class="chat-message__bubble">
+                <div class="chat-message__header">
+                  <strong class="text-accent font-xs">SARA AI HR Officer</strong>
+                  <span class="text-muted font-xs">Just now</span>
+                </div>
+                <div class="chat-message__body">
+                  <p>Mabuhay! I am <strong>SARA</strong> (<em>Smart Assistant for Recruitment & Analytics</em>), your AI HR Officer at Northern Bukidnon State College.</p>
+                  <p>I am trained on Philippine Civil Service rules, CSC PRIME-HRM Level 2 criteria, and NBSC's Merit Selection Plan. You can speak into your microphone or type any question below!</p>
+                </div>
+                <div class="chat-message__chips">
+                  <button type="button" class="chip-btn" onclick="sendSuggestedPrompt('What are the 4 pillars of the NBSC Merit Selection Plan?')">
+                    4-Pillar Merit Selection Plan
+                  </button>
+                  <button type="button" class="chip-btn" onclick="sendSuggestedPrompt('What are the active faculty vacancies in ICS?')">
+                    Open ICS Vacancies
+                  </button>
+                  <button type="button" class="chip-btn" onclick="sendSuggestedPrompt('How do I unlock my encrypted payslip PDF?')">
+                    Unlock Payslip PDF
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Suggested Queries Bar -->
+          <div class="sara-quick-bar" id="quick-prompts-bar">
+            <span class="font-xs text-muted mr-2">Suggested:</span>
+            <div class="sara-quick-scroll" id="quick-prompts-list">
+              <button type="button" class="quick-prompt-pill" onclick="sendSuggestedPrompt('What are the QS requirements for Instructor I?')">
+                QS for Instructor I
+              </button>
+              <button type="button" class="quick-prompt-pill" onclick="sendSuggestedPrompt('Track application NBSC-APP-2026-10042')">
+                Track Application #10042
+              </button>
+              <button type="button" class="quick-prompt-pill" onclick="sendSuggestedPrompt('How is withholding tax computed under TRAIN Law?')">
+                TRAIN Law Tax Table
+              </button>
+            </div>
+          </div>
+
+          <!-- Chat Input Bar -->
+          <div class="sara-input-bar">
+            <!-- Push to Talk Mic Button -->
+            <button type="button" class="btn-mic" id="btn-mic" title="Click to Speak (Push-to-Talk)" aria-label="Toggle Microphone Voice Input">
+              <span id="mic-icon">&#127908;</span>
+            </button>
+
+            <!-- Text Input -->
+            <input type="text" id="input-sara-message" class="form-control sara-input-field" placeholder="Ask SARA anything or click mic to speak..." autocomplete="off">
+
+            <!-- Send Button -->
+            <button type="button" class="btn btn--primary" id="btn-sara-send" aria-label="Send message">
+              Send &rarr;
+            </button>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="../../../shared/js/constants.js"></script>
+  <script src="../../../shared/js/utils.js"></script>
+  <script src="../../../shared/js/components.js"></script>
+  <script src="../../../shared/js/db.js"></script>
+  <script src="../../../shared/js/api.js"></script>
+  <script src="../../../shared/js/auth.js"></script>
+  <script src="sara-chat.js"></script>
+</body>
+</html>

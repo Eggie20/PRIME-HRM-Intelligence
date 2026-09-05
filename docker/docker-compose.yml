@@ -1,0 +1,81 @@
+# NBSC PRIME-HRM Intelligence Hub — Multi-Container Docker Compose
+# Orchestrates Frontend (Nginx), Backend (Django/Gunicorn), and MongoDB
+
+version: '3.8'
+
+services:
+  # ── MongoDB Document Database ─────────────────────────────────────
+  mongodb:
+    image: mongo:7.0
+    container_name: nbsc-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: nbsc_hrms
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - nbsc-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Django REST API Backend ────────────────────────────────────────
+  backend:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.backend
+    container_name: nbsc-backend
+    restart: unless-stopped
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings.prod
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-nbsc-prod-secret-key-32-chars-long-min!!}
+      DJANGO_DEBUG: "False"
+      ALLOWED_HOSTS: "localhost,127.0.0.1,backend,frontend"
+      MONGODB_HOST: mongodb
+      MONGODB_PORT: 27017
+      MONGODB_NAME: nbsc_hrms
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY:-nbsc-jwt-super-secret-key-prod-2026!!}
+      JWT_EXPIRATION_HOURS: 8
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      CORS_ALLOWED_ORIGINS: "http://localhost,http://localhost:80,http://127.0.0.1"
+    volumes:
+      - backend_media:/app/media
+      - backend_static:/app/staticfiles
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - nbsc-network
+    expose:
+      - "8000"
+
+  # ── Pure Static Frontend & Reverse Proxy ────────────────────────────
+  frontend:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.frontend
+    container_name: nbsc-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - nbsc-network
+
+volumes:
+  mongodb_data:
+    name: nbsc_mongodb_data
+  backend_media:
+    name: nbsc_backend_media
+  backend_static:
+    name: nbsc_backend_static
+
+networks:
+  nbsc-network:
+    name: nbsc_network
+    driver: bridge

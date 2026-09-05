@@ -1,0 +1,322 @@
+/**
+ * NBSC PRIME-HRM Intelligence Hub — Forms & Inputs Module
+ * Executive form controls, custom selects, styled textareas, tactile radios & checkboxes.
+ */
+
+/* ── Form Groups & Labels ─────────────────────────────────── */
+.form-group {
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-label,
+.form-group__label {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #1E293B;
+  margin-bottom: 0.45rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.form-group__label--required::after {
+  content: " *";
+  color: #DC2626;
+}
+
+.form-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.45rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.form-hint,
+.form-group__hint {
+  font-size: 0.75rem;
+  color: #64748B;
+  margin-top: 0.35rem;
+  line-height: 1.4;
+}
+
+.form-error,
+.form-group__error {
+  font-size: 0.75rem;
+  color: #DC2626;
+  margin-top: 0.35rem;
+  display: none;
+}
+
+.form-group__error--visible {
+  display: block;
+}
+
+/* ── Universal Form Controls ──────────────────────────────── */
+.form-control,
+.form-group__input,
+.form-group__textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.75rem 1rem;
+  font-family: inherit;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: #0F1B2D;
+  background-color: #FFFFFF;
+  border: 1.5px solid #CBD5E1;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 2px rgba(15, 27, 45, 0.04);
+}
+
+.form-control:hover,
+.form-group__input:hover,
+.form-group__textarea:hover {
+  border-color: #94A3B8;
+}
+
+.form-control:focus,
+.form-group__input:focus,
+.form-group__textarea:focus {
+  border-color: #D4A843;
+  box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.22);
+  background-color: #FFFFFF;
+}
+
+/* Specific styling for <textarea> */
+textarea.form-control,
+.form-group__textarea {
+  min-height: 95px;
+  resize: vertical;
+  line-height: 1.55;
+}
+
+/* Specific styling for <select> */
+select.form-control,
+.form-group__select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.75rem 2.5rem 0.75rem 1rem;
+  font-family: inherit;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: #0F1B2D;
+  background-color: #FFFFFF;
+  border: 1.5px solid #CBD5E1;
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23475569'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 16px;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(15, 27, 45, 0.04);
+}
+
+select.form-control:hover,
+.form-group__select:hover {
+  border-color: #94A3B8;
+}
+
+select.form-control:focus,
+.form-group__select:focus {
+  border-color: #D4A843;
+  box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.22);
+}
+
+/* ── Custom Range Slider ──────────────────────────────────── */
+.form-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 6px;
+  background: #E2E8F0;
+  outline: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.form-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #D4A843 0%, #B88E2C 100%);
+  border: 2.5px solid #FFFFFF;
+  box-shadow: 0 2px 8px rgba(15, 27, 45, 0.35);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-range::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 6px rgba(212, 168, 67, 0.25);
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #D4A843;
+  border: 2.5px solid #FFFFFF;
+  box-shadow: 0 2px 8px rgba(15, 27, 45, 0.35);
+  cursor: pointer;
+}
+
+/* ── Interactive Qualification Check Tiles ────────────────── */
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.85rem 1.15rem;
+  background: #FFFFFF;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1E293B;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.check-item:hover {
+  background: #F8FAFC;
+  border-color: #CBD5E1;
+  transform: translateX(2px);
+}
+
+.check-item:has(input:checked) {
+  background: linear-gradient(135deg, #F0FDF4 0%, #ECFDF5 100%);
+  border-color: #10B981;
+  color: #065F46;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.12);
+}
+
+.check-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #059669;
+  cursor: pointer;
+  flex-shrink: 0;
+  border-radius: 4px;
+}
+
+/* ── Tactile Radio Tiles (Voting & Decision) ──────────────── */
+.vote-selector-group,
+.decision-selector-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.vote-option-label,
+.decision-option {
+  display: flex;
+  align-items: center;
+  padding: 0.95rem 1.15rem;
+  border-radius: 12px;
+  border: 1.5px solid #E2E8F0;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  background-color: #FFFFFF;
+  user-select: none;
+  box-sizing: border-box;
+  gap: 0.85rem;
+}
+
+.vote-option-label:hover,
+.decision-option:hover {
+  background-color: #F8FAFC;
+  border-color: #CBD5E1;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(15, 27, 45, 0.05);
+}
+
+.vote-option-label input[type="radio"],
+.decision-option input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #059669;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin: 0;
+}
+
+.vote-option-label--approve:has(input:checked),
+.decision-option--appoint:has(input:checked) {
+  border-color: #10B981;
+  background: linear-gradient(135deg, #F0FDF4 0%, #ECFDF5 100%);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18), 0 4px 12px rgba(16, 185, 129, 0.08);
+  transform: translateY(-2px);
+}
+
+.vote-option-label--disapprove:has(input:checked),
+.decision-option--reject:has(input:checked) {
+  border-color: #EF4444;
+  background: linear-gradient(135deg, #FEF2F2 0%, #FEE2E2 100%);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.18), 0 4px 12px rgba(239, 68, 68, 0.08);
+  transform: translateY(-2px);
+}
+
+.vote-option-label--abstain:has(input:checked) {
+  border-color: #64748B;
+  background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+  box-shadow: 0 0 0 3px rgba(100, 116, 139, 0.18), 0 4px 12px rgba(100, 116, 139, 0.08);
+  transform: translateY(-2px);
+}
+
+.vote-card-content,
+.decision-card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+/* ── Quick Preset Chips ───────────────────────────────────── */
+.quick-tag-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: #F1F5F9;
+  border: 1px solid #CBD5E1;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.quick-tag-chip:hover {
+  background: #0F1B2D;
+  color: #FFFFFF;
+  border-color: #0F1B2D;
+  transform: translateY(-1px);
+}

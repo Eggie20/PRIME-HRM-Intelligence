@@ -1,0 +1,179 @@
+/**
+ * NBSC PRIME-HRM Intelligence Hub — Audit Chain Ledger Explorer Styles
+ */
+
+.kpi-card .font-mono {
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  font-weight: 700;
+}
+
+.blockchain-timeline {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: var(--spacing-6);
+}
+
+.blockchain-timeline::before {
+  content: '';
+  position: absolute;
+  top: 24px;
+  bottom: 24px;
+  left: 28px;
+  width: 3px;
+  background: linear-gradient(180deg, var(--color-accent-500) 0%, var(--color-primary-600) 100%);
+  z-index: 1;
+}
+
+.block-node {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+  position: relative;
+  z-index: 2;
+}
+
+.block-index-badge {
+  width: 58px;
+  height: 58px;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+  background-color: var(--color-primary-800);
+  color: var(--color-accent-500);
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--color-surface);
+  box-shadow: 0 0 0 2px var(--color-accent-500);
+}
+
+.block-card {
+  flex: 1;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-neutral-200);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+
+.block-card:hover {
+  border-color: var(--color-accent-500);
+  box-shadow: var(--shadow-md);
+}
+
+.block-header {
+  padding: var(--spacing-3) var(--spacing-4);
+  background-color: var(--color-neutral-50);
+  border-bottom: 1px solid var(--color-neutral-200);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: gap;
+}
+
+.block-body {
+  padding: var(--spacing-4);
+}
+
+.hash-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(15, 27, 45, 0.03);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-neutral-200);
+  margin-bottom: 0.5rem;
+  gap: 0.75rem;
+}
+
+.hash-label {
+  font-size: 0.7rem;
+  color: var(--color-neutral-500);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  min-width: 85px;
+}
+
+.hash-value {
+  font-family: var(--font-mono);
+  font-size: 0.775rem;
+  color: var(--color-primary-900);
+  word-break: break-all;
+  flex: 1;
+  letter-spacing: 0.02em;
+}
+
+.hash-value--prev {
+  color: var(--color-neutral-500);
+}
+
+.block-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--color-neutral-200);
+}
+
+.meta-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.meta-field-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--color-neutral-400);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.meta-field-value {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-neutral-800);
+}
+
+/* JSON Modal formatting */
+.json-viewer-box {
+  background-color: var(--color-neutral-900);
+  color: #38bdf8;
+  padding: var(--spacing-4);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  max-height: 400px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .blockchain-timeline::before {
+    left: 18px;
+  }
+
+  .block-index-badge {
+    width: 38px;
+    height: 38px;
+    font-size: 0.85rem;
+  }
+
+  .block-meta-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hash-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

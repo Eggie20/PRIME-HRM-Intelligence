@@ -1,0 +1,339 @@
+/**
+ * NBSC PRIME-HRM Intelligence Hub — Applicant Review Styles
+ * Executive candidate dossier with categorized credential blocks & verified badge styling.
+ */
+
+.review-split-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 992px) {
+  .review-split-grid {
+    grid-template-columns: 1.75fr 1fr;
+    align-items: start;
+  }
+}
+
+/* ── Credential Info Blocks ────────────────────────────────── */
+.profile-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .profile-meta-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.profile-field-block {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 1rem 1.15rem;
+  box-shadow: 0 1px 3px rgba(15, 27, 45, 0.03);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.profile-field-block:hover {
+  border-color: #CBD5E1;
+  box-shadow: 0 4px 12px rgba(15, 27, 45, 0.06);
+  transform: translateY(-2px);
+}
+
+.profile-field-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #64748B;
+  margin-bottom: 0.35rem;
+}
+
+.profile-field-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  background: #F1F5F9;
+  color: #0F1B2D;
+}
+
+.profile-field-value {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #0F1B2D;
+  line-height: 1.35;
+}
+
+.profile-field-block--gold {
+  border-left: 4px solid #D4A843;
+  background: linear-gradient(180deg, #FFFFFF 0%, #FDFBF7 100%);
+}
+
+.profile-field-block--primary {
+  border-left: 4px solid #0F1B2D;
+}
+
+.statement-intent-card {
+  background: linear-gradient(180deg, #FDFBF7 0%, #FAF6EE 100%);
+  border: 1px solid #EADBBA;
+  border-left: 4px solid #D4A843;
+  border-radius: 12px;
+  padding: 1.25rem 1.4rem;
+  margin-top: 1.25rem;
+  box-shadow: 0 2px 8px rgba(212, 168, 67, 0.06);
+}
+
+.statement-intent-label {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #936B15;
+  margin-bottom: 0.5rem;
+}
+
+.statement-intent-text {
+  font-size: 0.875rem;
+  color: #334155;
+  font-style: italic;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Document List ─────────────────────────────────────────── */
+.document-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.document-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(15, 27, 45, 0.03);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.document-card:hover {
+  border-color: #D4A843;
+  background-color: #FDFCF9;
+  box-shadow: 0 6px 16px rgba(212, 168, 67, 0.12);
+  transform: translateY(-2px);
+}
+
+.document-card__info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.document-card__icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #0F1B2D 0%, #1E293B 100%);
+  color: #D4A843;
+  font-size: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(15, 27, 45, 0.15);
+}
+
+.document-card__name {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #0F1B2D;
+  margin-bottom: 0.15rem;
+}
+
+.document-card__meta {
+  font-size: 0.75rem;
+  color: #64748B;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ── CSC Verification Tiles ────────────────────────────────── */
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.85rem 1.15rem;
+  background: #FFFFFF;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 12px;
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: #1E293B;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  box-shadow: 0 1px 3px rgba(15, 27, 45, 0.02);
+}
+
+.check-item:hover {
+  background: #F8FAFC;
+  border-color: #CBD5E1;
+  transform: translateX(3px);
+  box-shadow: 0 3px 8px rgba(15, 27, 45, 0.05);
+}
+
+.check-item:has(input:checked) {
+  background: linear-gradient(135deg, #F0FDF4 0%, #ECFDF5 100%);
+  border-color: #10B981;
+  color: #065F46;
+  box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.2), 0 3px 8px rgba(16, 185, 129, 0.1);
+}
+
+.check-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #059669;
+  cursor: pointer;
+  flex-shrink: 0;
+  border-radius: 4px;
+}
+
+.quick-tag-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.725rem;
+  font-weight: 700;
+  background: #F1F5F9;
+  border: 1px solid #CBD5E1;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.quick-tag-chip:hover {
+  background: #0F1B2D;
+  color: #FFFFFF;
+  border-color: #0F1B2D;
+  transform: translateY(-1px);
+}
+
+#textarea-screening-notes {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  display: block !important;
+  border: 1.5px solid #CBD5E1 !important;
+  border-radius: 10px !important;
+  padding: 0.85rem 1rem !important;
+  font-size: 0.875rem !important;
+  font-family: inherit !important;
+  color: #1E293B !important;
+  background-color: #FFFFFF !important;
+  line-height: 1.5 !important;
+  min-height: 95px !important;
+  transition: all 0.2s ease !important;
+  resize: vertical !important;
+}
+
+#textarea-screening-notes:focus {
+  border-color: #D4A843 !important;
+  box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.2) !important;
+  outline: none !important;
+  background-color: #FFFFFF !important;
+}
+
+#btn-save-screening {
+  background: linear-gradient(135deg, #D4A843 0%, #B88E2C 100%) !important;
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  font-size: 0.95rem !important;
+  padding: 0.95rem 1.5rem !important;
+  border-radius: 10px !important;
+  border: none !important;
+  width: 100% !important;
+  box-shadow: 0 4px 16px rgba(212, 168, 67, 0.38) !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+#btn-save-screening:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 22px rgba(212, 168, 67, 0.52) !important;
+}
+
+/* ── Stage Management Controls ────────────────────────────── */
+#select-advance-stage {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  display: block !important;
+  padding: 0.75rem 2.25rem 0.75rem 1rem !important;
+  border: 1.5px solid #CBD5E1 !important;
+  border-radius: 10px !important;
+  font-size: 0.875rem !important;
+  font-weight: 700 !important;
+  color: #0F1B2D !important;
+  background-color: #FFFFFF !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2364748B' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 0.85rem center !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  transition: all 0.2s ease !important;
+  cursor: pointer !important;
+}
+
+#select-advance-stage:focus {
+  border-color: #0F1B2D !important;
+  box-shadow: 0 0 0 3px rgba(15, 27, 45, 0.15) !important;
+  outline: none !important;
+}
+
+#btn-confirm-stage-advance {
+  background: linear-gradient(135deg, #0F1B2D 0%, #1E293B 100%) !important;
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  font-size: 0.95rem !important;
+  padding: 0.95rem 1.5rem !important;
+  border-radius: 10px !important;
+  border: none !important;
+  width: 100% !important;
+  box-shadow: 0 4px 14px rgba(15, 27, 45, 0.25) !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+#btn-confirm-stage-advance:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(15, 27, 45, 0.38) !important;
+  background: linear-gradient(135deg, #16263F 0%, #28374E 100%) !important;
+}
+

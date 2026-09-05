@@ -1,0 +1,666 @@
+/**
+ * NBSC PRIME-HRM Intelligence Hub — Staff Login Styles
+ * High-end institutional split layout replicating Image 1 hero branding
+ * with a perfectly arranged, premium workspace sign-in card.
+ */
+
+/* ── Base Setup ───────────────────────────────────────────── */
+.auth-body {
+  background-color: #0A1322;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: var(--font-body, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Secondary Quick Navigation (Form Footer) ─────────────── */
+.auth-quick-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px dashed #E2E8F0;
+  font-size: 0.82rem;
+}
+
+.quick-nav-link {
+  color: #64748B;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.quick-nav-link:hover {
+  color: #0F1B2D;
+  text-decoration: underline;
+}
+
+.quick-nav-sep {
+  color: #CBD5E1;
+  font-size: 0.75rem;
+}
+
+.auth-split {
+  display: flex;
+  flex: 1;
+  min-height: 100vh;
+  width: 100%;
+  animation: pageEnterStaff 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Smooth Page Transitions */
+@keyframes pageEnterStaff {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-exit-to-applicant .auth-split {
+  opacity: 0;
+  transform: scale(0.985) translateX(14px);
+  filter: blur(2px);
+  transition: opacity 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+              filter 0.22s ease;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   LEFT HERO BRAND PANEL (Image 1 Aesthetics)
+   ═══════════════════════════════════════════════════════════ */
+.auth-split__brand {
+  flex: 1.15;
+  background: radial-gradient(circle at 18% 22%, #1D3558 0%, #112038 42%, #0A1424 75%, #060C16 100%);
+  color: #FFFFFF;
+  padding: 4.5rem 5rem 3.5rem 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  border-right: 1px solid rgba(212, 168, 67, 0.12);
+}
+
+/* Atmospheric Ambient Lighting */
+.auth-split__brand::before {
+  content: "";
+  position: absolute;
+  top: -120px;
+  right: -100px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(212, 168, 67, 0.08) 0%, transparent 65%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.auth-split__brand::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(to top, rgba(6, 12, 22, 0.7) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Delicate Star Particles (as in Image 1) */
+.star-dust {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.star-dust--1 {
+  top: 11%;
+  right: 8%;
+  width: 2px;
+  height: 2px;
+  background: #FFFFFF;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.9);
+  opacity: 0.65;
+}
+
+.star-dust--2 {
+  top: 21%;
+  right: 30%;
+  width: 1.5px;
+  height: 1.5px;
+  background: #FFFFFF;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+  opacity: 0.45;
+}
+
+.star-dust--3 {
+  top: 32%;
+  left: 19%;
+  width: 1.5px;
+  height: 1.5px;
+  background: #FFFFFF;
+  opacity: 0.55;
+}
+
+.star-dust--4 {
+  top: 51%;
+  right: 46%;
+  width: 2.5px;
+  height: 2.5px;
+  background: #FEF08A;
+  box-shadow: 0 0 8px #FDE047;
+  opacity: 0.75;
+}
+
+.star-dust--5 {
+  top: 74%;
+  right: 15%;
+  width: 2px;
+  height: 2px;
+  background: #FFFFFF;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+  opacity: 0.4;
+}
+
+.star-dust--6 {
+  top: 89%;
+  left: 39%;
+  width: 1.5px;
+  height: 1.5px;
+  background: #FFFFFF;
+  opacity: 0.45;
+}
+
+/* Brand Identity Top Header */
+.brand-top-header {
+  display: flex;
+  align-items: center;
+  gap: 1.125rem;
+  z-index: 2;
+}
+
+.brand-crest-shield {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.35));
+}
+
+.brand-top-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-top-title {
+  font-family: var(--font-heading, 'Outfit', 'Inter', sans-serif);
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.brand-top-subtitle {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #94A3B8;
+  text-transform: uppercase;
+  margin-top: 0.125rem;
+}
+
+/* Hero Body & Big Headline */
+.brand-hero-body {
+  margin: auto 0;
+  padding: 3rem 0 2rem 0;
+  z-index: 2;
+}
+
+.brand-hero-title {
+  font-family: var(--font-heading, 'Outfit', 'Inter', sans-serif);
+  font-size: 3.375rem;
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  color: #FFFFFF;
+  margin: 0 0 1.75rem 0;
+}
+
+.brand-hero-title--gold {
+  color: #FDF08A; /* Warm cream/light-gold as seen in Image 1 */
+  text-shadow: 0 0 40px rgba(253, 240, 138, 0.25);
+}
+
+.brand-hero-description {
+  font-size: 1.0625rem;
+  line-height: 1.68;
+  color: #94A3B8;
+  max-width: 520px;
+  margin: 0 0 3.25rem 0;
+  font-weight: 400;
+}
+
+/* Trust / Security Badge */
+.brand-trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand-trust-badge__icon {
+  color: #F59E0B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.4));
+}
+
+.brand-trust-badge__text {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #CBD5E1;
+  letter-spacing: -0.01em;
+}
+
+/* Legal Footer */
+.auth-split__brand-footer {
+  z-index: 2;
+  padding-top: 1rem;
+}
+
+.brand-legal {
+  font-size: 0.75rem;
+  color: #64748B;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RIGHT LOGIN CARD PANEL (Arranged & Ultra-Premium)
+   ═══════════════════════════════════════════════════════════ */
+.auth-split__form-panel {
+  flex: 0.95;
+  background: radial-gradient(circle at 85% 12%, rgba(212, 168, 67, 0.05) 0%, transparent 55%), #F8FAFC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2.5rem;
+}
+
+.auth-form-card {
+  width: 100%;
+  max-width: 460px;
+  background-color: #FFFFFF;
+  padding: 2.75rem 2.5rem;
+  border-radius: 24px;
+  box-shadow: 0 25px 60px -15px rgba(15, 27, 45, 0.07), 0 0 0 1px rgba(15, 27, 45, 0.03);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.auth-form-header {
+  margin-bottom: 1.75rem;
+}
+
+.auth-form-title {
+  font-family: var(--font-heading, 'Outfit', 'Inter', sans-serif);
+  font-size: 1.875rem;
+  font-weight: 800;
+  color: #0F1B2D;
+  letter-spacing: -0.025em;
+  margin: 0 0 0.375rem 0;
+  line-height: 1.2;
+}
+
+.auth-form-subtitle {
+  font-size: 0.875rem;
+  color: #64748B;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ── Quick Demo Access Control (Arranged Pill Grid) ────────── */
+.demo-selector {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 0.875rem 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.demo-selector__header {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-bottom: 0.625rem;
+}
+
+.demo-selector__icon {
+  font-size: 0.8125rem;
+  color: #D4A843;
+}
+
+.demo-selector__label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #475569;
+}
+
+.demo-selector__buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.btn-demo-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.625rem 0.375rem;
+  border-radius: 10px;
+  border: 1px solid #CBD5E1;
+  background-color: #FFFFFF;
+  cursor: pointer;
+  transition: all 180ms cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+
+.btn-demo-chip:hover {
+  border-color: #D4A843;
+  background-color: #FFFDF9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px -2px rgba(212, 168, 67, 0.18);
+}
+
+.btn-demo-chip:active {
+  transform: translateY(0);
+}
+
+.demo-chip-badge {
+  font-size: 0.625rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  line-height: 1;
+}
+
+.demo-chip-badge--admin {
+  background-color: #FEF3C7;
+  color: #92400E;
+}
+
+.demo-chip-badge--hrmpsb {
+  background-color: #E0E7FF;
+  color: #3730A3;
+}
+
+.demo-chip-badge--dept {
+  background-color: #DCFCE7;
+  color: #166534;
+}
+
+.demo-chip-name {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #1E293B;
+  white-space: nowrap;
+}
+
+/* ── Form Groups & Icon Inputs ────────────────────────────── */
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+
+.form-group__label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #1E293B;
+  margin-bottom: 0.4rem;
+}
+
+.form-group__label--required::after {
+  content: " *";
+  color: var(--color-danger-500, #EF4444);
+}
+
+.forgot-link {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #B88B2A;
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+
+.forgot-link:hover {
+  color: #8A6414;
+  text-decoration: underline;
+}
+
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 0.9375rem;
+  font-size: 1rem;
+  color: #94A3B8;
+  pointer-events: none;
+  line-height: 1;
+}
+
+.form-group__input {
+  width: 100%;
+  height: 48px;
+  padding: 0.625rem 1rem 0.625rem 2.625rem;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  color: #0F1B2D;
+  background-color: #FFFFFF;
+  box-sizing: border-box;
+  transition: all 180ms ease;
+}
+
+.form-group__input::placeholder {
+  color: #94A3B8;
+  font-size: 0.875rem;
+}
+
+.form-group__input:hover {
+  border-color: #CBD5E1;
+}
+
+.form-group__input:focus {
+  border-color: #D4A843;
+  box-shadow: 0 0 0 4px rgba(212, 168, 67, 0.14);
+  outline: none;
+  background-color: #FFFFFF;
+}
+
+.form-group__error {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--color-danger-500, #EF4444);
+  margin-top: 0.375rem;
+  min-height: 1rem;
+}
+
+/* Password Toggle */
+.password-input-wrapper .form-group__input {
+  padding-right: 2.75rem;
+}
+
+.btn-toggle-password {
+  position: absolute;
+  right: 0.875rem;
+  background: none;
+  border: none;
+  font-size: 1.125rem;
+  color: #64748B;
+  cursor: pointer;
+  padding: 0.25rem;
+  opacity: 0.65;
+  transition: opacity 150ms ease;
+  line-height: 1;
+}
+
+.btn-toggle-password:hover {
+  opacity: 1;
+}
+
+/* ── Primary Submit Button ────────────────────────────────── */
+.form-actions {
+  margin-top: 1.5rem;
+}
+
+.btn-primary-auth {
+  width: 100%;
+  height: 48px;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #0F1B2D;
+  background: linear-gradient(135deg, #E5B84B 0%, #C49735 100%);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 10px 22px -5px rgba(212, 168, 67, 0.4), 0 2px 4px -1px rgba(212, 168, 67, 0.2);
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.01em;
+}
+
+.btn-primary-auth:hover {
+  background: linear-gradient(135deg, #EDB93B 0%, #D4A843 100%);
+  transform: translateY(-1.5px);
+  box-shadow: 0 14px 26px -5px rgba(212, 168, 67, 0.48);
+}
+
+.btn-primary-auth:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px -2px rgba(212, 168, 67, 0.3);
+}
+
+.btn-primary-auth:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-arrow {
+  font-size: 1.125rem;
+  transition: transform 180ms ease;
+}
+
+.btn-primary-auth:hover .btn-arrow {
+  transform: translateX(3px);
+}
+
+/* ── Card Footer Links ────────────────────────────────────── */
+.auth-form-footer {
+  margin-top: 1.875rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #F1F5F9;
+  text-align: center;
+}
+
+.applicant-switch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  font-size: 0.8125rem;
+  color: #64748B;
+  flex-wrap: wrap;
+}
+
+.applicant-switch__link {
+  font-weight: 700;
+  color: #B88B2A;
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+
+.applicant-switch__link:hover {
+  color: #8A6414;
+  text-decoration: underline;
+}
+
+.back-home-wrapper {
+  margin-top: 0.875rem;
+}
+
+.back-home-link {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: #94A3B8;
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+
+.back-home-link:hover {
+  color: #475569;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 1100px) {
+  .auth-split__brand {
+    padding: 3.5rem 3rem 2.5rem 3rem;
+  }
+  .brand-hero-title {
+    font-size: 2.75rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .auth-split {
+    flex-direction: column;
+  }
+  .auth-split__brand {
+    padding: 3rem 2rem 2.5rem 2rem;
+    flex: none;
+  }
+  .brand-hero-title {
+    font-size: 2.25rem;
+    margin-bottom: 1.25rem;
+  }
+  .brand-hero-description {
+    margin-bottom: 2rem;
+  }
+  .auth-split__form-panel {
+    padding: 2.5rem 1.5rem;
+    flex: none;
+  }
+  .auth-form-card {
+    padding: 2rem 1.75rem;
+  }
+}

@@ -1,0 +1,68 @@
+/**
+ * NBSC PRIME-HRM Intelligence Hub — Applicant Registration Styles
+ */
+
+.register-body {
+  background: linear-gradient(135deg, #0F1B2D 0%, #182A45 50%, #0B1320 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+}
+
+.register-container {
+  width: 100%;
+  max-width: 500px;
+}
+
+.register-card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  padding: 2.75rem;
+  border-top: 4px solid var(--color-accent-500);
+}
+
+.register-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin-bottom: 1.25rem;
+}
+
+.register-brand__crest {
+  display: inline-block;
+  padding: 0.25rem 0.625rem;
+  background-color: var(--color-primary-800);
+  color: var(--color-accent-400);
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 0.8125rem;
+  border-radius: var(--radius-sm);
+}
+
+.register-brand__text {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-neutral-600);
+}
+
+.register-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--color-primary-900);
+}
+
+.register-subtitle {
+  font-size: 0.875rem;
+  color: var(--color-neutral-500);
+  margin-top: 0.375rem;
+  margin-bottom: 1.75rem;
+}
+
+.register-footer {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-neutral-200);
+}

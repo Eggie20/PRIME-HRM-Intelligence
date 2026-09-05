@@ -1,0 +1,139 @@
+/**
+ * NBSC PRIME-HRM Intelligence Hub — 2FA Setup Styles
+ */
+
+.setup-2fa-body {
+  background: linear-gradient(135deg, #0F1B2D 0%, #182A45 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.5rem;
+}
+
+.setup-2fa-container {
+  width: 100%;
+  max-width: 560px;
+}
+
+.setup-2fa-card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  padding: 2.5rem;
+}
+
+.shield-badge {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-accent-100);
+  color: var(--color-accent-700);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+.setup-2fa-title {
+  font-size: 1.625rem;
+  font-weight: 800;
+  color: var(--color-primary-900);
+}
+
+.setup-2fa-subtitle {
+  font-size: 0.875rem;
+  color: var(--color-neutral-500);
+  margin-top: 0.375rem;
+  margin-bottom: 2rem;
+}
+
+.steps-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.step-item {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.step-number {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-primary-800);
+  color: var(--color-accent-400);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+}
+
+.step-content {
+  flex: 1;
+}
+
+.step-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-primary-800);
+  margin-bottom: 0.25rem;
+}
+
+.step-desc {
+  font-size: 0.8125rem;
+  color: var(--color-neutral-500);
+  margin-bottom: 1rem;
+}
+
+.qr-container {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 1rem;
+  padding: 0.75rem;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-neutral-300);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.manual-key-box {
+  background-color: var(--color-neutral-50);
+  border: 1px dashed var(--color-neutral-300);
+  border-radius: var(--radius-sm);
+  padding: 0.625rem 0.875rem;
+  text-align: center;
+  font-size: 0.75rem;
+}
+
+.manual-key-label {
+  display: block;
+  color: var(--color-neutral-500);
+  margin-bottom: 0.25rem;
+}
+
+.manual-key-code {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--color-primary-800);
+  letter-spacing: 0.1em;
+}
+
+.setup-2fa-footer {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-neutral-100);
+}

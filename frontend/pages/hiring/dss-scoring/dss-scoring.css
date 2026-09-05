@@ -1,0 +1,319 @@
+/**
+ * NBSC PRIME-HRM Intelligence Hub — 4-Pillar DSS Scoring Styles
+ * Premium Executive Analytics Styling with High-Contrast Score Banner & Precision Sliders
+ */
+
+/* ── Luxury Composite Score Banner ────────────────────────── */
+.composite-banner {
+  background: linear-gradient(135deg, #080E1A 0%, #0F1B2D 50%, #17263C 100%) !important;
+  color: #FFFFFF !important;
+  border-radius: 14px;
+  padding: 1.75rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  justify-content: space-between;
+  border: 1px solid rgba(212, 168, 67, 0.35);
+  border-left: 6px solid #D4A843 !important;
+  box-shadow: 0 10px 25px -4px rgba(11, 19, 32, 0.3), 0 0 20px rgba(212, 168, 67, 0.12);
+  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.composite-banner::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(212, 168, 67, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .composite-banner {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.composite-banner__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.composite-banner__title-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #D4A843;
+}
+
+.composite-banner__score-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.composite-banner__score {
+  font-size: 3.5rem !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  color: #FFE29A !important;
+  text-shadow: 0 2px 14px rgba(212, 168, 67, 0.45);
+  font-family: var(--font-heading), 'Inter', sans-serif;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.composite-banner__max {
+  font-size: 1.25rem;
+  color: #94A3B8;
+  font-weight: 600;
+}
+
+.composite-banner__desc {
+  color: #CBD5E1 !important;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.composite-banner__status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+
+@media (min-width: 768px) {
+  .composite-banner__status {
+    align-items: flex-end;
+  }
+}
+
+.compliance-beacon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.15rem;
+  border-radius: 30px;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.compliance-beacon--pass {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  color: #FFFFFF;
+  border: 1px solid #10B981;
+}
+
+.compliance-beacon--fail {
+  background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+  color: #FFFFFF;
+  border: 1px solid #EF4444;
+}
+
+.calculated-time-text {
+  font-size: 0.75rem;
+  color: #94A3B8;
+}
+
+/* ── 2-Column Grid ────────────────────────────────────────── */
+.dss-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 992px) {
+  .dss-grid {
+    grid-template-columns: 1.25fr 1fr;
+    align-items: start;
+  }
+}
+
+/* ── Pillar Scoring Cards ─────────────────────────────────── */
+.pillar-card {
+  background: #FFFFFF;
+  border: 1px solid #E4E7EE;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(15, 27, 45, 0.03);
+  transition: all 0.2s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.pillar-card:hover {
+  box-shadow: 0 6px 16px rgba(15, 27, 45, 0.06);
+  border-color: #CBD5E1;
+  transform: translateY(-2px);
+}
+
+.pillar-card--merit { border-left: 5px solid #3B82F6; }
+.pillar-card--competence { border-left: 5px solid #D4A843; }
+.pillar-card--ethics { border-left: 5px solid #10B981; }
+.pillar-card--service { border-left: 5px solid #8B5CF6; }
+
+.pillar-card .card__header {
+  padding: 1rem 1.35rem;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+  border-bottom: 1px solid #E2E8F0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pillar-card .card__title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0F1B2D;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pillar-card .card__body {
+  padding: 1.25rem 1.35rem;
+}
+
+/* ── Precision Sliders ─────────────────────────────────────── */
+.scoring-row {
+  margin-bottom: 1.15rem;
+}
+
+.scoring-row:last-child {
+  margin-bottom: 0;
+}
+
+.scoring-row-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+
+.scoring-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.scoring-value-bubble {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.15rem 0.6rem;
+  border-radius: 6px;
+  background: rgba(212, 168, 67, 0.12);
+  border: 1px solid rgba(212, 168, 67, 0.35);
+  color: #936B15;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  min-width: 44px;
+}
+
+.form-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 7px;
+  border-radius: 5px;
+  background: #E2E8F0;
+  outline: none;
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.form-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #D4A843 0%, #B88E2C 100%);
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 2px 6px rgba(15, 27, 45, 0.35);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-range::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 5px rgba(212, 168, 67, 0.25);
+}
+
+.form-range::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #D4A843;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 2px 6px rgba(15, 27, 45, 0.35);
+  cursor: pointer;
+}
+
+/* ── Radar Column ─────────────────────────────────────────── */
+.radar-card {
+  background: #FFFFFF;
+  border: 1px solid #E4E7EE;
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(15, 27, 45, 0.04);
+}
+
+.radar-chart-container {
+  position: relative;
+  height: 300px;
+  width: 100%;
+  margin: 0.75rem 0;
+}
+
+.pillar-summary-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: 1.25rem;
+  padding-top: 1.15rem;
+  border-top: 1px solid #E2E8F0;
+}
+
+.pillar-summary-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8125rem;
+}
+
+.pillar-summary-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.pillar-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.pillar-dot--merit { background-color: #3B82F6; }
+.pillar-dot--competence { background-color: #D4A843; }
+.pillar-dot--ethics { background-color: #10B981; }
+.pillar-dot--service { background-color: #8B5CF6; }
+
+.pillar-summary-score {
+  font-weight: 800;
+  color: #0F1B2D;
+}

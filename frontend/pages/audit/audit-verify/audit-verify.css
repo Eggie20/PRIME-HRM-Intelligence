@@ -1,0 +1,139 @@
+/**
+ * NBSC PRIME-HRM Intelligence Hub — Audit Chain Integrity Verifier Styles
+ */
+
+.verifier-hero-card {
+  border-top: 4px solid var(--color-success-500);
+  background: linear-gradient(180deg, #FFFFFF 0%, #FAFDFB 100%);
+  transition: all 0.3s ease;
+}
+
+.verifier-hero-card--invalid {
+  border-top: 4px solid var(--color-danger-500);
+  background: linear-gradient(180deg, #FFFFFF 0%, #FDF8F8 100%);
+}
+
+.verifier-pulse-icon {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto;
+  border-radius: var(--radius-full);
+  background-color: var(--color-success-50);
+  border: 4px solid var(--color-success-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.25);
+  animation: pulse-ring 2.5s infinite;
+}
+
+.verifier-pulse-icon--invalid {
+  background-color: var(--color-danger-50);
+  border-color: var(--color-danger-500);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.25);
+  animation: pulse-ring-danger 2.5s infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 16px rgba(16, 185, 129, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+@keyframes pulse-ring-danger {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 16px rgba(239, 68, 68, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+.shield-glyph {
+  font-size: 2.75rem;
+}
+
+.verifier-stats-row {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-8);
+  flex-wrap: wrap;
+  padding-top: var(--spacing-4);
+  border-top: 1px solid var(--color-neutral-200);
+}
+
+.verifier-stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Verification Step Items */
+.verification-step-item {
+  display: flex;
+  align-items: flex-start;
+  padding: var(--spacing-4);
+  border-bottom: 1px solid var(--color-neutral-200);
+  gap: var(--spacing-4);
+}
+
+.verification-step-item:last-child {
+  border-bottom: none;
+}
+
+.step-check-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.step-check-icon--pass {
+  background-color: var(--color-success-100);
+  color: var(--color-success-700);
+}
+
+.step-check-icon--fail {
+  background-color: var(--color-danger-100);
+  color: var(--color-danger-700);
+}
+
+.step-details {
+  flex: 1;
+}
+
+/* Log console */
+.verifier-log-console {
+  background-color: var(--color-neutral-900);
+  color: #10b981;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  padding: var(--spacing-4);
+  border-radius: var(--radius-md);
+  height: 240px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .verifier-stats-row {
+    gap: var(--spacing-4);
+    justify-content: space-between;
+  }
+}

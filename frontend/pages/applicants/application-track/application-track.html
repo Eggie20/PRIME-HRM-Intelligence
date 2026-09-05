@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Check real-time status and deliberation progress for Northern Bukidnon State College vacancies with your tracking code.">
+  <title>Application Tracking — Northern Bukidnon State College</title>
+  <link rel="stylesheet" href="../../../shared/css/global.css">
+  <link rel="stylesheet" href="../../../shared/css/components.css">
+  <link rel="stylesheet" href="../../../shared/css/layout.css">
+  <link rel="stylesheet" href="../../../shared/css/utilities.css">
+  <link rel="stylesheet" href="application-track.css">
+</head>
+<body class="public-page">
+  <!-- Public Navigation (Responsive Header with Mobile Toggle) -->
+  <header class="public-nav" role="banner">
+    <div class="public-nav__container">
+      <a href="../../../index.html" class="public-nav__brand">
+        <div class="public-nav__logo">N</div>
+        <div class="public-nav__brand-text">
+          <span class="public-nav__title">Northern Bukidnon State College</span>
+          <span class="public-nav__subtitle">PRIME-HRM Status Tracker</span>
+        </div>
+      </a>
+
+      <!-- Mobile Hamburger Button -->
+      <button class="public-nav__toggle" id="nav-toggle-btn" aria-label="Toggle Navigation Menu" aria-expanded="false">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+
+      <!-- Navigation Links -->
+      <nav class="public-nav__links" id="public-nav-links" aria-label="Public Navigation">
+        <a href="../../../index.html" class="public-nav__link">
+          <span>Home</span>
+        </a>
+        <a href="../../vacancies/job-board/job-board.html" class="public-nav__link">
+          <span>Open Vacancies</span>
+        </a>
+        <a href="application-track.html" class="public-nav__link public-nav__link--active" aria-current="page">
+          <span>Track Application</span>
+        </a>
+        <a href="../../auth/applicant-login/applicant-login.html" class="public-nav__link">
+          <span>Applicant Portal</span>
+        </a>
+        <a href="../../auth/admin-login/admin-login.html" class="public-nav__btn-staff">
+          <span>Staff Portal</span>
+          <span>&rarr;</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="track-hero">
+    <div class="track-hero__container">
+      <div class="track-hero__badge">
+        <span>&#9733;</span>
+        <span>CSC PRIME-HRM Merit Selection Track</span>
+      </div>
+      <h1 class="track-hero__title">
+        Real-Time Application <span class="track-hero__title-accent">Status Tracker</span>
+      </h1>
+      <p class="track-hero__subtitle">
+        Review your document screening, 4-Pillar DSS score compilation, and HRMPSB deliberation milestones with your official tracking number.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="track-main" id="main-content">
+    <div class="track-container">
+      <div class="track-layout-split">
+        <!-- LEFT SIDE: Merit Selection Stages & HRMO Inquiry / Guidance (Arranged to limit scrolling) -->
+        <aside class="track-layout-sidebar" aria-label="Recruitment Information and Support">
+          <!-- Card 1: 8-Stage Merit Selection Stages -->
+          <div class="track-info-card">
+            <h3 class="track-info-card__title">
+              <span>&#128203;</span>
+              <span>Merit Selection Stages</span>
+            </h3>
+            <ul class="track-info-card__list">
+              <li><span>1.</span> <strong>Application Docketing:</strong> System logs submitted packet and assigns unique tracking ID.</li>
+              <li><span>2.</span> <strong>Document &amp; QS Screening:</strong> HRMO audits education, experience, and eligibility compliance.</li>
+              <li><span>3.</span> <strong>4-Pillar DSS Scoring:</strong> Automated multi-attribute benchmarking and comparative ranking.</li>
+              <li><span>4.</span> <strong>Dept Head Evaluation:</strong> Teaching demonstration rubric and specialized interview.</li>
+              <li><span>5.</span> <strong>HRMPSB Deliberation:</strong> Selection board comparative consensus and final ranking.</li>
+              <li><span>6.</span> <strong>President Appointment:</strong> Issuance of official appointment under Civil Service rules.</li>
+              <li><span>7.</span> <strong>Board Attestation:</strong> Submission of resolution and plantilla assignment to CSC.</li>
+              <li><span>8.</span> <strong>Assumption to Duty:</strong> Formal oath administration and institutional onboarding.</li>
+            </ul>
+          </div>
+
+          <!-- Card 2: Helpdesk & Data Privacy -->
+          <div class="track-info-card">
+            <h3 class="track-info-card__title">
+              <span>&#128222;</span>
+              <span>HRMO Inquiry &amp; Support</span>
+            </h3>
+            <p class="font-sm text-secondary mb-3">
+              For inquiries regarding interview schedules, document compliance, or appeal procedures, contact the Human Resource Management Office:
+            </p>
+            <ul class="track-info-card__list mb-3">
+              <li><span>&#9993;</span> <strong>Email:</strong> hrmo@nbsc.edu.ph</li>
+              <li><span>&#128222;</span> <strong>Direct Line:</strong> (088) 356-4012 local 108</li>
+              <li><span>&#128338;</span> <strong>Office Hours:</strong> Mon &ndash; Fri, 8:00 AM &ndash; 5:00 PM</li>
+              <li><span>&#128205;</span> <strong>Location:</strong> Admin Bldg., Kihare, Manolo Fortich, Bukidnon</li>
+            </ul>
+            <p class="font-xs text-muted mb-0" style="border-top: 1px dashed #e2e8f0; padding-top: 0.75rem;">
+              <em>All applicant personal records are protected under the <strong>Philippine Data Privacy Act of 2012 (RA 10173)</strong>.</em>
+            </p>
+          </div>
+        </aside>
+
+        <!-- RIGHT SIDE: Search Card & Application Status Results -->
+        <div class="track-layout-main">
+          <!-- Look Up Application Status Card -->
+          <section class="track-search-card" aria-label="Tracking Search">
+            <div class="track-search-card__header">
+              <h2 class="track-search-card__title">&#128269; Look Up Application Status</h2>
+              <p class="track-search-card__desc">
+                Enter your official 16-character tracking number issued during online application submission.
+              </p>
+            </div>
+
+            <form id="form-track" class="track-search-bar" role="search">
+              <div class="track-search-bar__input-wrap">
+                <span class="track-search-bar__icon">&#128270;</span>
+                <input type="text" id="input-tracking-number" class="track-search-bar__input" placeholder="Enter tracking code (e.g. NBSC-APP-2026-10001)" required aria-label="Application tracking number">
+              </div>
+              <button type="submit" class="track-search-bar__btn" id="btn-track-submit">
+                <span>Track Status</span>
+                <span>&rarr;</span>
+              </button>
+            </form>
+
+            <!-- Quick Sample Tracking Chips -->
+            <div class="track-samples">
+              <span>Try sample docket:</span>
+              <button type="button" class="track-sample-btn" data-code="NBSC-APP-2026-10001">NBSC-APP-2026-10001 (Faculty)</button>
+              <button type="button" class="track-sample-btn" data-code="NBSC-APP-2026-10002">NBSC-APP-2026-10002 (Staff)</button>
+            </div>
+          </section>
+
+          <!-- Initial Prompt State (Displayed before tracking search is initiated) -->
+          <div id="track-initial-state" class="track-initial-box">
+            <div class="track-initial-box__icon">&#128269;</div>
+            <h3 class="track-initial-box__title">Ready to Track Your Application Status</h3>
+            <p class="track-initial-box__text">
+              Enter your tracking code manually in the input field above and click <strong>Track Status &rarr;</strong>, or click one of the sample dockets to preview the merit selection milestones.
+            </p>
+          </div>
+
+          <!-- Tracking Results Card (2-Row Executive Arrangement) -->
+          <section class="track-results-card d-none" id="track-results-card" aria-label="Application Status Results">
+            <!-- ROW 1: Application Overview & Progression Status Banner -->
+            <div class="track-result-row track-result-row--summary">
+              <div class="track-header">
+                <div class="track-header__meta">
+                  <div class="track-header__badge-row">
+                    <span class="track-header__num" id="result-tracking-num">NBSC-APP-2026-10001</span>
+                    <span class="track-integrity-badge">CSC PRIME-HRM Level 2 Verified</span>
+                  </div>
+                  <h2 class="track-header__title" id="result-vacancy-title">Instructor I (Computer Studies)</h2>
+                  <p class="track-header__dept" id="result-department">Institute of Computer Studies (ICS) &bull; Applied on August 20, 2026</p>
+                </div>
+                <div class="track-header__status-wrap">
+                  <span class="track-stage-pill track-stage-pill--active" id="result-current-stage">
+                    <span class="track-pulse-dot"></span>
+                    <span>5. HRMPSB Deliberation &amp; Voting</span>
+                  </span>
+                  <div class="text-muted font-xs mt-1" id="result-updated-date">Updated: Just now</div>
+                </div>
+              </div>
+
+              <!-- Visual Progression Bar -->
+              <div class="track-progress-banner">
+                <div class="track-progress-info">
+                  <span class="track-progress-label">Merit Selection Progression Completion</span>
+                  <span class="track-progress-pct" id="track-progress-pct">Stage 5 of 8 (62.5%)</span>
+                </div>
+                <div class="track-progress-track">
+                  <div class="track-progress-fill" id="track-progress-fill" style="width: 62.5%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ROW 2: Merit Selection Milestone Progression (2-Column Arranged Grid) -->
+            <div class="track-result-row track-result-row--milestones">
+              <div class="track-timeline-header">
+                <div class="track-timeline-title">
+                  <span>&#128337;</span>
+                  <span>Merit Selection Milestone Progression</span>
+                </div>
+                <span class="track-timeline-badge">2-Column Arranged View</span>
+              </div>
+              <div class="milestone-timeline" id="milestone-timeline-container">
+                <!-- Populated dynamically via application-track.js in 2-column grid -->
+              </div>
+            </div>
+          </section>
+
+          <!-- Initial Prompt (Shown prior to searching) -->
+          <div class="track-initial-card" id="track-initial-card">
+            <div class="track-initial-icon">&#128337;</div>
+            <h3 class="track-initial-title">Real-Time HRMPSB Docket Tracking</h3>
+            <p class="track-initial-desc">
+              Enter your official applicant tracking number above or click one of the sample dockets to inspect your screening milestones, 4-Pillar DSS evaluation status, and deliberation progress.
+            </p>
+          </div>
+
+          <!-- Empty State Container -->
+          <div id="track-empty-state" class="d-none"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Public Footer -->
+  <footer class="public-footer">
+    <div class="public-footer__container">
+      <p>
+        &copy; 2026 Northern Bukidnon State College &bull; 
+        <span class="public-footer__accreditation">Civil Service Commission PRIME-HRM Level 2 Accredited</span>
+      </p>
+      <p class="public-footer__sub">Kihare, Manolo Fortich, Bukidnon, Philippines 8703 &bull; Equal Employment Opportunity Employer</p>
+    </div>
+  </footer>
+
+  <script src="../../../shared/js/constants.js"></script>
+  <script src="../../../shared/js/utils.js"></script>
+  <script src="../../../shared/js/components.js"></script>
+  <script src="../../../shared/js/db.js"></script>
+  <script src="../../../shared/js/api.js"></script>
+  <script src="application-track.js"></script>
+</body>
+</html>

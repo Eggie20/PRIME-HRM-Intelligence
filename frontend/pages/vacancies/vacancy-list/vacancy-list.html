@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Manage Northern Bukidnon State College vacancies, recruitment notices, and CSC qualification standards.">
+  <title>Vacancies Management — NBSC PRIME-HRM Intelligence Hub</title>
+  <link rel="stylesheet" href="../../../shared/css/global.css">
+  <link rel="stylesheet" href="../../../shared/css/components.css">
+  <link rel="stylesheet" href="../../../shared/css/layout.css">
+  <link rel="stylesheet" href="../../../shared/css/utilities.css">
+  <link rel="stylesheet" href="vacancy-list.css">
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="app-sidebar" aria-label="Main Navigation">
+      <div class="sidebar__brand">
+        <div class="sidebar__logo-icon">N</div>
+        <div class="sidebar__brand-text">
+          <span class="sidebar__brand-title">NBSC HRMS</span>
+          <span class="sidebar__brand-badge">PRIME-HRM Level 2</span>
+        </div>
+      </div>
+
+      <nav class="sidebar__nav">
+        <span class="sidebar__section-title">Core Operations</span>
+        <a href="../../dashboard/dashboard/dashboard.html" class="sidebar__link" id="nav-dashboard">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#9638;</span>
+            <span>Dashboard</span>
+          </div>
+        </a>
+        <a href="../../employees/employee-list/employee-list.html" class="sidebar__link" id="nav-employees">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128101;</span>
+            <span>Employees</span>
+          </div>
+        </a>
+        <a href="../../programs/program-list/program-list.html" class="sidebar__link" id="nav-programs">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#127891;</span>
+            <span>Programs</span>
+          </div>
+        </a>
+
+        <span class="sidebar__section-title">Recruitment & Hiring</span>
+        <a href="vacancy-list.html" class="sidebar__link sidebar__link--active" id="nav-vacancies">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128188;</span>
+            <span>Vacancies</span>
+          </div>
+        </a>
+        <a href="../../hiring/hiring-pipeline/hiring-pipeline.html" class="sidebar__link" id="nav-hiring-pipeline">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#9640;</span>
+            <span>Hiring Pipeline</span>
+          </div>
+        </a>
+        <a href="../../hiring/deliberation/deliberation.html" class="sidebar__link" id="nav-deliberation">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#9878;</span>
+            <span>HRMPSB Voting</span>
+          </div>
+        </a>
+
+        <span class="sidebar__section-title">Compliance & Payroll</span>
+        <a href="../../audit/audit-chain/audit-chain.html" class="sidebar__link" id="nav-audit">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128279;</span>
+            <span>Audit Trail (SHA256)</span>
+          </div>
+        </a>
+        <a href="../../payroll/payroll-list/payroll-list.html" class="sidebar__link" id="nav-payroll-batches">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128176;</span>
+            <span>Payroll Batches</span>
+          </div>
+        </a>
+        <a href="../../payroll/payroll-upload/payroll-upload.html" class="sidebar__link" id="nav-payroll-upload">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128196;</span>
+            <span>Upload & Generate</span>
+          </div>
+        </a>
+        <a href="../../payroll/payslip-download/payslip-download.html" class="sidebar__link" id="nav-payslip-download">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128274;</span>
+            <span>My Payslips</span>
+          </div>
+        </a>
+        <a href="../../sara/sara-chat/sara-chat.html" class="sidebar__link" id="nav-sara">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#129302;</span>
+            <span>SARA Voice AI</span>
+          </div>
+        </a>
+      </nav>
+
+      <div class="sidebar__footer">
+        <div class="sidebar__user">
+          <div class="sidebar__user-avatar" id="user-avatar">AD</div>
+          <div class="sidebar__user-info">
+            <span class="sidebar__user-name" id="user-display-name">HR Administrator</span>
+            <span class="sidebar__user-role" id="user-display-role">HR Admin</span>
+          </div>
+        </div>
+        <button class="btn btn--icon btn--ghost" id="btn-logout" title="Sign out" aria-label="Sign out">&#10150;</button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="pipeline-main" id="main-content">
+      <div class="topbar">
+        <div>
+          <div class="crumb">Recruitment &amp; Hiring / <b>Vacancy Postings</b></div>
+          <h1>Recruitment &amp; Vacancies</h1>
+          <div class="sub">Manage college plantilla and contractual postings with Civil Service Commission Qualification Standards.</div>
+        </div>
+        <div class="top-actions">
+          <a href="../job-board/job-board.html" class="btn-outline" target="_blank" id="btn-view-public-board">&#128065; View Public Board</a>
+          <a href="../vacancy-form/vacancy-form.html" class="btn-gold" id="btn-create-vacancy">&#10010; Create Vacancy</a>
+        </div>
+      </div>
+
+      <!-- Executive KPI Banner -->
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-num" id="kpi-open-vacancies">4</div>
+          <div class="stat-lbl">Active Postings</div>
+          <span class="stat-flag flag-green">Open for Applications</span>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="kpi-delib-vacancies">1</div>
+          <div class="stat-lbl">In Deliberation</div>
+          <span class="stat-flag flag-gold">HRMPSB Docket</span>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="kpi-total-candidates">10</div>
+          <div class="stat-lbl">Total Candidates</div>
+          <span class="stat-flag flag-neutral">Merit Pool Portfolios</span>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="kpi-total-vacancies">6</div>
+          <div class="stat-lbl">Total Postings</div>
+          <span class="stat-flag flag-neutral">CSC Plantilla Registry</span>
+        </div>
+      </div>
+
+      <!-- Filter Toolbar -->
+      <div class="controls">
+        <div class="search">
+          &#128269;
+          <input type="text" id="input-search-vacancies" placeholder="Search by position title or keywords..." aria-label="Search vacancies">
+        </div>
+        <select id="select-filter-dept" class="select" aria-label="Filter by department">
+          <option value="">All Departments</option>
+        </select>
+        <select id="select-filter-category" class="select" aria-label="Filter by category">
+          <option value="">All Categories</option>
+          <option value="TEACHING">Teaching / Faculty</option>
+          <option value="NON_TEACHING">Non-Teaching / Staff</option>
+        </select>
+        <select id="select-filter-status" class="select" aria-label="Filter by status">
+          <option value="">All Statuses</option>
+          <option value="OPEN">Open for Applications</option>
+          <option value="DELIBERATION">Under Deliberation</option>
+          <option value="CLOSED">Closed</option>
+        </select>
+        <div class="roster-indicator-wrapper">
+          <div class="premium-indicator" id="vacancies-live-indicator" title="Active NBSC Vacancy Postings Registry">
+            <span class="indicator-pulse-box">
+              <span class="indicator-pulse-ring"></span>
+              <span class="indicator-pulse-core"></span>
+            </span>
+            <div class="indicator-info">
+              <span class="indicator-num" id="vacancies-count-num">6</span>
+              <span class="indicator-label" id="vacancies-count-label">Vacancies Active</span>
+            </div>
+            <span class="indicator-tag" id="indicator-scope-tag">Plantilla Registry</span>
+          </div>
+          <button class="btn-outline btn-reset-premium" id="btn-reset-filters" type="button" title="Clear all search keywords and filter dropdowns">
+            <span class="btn-reset-icon">&#8635;</span>
+            <span>Reset Filters</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="mt-2">
+
+        <!-- Vacancies Table Card -->
+        <section class="card" aria-label="Vacancies Table">
+          <div class="table-responsive">
+            <table class="data-table" id="table-vacancies">
+              <thead>
+                <tr>
+                  <th scope="col" class="sortable-th" data-sort="title" style="min-width: 250px;" title="Sort by Position & Department">
+                    <span>Position &amp; Department</span>
+                    <span class="sort-icon" id="sort-icon-title">&#8645;</span>
+                  </th>
+                  <th scope="col" class="sortable-th" data-sort="category" style="width: 130px;" title="Sort by Category">
+                    <span>Category</span>
+                    <span class="sort-icon" id="sort-icon-category">&#8645;</span>
+                  </th>
+                  <th scope="col" class="sortable-th" data-sort="salary_grade" style="width: 140px;" title="Sort by Salary Grade & Rate">
+                    <span>Salary Grade &amp; Rate</span>
+                    <span class="sort-icon" id="sort-icon-salary_grade">&#8645;</span>
+                  </th>
+                  <th scope="col" class="sortable-th" data-sort="slots" style="width: 80px;" title="Sort by Slots">
+                    <span>Slots</span>
+                    <span class="sort-icon" id="sort-icon-slots">&#8645;</span>
+                  </th>
+                  <th scope="col" class="sortable-th" data-sort="applicant_count" style="width: 100px;" title="Sort by Applicants">
+                    <span>Applicants</span>
+                    <span class="sort-icon" id="sort-icon-applicant_count">&#8645;</span>
+                  </th>
+                  <th scope="col" class="sortable-th" data-sort="deadline" style="width: 120px;" title="Sort by Deadline">
+                    <span>Deadline</span>
+                    <span class="sort-icon" id="sort-icon-deadline">&#8645;</span>
+                  </th>
+                  <th scope="col" class="sortable-th" data-sort="status" style="width: 110px;" title="Sort by Status">
+                    <span>Status</span>
+                    <span class="sort-icon" id="sort-icon-status">&#8645;</span>
+                  </th>
+                  <th scope="col" class="text-right" style="width: 170px;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="vacancy-table-body">
+                <!-- Rows injected dynamically via vacancy-list.js -->
+              </tbody>
+            </table>
+          </div>
+
+          <div id="vacancy-empty-state" class="d-none"></div>
+
+          <!-- Premium Table Footer Bar: Rows Per Page Selector, Range Indicator, Dynamic Metric, and Paging Controls -->
+          <div class="table-footer-bar" id="vacancies-pagination-bar">
+            <!-- Left: Rows per page selector & Range indicator -->
+            <div class="footer-left">
+              <div class="page-size-control">
+                <label for="select-page-size" class="page-size-label">Rows per page:</label>
+                <div class="page-size-select-wrap">
+                  <select id="select-page-size" class="page-size-select" aria-label="Select rows per page">
+                    <option value="5">5 rows</option>
+                    <option value="10" selected>10 rows</option>
+                    <option value="25">25 rows</option>
+                    <option value="50">50 rows</option>
+                    <option value="all">All rows</option>
+                  </select>
+                </div>
+              </div>
+              <span class="footer-v-divider" aria-hidden="true"></span>
+              <div class="range-indicator" id="pagination-range-indicator">
+                Showing <strong id="range-start">1</strong>–<strong id="range-end">6</strong> of <strong id="range-total">6</strong> vacancies
+              </div>
+            </div>
+
+            <!-- Center: Financial & Operational Live Metrics -->
+            <div class="footer-center">
+              <div class="footer-summary-chip" id="footer-summary-chip" title="Total Plantilla & COS slots in pipeline">
+                <span class="chip-dot"></span>
+                <span class="chip-text" id="footer-summary-text">Active Capacity: <strong id="metric-total-slots">8 Available Slots</strong> &bull; Open: <strong id="metric-open-count">4 Postings</strong></span>
+              </div>
+            </div>
+
+            <!-- Right: Interactive Paging Buttons (First, Prev, 1, 2, Next, Last) -->
+            <div class="footer-right">
+              <nav class="pagination-nav" id="vacancies-pagination-nav" aria-label="Vacancies table pagination">
+                <!-- Dynamically populated -->
+              </nav>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="../../../shared/js/constants.js"></script>
+  <script src="../../../shared/js/utils.js"></script>
+  <script src="../../../shared/js/components.js"></script>
+  <script src="../../../shared/js/db.js"></script>
+  <script src="../../../shared/js/api.js"></script>
+  <script src="../../../shared/js/auth.js"></script>
+  <script src="vacancy-list.js"></script>
+</body>
+</html>

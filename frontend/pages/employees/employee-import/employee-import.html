@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bulk import employee rosters and Comparative Assessment Reports into NBSC PRIME-HRM.">
+  <title>Bulk Excel Import — NBSC PRIME-HRM Intelligence Hub</title>
+  <link rel="stylesheet" href="../../../shared/css/global.css">
+  <link rel="stylesheet" href="../../../shared/css/components.css">
+  <link rel="stylesheet" href="../../../shared/css/layout.css">
+  <link rel="stylesheet" href="../../../shared/css/utilities.css">
+  <link rel="stylesheet" href="employee-import.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="app-sidebar" aria-label="Main Navigation">
+      <div class="sidebar__brand">
+        <div class="sidebar__logo-icon">N</div>
+        <div class="sidebar__brand-text">
+          <span class="sidebar__brand-title">NBSC HRMS</span>
+          <span class="sidebar__brand-badge">PRIME-HRM Level 2</span>
+        </div>
+      </div>
+      <nav class="sidebar__nav">
+        <a href="../../dashboard/dashboard/dashboard.html" class="sidebar__link" id="nav-dashboard">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#9638;</span>
+            <span>Dashboard</span>
+          </div>
+        </a>
+        <a href="../employee-list/employee-list.html" class="sidebar__link sidebar__link--active" id="nav-employees">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128101;</span>
+            <span>Employees</span>
+          </div>
+        </a>
+      </nav>
+      <div class="sidebar__footer">
+        <div class="sidebar__user">
+          <div class="sidebar__user-avatar" id="user-avatar">AD</div>
+          <div class="sidebar__user-info">
+            <span class="sidebar__user-name" id="user-display-name">HR Administrator</span>
+            <span class="sidebar__user-role" id="user-display-role">HR Admin</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <header class="app-header">
+        <div class="app-header__left">
+          <h2 class="app-header__title">Bulk Excel Roster Import</h2>
+        </div>
+        <div class="app-header__right">
+          <a href="../employee-list/employee-list.html" class="btn btn--outline btn--sm" id="btn-back-dir">&larr; Back to Directory</a>
+        </div>
+      </header>
+
+      <div class="page-container">
+        <div class="card import-card">
+          <header class="card__header">
+            <div>
+              <h3 class="card__title">Upload Personnel Roster Workbook</h3>
+              <p class="card__subtitle">Supports official NBSC Comparative Assessment Report (CAR) sheets and standard Excel files (.xlsx)</p>
+            </div>
+          </header>
+
+          <div class="card__body">
+            <!-- Dropzone -->
+            <div class="dropzone" id="excel-dropzone">
+              <div class="dropzone__icon">&#128196;</div>
+              <h4 class="dropzone__title">Drag and drop your Excel roster file here</h4>
+              <p class="dropzone__subtitle">Supports .xlsx workbooks (e.g. DGEC.xlsx, IBM.xlsx, ICS.xlsx, ITE.xlsx)</p>
+              <label for="input-file-excel" class="btn btn--primary btn--sm cursor-pointer mt-2" id="label-file-select">
+                Choose Excel File
+              </label>
+              <input type="file" id="input-file-excel" class="d-none" accept=".xlsx,.xls">
+              <span class="file-name-preview d-none" id="file-name-display"></span>
+            </div>
+
+            <div class="d-flex justify-end mt-6">
+              <button type="button" class="btn btn--primary btn--lg" id="btn-start-import" disabled>
+                <span id="btn-import-text">Process & Import Roster</span>
+              </button>
+            </div>
+
+            <!-- Import Results Summary -->
+            <div class="import-summary card mt-6 d-none" id="import-summary-box">
+              <div class="card__body">
+                <h4 class="text-primary font-bold mb-3">Import Processing Summary</h4>
+                <div class="grid-3col">
+                  <div class="kpi-card">
+                    <span class="kpi-card__label">Successfully Imported</span>
+                    <span class="kpi-card__value text-success" id="summary-imported">0</span>
+                  </div>
+                  <div class="kpi-card">
+                    <span class="kpi-card__label">Duplicate / Skipped</span>
+                    <span class="kpi-card__value text-warning" id="summary-skipped">0</span>
+                  </div>
+                  <div class="kpi-card">
+                    <span class="kpi-card__label">Parse Warnings</span>
+                    <span class="kpi-card__value text-danger" id="summary-errors">0</span>
+                  </div>
+                </div>
+
+                <div class="mt-4 text-right">
+                  <a href="../employee-list/employee-list.html" class="btn btn--primary" id="btn-view-results">
+                    View Updated Directory &rarr;
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../../../shared/js/constants.js"></script>
+  <script src="../../../shared/js/utils.js"></script>
+  <script src="../../../shared/js/components.js"></script>
+  <script src="../../../shared/js/db.js"></script>
+  <script src="../../../shared/js/api.js"></script>
+  <script src="../../../shared/js/auth.js"></script>
+  <script src="employee-import.js"></script>
+</body>
+</html>

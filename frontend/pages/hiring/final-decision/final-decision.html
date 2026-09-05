@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NBSC PRIME-HRM Final Appointment Resolution — Executive sign-off and SHA-256 cryptographic audit chain commitment.">
+  <title>Final Appointment Resolution — NBSC PRIME-HRM Intelligence Hub</title>
+  <link rel="stylesheet" href="../../../shared/css/global.css">
+  <link rel="stylesheet" href="../../../shared/css/components.css">
+  <link rel="stylesheet" href="../../../shared/css/modules/animations.css">
+  <link rel="stylesheet" href="../../../shared/css/modules/buttons.css">
+  <link rel="stylesheet" href="../../../shared/css/modules/badges.css">
+  <link rel="stylesheet" href="../../../shared/css/modules/cards.css">
+  <link rel="stylesheet" href="../../../shared/css/modules/forms.css">
+  <link rel="stylesheet" href="../../../shared/css/modules/tables.css">
+  <link rel="stylesheet" href="../../../shared/css/modules/navigation.css">
+  <link rel="stylesheet" href="../../../shared/css/modules/modals.css">
+  <link rel="stylesheet" href="../../../shared/css/layout.css">
+  <link rel="stylesheet" href="../../../shared/css/utilities.css">
+  <link rel="stylesheet" href="final-decision.css">
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="app-sidebar" aria-label="Main Navigation">
+      <div class="sidebar__brand">
+        <div class="sidebar__logo-icon">N</div>
+        <div class="sidebar__brand-text">
+          <span class="sidebar__brand-title">NBSC HRMS</span>
+          <span class="sidebar__brand-badge">PRIME-HRM Level 2</span>
+        </div>
+      </div>
+
+      <nav class="sidebar__nav">
+        <span class="sidebar__section-title">Core Operations</span>
+        <a href="../../dashboard/dashboard/dashboard.html" class="sidebar__link" id="nav-dashboard">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#9638;</span>
+            <span>Dashboard</span>
+          </div>
+        </a>
+        <a href="../../employees/employee-list/employee-list.html" class="sidebar__link" id="nav-employees">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128101;</span>
+            <span>Employees</span>
+          </div>
+        </a>
+        <a href="../../programs/program-list/program-list.html" class="sidebar__link" id="nav-programs">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#127891;</span>
+            <span>Programs</span>
+          </div>
+        </a>
+
+        <span class="sidebar__section-title">Recruitment & Hiring</span>
+        <a href="../../vacancies/vacancy-list/vacancy-list.html" class="sidebar__link" id="nav-vacancies">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128188;</span>
+            <span>Vacancies</span>
+          </div>
+        </a>
+        <a href="../hiring-pipeline/hiring-pipeline.html" class="sidebar__link sidebar__link--active" id="nav-hiring-pipeline">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#9640;</span>
+            <span>Hiring Pipeline</span>
+          </div>
+        </a>
+        <a href="../deliberation/deliberation.html" class="sidebar__link" id="nav-deliberation">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#9878;</span>
+            <span>HRMPSB Voting</span>
+          </div>
+        </a>
+
+        <span class="sidebar__section-title">Compliance & Payroll</span>
+        <a href="../../audit/audit-chain/audit-chain.html" class="sidebar__link" id="nav-audit">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128279;</span>
+            <span>Audit Trail (SHA256)</span>
+          </div>
+        </a>
+        <a href="../../payroll/payroll-list/payroll-list.html" class="sidebar__link" id="nav-payroll-batches">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128176;</span>
+            <span>Payroll Batches</span>
+          </div>
+        </a>
+        <a href="../../payroll/payroll-upload/payroll-upload.html" class="sidebar__link" id="nav-payroll-upload">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128196;</span>
+            <span>Upload & Generate</span>
+          </div>
+        </a>
+        <a href="../../payroll/payslip-download/payslip-download.html" class="sidebar__link" id="nav-payslip-download">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128274;</span>
+            <span>My Payslips</span>
+          </div>
+        </a>
+        <a href="../../sara/sara-chat/sara-chat.html" class="sidebar__link" id="nav-sara">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#129302;</span>
+            <span>SARA Voice AI</span>
+          </div>
+        </a>
+      </nav>
+
+      <div class="sidebar__footer">
+        <div class="sidebar__user">
+          <div class="sidebar__user-avatar" id="user-avatar">AD</div>
+          <div class="sidebar__user-info">
+            <span class="sidebar__user-name" id="user-display-name">HR Administrator</span>
+            <span class="sidebar__user-role" id="user-display-role">HR Admin</span>
+          </div>
+        </div>
+        <button class="btn btn--icon btn--ghost" id="btn-logout" title="Sign out" aria-label="Sign out">&#10150;</button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <!-- Main Content -->
+    <main class="pipeline-main" id="main-content">
+      <div class="topbar">
+        <div>
+          <div class="crumb">Recruitment &amp; Hiring / <b>Appointment Resolution</b></div>
+          <h1>Appointment Resolution &amp; Cryptographic Commit</h1>
+          <div class="sub">Official executive plantilla appointment, CSC ORAOHRA certification, and SHA-256 immutable ledger seal.</div>
+        </div>
+        <div class="pipeline-stepper">
+          <a href="../hiring-pipeline/hiring-pipeline.html" class="stepper-item">&larr; Pipeline</a>
+          <a href="../applicant-review/applicant-review.html" class="stepper-item" id="link-candidate-review">1. Dossier</a>
+          <a href="../dss-scoring/dss-scoring.html" class="stepper-item" id="link-dss-scoring">2. 4-Pillar DSS</a>
+          <a href="../evaluation/evaluation.html" class="stepper-item" id="link-dept-eval">3. Dept Head Rubric</a>
+          <a href="../deliberation/deliberation.html" class="stepper-item" id="link-deliberation">4. HRMPSB Deliberation</a>
+          <a href="../final-decision/final-decision.html" class="stepper-item stepper-item--gold stepper-item--active" id="link-final-decision">5. Appointment Resolution &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Universal Docket Selector Bar -->
+      <section class="docket-selector-bar" aria-label="Docket Candidate and Vacancy Filter">
+        <div class="docket-selector-left">
+          <span class="docket-selector-label">&#128269; Docket Filter:</span>
+          <input type="text" id="input-docket-search" class="docket-search-input" placeholder="Search applicant, ID, date..." aria-label="Search Applicant">
+          <select id="select-docket-vacancy" class="docket-select" aria-label="Select Hiring Vacancy">
+            <option value="">All Positions / Vacancies</option>
+          </select>
+          <select id="select-docket-stage" class="docket-select" aria-label="Filter by Pipeline Stage">
+            <option value="">All Pipeline Stages</option>
+            <option value="SCREENING">1. Screening / Dossier</option>
+            <option value="DSS_SCORED">2. 4-Pillar DSS</option>
+            <option value="DEPT_EVAL">3. Dept Head Rubric</option>
+            <option value="DELIBERATION">4. HRMPSB Deliberation</option>
+            <option value="FINAL_DECISION">5. Appointment Resolution</option>
+          </select>
+          <select id="select-docket-candidate" class="docket-select docket-select--candidate" aria-label="Select Candidate Docket">
+            <!-- Dynamically populated -->
+          </select>
+          <span class="docket-count-indicator" id="docket-count-indicator">Showing 0 of 0</span>
+        </div>
+        <div class="docket-chips-container" id="candidate-chips-container">
+          <!-- Quick candidate pills -->
+        </div>
+      </section>
+
+      <!-- Candidate Profile Hero Strip -->
+      <section class="candidate-hero-strip animate-fade-in" aria-labelledby="heading-resolution">
+        <div class="candidate-hero-left">
+          <div class="candidate-hero-avatar" id="resolution-candidate-avatar">AP</div>
+          <div>
+            <h2 class="candidate-hero-title" id="heading-resolution">Loading Candidate...</h2>
+            <div class="candidate-hero-meta">
+              <span id="resolution-position-text">Position Title &bull; Department</span>
+              <span>&bull;</span>
+              <span class="badge badge--primary" id="resolution-tracking-badge">NBSC-APP-2026-00000</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex align-center gap-3">
+          <a href="../../audit/audit-chain/audit-chain.html" class="btn btn--outline btn--sm">&larr; View Audit Trail</a>
+          <span class="badge badge--warning font-sm" id="resolution-stage-badge">Awaiting Executive Resolution</span>
+        </div>
+      </section>
+
+        <!-- Cryptographic Block Confirmation Banner (Hidden by default, shown after commit) -->
+        <section class="card mb-6 crypto-commit-banner d-none" id="crypto-commit-banner" aria-label="Cryptographic Audit Confirmation">
+          <div class="card__body d-flex justify-between align-center flex-wrap gap-4">
+            <div class="d-flex align-center gap-3">
+              <div class="crypto-seal-icon">&#128274;</div>
+              <div>
+                <h3 class="font-md font-bold text-success mb-1">Committed to Cryptographic Audit Chain</h3>
+                <p class="font-xs text-muted mb-0">
+                  Block <strong id="crypto-block-index">#0</strong> &bull; Hash: <code class="font-mono text-accent" id="crypto-block-hash">000000000000...</code>
+                </p>
+              </div>
+            </div>
+            <a href="../../audit/audit-chain/audit-chain.html" class="btn btn--outline btn--sm">View in Audit Ledger</a>
+          </div>
+        </section>
+
+        <!-- Grid: Resolution Generator & Dossier Summary -->
+        <div class="resolution-grid animate-stagger-1">
+          <!-- Left Column: Executive Sign-off Form -->
+          <div class="resolution-left-column">
+            <section class="card mb-6" aria-labelledby="heading-action-form">
+              <div class="card__header">
+                <h2 class="card__title font-md" id="heading-action-form">Executive Appointment Sign-Off</h2>
+              </div>
+              <div class="card__body">
+                <form id="form-final-decision" novalidate>
+                  <div class="form-group mb-4">
+                    <label class="form-label">Official Executive Action:</label>
+                    <div class="decision-selector-group">
+                      <label class="decision-option decision-option--appoint">
+                        <input type="radio" name="executive_decision" value="APPOINTED" checked>
+                        <div class="decision-card-text">
+                          <span class="font-bold text-success">&#10004; ISSUE OFFICIAL APPOINTMENT</span>
+                          <span class="font-xs text-muted">Confirm selection for Plantilla / COS item and generate BOT Resolution</span>
+                        </div>
+                      </label>
+
+                      <label class="decision-option decision-option--reject">
+                        <input type="radio" name="executive_decision" value="REJECTED">
+                        <div class="decision-card-text">
+                          <span class="font-bold text-danger">&#10008; DISQUALIFY / CLOSE APPLICATION</span>
+                          <span class="font-xs text-muted">Reject candidacy per HRMPSB recommendation and notify applicant</span>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="form-group mb-4">
+                    <label for="input-resolution-number" class="form-label">Board of Trustees Resolution Number:</label>
+                    <input type="text" id="input-resolution-number" class="form-control font-mono" placeholder="NBSC-BOT-RES-2026-00001" required>
+                    <span class="font-xs text-muted">Official reference number stamped on appointment letter and CSC Form 33.</span>
+                  </div>
+
+                  <div class="form-group mb-4">
+                    <label for="textarea-decision-remarks" class="form-label">Executive Rationale & Appointment Terms:</label>
+                    <textarea id="textarea-decision-remarks" class="form-control" rows="5" placeholder="Document appointment terms (e.g. effective date, probation period, CSC compliance conditions)..." required></textarea>
+                  </div>
+
+                  <div class="audit-security-notice p-4 mb-4">
+                    <div class="d-flex align-center gap-2 mb-2">
+                      <span class="text-accent font-md">&#128279;</span>
+                      <strong class="font-xs uppercase tracking-wide text-primary-800">Immutable Cryptographic Audit Trail</strong>
+                    </div>
+                    <p class="font-xs text-neutral-600 mb-0">
+                      Committing this resolution creates an immutable block linked with SHA-256 hashing to the preceding audit chain. This action cannot be altered or deleted.
+                    </p>
+                  </div>
+
+                  <button type="submit" class="btn btn--primary w-100 btn--lg" id="btn-commit-resolution">
+                    Commit Resolution & Sign Cryptographic Block
+                  </button>
+                </form>
+              </div>
+            </section>
+          </div>
+
+          <!-- Right Column: Merit Dossier Summary -->
+          <div class="resolution-right-column">
+            <!-- Candidate Deliberation Scorecard -->
+            <section class="card mb-6" aria-labelledby="heading-scorecard">
+              <div class="card__header">
+                <h2 class="card__title font-md" id="heading-scorecard">Merit & Deliberation Dossier</h2>
+              </div>
+              <div class="card__body p-0">
+                <div class="dossier-stat-row">
+                  <span class="text-muted font-xs">4-Pillar DSS Score:</span>
+                  <strong class="font-sm text-accent" id="summary-dss-score">Pending / 100</strong>
+                </div>
+                <div class="dossier-stat-row">
+                  <span class="text-muted font-xs">Civil Service QS:</span>
+                  <span class="badge badge--success" id="summary-qs-status">Compliant</span>
+                </div>
+                <div class="dossier-stat-row">
+                  <span class="text-muted font-xs">Dept Head Rubric:</span>
+                  <strong class="font-sm" id="summary-dept-score">Pending / 100</strong>
+                </div>
+                <div class="dossier-stat-row">
+                  <span class="text-muted font-xs">Dept Head Recommendation:</span>
+                  <span class="badge badge--neutral" id="summary-dept-rec">Pending</span>
+                </div>
+                <div class="dossier-stat-row">
+                  <span class="text-muted font-xs">HRMPSB Consensus:</span>
+                  <strong class="font-sm" id="summary-hrmpsb-consensus">0 Approve / 0 Disapprove</strong>
+                </div>
+              </div>
+            </section>
+
+            <!-- Formal Certificate Preview -->
+            <article class="card certificate-preview-card" aria-label="Appointment Certificate Preview">
+              <div class="card__body text-center p-5">
+                <div class="college-seal-icon">NBSC</div>
+                <div class="font-xs uppercase tracking-wide text-muted font-bold mb-1">Republic of the Philippines</div>
+                <h3 class="font-sm uppercase tracking-wide text-primary font-bold mb-1" style="letter-spacing: 0.04em;">Northern Bukidnon State College</h3>
+                <div class="font-xs text-muted mb-2">Office of the Board of Trustees &bull; Manolo Fortich, Bukidnon</div>
+                <div class="badge badge--warning mb-3" style="font-size: 0.7rem; letter-spacing: 0.08em; font-weight: 700;">CSC FORM 33 (REVISED 2018)</div>
+                <h4 class="font-md font-bold mb-3 text-primary" style="font-family: var(--font-heading);">Notice of Official Plantilla Appointment</h4>
+                <p class="font-xs text-neutral-700 mb-4" id="cert-preview-body" style="line-height: 1.6; font-style: italic;">
+                  Subject to the provisions of Civil Service Law and Rules, this certifies that the candidate has satisfied all Qualification Standards.
+                </p>
+                <div class="cert-signature-line">
+                  <span class="font-xs font-bold text-primary" id="cert-signatory-name">Dr. Maria Santos</span>
+                  <span class="font-xs text-muted">College President / Appointing Authority</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+    </main>
+  </div>
+
+  <script src="../../../shared/js/constants.js"></script>
+  <script src="../../../shared/js/utils.js"></script>
+  <script src="../../../shared/js/components.js"></script>
+  <script src="../../../shared/js/db.js"></script>
+  <script src="../../../shared/js/api.js"></script>
+  <script src="../../../shared/js/auth.js"></script>
+  <script src="../../../shared/js/docket-filter.js"></script>
+  <script src="final-decision.js"></script>
+</body>
+</html>

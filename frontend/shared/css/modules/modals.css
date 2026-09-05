@@ -1,0 +1,218 @@
+/**
+ * NBSC PRIME-HRM Intelligence Hub — Modals & Overlays Module
+ * Dialog modals, toast alert notifications, and dropdown menus.
+ */
+
+/* ── Modals ───────────────────────────────────────────────── */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-base), visibility var(--transition-base);
+}
+
+.modal--open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.modal__dialog {
+  position: relative;
+  background-color: var(--color-white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  width: 90%;
+  max-width: 540px;
+  max-height: 90vh;
+  overflow-y: auto;
+  z-index: 1001;
+  transform: scale(0.95);
+  transition: transform var(--transition-base);
+}
+
+.modal--open .modal__dialog {
+  transform: scale(1);
+}
+
+.modal__header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--color-neutral-100);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal__body {
+  padding: 1.5rem;
+}
+
+.modal__footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--color-neutral-100);
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  background-color: var(--color-neutral-50);
+}
+
+/* ── Toast Notifications ──────────────────────────────────── */
+.toast-container {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  pointer-events: none;
+}
+
+.toast {
+  min-width: 320px;
+  max-width: 420px;
+  padding: 0.875rem 1.25rem;
+  background-color: var(--color-neutral-900);
+  color: var(--color-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  pointer-events: auto;
+  animation: slideInRight 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toast--success {
+  background-color: var(--color-success-700);
+}
+
+.toast--error {
+  background-color: var(--color-danger-700);
+}
+
+.toast--warning {
+  background-color: var(--color-warning-700);
+}
+
+.toast--info {
+  background-color: var(--color-primary-800);
+}
+
+/* ── Notification Dropdown ────────────────────────────────── */
+.notification-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 360px;
+  max-width: 90vw;
+  background-color: #FFFFFF;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -4px rgba(15, 27, 45, 0.15), 0 4px 6px -2px rgba(15, 27, 45, 0.05);
+  border: 1px solid #E2E8F0;
+  z-index: 1050;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: dropdownFadeIn 150ms ease-out forwards;
+}
+
+.notification-dropdown__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.875rem 1rem;
+  background-color: #F8FAFC;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.notification-dropdown__title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #0F1B2D;
+  margin: 0;
+}
+
+.notification-dropdown__mark-all {
+  font-size: 0.75rem;
+  color: #2563EB;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.notification-dropdown__list {
+  max-height: 380px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.notification-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid #F1F5F9;
+  text-decoration: none;
+  color: inherit;
+  transition: background-color var(--transition-fast);
+}
+
+.notification-item:hover {
+  background-color: #F8FAFC;
+}
+
+.notification-item--unread {
+  background-color: #F0F7FF;
+}
+
+.notification-item__icon {
+  font-size: 1.125rem;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.notification-item__body {
+  flex: 1;
+}
+
+.notification-item__title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #0F1B2D;
+  margin-bottom: 0.125rem;
+}
+
+.notification-item__message {
+  font-size: 0.75rem;
+  color: #64748B;
+  line-height: 1.35;
+}
+
+.notification-item__time {
+  font-size: 0.6875rem;
+  color: #94A3B8;
+  margin-top: 0.25rem;
+}

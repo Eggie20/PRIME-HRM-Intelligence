@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Add or edit personnel records in the NBSC PRIME-HRM system.">
+  <title>Employee Form — NBSC PRIME-HRM Intelligence Hub</title>
+  <link rel="stylesheet" href="../../../shared/css/global.css">
+  <link rel="stylesheet" href="../../../shared/css/components.css">
+  <link rel="stylesheet" href="../../../shared/css/layout.css">
+  <link rel="stylesheet" href="../../../shared/css/utilities.css">
+  <link rel="stylesheet" href="employee-form.css">
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="app-sidebar" aria-label="Main Navigation">
+      <div class="sidebar__brand">
+        <div class="sidebar__logo-icon">N</div>
+        <div class="sidebar__brand-text">
+          <span class="sidebar__brand-title">NBSC HRMS</span>
+          <span class="sidebar__brand-badge">PRIME-HRM Level 2</span>
+        </div>
+      </div>
+
+      <nav class="sidebar__nav">
+        <a href="../../dashboard/dashboard/dashboard.html" class="sidebar__link" id="nav-dashboard">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#9638;</span>
+            <span>Dashboard</span>
+          </div>
+        </a>
+        <a href="../employee-list/employee-list.html" class="sidebar__link sidebar__link--active" id="nav-employees">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128101;</span>
+            <span>Employees</span>
+          </div>
+        </a>
+        <a href="../../programs/program-list/program-list.html" class="sidebar__link" id="nav-programs">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#127891;</span>
+            <span>Programs</span>
+          </div>
+        </a>
+      </nav>
+
+      <div class="sidebar__footer">
+        <div class="sidebar__user">
+          <div class="sidebar__user-avatar" id="user-avatar">AD</div>
+          <div class="sidebar__user-info">
+            <span class="sidebar__user-name" id="user-display-name">HR Administrator</span>
+            <span class="sidebar__user-role" id="user-display-role">HR Admin</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <header class="app-header">
+        <div class="app-header__left">
+          <h2 class="app-header__title" id="page-heading">Add New Employee</h2>
+        </div>
+        <div class="app-header__right">
+          <a href="../employee-list/employee-list.html" class="btn btn--outline btn--sm" id="btn-cancel-top">&larr; Back to Directory</a>
+        </div>
+      </header>
+
+      <div class="page-container">
+        <div class="card form-container-card">
+          <header class="card__header">
+            <div>
+              <h3 class="card__title" id="card-form-title">Personnel Profile Information</h3>
+              <p class="card__subtitle">Civil Service Commission (CSC) Form 212 standard personnel fields</p>
+            </div>
+          </header>
+
+          <div class="card__body">
+            <form id="form-employee" novalidate>
+              <div class="grid-3col">
+                <div class="form-group">
+                  <label for="input-first-name" class="form-group__label form-group__label--required">First Name</label>
+                  <input type="text" id="input-first-name" name="first_name" class="form-group__input" required>
+                  <span class="form-group__error" id="input-first-name-error"></span>
+                </div>
+                <div class="form-group">
+                  <label for="input-last-name" class="form-group__label form-group__label--required">Last Name</label>
+                  <input type="text" id="input-last-name" name="last_name" class="form-group__input" required>
+                  <span class="form-group__error" id="input-last-name-error"></span>
+                </div>
+                <div class="form-group">
+                  <label for="input-middle-name" class="form-group__label">Middle Name</label>
+                  <input type="text" id="input-middle-name" name="middle_name" class="form-group__input">
+                </div>
+              </div>
+
+              <div class="grid-2col">
+                <div class="form-group">
+                  <label for="input-email" class="form-group__label form-group__label--required">Institutional Email</label>
+                  <input type="email" id="input-email" name="email" class="form-group__input" required>
+                  <span class="form-group__error" id="input-email-error"></span>
+                </div>
+                <div class="form-group">
+                  <label for="input-phone" class="form-group__label">Contact Number</label>
+                  <input type="tel" id="input-phone" name="phone" class="form-group__input" placeholder="09xxxxxxxxx">
+                </div>
+              </div>
+
+              <div class="grid-3col">
+                <div class="form-group">
+                  <label for="select-department" class="form-group__label form-group__label--required">Department / Office</label>
+                  <select id="select-department" name="department" class="form-group__select" required>
+                    <option value="">Select Division...</option>
+                    <option value="DGEC">Department of General Education (DGEC)</option>
+                    <option value="IBM">Institute of Business & Mgmt (IBM)</option>
+                    <option value="ICS">Institute of Computer Studies (ICS)</option>
+                    <option value="ITE">Institute of Teacher Education (ITE)</option>
+                    <option value="ADMIN">Administrative & Support</option>
+                    <option value="FIN">Finance & Accounting</option>
+                    <option value="REG">Office of the Registrar</option>
+                  </select>
+                  <span class="form-group__error" id="select-department-error"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="input-position" class="form-group__label form-group__label--required">Position Title</label>
+                  <input type="text" id="input-position" name="position" class="form-group__input" placeholder="e.g. Instructor I" required>
+                  <span class="form-group__error" id="input-position-error"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="select-category" class="form-group__label form-group__label--required">Category</label>
+                  <select id="select-category" name="category" class="form-group__select" required>
+                    <option value="TEACHING">Teaching / Faculty</option>
+                    <option value="NON_TEACHING">Non-Teaching Staff</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="grid-3col">
+                <div class="form-group">
+                  <label for="select-status" class="form-group__label form-group__label--required">Appointment Status</label>
+                  <select id="select-status" name="employment_status" class="form-group__select" required>
+                    <option value="COS">Contract of Service (COS)</option>
+                    <option value="PERMANENT">Permanent (Plantilla)</option>
+                    <option value="TEMPORARY">Temporary</option>
+                    <option value="JOB_ORDER">Job Order (JO)</option>
+                    <option value="PART_TIME">Part-Time Faculty</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="input-daily-rate" class="form-group__label">Daily Rate (₱)</label>
+                  <input type="number" id="input-daily-rate" name="daily_rate" step="0.01" class="form-group__input" placeholder="1325.68">
+                </div>
+
+                <div class="form-group">
+                  <label for="input-monthly-salary" class="form-group__label">Monthly Salary (₱)</label>
+                  <input type="number" id="input-monthly-salary" name="monthly_salary" step="0.01" class="form-group__input" placeholder="29165.00">
+                </div>
+              </div>
+
+              <div class="d-flex justify-end gap-3 mt-6 pt-4 border-top">
+                <a href="../employee-list/employee-list.html" class="btn btn--outline" id="btn-cancel">Cancel</a>
+                <button type="submit" class="btn btn--primary btn--lg" id="btn-submit-employee">
+                  <span id="btn-save-text">Save Personnel Record</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../../../shared/js/constants.js"></script>
+  <script src="../../../shared/js/utils.js"></script>
+  <script src="../../../shared/js/components.js"></script>
+  <script src="../../../shared/js/db.js"></script>
+  <script src="../../../shared/js/api.js"></script>
+  <script src="../../../shared/js/auth.js"></script>
+  <script src="employee-form.js"></script>
+</body>
+</html>

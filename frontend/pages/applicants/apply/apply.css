@@ -1,0 +1,198 @@
+/**
+ * NBSC PRIME-HRM Intelligence Hub — Application Wizard Styles
+ */
+
+.wizard-main {
+  flex: 1;
+  padding: var(--space-6) 0 var(--space-12);
+}
+
+.wizard-container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+.target-vacancy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .target-vacancy {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.target-vacancy__title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  line-height: 1.2;
+}
+
+.target-vacancy__dept {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+/* Wizard Stepper Nav */
+.wizard-stepper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-2);
+}
+
+.wizard-step {
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-2);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.wizard-step__number {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--color-border);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wizard-step__title {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .wizard-step__title {
+    display: inline;
+  }
+}
+
+.wizard-step--active {
+  border-color: var(--color-accent);
+  background-color: rgba(212, 168, 67, 0.08);
+}
+
+.wizard-step--active .wizard-step__number {
+  background-color: var(--color-accent);
+  color: var(--color-primary);
+}
+
+.wizard-step--active .wizard-step__title {
+  color: var(--color-primary);
+}
+
+.wizard-step--completed .wizard-step__number {
+  background-color: #059669;
+  color: #ffffff;
+}
+
+/* Panes */
+.wizard-pane {
+  display: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.wizard-pane--active {
+  display: block;
+}
+
+.wizard-pane__title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: var(--space-1);
+}
+
+.wizard-pane__subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-6);
+}
+
+.wizard-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-8);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+/* Upload Items */
+.upload-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.upload-item {
+  background-color: rgba(15, 27, 45, 0.02);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+
+.upload-item__info {
+  margin-bottom: var(--space-2);
+}
+
+.upload-item__title {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.upload-item__desc {
+  display: block;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+/* Review Box & Declaration */
+.review-box {
+  background-color: rgba(15, 27, 45, 0.03);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+}
+
+.declaration-card {
+  background-color: #FEF3C7;
+  border: 1px solid #F59E0B;
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  cursor: pointer;
+}
+
+.checkbox-label {
+  font-size: var(--font-size-xs);
+  color: #78350F;
+  line-height: 1.5;
+}

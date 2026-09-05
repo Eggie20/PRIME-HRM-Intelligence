@@ -1,0 +1,342 @@
+/**
+ * NBSC PRIME-HRM Intelligence Hub — Department Head Evaluation Styles
+ * Structured 5-point Likert rubric assessment with executive scoring cards and real-time live total.
+ */
+
+.eval-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 390px;
+  gap: var(--spacing-6);
+  align-items: start;
+}
+
+.eval-left-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.eval-right-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.sticky-panel {
+  position: sticky;
+  top: 1.5rem;
+}
+
+/* ── Criteria Cards ────────────────────────────────────────── */
+.criterion-card {
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  background: #FFFFFF;
+  box-shadow: 0 1px 3px rgba(15, 27, 45, 0.03), 0 4px 12px rgba(15, 27, 45, 0.02);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.criterion-card:hover {
+  box-shadow: 0 6px 20px rgba(15, 27, 45, 0.06);
+  transform: translateY(-2px);
+}
+
+.criterion-card--1 {
+  border-left: 5px solid #2563EB;
+}
+
+.criterion-card--2 {
+  border-left: 5px solid #D4A843;
+}
+
+.criterion-card--3 {
+  border-left: 5px solid #10B981;
+}
+
+.criterion-card--4 {
+  border-left: 5px solid #0EA5E9;
+}
+
+.criterion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.15rem 1.4rem;
+  border-bottom: 1px solid #F1F5F9;
+  background: #FAFAFC;
+}
+
+.criterion-title {
+  font-family: var(--font-heading), 'Inter', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0F1B2D;
+  margin: 0 0 0.2rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.criterion-desc {
+  font-size: 0.8125rem;
+  color: #64748B;
+  margin: 0;
+}
+
+.rubric-slider-group {
+  padding: 1.25rem 1.4rem;
+  border-bottom: 1px solid #F8FAFC;
+}
+
+.rubric-slider-group:last-child {
+  border-bottom: none;
+}
+
+.rubric-slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.rubric-slider-label {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #1E293B;
+}
+
+.rubric-score-bubble {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.65rem;
+  background: #0F1B2D;
+  color: #FFE29A;
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  font-family: var(--font-mono), monospace;
+  box-shadow: 0 2px 5px rgba(15, 27, 45, 0.2);
+}
+
+.rubric-anchor-desc {
+  font-size: 0.75rem;
+  color: #64748B;
+  margin-top: 0.4rem;
+  display: block;
+}
+
+/* ── Custom Range Slider ───────────────────────────────────── */
+.form-range {
+  width: 100%;
+  height: 8px;
+  background: #E2E8F0;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  accent-color: #D4A843;
+  margin: 0.5rem 0 0.25rem 0;
+  transition: all 0.2s ease;
+}
+
+.form-range:hover {
+  background: #CBD5E1;
+}
+
+/* ── Live Recommendation Scorecard ─────────────────────────── */
+.eval-summary-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(15, 27, 45, 0.05);
+}
+
+.eval-summary-score-box {
+  background: linear-gradient(135deg, #080E1A 0%, #0F1B2D 50%, #17263C 100%);
+  border-radius: 10px;
+  padding: 1.25rem;
+  text-align: center;
+  color: #FFFFFF;
+  border: 1px solid rgba(212, 168, 67, 0.35);
+  margin-bottom: 1.25rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.eval-summary-score-box::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -30%;
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle, rgba(212, 168, 67, 0.2) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.eval-summary-score-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #D4A843;
+  margin-bottom: 0.25rem;
+}
+
+.eval-summary-score-value {
+  font-size: 2.75rem;
+  font-weight: 900;
+  line-height: 1;
+  color: #FFE29A;
+  text-shadow: 0 2px 10px rgba(212, 168, 67, 0.4);
+  font-family: var(--font-heading), 'Inter', sans-serif;
+}
+
+.eval-summary-score-sub {
+  font-size: 0.75rem;
+  color: #94A3B8;
+  margin-top: 0.35rem;
+}
+
+.score-breakdown-card {
+  background-color: #F8FAFC;
+  border-radius: 10px;
+  border: 1px solid #E2E8F0;
+}
+
+/* ── Formal Recommendation Controls ───────────────────────── */
+#select-recommendation {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  display: block !important;
+  padding: 0.75rem 2.25rem 0.75rem 1rem !important;
+  border: 1.5px solid #CBD5E1 !important;
+  border-radius: 10px !important;
+  font-size: 0.875rem !important;
+  font-weight: 700 !important;
+  color: #0F1B2D !important;
+  background-color: #FFFFFF !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2364748B' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 0.85rem center !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  transition: all 0.2s ease !important;
+  cursor: pointer !important;
+}
+
+#select-recommendation:focus {
+  border-color: #D4A843 !important;
+  box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.2) !important;
+  outline: none !important;
+}
+
+#textarea-eval-remarks {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  display: block !important;
+  border: 1.5px solid #CBD5E1 !important;
+  border-radius: 10px !important;
+  padding: 0.85rem 1rem !important;
+  font-size: 0.875rem !important;
+  font-family: inherit !important;
+  color: #1E293B !important;
+  background-color: #FFFFFF !important;
+  line-height: 1.5 !important;
+  min-height: 105px !important;
+  transition: all 0.2s ease !important;
+  resize: vertical !important;
+}
+
+#textarea-eval-remarks:focus {
+  border-color: #D4A843 !important;
+  box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.2) !important;
+  outline: none !important;
+}
+
+.quick-tag-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.725rem;
+  font-weight: 700;
+  background: #F1F5F9;
+  border: 1px solid #CBD5E1;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.quick-tag-chip:hover {
+  background: #0F1B2D;
+  color: #FFFFFF;
+  border-color: #0F1B2D;
+  transform: translateY(-1px);
+}
+
+#btn-submit-evaluation {
+  background: linear-gradient(135deg, #D4A843 0%, #B88E2C 100%) !important;
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  font-size: 0.95rem !important;
+  padding: 0.95rem 1.5rem !important;
+  border-radius: 10px !important;
+  border: none !important;
+  width: 100% !important;
+  box-shadow: 0 4px 16px rgba(212, 168, 67, 0.38) !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+#btn-submit-evaluation:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 22px rgba(212, 168, 67, 0.52) !important;
+}
+
+/* ── Prior Evaluations Log ─────────────────────────────────── */
+.prior-eval-item {
+  padding: 0.85rem 1.15rem;
+  border-bottom: 1px solid #F1F5F9;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  transition: background 0.15s ease;
+}
+
+.prior-eval-item:last-child {
+  border-bottom: none;
+}
+
+.prior-eval-item:hover {
+  background: #F8FAFC;
+}
+
+.prior-eval-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+}
+
+.prior-eval-remarks {
+  font-size: 0.75rem;
+  color: #475569;
+  background-color: #F1F5F9;
+  padding: 0.5rem 0.65rem;
+  border-radius: 6px;
+  margin-top: 0.25rem;
+  border-left: 3px solid #D4A843;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .eval-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sticky-panel {
+    position: static;
+  }
+}

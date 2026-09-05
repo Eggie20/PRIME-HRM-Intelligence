@@ -1,0 +1,12 @@
+/**
+ * NBSC PRIME-HRM Intelligence Hub — Program Form Styles
+ */
+
+.program-form-card {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.border-top {
+  border-top: 1px solid var(--color-neutral-200);
+}

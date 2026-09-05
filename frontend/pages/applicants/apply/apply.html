@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Submit your application for positions at Northern Bukidnon State College under CSC PRIME-HRM Level 2 standards.">
+  <title>Application Wizard — Northern Bukidnon State College</title>
+  <link rel="stylesheet" href="../../../shared/css/global.css">
+  <link rel="stylesheet" href="../../../shared/css/components.css">
+  <link rel="stylesheet" href="../../../shared/css/layout.css">
+  <link rel="stylesheet" href="../../../shared/css/utilities.css">
+  <link rel="stylesheet" href="apply.css">
+</head>
+<body class="public-page">
+  <!-- Header -->
+  <header class="public-nav" role="banner">
+    <div class="public-nav__container">
+      <a href="../../../index.html" class="public-nav__brand">
+        <div class="public-nav__logo">N</div>
+        <div>
+          <span class="public-nav__title">Northern Bukidnon State College</span>
+          <span class="public-nav__subtitle">Merit Selection Application Portal</span>
+        </div>
+      </a>
+
+      <nav class="public-nav__links">
+        <a href="../../vacancies/job-board/job-board.html" class="public-nav__link">&larr; Back to Job Board</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wizard-main" id="main-content">
+    <div class="wizard-container">
+      <!-- Vacancy Target Header Card -->
+      <section class="card mb-6" id="vacancy-target-card">
+        <div class="target-vacancy">
+          <div>
+            <span class="badge badge--teaching mb-1" id="target-category">Position Posting</span>
+            <h1 class="target-vacancy__title" id="target-title">Loading vacancy details...</h1>
+            <p class="target-vacancy__dept" id="target-dept">Northern Bukidnon State College</p>
+          </div>
+          <div class="target-vacancy__meta" id="target-meta">
+            <!-- Populated via apply.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Wizard Progress Stepper -->
+      <nav class="wizard-stepper mb-6" aria-label="Application Progress">
+        <div class="wizard-step wizard-step--active" data-step="1">
+          <span class="wizard-step__number">1</span>
+          <span class="wizard-step__title">Personal Details</span>
+        </div>
+        <div class="wizard-step" data-step="2">
+          <span class="wizard-step__number">2</span>
+          <span class="wizard-step__title">Background & QS</span>
+        </div>
+        <div class="wizard-step" data-step="3">
+          <span class="wizard-step__number">3</span>
+          <span class="wizard-step__title">PDS & Documents</span>
+        </div>
+        <div class="wizard-step" data-step="4">
+          <span class="wizard-step__number">4</span>
+          <span class="wizard-step__title">Review & Submit</span>
+        </div>
+      </nav>
+
+      <!-- Wizard Form -->
+      <form id="form-application-wizard" class="card p-6" novalidate>
+        <!-- Step 1: Personal Details -->
+        <fieldset class="wizard-pane wizard-pane--active" id="pane-step-1" aria-labelledby="heading-step-1">
+          <legend class="wizard-pane__title" id="heading-step-1">Step 1: Personal & Contact Information</legend>
+          <p class="wizard-pane__subtitle">Please verify your legal personal details as they appear on your government records.</p>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="input-full-name" class="form-label">Full Legal Name <span class="text-danger">*</span></label>
+              <input type="text" id="input-full-name" class="form-control" placeholder="First Name, Middle Name, Last Name" required>
+              <div class="form-error" id="error-full-name"></div>
+            </div>
+
+            <div class="form-group flex-1">
+              <label for="input-email" class="form-label">Email Address <span class="text-danger">*</span></label>
+              <input type="email" id="input-email" class="form-control" placeholder="your.name@example.com" required>
+              <div class="form-error" id="error-email"></div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="input-phone" class="form-label">Contact / Mobile Number <span class="text-danger">*</span></label>
+              <input type="tel" id="input-phone" class="form-control" placeholder="09XX XXX XXXX" required>
+              <div class="form-error" id="error-phone"></div>
+            </div>
+
+            <div class="form-group flex-1">
+              <label for="input-birthdate" class="form-label">Date of Birth <span class="text-danger">*</span></label>
+              <input type="date" id="input-birthdate" class="form-control" required>
+              <div class="form-error" id="error-birthdate"></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="input-address" class="form-label">Permanent Address <span class="text-danger">*</span></label>
+            <input type="text" id="input-address" class="form-control" placeholder="Barangay, Municipality/City, Province" required>
+            <div class="form-error" id="error-address"></div>
+          </div>
+
+          <div class="wizard-actions">
+            <button type="button" class="btn btn--primary ml-auto" id="btn-next-1">Next: Background & QS &rarr;</button>
+          </div>
+        </fieldset>
+
+        <!-- Step 2: Background & QS -->
+        <fieldset class="wizard-pane" id="pane-step-2" aria-labelledby="heading-step-2">
+          <legend class="wizard-pane__title" id="heading-step-2">Step 2: Educational & Professional Qualifications</legend>
+          <p class="wizard-pane__subtitle">Provide information relevant to the Civil Service Qualification Standards (QS) of this vacancy.</p>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="input-highest-education" class="form-label">Highest Degree Earned <span class="text-danger">*</span></label>
+              <input type="text" id="input-highest-education" class="form-control" placeholder="e.g. Master of Science in Information Technology" required>
+              <div class="form-error" id="error-highest-education"></div>
+            </div>
+
+            <div class="form-group flex-1">
+              <label for="input-school" class="form-label">College / University <span class="text-danger">*</span></label>
+              <input type="text" id="input-school" class="form-control" placeholder="e.g. Central Mindanao University" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="input-years-experience" class="form-label">Years of Relevant Experience <span class="text-danger">*</span></label>
+              <input type="text" id="input-years-experience" class="form-control" placeholder="e.g. 3 years teaching tertiary CS courses" required>
+            </div>
+
+            <div class="form-group flex-1">
+              <label for="input-eligibility-type" class="form-label">Civil Service Eligibility / PRC License <span class="text-danger">*</span></label>
+              <input type="text" id="input-eligibility-type" class="form-control" placeholder="e.g. RA 1080 (LET) / CS Professional" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="textarea-cover-letter" class="form-label">Statement of Interest & Core Competencies</label>
+            <textarea id="textarea-cover-letter" class="form-control" rows="4" placeholder="Briefly describe your dedication to public higher education and student mentorship..."></textarea>
+          </div>
+
+          <div class="wizard-actions">
+            <button type="button" class="btn btn--secondary" id="btn-prev-2">&larr; Previous</button>
+            <button type="button" class="btn btn--primary ml-auto" id="btn-next-2">Next: Upload Documents &rarr;</button>
+          </div>
+        </fieldset>
+
+        <!-- Step 3: PDS & Documents -->
+        <fieldset class="wizard-pane" id="pane-step-3" aria-labelledby="heading-step-3">
+          <legend class="wizard-pane__title" id="heading-step-3">Step 3: Document Uploads (Civil Service Requirements)</legend>
+          <p class="wizard-pane__subtitle">Upload clear scanned copies in PDF or Excel format. Maximum 10MB per file.</p>
+
+          <div class="upload-stack">
+            <!-- PDS 212 -->
+            <div class="upload-item">
+              <div class="upload-item__info">
+                <span class="upload-item__title">Personal Data Sheet (CSC Form 212, Revised 2017) <span class="text-danger">*</span></span>
+                <span class="upload-item__desc">Include Work Experience Sheet attachment with recent passport photo.</span>
+              </div>
+              <input type="file" id="file-pds" class="form-control-file" accept=".pdf,.xls,.xlsx" required>
+            </div>
+
+            <!-- Transcript of Records -->
+            <div class="upload-item">
+              <div class="upload-item__info">
+                <span class="upload-item__title">Official Transcript of Records (TOR) <span class="text-danger">*</span></span>
+                <span class="upload-item__desc">Undergraduate and Graduate School complete academic transcripts.</span>
+              </div>
+              <input type="file" id="file-tor" class="form-control-file" accept=".pdf" required>
+            </div>
+
+            <!-- PRC / CS Eligibility -->
+            <div class="upload-item">
+              <div class="upload-item__info">
+                <span class="upload-item__title">Certificate of Eligibility or Professional Board Rating / License</span>
+                <span class="upload-item__desc">Valid PRC ID card copy or authenticated CSC Certificate.</span>
+              </div>
+              <input type="file" id="file-eligibility" class="form-control-file" accept=".pdf,.jpg,.png">
+            </div>
+
+            <!-- Certificates -->
+            <div class="upload-item">
+              <div class="upload-item__info">
+                <span class="upload-item__title">Certificates of Relevant Trainings, Seminars & Employment</span>
+                <span class="upload-item__desc">Proof of accredited trainings within the past 5 years.</span>
+              </div>
+              <input type="file" id="file-trainings" class="form-control-file" accept=".pdf">
+            </div>
+          </div>
+
+          <div class="wizard-actions">
+            <button type="button" class="btn btn--secondary" id="btn-prev-3">&larr; Previous</button>
+            <button type="button" class="btn btn--primary ml-auto" id="btn-next-3">Next: Review & Submit &rarr;</button>
+          </div>
+        </fieldset>
+
+        <!-- Step 4: Review & Submit -->
+        <fieldset class="wizard-pane" id="pane-step-4" aria-labelledby="heading-step-4">
+          <legend class="wizard-pane__title" id="heading-step-4">Step 4: Review Application & Truthfulness Declaration</legend>
+          <p class="wizard-pane__subtitle">Review your information before official transmission to the NBSC Human Resource Selection Board.</p>
+
+          <div class="review-box mb-5" id="review-summary-content">
+            <!-- Dynamically populated via apply.js -->
+          </div>
+
+          <div class="declaration-card mb-6">
+            <label class="checkbox-container">
+              <input type="checkbox" id="check-oath" required>
+              <span class="checkbox-label">
+                <strong>OATH OF TRUTHFULNESS & CIVIL SERVICE COMPLIANCE:</strong><br>
+                I hereby certify that all information submitted in this application and attached documents are true, correct, and complete to the best of my knowledge. I understand that any willful omission or false statement will result in immediate disqualification or administrative liability under Republic Act No. 6713 and Civil Service Commission rules.
+              </span>
+            </label>
+            <div class="form-error" id="error-oath"></div>
+          </div>
+
+          <div class="wizard-actions">
+            <button type="button" class="btn btn--secondary" id="btn-prev-4">&larr; Previous</button>
+            <button type="submit" class="btn btn--primary ml-auto" id="btn-submit-application">
+              Submit Official Application
+            </button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </main>
+
+  <script src="../../../shared/js/constants.js"></script>
+  <script src="../../../shared/js/utils.js"></script>
+  <script src="../../../shared/js/components.js"></script>
+  <script src="../../../shared/js/db.js"></script>
+  <script src="../../../shared/js/api.js"></script>
+  <script src="../../../shared/js/auth.js"></script>
+  <script src="apply.js"></script>
+</body>
+</html>

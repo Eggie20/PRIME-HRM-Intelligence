@@ -1,0 +1,16 @@
+# Requirements — Base (shared)
+Django==5.1.4
+mongoengine==0.29.1
+PyJWT==2.10.1
+argon2-cffi==23.1.0
+pyotp==2.9.0
+qrcode[pil]==8.0
+pandas==2.2.3
+openpyxl==3.1.5
+reportlab==4.2.5
+PyPDF2==3.0.1
+google-genai==1.14.0
+django-htmx==1.21.0
+Pillow==11.1.0
+python-dotenv==1.0.1
+django-cors-headers==4.6.0

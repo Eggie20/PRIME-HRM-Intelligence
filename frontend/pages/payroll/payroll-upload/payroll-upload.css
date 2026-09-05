@@ -1,0 +1,92 @@
+/* ==========================================================================
+   NBSC PRIME-HRM Intelligence Hub — Payroll Upload Styles
+   BEM naming conventions, responsive grid, dropzone, and metric cards.
+   ========================================================================== */
+
+.payroll-config-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--spacing-6, 1.5rem);
+}
+
+@media (max-width: 992px) {
+  .payroll-config-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Dropzone styling */
+.dropzone {
+  border: 2px dashed var(--color-border, #CBD5E1);
+  border-radius: var(--radius-lg, 12px);
+  padding: var(--spacing-8, 2rem);
+  text-align: center;
+  background-color: var(--color-bg-subtle, #F8FAFC);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+  outline: none;
+}
+
+.dropzone:hover,
+.dropzone:focus,
+.dropzone--dragover {
+  border-color: var(--color-accent, #D4A843);
+  background-color: #FEFCE8;
+}
+
+.dropzone__icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-2, 0.5rem);
+  color: var(--color-accent, #D4A843);
+}
+
+.dropzone__title {
+  color: var(--color-text-primary, #0F1B2D);
+  margin-bottom: var(--spacing-1, 0.25rem);
+}
+
+.dropzone__file-info {
+  background-color: #FEF9C3;
+  border: 1px solid #FDE047;
+  padding: var(--spacing-2, 0.5rem) var(--spacing-3, 0.75rem);
+  border-radius: var(--radius-sm, 6px);
+  display: inline-block;
+}
+
+/* KPI Column */
+.payroll-kpi-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.kpi-metric-card {
+  border-left: 4px solid var(--color-accent, #D4A843);
+  box-shadow: var(--shadow-sm, 0 1px 3px rgba(0,0,0,0.05));
+  transition: transform 0.2s ease;
+}
+
+.kpi-metric-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Table overrides */
+.table td.text-right,
+.table th.text-right {
+  text-align: right;
+}
+
+/* Progress bar */
+.progress-bar-container {
+  width: 100%;
+  height: 8px;
+  background-color: #E2E8F0;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #D4A843 0%, #10B981 100%);
+  transition: width 0.3s ease;
+}

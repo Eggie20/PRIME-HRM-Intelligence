@@ -1,0 +1,396 @@
+/**
+ * NBSC PRIME-HRM Intelligence Hub — Vacancy List Styles
+ * Executive-grade recruitment portal styling.
+ */
+
+.app-header__left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* ── KPI Overview Banner ──────────────────────────────────── */
+.kpi-banner-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.kpi-mini-card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: 1.125rem 1.25rem;
+  border: 1px solid var(--color-neutral-200);
+  box-shadow: 0 1px 3px rgba(15, 27, 45, 0.04), 0 4px 12px rgba(15, 27, 45, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.kpi-mini-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(15, 27, 45, 0.08);
+}
+
+.kpi-mini-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.kpi-mini-card__label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-neutral-500);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.kpi-mini-card__icon {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kpi-icon--navy {
+  background: rgba(15, 27, 45, 0.08);
+  color: var(--color-primary-800);
+}
+
+.kpi-icon--gold {
+  background: rgba(212, 168, 67, 0.15);
+  color: var(--color-accent-700);
+}
+
+.kpi-icon--emerald {
+  background: rgba(16, 185, 129, 0.12);
+  color: #059669;
+}
+
+.kpi-icon--amber {
+  background: rgba(245, 158, 11, 0.12);
+  color: #d97706;
+}
+
+.kpi-mini-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.kpi-mini-card__value {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--color-primary-900);
+  line-height: 1.1;
+}
+
+.kpi-mini-card__subtext {
+  font-size: 0.775rem;
+  color: var(--color-neutral-500);
+}
+
+/* ── Filter Toolbar ───────────────────────────────────────── */
+.filter-toolbar-card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-neutral-200);
+  box-shadow: 0 1px 3px rgba(15, 27, 45, 0.04);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.filter-toolbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.search-input-wrapper {
+  position: relative;
+  flex: 1;
+  min-width: 240px;
+  max-width: 380px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-neutral-400);
+  pointer-events: none;
+}
+
+.search-input-field {
+  width: 100%;
+  padding: 0.55rem 0.85rem 0.55rem 2.35rem;
+  border: 1px solid var(--color-neutral-300);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  background-color: var(--color-white);
+  color: var(--color-neutral-800);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.search-input-field:focus {
+  outline: none;
+  border-color: var(--color-accent-500);
+  box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.15);
+}
+
+.filter-controls-group {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.filter-select {
+  padding: 0.55rem 2rem 0.55rem 0.85rem;
+  border: 1px solid var(--color-neutral-300);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  background-color: var(--color-white);
+  color: var(--color-neutral-800);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  transition: border-color var(--transition-fast);
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: var(--color-accent-500);
+  box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.15);
+}
+
+/* ── Table Typography & Cells ─────────────────────────────── */
+.vacancy-title-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.vacancy-title-cell__name {
+  font-weight: 700;
+  font-size: 0.925rem;
+  color: var(--color-primary-900);
+}
+
+.vacancy-title-cell__dept {
+  font-size: 0.775rem;
+  color: var(--color-neutral-500);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* ── Badges ───────────────────────────────────────────────── */
+.badge--teaching {
+  background-color: rgba(212, 168, 67, 0.16);
+  color: #8D6B14;
+  border: 1px solid rgba(212, 168, 67, 0.35);
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+}
+
+.badge--non-teaching {
+  background-color: rgba(15, 27, 45, 0.08);
+  color: var(--color-primary-800);
+  border: 1px solid rgba(15, 27, 45, 0.18);
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+}
+
+.badge--open {
+  background-color: rgba(16, 185, 129, 0.12);
+  color: #047857;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+}
+
+.badge--deliberation {
+  background-color: rgba(245, 158, 11, 0.15);
+  color: #b45309;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+}
+
+.badge--closed {
+  background-color: rgba(100, 116, 139, 0.12);
+  color: #475569;
+  border: 1px solid rgba(100, 116, 139, 0.25);
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+}
+
+.applicant-count-bubble {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 0.4rem;
+  border-radius: var(--radius-full);
+  background-color: rgba(15, 27, 45, 0.06);
+  color: var(--color-primary-900);
+  font-weight: 700;
+  font-size: 0.8125rem;
+  border: 1px solid var(--color-neutral-200);
+}
+
+/* ── Action Buttons ───────────────────────────────────────── */
+.action-buttons-group {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.4rem;
+}
+
+.btn-table-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.775rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-neutral-200);
+  background: var(--color-white);
+  color: var(--color-neutral-700);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.btn-table-action:hover {
+  background: var(--color-neutral-50);
+  color: var(--color-primary-900);
+  border-color: var(--color-neutral-300);
+  transform: translateY(-1px);
+}
+
+.btn-table-action--primary {
+  border-color: rgba(212, 168, 67, 0.5);
+  background: rgba(212, 168, 67, 0.08);
+  color: #8D6B14;
+}
+
+.btn-table-action--primary:hover {
+  background: var(--color-accent-500);
+  color: var(--color-primary-950);
+  border-color: var(--color-accent-600);
+}
+
+.btn-table-action--danger {
+  color: #dc2626;
+}
+
+.btn-table-action--danger:hover {
+  background: #fee2e2;
+  border-color: #fca5a5;
+  color: #b91c1c;
+}
+
+/* ── Modern Inline Vacancy Action Buttons ─────────────────── */
+.vacancy-actions-group {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.btn-pipeline-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #854D0E;
+  background: #FEF3C7;
+  border: 1px solid rgba(212, 168, 67, 0.45);
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  line-height: 1;
+  box-shadow: 0 1px 2px rgba(212, 168, 67, 0.1);
+}
+
+.btn-pipeline-pill:hover {
+  background: #D4A843;
+  color: #FFFFFF;
+  border-color: #D4A843;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(212, 168, 67, 0.25);
+}
+
+.btn-pipeline-pill .btn-icon {
+  font-size: 11px;
+}
+
+.vacancy-actions-group .action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  border: 1px solid #E2E8F0;
+  background: #FFFFFF;
+  color: #64748B;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-decoration: none;
+  padding: 0;
+}
+
+.vacancy-actions-group .action-btn:hover {
+  background: #F8FAFC;
+  border-color: #CBD5E1;
+  color: #0F1B2D;
+  transform: translateY(-1px);
+}
+
+.vacancy-actions-group .action-btn--archive:hover {
+  background: #FEE2E2;
+  border-color: #FCA5A5;
+  color: #DC2626;
+}
+
+@media (max-width: 1024px) {
+  .kpi-banner-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .kpi-banner-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

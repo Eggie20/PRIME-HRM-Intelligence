@@ -1,0 +1,56 @@
+# NBSC PRIME-HRM Intelligence Hub — Backend Dockerfile
+# Multi-stage Python 3.12 slim build with Gunicorn WSGI
+
+FROM python:3.12-slim AS builder
+
+WORKDIR /app
+
+# Install build dependencies for CFFI and cryptography
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    libffi-dev \
+    libssl-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install python requirements
+COPY backend/requirements/ /app/requirements/
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r /app/requirements/prod.txt
+
+# Final Production Stage
+FROM python:3.12-slim
+
+WORKDIR /app
+
+# Install runtime shared libraries
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy installed wheels and dependencies
+COPY --from=builder /usr/local/lib/python3.12/site-packages/ /usr/local/lib/python3.12/site-packages/
+COPY --from=builder /usr/local/bin/ /usr/local/bin/
+
+# Copy backend source code
+COPY backend/ /app/
+
+# Environment defaults
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    DJANGO_SETTINGS_MODULE=config.settings.prod \
+    PORT=8000
+
+# Non-root user for security
+RUN useradd -m -u 1000 appuser && \
+    mkdir -p /app/media /app/staticfiles && \
+    chown -R appuser:appuser /app
+
+USER appuser
+
+EXPOSE 8000
+
+# Health check endpoint
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+    CMD curl -f http://localhost:8000/api/v1/health/ || exit 1
+
+CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3", "--timeout", "120"]

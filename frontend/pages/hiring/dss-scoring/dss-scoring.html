@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NBSC PRIME-HRM 4-Pillar Decision Support System (DSS) — Automated civil service merit selection scoring, radar competencies, and ranking index.">
+  <title>4-Pillar DSS Scoring — NBSC PRIME-HRM Intelligence Hub</title>
+  <link rel="stylesheet" href="../../../shared/css/global.css">
+  <link rel="stylesheet" href="../../../shared/css/components.css">
+  <link rel="stylesheet" href="../../../shared/css/modules/animations.css">
+  <link rel="stylesheet" href="../../../shared/css/modules/buttons.css">
+  <link rel="stylesheet" href="../../../shared/css/modules/badges.css">
+  <link rel="stylesheet" href="../../../shared/css/modules/cards.css">
+  <link rel="stylesheet" href="../../../shared/css/modules/forms.css">
+  <link rel="stylesheet" href="../../../shared/css/modules/tables.css">
+  <link rel="stylesheet" href="../../../shared/css/modules/navigation.css">
+  <link rel="stylesheet" href="../../../shared/css/modules/modals.css">
+  <link rel="stylesheet" href="../../../shared/css/layout.css">
+  <link rel="stylesheet" href="../../../shared/css/utilities.css">
+  <link rel="stylesheet" href="dss-scoring.css">
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="app-sidebar" aria-label="Main Navigation">
+      <div class="sidebar__brand">
+        <div class="sidebar__logo-icon">N</div>
+        <div class="sidebar__brand-text">
+          <span class="sidebar__brand-title">NBSC HRMS</span>
+          <span class="sidebar__brand-badge">PRIME-HRM Level 2</span>
+        </div>
+      </div>
+
+      <nav class="sidebar__nav">
+        <span class="sidebar__section-title">Core Operations</span>
+        <a href="../../dashboard/dashboard/dashboard.html" class="sidebar__link" id="nav-dashboard">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#9638;</span>
+            <span>Dashboard</span>
+          </div>
+        </a>
+        <a href="../../employees/employee-list/employee-list.html" class="sidebar__link" id="nav-employees">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128101;</span>
+            <span>Employees</span>
+          </div>
+        </a>
+        <a href="../../programs/program-list/program-list.html" class="sidebar__link" id="nav-programs">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#127891;</span>
+            <span>Programs</span>
+          </div>
+        </a>
+
+        <span class="sidebar__section-title">Recruitment & Hiring</span>
+        <a href="../../vacancies/vacancy-list/vacancy-list.html" class="sidebar__link" id="nav-vacancies">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128188;</span>
+            <span>Vacancies</span>
+          </div>
+        </a>
+        <a href="../hiring-pipeline/hiring-pipeline.html" class="sidebar__link sidebar__link--active" id="nav-hiring-pipeline">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#9640;</span>
+            <span>Hiring Pipeline</span>
+          </div>
+        </a>
+        <a href="../deliberation/deliberation.html" class="sidebar__link" id="nav-deliberation">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#9878;</span>
+            <span>HRMPSB Voting</span>
+          </div>
+        </a>
+
+        <span class="sidebar__section-title">Compliance & Payroll</span>
+        <a href="../../audit/audit-chain/audit-chain.html" class="sidebar__link" id="nav-audit">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128279;</span>
+            <span>Audit Trail (SHA256)</span>
+          </div>
+        </a>
+        <a href="../../payroll/payroll-list/payroll-list.html" class="sidebar__link" id="nav-payroll-batches">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128176;</span>
+            <span>Payroll Batches</span>
+          </div>
+        </a>
+        <a href="../../payroll/payroll-upload/payroll-upload.html" class="sidebar__link" id="nav-payroll-upload">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128196;</span>
+            <span>Upload & Generate</span>
+          </div>
+        </a>
+        <a href="../../payroll/payslip-download/payslip-download.html" class="sidebar__link" id="nav-payslip-download">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#128274;</span>
+            <span>My Payslips</span>
+          </div>
+        </a>
+        <a href="../../sara/sara-chat/sara-chat.html" class="sidebar__link" id="nav-sara">
+          <div class="sidebar__link-content">
+            <span class="sidebar__link-icon">&#129302;</span>
+            <span>SARA Voice AI</span>
+          </div>
+        </a>
+      </nav>
+
+      <div class="sidebar__footer">
+        <div class="sidebar__user">
+          <div class="sidebar__user-avatar" id="user-avatar">AD</div>
+          <div class="sidebar__user-info">
+            <span class="sidebar__user-name" id="user-display-name">HR Administrator</span>
+            <span class="sidebar__user-role" id="user-display-role">HR Admin</span>
+          </div>
+        </div>
+        <button class="btn btn--icon btn--ghost" id="btn-logout" title="Sign out" aria-label="Sign out">&#10150;</button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <!-- Main Content -->
+    <main class="pipeline-main" id="main-content">
+      <div class="topbar">
+        <div>
+          <div class="crumb">Recruitment &amp; Hiring / <b>4-Pillar Decision Support System</b></div>
+          <h1>4-Pillar DSS Merit Scoring</h1>
+          <div class="sub">CSC PRIME-HRM Level 2 Merit Selection Scoring Algorithm, weighted competencies, and radar index.</div>
+        </div>
+        <div class="pipeline-stepper">
+          <a href="../hiring-pipeline/hiring-pipeline.html" class="stepper-item">&larr; Pipeline</a>
+          <a href="../applicant-review/applicant-review.html" class="stepper-item" id="link-candidate-review">1. Dossier</a>
+          <a href="../dss-scoring/dss-scoring.html" class="stepper-item stepper-item--active" id="link-dss-scoring">2. 4-Pillar DSS</a>
+          <a href="../evaluation/evaluation.html" class="stepper-item" id="link-dept-eval">3. Dept Head Rubric</a>
+          <a href="../deliberation/deliberation.html" class="stepper-item" id="link-deliberation">4. HRMPSB Deliberation</a>
+          <a href="../final-decision/final-decision.html" class="stepper-item stepper-item--gold" id="link-final-decision">5. Appointment Resolution &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Universal Docket Selector Bar -->
+      <section class="docket-selector-bar" aria-label="Docket Candidate and Vacancy Filter">
+        <div class="docket-selector-left">
+          <span class="docket-selector-label">&#128269; Docket Filter:</span>
+          <input type="text" id="input-docket-search" class="docket-search-input" placeholder="Search applicant, ID, date..." aria-label="Search Applicant">
+          <select id="select-docket-vacancy" class="docket-select" aria-label="Select Hiring Vacancy">
+            <option value="">All Positions / Vacancies</option>
+          </select>
+          <select id="select-docket-stage" class="docket-select" aria-label="Filter by Pipeline Stage">
+            <option value="">All Pipeline Stages</option>
+            <option value="SCREENING">1. Screening / Dossier</option>
+            <option value="DSS_SCORED">2. 4-Pillar DSS</option>
+            <option value="DEPT_EVAL">3. Dept Head Rubric</option>
+            <option value="DELIBERATION">4. HRMPSB Deliberation</option>
+            <option value="FINAL_DECISION">5. Appointment Resolution</option>
+          </select>
+          <select id="select-docket-candidate" class="docket-select docket-select--candidate" aria-label="Select Candidate Docket">
+            <!-- Dynamically populated -->
+          </select>
+          <span class="docket-count-indicator" id="docket-count-indicator">Showing 0 of 0</span>
+        </div>
+        <div class="docket-chips-container" id="candidate-chips-container">
+          <!-- Quick candidate pills -->
+        </div>
+      </section>
+
+      <!-- Candidate Identity Hero Strip -->
+      <section class="candidate-hero-strip animate-fade-in" aria-label="Candidate Summary">
+        <div class="candidate-hero-left">
+          <div class="candidate-hero-avatar" id="dss-hero-avatar">CM</div>
+          <div>
+            <h2 class="candidate-hero-title" id="dss-candidate-name">Loading Candidate...</h2>
+            <div class="candidate-hero-meta">
+              <span id="dss-candidate-position">Position applied &bull; Department</span>
+              <span>&bull;</span>
+              <span class="badge badge--primary" id="dss-tracking-badge">NBSC-APP-2026-00001</span>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex align-center gap-3">
+          <a href="#" class="btn btn--secondary btn--sm" id="btn-back-docket">&larr; Candidate Dossier</a>
+          <a href="#" class="btn btn--primary btn--sm" id="btn-forward-eval">Proceed to Dept Eval &rarr;</a>
+        </div>
+      </section>
+        <!-- Composite Score Card -->
+        <section class="composite-banner mb-4 animate-stagger-1">
+          <div class="composite-banner__info">
+            <span class="composite-banner__title-chip">&#9733; CSC 4-Pillar Decision Support Index</span>
+            <div class="composite-banner__score-row">
+              <h2 class="composite-banner__score" id="composite-score-val">86.15</h2>
+              <span class="composite-banner__max">/ 100.00</span>
+            </div>
+            <p class="composite-banner__desc">Civil Service Commission Level 2 Minimum Merit Threshold: <strong>70.00 pts</strong></p>
+          </div>
+          <div class="composite-banner__status">
+            <div id="compliance-pill" class="compliance-beacon compliance-beacon--pass">&#10004; CSC QS COMPLIANT</div>
+            <span class="calculated-time-text" id="calculated-timestamp">Calculated: Aug 25, 2026</span>
+          </div>
+        </section>
+
+        <!-- Split Grid: Scoring Inputs & Radar Chart -->
+        <div class="dss-grid animate-stagger-2">
+          <!-- Left: 4 Pillars Interactive Inputs -->
+          <div class="pillars-column">
+            <!-- Pillar 1: Merit -->
+            <article class="card mb-4 pillar-card pillar-card--merit">
+              <div class="card__header">
+                <h3 class="card__title font-md">&#127942; Pillar 1: Merit &amp; Fitness</h3>
+                <span class="badge badge--teaching">Weight: 30%</span>
+              </div>
+              <div class="card__body">
+                <div class="scoring-row">
+                  <div class="scoring-row-header">
+                    <label for="range-edu" class="scoring-label">Education Attainment (Max 15 pts)</label>
+                    <span class="scoring-value-bubble" id="val-edu">12.0</span>
+                  </div>
+                  <input type="range" id="range-edu" class="form-range" min="0" max="15" step="0.5" value="12">
+                </div>
+                <div class="scoring-row">
+                  <div class="scoring-row-header">
+                    <label for="range-exp" class="scoring-label">Relevant Experience (Max 10 pts)</label>
+                    <span class="scoring-value-bubble" id="val-exp">8.0</span>
+                  </div>
+                  <input type="range" id="range-exp" class="form-range" min="0" max="10" step="0.5" value="8">
+                </div>
+                <div class="scoring-row mb-0">
+                  <div class="scoring-row-header">
+                    <label for="range-train" class="scoring-label">Relevant Trainings &amp; Seminars (Max 5 pts)</label>
+                    <span class="scoring-value-bubble" id="val-train">4.0</span>
+                  </div>
+                  <input type="range" id="range-train" class="form-range" min="0" max="5" step="0.5" value="4">
+                </div>
+              </div>
+            </article>
+
+            <!-- Pillar 2: Competence -->
+            <article class="card mb-4 pillar-card pillar-card--competence">
+              <div class="card__header">
+                <h3 class="card__title font-md">&#9889; Pillar 2: Technical Competence</h3>
+                <span class="badge badge--teaching">Weight: 30%</span>
+              </div>
+              <div class="card__body">
+                <div class="scoring-row">
+                  <div class="scoring-row-header">
+                    <label for="range-demo" class="scoring-label">Teaching Demo / Skill Mastery Exam (Max 15 pts)</label>
+                    <span class="scoring-value-bubble" id="val-demo">12.5</span>
+                  </div>
+                  <input type="range" id="range-demo" class="form-range" min="0" max="15" step="0.5" value="12.5">
+                </div>
+                <div class="scoring-row mb-0">
+                  <div class="scoring-row-header">
+                    <label for="range-interview" class="scoring-label">Behavioral Event Interview (Max 15 pts)</label>
+                    <span class="scoring-value-bubble" id="val-interview">13.0</span>
+                  </div>
+                  <input type="range" id="range-interview" class="form-range" min="0" max="15" step="0.5" value="13">
+                </div>
+              </div>
+            </article>
+
+            <!-- Pillar 3: Ethics -->
+            <article class="card mb-4 pillar-card pillar-card--ethics">
+              <div class="card__header">
+                <h3 class="card__title font-md">&#9878; Pillar 3: Ethics &amp; Integrity</h3>
+                <span class="badge badge--neutral">Weight: 20%</span>
+              </div>
+              <div class="card__body">
+                <div class="scoring-row">
+                  <div class="scoring-row-header">
+                    <label for="range-bi" class="scoring-label">Background Investigation &amp; Clearances (Max 10 pts)</label>
+                    <span class="scoring-value-bubble" id="val-bi">8.5</span>
+                  </div>
+                  <input type="range" id="range-bi" class="form-range" min="0" max="10" step="0.5" value="8.5">
+                </div>
+                <div class="scoring-row mb-0">
+                  <div class="scoring-row-header">
+                    <label for="range-ref" class="scoring-label">Character Reference Validation (Max 10 pts)</label>
+                    <span class="scoring-value-bubble" id="val-ref">9.0</span>
+                  </div>
+                  <input type="range" id="range-ref" class="form-range" min="0" max="10" step="0.5" value="9">
+                </div>
+              </div>
+            </article>
+
+            <!-- Pillar 4: Service Orientation -->
+            <article class="card mb-4 pillar-card pillar-card--service">
+              <div class="card__header">
+                <h3 class="card__title font-md">&#127963; Pillar 4: Public Service Orientation</h3>
+                <span class="badge badge--neutral">Weight: 20%</span>
+              </div>
+              <div class="card__body">
+                <div class="scoring-row">
+                  <div class="scoring-row-header">
+                    <label for="range-community" class="scoring-label">Community Engagement &amp; Citizenship (Max 10 pts)</label>
+                    <span class="scoring-value-bubble" id="val-community">8.5</span>
+                  </div>
+                  <input type="range" id="range-community" class="form-range" min="0" max="10" step="0.5" value="8.5">
+                </div>
+                <div class="scoring-row mb-0">
+                  <div class="scoring-row-header">
+                    <label for="range-dedication" class="scoring-label">Public Service Commitment Panel Rating (Max 10 pts)</label>
+                    <span class="scoring-value-bubble" id="val-dedication">9.0</span>
+                  </div>
+                  <input type="range" id="range-dedication" class="form-range" min="0" max="10" step="0.5" value="9">
+                </div>
+              </div>
+            </article>
+
+            <button class="btn btn--primary w-100 btn--lg mb-4" id="btn-recalculate-dss" style="box-shadow: 0 4px 14px rgba(212, 168, 67, 0.35); font-weight: 700;">
+              &#10004; Recalculate &amp; Persist DSS Score
+            </button>
+          </div>
+
+          <!-- Right: Radar Chart Visualization -->
+          <div class="radar-column">
+            <section class="radar-card" aria-label="Radar Competency Chart">
+              <div class="d-flex justify-between align-center mb-1">
+                <h3 class="card__title font-md" style="margin: 0;">4-Pillar Competency Radar Map</h3>
+                <span class="badge badge--gold font-xs">PRIME-HRM L2</span>
+              </div>
+              <p class="font-xs text-muted mb-3">Multi-dimensional scoring alignment with Civil Service ORAOHRA standards.</p>
+
+              <div class="radar-chart-container">
+                <canvas id="dss-radar-chart"></canvas>
+              </div>
+
+              <div class="pillar-summary-table">
+                <div class="pillar-summary-item">
+                  <div class="pillar-summary-left">
+                    <span class="pillar-dot pillar-dot--merit"></span>
+                    <span>Pillar 1: Merit &amp; Fitness (30%)</span>
+                  </div>
+                  <span class="pillar-summary-score" id="summary-merit">80.0%</span>
+                </div>
+                <div class="pillar-summary-item">
+                  <div class="pillar-summary-left">
+                    <span class="pillar-dot pillar-dot--competence"></span>
+                    <span>Pillar 2: Technical Competence (30%)</span>
+                  </div>
+                  <span class="pillar-summary-score" id="summary-competence">85.0%</span>
+                </div>
+                <div class="pillar-summary-item">
+                  <div class="pillar-summary-left">
+                    <span class="pillar-dot pillar-dot--ethics"></span>
+                    <span>Pillar 3: Ethics &amp; Integrity (20%)</span>
+                  </div>
+                  <span class="pillar-summary-score" id="summary-ethics">87.5%</span>
+                </div>
+                <div class="pillar-summary-item">
+                  <div class="pillar-summary-left">
+                    <span class="pillar-dot pillar-dot--service"></span>
+                    <span>Pillar 4: Public Service (20%)</span>
+                  </div>
+                  <span class="pillar-summary-score" id="summary-service">87.5%</span>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+    </main>
+  </div>
+
+  <script src="../../../shared/js/constants.js"></script>
+  <script src="../../../shared/js/utils.js"></script>
+  <script src="../../../shared/js/components.js"></script>
+  <script src="../../../shared/js/db.js"></script>
+  <script src="../../../shared/js/api.js"></script>
+  <script src="../../../shared/js/auth.js"></script>
+  <script src="../../../shared/js/docket-filter.js"></script>
+  <script src="../../../vendor/chart.min.js"></script>
+  <script src="dss-scoring.js"></script>
+</body>
+</html>

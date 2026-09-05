@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Create an applicant profile to apply for teaching and non-teaching positions at Northern Bukidnon State College.">
+  <title>Applicant Registration — NBSC PRIME-HRM Intelligence Hub</title>
+  <link rel="stylesheet" href="../../../shared/css/global.css">
+  <link rel="stylesheet" href="../../../shared/css/components.css">
+  <link rel="stylesheet" href="../../../shared/css/layout.css">
+  <link rel="stylesheet" href="../../../shared/css/utilities.css">
+  <link rel="stylesheet" href="register.css">
+</head>
+<body class="register-body">
+  <main class="register-container">
+    <div class="register-card">
+      <header class="register-header">
+        <div class="register-brand">
+          <span class="register-brand__crest">NBSC</span>
+          <span class="register-brand__text">PRIME-HRM Intelligence Hub</span>
+        </div>
+        <h1 class="register-title">Create Applicant Account</h1>
+        <p class="register-subtitle">Register to apply for vacancies and track your HRMPSB deliberation status in real time.</p>
+      </header>
+
+      <form id="form-register" novalidate>
+        <div class="form-group">
+          <label for="input-reg-name" class="form-group__label form-group__label--required">Full Legal Name</label>
+          <input
+            type="text"
+            id="input-reg-name"
+            name="full_name"
+            class="form-group__input"
+            placeholder="e.g. Maria Clara D. Santos"
+            required
+          >
+          <span class="form-group__error" id="input-reg-name-error"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="input-reg-email" class="form-group__label form-group__label--required">Email Address</label>
+          <input
+            type="email"
+            id="input-reg-email"
+            name="email"
+            class="form-group__input"
+            placeholder="e.g. mariaclara@gmail.com"
+            required
+          >
+          <span class="form-group__error" id="input-reg-email-error"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="input-reg-phone" class="form-group__label">Mobile Phone Number</label>
+          <input
+            type="tel"
+            id="input-reg-phone"
+            name="phone"
+            class="form-group__input"
+            placeholder="e.g. 09171234567"
+          >
+          <span class="form-group__hint">Used for SMS interview schedule alerts and notifications</span>
+        </div>
+
+        <div class="form-group">
+          <label for="input-reg-password" class="form-group__label form-group__label--required">Password</label>
+          <input
+            type="password"
+            id="input-reg-password"
+            name="password"
+            class="form-group__input"
+            placeholder="At least 8 characters"
+            minlength="8"
+            required
+          >
+          <span class="form-group__error" id="input-reg-password-error"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="input-reg-confirm-pass" class="form-group__label form-group__label--required">Confirm Password</label>
+          <input
+            type="password"
+            id="input-reg-confirm-pass"
+            name="confirm_password"
+            class="form-group__input"
+            placeholder="Re-enter password"
+            required
+          >
+          <span class="form-group__error" id="input-reg-confirm-pass-error"></span>
+        </div>
+
+        <button type="submit" class="btn btn--primary btn--lg w-100 mt-4" id="btn-submit-register">
+          <span id="btn-register-text">Complete Registration</span>
+        </button>
+      </form>
+
+      <footer class="register-footer">
+        <p class="text-sm text-center">
+          Already have an account?
+          <a href="../applicant-login/applicant-login.html" class="text-accent font-semibold" id="link-login">Sign in</a>
+        </p>
+      </footer>
+    </div>
+  </main>
+
+  <script src="../../../shared/js/constants.js"></script>
+  <script src="../../../shared/js/utils.js"></script>
+  <script src="../../../shared/js/components.js"></script>
+  <script src="../../../shared/js/db.js"></script>
+  <script src="../../../shared/js/api.js"></script>
+  <script src="../../../shared/js/auth.js"></script>
+  <script src="register.js"></script>
+</body>
+</html>

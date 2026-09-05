@@ -1,0 +1,181 @@
+/**
+ * NBSC PRIME-HRM Intelligence Hub — Buttons Module
+ * Standardized BEM button styles, sizes, and luxury gold/navy action states.
+ */
+
+/* ── Base Button ──────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.btn:disabled, .btn[aria-disabled="true"] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Button Variants ──────────────────────────────────────── */
+
+/* Primary Button (NBSC Warm Gold) */
+.btn--primary {
+  background: linear-gradient(135deg, #D4A843 0%, #B88E2C 100%);
+  color: #FFFFFF;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(212, 168, 67, 0.35);
+  border: none;
+}
+
+.btn--primary:hover {
+  background: linear-gradient(135deg, #DFB44F 0%, #C49835 100%);
+  color: #FFFFFF;
+  box-shadow: 0 6px 18px rgba(212, 168, 67, 0.45);
+  transform: translateY(-2px);
+}
+
+.btn--primary:active {
+  transform: translateY(0);
+}
+
+/* Secondary Button (Deep Navy) */
+.btn--secondary {
+  background: linear-gradient(135deg, #0F1B2D 0%, #1E293B 100%);
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(15, 27, 45, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn--secondary:hover {
+  background: linear-gradient(135deg, #1E2D44 0%, #2D3D56 100%);
+  color: #FFFFFF;
+  box-shadow: 0 6px 16px rgba(15, 27, 45, 0.35);
+  transform: translateY(-2px);
+}
+
+/* Outline Button */
+.btn--outline, .btn-outline {
+  background-color: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  color: #334155;
+  font-weight: 600;
+}
+
+.btn--outline:hover, .btn-outline:hover {
+  background-color: #F8FAFC;
+  border-color: #94A3B8;
+  color: #0F1B2D;
+  transform: translateY(-1px);
+}
+
+/* Outline Gold */
+.btn--outline-gold {
+  background-color: transparent;
+  border-color: #D4A843;
+  color: #936B15;
+  font-weight: 700;
+}
+
+.btn--outline-gold:hover {
+  background-color: rgba(212, 168, 67, 0.1);
+  border-color: #B88E2C;
+  color: #785408;
+}
+
+/* Danger Button */
+.btn--danger {
+  background-color: var(--color-danger-600);
+  color: #FFFFFF;
+}
+
+.btn--danger:hover {
+  background-color: var(--color-danger-700);
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Ghost Button */
+.btn--ghost {
+  background-color: transparent;
+  color: var(--color-neutral-600);
+}
+
+.btn--ghost:hover {
+  background-color: var(--color-neutral-100);
+  color: var(--color-neutral-900);
+}
+
+/* Gold Action Button */
+.btn-gold {
+  border: none;
+  background: linear-gradient(135deg, #D4A843 0%, #B88E2C 100%);
+  color: #FFFFFF;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+  box-shadow: 0 2px 6px rgba(212, 168, 67, 0.25);
+}
+
+.btn-gold:hover {
+  background: linear-gradient(135deg, #DFB44F 0%, #C49835 100%);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(212, 168, 67, 0.35);
+}
+
+/* ── Button Sizes ─────────────────────────────────────────── */
+.btn--xs {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: var(--radius-xs);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  line-height: 1;
+}
+
+.btn--sm {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.8125rem;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.btn--lg {
+  padding: 0.875rem 1.75rem;
+  font-size: 1rem;
+  border-radius: var(--radius-lg);
+}
+
+.btn--icon {
+  padding: 0.5rem;
+  border-radius: var(--radius-md);
+}
+
+.w-100 {
+  width: 100% !important;
+}
