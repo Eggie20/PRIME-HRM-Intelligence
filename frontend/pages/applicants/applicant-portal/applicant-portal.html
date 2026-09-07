@@ -3,80 +3,151 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="NBSC Applicant Portal — Track your active job applications across all 8 Civil Service merit selection stages.">
-  <title>Applicant Dashboard — NBSC PRIME-HRM Intelligence Hub</title>
-  <link rel="stylesheet" href="../../../shared/css/global.css">
-  <link rel="stylesheet" href="../../../shared/css/components.css">
-  <link rel="stylesheet" href="../../../shared/css/layout.css">
-  <link rel="stylesheet" href="../../../shared/css/utilities.css">
+  <title>Applicant Dashboard — NBSC Candidate Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="applicant-portal.css">
 </head>
-<body class="applicant-body">
-  <!-- Applicant Header -->
-  <header class="applicant-nav" role="banner">
-    <div class="applicant-nav__container">
-      <div class="applicant-nav__brand">
-        <div class="applicant-nav__logo">N</div>
-        <div>
-          <span class="applicant-nav__title">NBSC Candidate Portal</span>
-          <span class="applicant-nav__subtitle">PRIME-HRM Recruitment Suite</span>
+<body>
+
+  <!-- Top bar -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="seal" aria-hidden="true">N</div>
+      <div class="brand-text">
+        <span class="name">NBSC Candidate Portal</span>
+        <span class="sub">PRIME-HRM Recruitment Suite</span>
+      </div>
+    </div>
+    <nav class="topnav" aria-label="Candidate Navigation">
+      <a class="navlink" href="#jobs" id="nav-open-positions">Open positions</a>
+      <a class="navlink" href="../application-track/application-track.html">Track an application</a>
+      <div class="userchip">
+        <div class="avatar" id="nav-avatar">CM</div>
+        <span id="nav-username">Carlo Mendoza</span>
+        <button type="button" class="exit" id="btn-applicant-logout" aria-label="Sign out">Sign out</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Shell (2-Column Grid Layout) -->
+  <div class="shell">
+
+    <!-- SIDEBAR -->
+    <aside aria-label="Applicant Profile & Progress">
+      <div class="applicant-card">
+        <div class="avatar-lg" id="sidebar-avatar">CM</div>
+        <div class="aname" id="sidebar-name">Carlo Mendoza</div>
+        <div class="aid code" id="sidebar-id">Applicant ID &middot; APP-2026-00417</div>
+        <div class="progress-row">
+          <div class="label">
+            <span>Profile completeness</span>
+            <span id="profile-pct">35%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="profile-progress-fill" style="width: 35%;"></div>
+          </div>
         </div>
       </div>
 
-      <nav class="applicant-nav__links" aria-label="Portal Navigation">
-        <a href="../../vacancies/job-board/job-board.html" class="applicant-nav__link">Browse Jobs</a>
-        <a href="../application-track/application-track.html" class="applicant-nav__link">Quick Tracking</a>
-        <div class="applicant-nav__profile">
-          <span class="applicant-nav__user" id="applicant-name">Applicant</span>
-          <button class="btn btn--sm btn--ghost text-danger" id="btn-applicant-logout" title="Sign out">&#10150; Exit</button>
-        </div>
-      </nav>
-    </div>
-  </header>
+      <div class="stage-block">
+        <h4>Recruitment journey</h4>
+        <div class="stage-sub">The 4 pillars of CSC PRIME-HRM Level 2 merit selection</div>
 
-  <main class="applicant-main" id="main-content">
-    <div class="applicant-container">
-      <!-- Welcome Banner -->
-      <section class="portal-welcome-banner mb-6">
-        <div>
-          <h1 class="portal-welcome-banner__title">Application Status & History</h1>
-          <p class="portal-welcome-banner__text">Track your recruitment trajectory through the 4 Pillars of CSC PRIME-HRM Level 2 Merit Selection.</p>
+        <div class="stage done" id="stage-pillar-1">
+          <div class="dot">&#10003;</div>
+          <div>
+            <div class="stitle">Application</div>
+            <div class="sdesc">Profile registered with the portal</div>
+          </div>
         </div>
-        <div>
-          <a href="../../vacancies/job-board/job-board.html" class="btn btn--primary">
-            + Explore Openings
-          </a>
+        <div class="stage current" id="stage-pillar-2">
+          <div class="dot">2</div>
+          <div>
+            <div class="stitle">Screening</div>
+            <div class="sdesc">Submit documents to a vacancy to begin</div>
+          </div>
+        </div>
+        <div class="stage" id="stage-pillar-3">
+          <div class="dot">3</div>
+          <div>
+            <div class="stitle">Assessment</div>
+            <div class="sdesc">Written exam or performance review</div>
+          </div>
+        </div>
+        <div class="stage" id="stage-pillar-4">
+          <div class="dot">4</div>
+          <div>
+            <div class="stitle">Final selection</div>
+            <div class="sdesc">Panel interview and appointment</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main>
+      <div class="page-head">
+        <h1 id="welcome-heading">Welcome back, Carlo</h1>
+        <p id="welcome-sub">You're registered but haven't applied to a position yet. Submit your first application to move into screening.</p>
+      </div>
+
+      <!-- Section: My Active Applications -->
+      <section aria-labelledby="heading-active-apps">
+        <div class="section-head">
+          <h2 id="heading-active-apps">My active applications</h2>
+          <span class="count" id="active-apps-count"></span>
+        </div>
+
+        <!-- Application Cards Stack (when submitted) -->
+        <div id="applications-container" class="app-cards-container d-none"></div>
+
+        <!-- Empty State Panel (matches sample.html) -->
+        <div class="empty-panel" id="applications-empty-panel">
+          <svg class="tray" width="56" height="56" viewBox="0 0 56 56" fill="none" aria-hidden="true">
+            <rect x="4" y="14" width="48" height="34" rx="3" stroke="#A97C22" stroke-width="1.6"/>
+            <path d="M4 30h13.5a2 2 0 0 1 1.8 1.1l1.4 2.8a2 2 0 0 0 1.8 1.1h6.5a2 2 0 0 0 1.8-1.1l1.4-2.8a2 2 0 0 1 1.8-1.1H52" stroke="#A97C22" stroke-width="1.6"/>
+            <path d="M16 14V9a2 2 0 0 1 2-2h20a2 2 0 0 1 2 2v5" stroke="#A97C22" stroke-width="1.6"/>
+          </svg>
+          <div>
+            <h3>Your application tray is empty</h3>
+            <p>Applications you submit will appear here with their screening status, exam schedule, and results.</p>
+            <button type="button" class="btn-primary" id="btn-browse-jobs">Browse open positions</button>
+          </div>
         </div>
       </section>
 
-      <!-- Active Applications Section -->
-      <section class="portal-section mb-8" aria-labelledby="heading-active-apps">
-        <h2 class="portal-section__title" id="heading-active-apps">My Active Applications</h2>
-
-        <div id="applications-container" class="applications-stack">
-          <!-- Rendered dynamically via applicant-portal.js -->
+      <!-- Section: Open Opportunities -->
+      <section id="jobs" aria-labelledby="heading-open-jobs">
+        <div class="section-head">
+          <h2 id="heading-open-jobs">Open opportunities</h2>
+          <span class="count" id="jobs-count">3 positions</span>
         </div>
 
-        <div id="applications-empty-state" class="d-none"></div>
+        <!-- Filter Row -->
+        <div class="filter-row">
+          <input type="text" id="jobSearch" placeholder="Search by title or office" aria-label="Search by title or office">
+          <button type="button" class="chip active" data-dept="all">All offices</button>
+          <button type="button" class="chip" data-dept="fin">Finance</button>
+          <button type="button" class="chip" data-dept="admin">Administrative</button>
+          <button type="button" class="chip" data-dept="ibm">Academic</button>
+        </div>
+
+        <!-- Job List -->
+        <div class="job-list" id="jobList">
+          <!-- Populated dynamically via applicant-portal.js -->
+        </div>
+
+        <div class="helpline">
+          Need help with a requirement? Contact the HR Recruitment Unit for guidance before a vacancy closes.
+        </div>
       </section>
-
-      <!-- Recommended Vacancies Section -->
-      <section class="portal-section" aria-labelledby="heading-recommended-jobs">
-        <div class="portal-section__header">
-          <h2 class="portal-section__title" id="heading-recommended-jobs">Other Open Opportunities</h2>
-          <a href="../../vacancies/job-board/job-board.html" class="font-sm text-accent">View All &rarr;</a>
-        </div>
-
-        <div id="recommended-grid" class="recommended-grid">
-          <!-- Rendered dynamically -->
-        </div>
-      </section>
-    </div>
-  </main>
+    </main>
+  </div>
 
   <script src="../../../shared/js/constants.js"></script>
   <script src="../../../shared/js/utils.js"></script>
-  <script src="../../../shared/js/components.js"></script>
   <script src="../../../shared/js/db.js"></script>
   <script src="../../../shared/js/api.js"></script>
   <script src="../../../shared/js/auth.js"></script>

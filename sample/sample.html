@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Applicant Dashboard — NBSC Candidate Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#152238;
+    --ink-2:#2B3B57;
+    --paper:#EEF0E9;
+    --surface:#FFFFFF;
+    --brass:#A97C22;
+    --brass-deep:#7C5A18;
+    --line:#DBDECF;
+    --muted:#5B6472;
+    --success:#3F7D58;
+    --success-bg:#E7F0E9;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:15px;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  .code{font-family:'IBM Plex Mono', monospace; letter-spacing:0.01em;}
+
+  /* ---------- Top bar ---------- */
+  .topbar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 28px;
+    background:var(--ink);
+    color:#fff;
+  }
+  .brand{display:flex;align-items:center;gap:12px;}
+  .seal{
+    width:36px;height:36px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, var(--brass) 0%, var(--brass-deep) 70%);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Fraunces',serif;font-weight:700;font-size:16px;color:#fff;
+    flex-shrink:0;
+  }
+  .brand-text{display:flex;flex-direction:column;line-height:1.25;}
+  .brand-text .name{font-family:'Fraunces',serif;font-weight:600;font-size:16.5px;}
+  .brand-text .sub{font-size:11.5px;color:#C9CFDB;letter-spacing:0.02em;}
+  .topnav{display:flex;align-items:center;gap:28px;font-size:14px;}
+  .topnav .navlink{color:#D7DCE6;transition:color .15s ease;}
+  .topnav .navlink:hover{color:#fff;}
+  .userchip{display:flex;align-items:center;gap:10px;padding-left:20px;border-left:1px solid rgba(255,255,255,0.18);}
+  .userchip .avatar{
+    width:28px;height:28px;border-radius:50%;background:var(--ink-2);
+    display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;
+  }
+  .userchip .exit{color:#E8B98E;font-size:13px;}
+
+  /* ---------- Shell ---------- */
+  .shell{
+    display:grid;
+    grid-template-columns:272px 1fr;
+    max-width:1180px;
+    margin:0 auto;
+    gap:36px;
+    padding:32px 28px 64px;
+  }
+  @media (max-width:820px){
+    .shell{grid-template-columns:1fr; gap:28px;}
+  }
+
+  /* ---------- Sidebar ---------- */
+  .applicant-card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:20px;
+  }
+  .applicant-card .avatar-lg{
+    width:44px;height:44px;border-radius:50%;
+    background:var(--ink-2);color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Fraunces',serif;font-weight:600;font-size:16px;
+    margin-bottom:12px;
+  }
+  .applicant-card .aname{font-family:'Fraunces',serif;font-weight:600;font-size:18px;}
+  .applicant-card .aid{color:var(--muted);font-size:12.5px;margin-top:2px;}
+
+  .progress-row{margin-top:16px;}
+  .progress-row .label{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted);margin-bottom:6px;}
+  .progress-track{height:5px;background:var(--paper);border-radius:3px;overflow:hidden;}
+  .progress-fill{height:100%;background:var(--brass);width:35%;}
+
+  .stage-block{
+    margin-top:24px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:20px 20px 22px;
+  }
+  .stage-block h4{
+    font-family:'Fraunces',serif;font-weight:600;font-size:14.5px;
+    margin:0 0 3px;
+  }
+  .stage-block .stage-sub{font-size:12px;color:var(--muted);margin-bottom:18px;}
+  .stage{display:flex;gap:12px;position:relative;padding-bottom:22px;}
+  .stage:last-child{padding-bottom:0;}
+  .stage::before{
+    content:'';position:absolute;left:11px;top:24px;bottom:0;width:1px;background:var(--line);
+  }
+  .stage:last-child::before{display:none;}
+  .stage .dot{
+    width:23px;height:23px;border-radius:50%;flex-shrink:0;
+    border:1.5px solid var(--line);background:var(--surface);
+    display:flex;align-items:center;justify-content:center;
+    font-size:11px;font-weight:600;color:var(--muted);
+    z-index:1;
+  }
+  .stage.done .dot{background:var(--success);border-color:var(--success);color:#fff;}
+  .stage.current .dot{border-color:var(--brass);color:var(--brass-deep);background:#FBF4E7;}
+  .stage .stitle{font-size:13.5px;font-weight:500;margin-top:1px;}
+  .stage.current .stitle{color:var(--brass-deep);font-weight:600;}
+  .stage .sdesc{font-size:12px;color:var(--muted);margin-top:2px;}
+
+  /* ---------- Main ---------- */
+  .page-head{margin-bottom:28px;}
+  .page-head h1{
+    font-family:'Fraunces',serif;font-weight:600;font-size:26px;margin:0 0 6px;
+    animation:rise .5s ease both;
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+  .page-head p{color:var(--muted);margin:0;max-width:52ch;}
+
+  section{margin-bottom:40px;}
+  .section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px;}
+  .section-head h2{font-family:'Fraunces',serif;font-weight:600;font-size:17px;margin:0;}
+  .section-head .count{font-size:12.5px;color:var(--muted);}
+
+  /* empty state */
+  .empty-panel{
+    border:1px dashed var(--line);
+    border-radius:4px;
+    background:var(--surface);
+    padding:36px 32px;
+    display:flex;
+    align-items:center;
+    gap:28px;
+  }
+  @media (max-width:600px){.empty-panel{flex-direction:column;text-align:center;}}
+  .empty-panel .tray{flex-shrink:0;}
+  .empty-panel h3{font-family:'Fraunces',serif;font-weight:600;font-size:17px;margin:0 0 6px;}
+  .empty-panel p{color:var(--muted);margin:0 0 16px;max-width:46ch;}
+  .btn-primary{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--ink);color:#fff;
+    padding:10px 18px;border-radius:3px;border:none;
+    font-size:13.5px;font-weight:500;cursor:pointer;
+    font-family:'IBM Plex Sans',sans-serif;
+    transition:background .15s ease;
+  }
+  .btn-primary:hover{background:var(--ink-2);}
+  .btn-ghost{
+    display:inline-flex;align-items:center;gap:6px;
+    background:transparent;color:var(--ink);
+    padding:8px 14px;border-radius:3px;border:1px solid var(--line);
+    font-size:13px;font-weight:500;cursor:pointer;
+    font-family:'IBM Plex Sans',sans-serif;
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .btn-ghost:hover{border-color:var(--ink);}
+
+  /* filter row */
+  .filter-row{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
+  .filter-row input[type=text]{
+    flex:1;min-width:180px;
+    padding:9px 12px;border:1px solid var(--line);border-radius:3px;
+    font-family:'IBM Plex Sans',sans-serif;font-size:13.5px;background:var(--surface);
+  }
+  .chip{
+    padding:8px 14px;border:1px solid var(--line);border-radius:3px;
+    font-size:13px;color:var(--muted);cursor:pointer;background:var(--surface);
+    transition:all .15s ease;
+  }
+  .chip.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+
+  /* job list */
+  .job-list{border-top:1px solid var(--line);}
+  .job-row{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 4px;border-bottom:1px solid var(--line);
+    gap:20px;
+  }
+  @media (max-width:600px){.job-row{flex-direction:column;align-items:flex-start;gap:12px;}}
+  .job-info .jtitle{font-family:'Fraunces',serif;font-weight:600;font-size:15.5px;}
+  .job-info .jmeta{font-size:12.5px;color:var(--muted);margin-top:4px;}
+  .job-info .jmeta .sg{
+    display:inline-block;margin-left:8px;padding:1px 7px;border-radius:3px;
+    background:var(--success-bg);color:var(--success);font-size:11px;font-weight:600;
+  }
+  .job-right{display:flex;align-items:center;gap:18px;flex-shrink:0;}
+  .job-right .deadline{font-size:12px;color:var(--muted);white-space:nowrap;}
+  .job-right .deadline b{color:var(--ink);}
+
+  .helpline{
+    margin-top:8px;padding-top:20px;border-top:1px solid var(--line);
+    font-size:12.5px;color:var(--muted);
+  }
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="brand">
+      <div class="seal">N</div>
+      <div class="brand-text">
+        <span class="name">NBSC Candidate Portal</span>
+        <span class="sub">PRIME-HRM Recruitment Suite</span>
+      </div>
+    </div>
+    <div class="topnav">
+      <a class="navlink" href="#">Open positions</a>
+      <a class="navlink" href="#">Track an application</a>
+      <div class="userchip">
+        <div class="avatar">CM</div>
+        <span>Carlo Mendoza</span>
+        <a class="exit" href="#">Sign out</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="shell">
+
+    <!-- SIDEBAR -->
+    <aside>
+      <div class="applicant-card">
+        <div class="avatar-lg">CM</div>
+        <div class="aname">Carlo Mendoza</div>
+        <div class="aid code">Applicant ID · APP-2026-00417</div>
+        <div class="progress-row">
+          <div class="label"><span>Profile completeness</span><span>35%</span></div>
+          <div class="progress-track"><div class="progress-fill"></div></div>
+        </div>
+      </div>
+
+      <div class="stage-block">
+        <h4>Recruitment journey</h4>
+        <div class="stage-sub">The 4 pillars of CSC PRIME-HRM Level 2 merit selection</div>
+
+        <div class="stage done">
+          <div class="dot">✓</div>
+          <div>
+            <div class="stitle">Application</div>
+            <div class="sdesc">Profile registered with the portal</div>
+          </div>
+        </div>
+        <div class="stage current">
+          <div class="dot">2</div>
+          <div>
+            <div class="stitle">Screening</div>
+            <div class="sdesc">Submit documents to a vacancy to begin</div>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="dot">3</div>
+          <div>
+            <div class="stitle">Assessment</div>
+            <div class="sdesc">Written exam or performance review</div>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="dot">4</div>
+          <div>
+            <div class="stitle">Final selection</div>
+            <div class="sdesc">Panel interview and appointment</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main>
+      <div class="page-head">
+        <h1>Welcome back, Carlo</h1>
+        <p>You're registered but haven't applied to a position yet. Submit your first application to move into screening.</p>
+      </div>
+
+      <section>
+        <div class="section-head">
+          <h2>My active applications</h2>
+        </div>
+        <div class="empty-panel">
+          <svg class="tray" width="56" height="56" viewBox="0 0 56 56" fill="none">
+            <rect x="4" y="14" width="48" height="34" rx="3" stroke="#A97C22" stroke-width="1.6"/>
+            <path d="M4 30h13.5a2 2 0 0 1 1.8 1.1l1.4 2.8a2 2 0 0 0 1.8 1.1h6.5a2 2 0 0 0 1.8-1.1l1.4-2.8a2 2 0 0 1 1.8-1.1H52" stroke="#A97C22" stroke-width="1.6"/>
+            <path d="M16 14V9a2 2 0 0 1 2-2h20a2 2 0 0 1 2 2v5" stroke="#A97C22" stroke-width="1.6"/>
+          </svg>
+          <div>
+            <h3>Your application tray is empty</h3>
+            <p>Applications you submit will appear here with their screening status, exam schedule, and results.</p>
+            <button class="btn-primary" onclick="document.getElementById('jobs').scrollIntoView({behavior:'smooth'})">Browse open positions</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="jobs">
+        <div class="section-head">
+          <h2>Open opportunities</h2>
+          <span class="count">3 positions</span>
+        </div>
+
+        <div class="filter-row">
+          <input type="text" id="jobSearch" placeholder="Search by title or office" oninput="filterJobs()">
+          <div class="chip active" data-dept="all" onclick="setDept(this)">All offices</div>
+          <div class="chip" data-dept="fin" onclick="setDept(this)">Finance</div>
+          <div class="chip" data-dept="admin" onclick="setDept(this)">Administrative</div>
+          <div class="chip" data-dept="ibm" onclick="setDept(this)">Academic</div>
+        </div>
+
+        <div class="job-list" id="jobList">
+          <div class="job-row" data-dept="fin" data-title="accountant ii finance accounting division">
+            <div class="job-info">
+              <div class="jtitle">Accountant II</div>
+              <div class="jmeta">Finance &amp; Accounting Division <span class="sg">SG 15</span></div>
+            </div>
+            <div class="job-right">
+              <div class="deadline">Closes <b>Sep 25</b></div>
+              <button class="btn-ghost">Apply</button>
+            </div>
+          </div>
+          <div class="job-row" data-dept="admin" data-title="administrative assistant iii president office">
+            <div class="job-info">
+              <div class="jtitle">Administrative Assistant III</div>
+              <div class="jmeta">Office of the President <span class="sg">SG 9</span></div>
+            </div>
+            <div class="job-right">
+              <div class="deadline">Closes <b>Sep 18</b></div>
+              <button class="btn-ghost">Apply</button>
+            </div>
+          </div>
+          <div class="job-row" data-dept="ibm" data-title="associate professor i business admin institute of business and management">
+            <div class="job-info">
+              <div class="jtitle">Associate Professor I, Business Administration</div>
+              <div class="jmeta">Institute of Business &amp; Management <span class="sg">SG 15</span></div>
+            </div>
+            <div class="job-right">
+              <div class="deadline">Closes <b>Oct 2</b></div>
+              <button class="btn-ghost">Apply</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="helpline">
+          Need help with a requirement? Contact the HR Recruitment Unit for guidance before a vacancy closes.
+        </div>
+      </section>
+    </main>
+  </div>
+
+<script>
+  let activeDept = 'all';
+  function setDept(el){
+    document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+    el.classList.add('active');
+    activeDept = el.dataset.dept;
+    filterJobs();
+  }
+  function filterJobs(){
+    const q = document.getElementById('jobSearch').value.toLowerCase().trim();
+    document.querySelectorAll('.job-row').forEach(row=>{
+      const matchesDept = activeDept === 'all' || row.dataset.dept === activeDept;
+      const matchesText = row.dataset.title.includes(q);
+      row.style.display = (matchesDept && matchesText) ? 'flex' : 'none';
+    });
+  }
+</script>
+
+</body>
+</html>

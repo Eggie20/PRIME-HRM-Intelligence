@@ -1,300 +1,683 @@
 /**
- * NBSC PRIME-HRM Intelligence Hub — Applicant Portal Styles
+ * NBSC Candidate Portal — Applicant Dashboard Styles
+ * Precision Academic & Civil Service Design System
+ * Replicates C:\NBSC PRIME-HRM Intelligence Hub\sample\sample.html
  */
 
-.applicant-body {
-  background-color: var(--color-surface);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+:root {
+  --ink: #152238;
+  --ink-2: #2B3B57;
+  --paper: #EEF0E9;
+  --surface: #FFFFFF;
+  --brass: #A97C22;
+  --brass-deep: #7C5A18;
+  --line: #DBDECF;
+  --muted: #5B6472;
+  --success: #3F7D58;
+  --success-bg: #E7F0E9;
 }
 
-.applicant-nav {
-  background-color: var(--color-primary);
-  color: #ffffff;
-  padding: var(--space-3) 0;
-  border-bottom: 2px solid var(--color-accent);
+* {
+  box-sizing: border-box;
 }
 
-.applicant-nav__container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 var(--space-4);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+html, body {
+  margin: 0;
+  padding: 0;
 }
 
-.applicant-nav__brand {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }
 
-.applicant-nav__logo {
-  width: 38px;
-  height: 38px;
-  background: linear-gradient(135deg, var(--color-accent), #B3862A);
-  color: var(--color-primary);
-  font-weight: 800;
-  font-size: 1.25rem;
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.applicant-nav__title {
-  display: block;
-  font-size: var(--font-size-base);
-  font-weight: 700;
-}
-
-.applicant-nav__subtitle {
-  display: block;
-  font-size: var(--font-size-xs);
-  color: var(--color-accent);
-}
-
-.applicant-nav__links {
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-}
-
-.applicant-nav__link {
-  color: rgba(255, 255, 255, 0.85);
+a {
+  color: inherit;
   text-decoration: none;
-  font-size: var(--font-size-sm);
-  font-weight: 500;
-  transition: color var(--transition-fast);
 }
 
-.applicant-nav__link:hover {
-  color: var(--color-accent);
+.code {
+  font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: 0.01em;
 }
 
-.applicant-nav__profile {
+.d-none {
+  display: none !important;
+}
+
+/* ── Top Bar ────────────────────────────────────────────────── */
+.topbar {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
-  border-left: 1px solid rgba(255, 255, 255, 0.2);
-  padding-left: var(--space-4);
+  justify-content: space-between;
+  padding: 14px 28px;
+  background: var(--ink);
+  color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
 }
 
-.applicant-nav__user {
-  font-size: var(--font-size-sm);
-  font-weight: 600;
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
   color: #ffffff;
 }
 
-/* Main Layout */
-.applicant-main {
-  flex: 1;
-  padding: var(--space-6) 0 var(--space-10);
-}
-
-.applicant-container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 var(--space-4);
-}
-
-.portal-welcome-banner {
-  background: linear-gradient(135deg, var(--color-primary), #1a2c47);
-  color: #ffffff;
-  border-radius: var(--radius-lg);
-  padding: var(--space-6);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-  justify-content: space-between;
-  border-left: 5px solid var(--color-accent);
-}
-
-@media (min-width: 768px) {
-  .portal-welcome-banner {
-    flex-direction: row;
-    align-items: center;
-  }
-}
-
-.portal-welcome-banner__title {
-  font-size: 1.6rem;
-  font-weight: 800;
-  margin-bottom: var(--space-1);
-}
-
-.portal-welcome-banner__text {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: var(--font-size-sm);
-}
-
-.portal-section__title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--color-primary);
-  margin-bottom: var(--space-4);
-}
-
-.portal-section__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: var(--space-4);
-}
-
-/* Application Card */
-.application-card {
-  background: #ffffff;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-6);
-  margin-bottom: var(--space-5);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-}
-
-.application-card__top {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  margin-bottom: var(--space-5);
-}
-
-@media (min-width: 768px) {
-  .application-card__top {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-}
-
-.application-card__position {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--color-primary);
-}
-
-.application-card__dept {
-  font-size: var(--font-size-xs);
-  color: var(--color-text-muted);
-}
-
-/* 7-Step Timeline Stepper */
-.stepper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: var(--space-6) 0 var(--space-6);
-  position: relative;
-  overflow-x: auto;
-  padding-bottom: var(--space-2);
-}
-
-.stepper__track {
-  position: absolute;
-  top: 18px;
-  left: 30px;
-  right: 30px;
-  height: 4px;
-  background-color: var(--color-border);
-  z-index: 1;
-}
-
-.stepper__track-fill {
-  height: 100%;
-  background-color: #059669;
-  transition: width var(--transition-normal);
-}
-
-.stepper__step {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 90px;
-  text-align: center;
-}
-
-.stepper__circle {
+.seal {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background-color: #ffffff;
-  border: 3px solid var(--color-border);
+  background: radial-gradient(circle at 35% 30%, var(--brass) 0%, var(--brass-deep) 70%);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--font-size-xs);
+  font-family: 'Fraunces', serif;
   font-weight: 700;
-  color: var(--color-text-muted);
-  margin-bottom: var(--space-2);
-  transition: all var(--transition-fast);
+  font-size: 16px;
+  color: #ffffff;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-.stepper__label {
-  font-size: var(--font-size-xs);
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.brand-text .name {
+  font-family: 'Fraunces', serif;
   font-weight: 600;
-  color: var(--color-text-muted);
-  line-height: 1.2;
-}
-
-/* Stepper States */
-.stepper__step--completed .stepper__circle {
-  background-color: #059669;
-  border-color: #059669;
+  font-size: 16.5px;
+  letter-spacing: -0.01em;
   color: #ffffff;
 }
 
-.stepper__step--completed .stepper__label {
-  color: #059669;
+.brand-text .sub {
+  font-size: 11.5px;
+  color: #C9CFDB;
+  letter-spacing: 0.02em;
 }
 
-.stepper__step--active .stepper__circle {
-  background-color: var(--color-accent);
-  border-color: var(--color-primary);
-  color: var(--color-primary);
-  box-shadow: 0 0 0 4px rgba(212, 168, 67, 0.25);
-  animation: pulse-ring 1.8s infinite;
+.topnav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  font-size: 14px;
 }
 
-.stepper__step--active .stepper__label {
-  color: var(--color-primary);
-  font-weight: 700;
+.topnav .navlink {
+  color: #D7DCE6;
+  transition: color .15s ease;
+  font-weight: 500;
+  text-decoration: none;
 }
 
-@keyframes pulse-ring {
-  0% { box-shadow: 0 0 0 0 rgba(212, 168, 67, 0.4); }
-  70% { box-shadow: 0 0 0 8px rgba(212, 168, 67, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(212, 168, 67, 0); }
+.topnav .navlink:hover {
+  color: #ffffff;
 }
 
-.application-card__status-banner {
-  background-color: rgba(15, 27, 45, 0.04);
-  border-radius: var(--radius-md);
-  padding: var(--space-3) var(--space-4);
+.userchip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 20px;
+  border-left: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.userchip .avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--ink-2);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.userchip .exit {
+  color: #E8B98E;
+  font-size: 13px;
+  cursor: pointer;
+  transition: color .15s ease;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.userchip .exit:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+/* ── Shell (2-Column Grid Layout) ───────────────────────────── */
+.shell {
+  display: grid;
+  grid-template-columns: 272px 1fr;
+  max-width: 1180px;
+  margin: 0 auto;
+  gap: 36px;
+  padding: 32px 28px 64px;
+}
+
+@media (max-width: 860px) {
+  .shell {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 20px 16px 48px;
+  }
+  .topbar {
+    padding: 12px 16px;
+  }
+  .topnav {
+    gap: 16px;
+  }
+}
+
+/* ── Sidebar ────────────────────────────────────────────────── */
+.applicant-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.applicant-card .avatar-lg {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--ink-2);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.applicant-card .aname {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.applicant-card .aid {
+  color: var(--muted);
+  font-size: 12.5px;
+  margin-top: 2px;
+}
+
+.progress-row {
+  margin-top: 16px;
+}
+
+.progress-row .label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12.5px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.progress-track {
+  height: 5px;
+  background: var(--paper);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--brass);
+  width: 35%;
+  transition: width 0.3s ease;
+}
+
+/* 4-Pillar Recruitment Journey */
+.stage-block {
+  margin-top: 24px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 20px 20px 22px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.stage-block h4 {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 14.5px;
+  margin: 0 0 3px;
+  color: var(--ink);
+}
+
+.stage-block .stage-sub {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 18px;
+  line-height: 1.4;
+}
+
+.stage {
+  display: flex;
+  gap: 12px;
+  position: relative;
+  padding-bottom: 22px;
+}
+
+.stage:last-child {
+  padding-bottom: 0;
+}
+
+.stage::before {
+  content: '';
+  position: absolute;
+  left: 11px;
+  top: 24px;
+  bottom: 0;
+  width: 1px;
+  background: var(--line);
+}
+
+.stage:last-child::before {
+  display: none;
+}
+
+.stage .dot {
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 1.5px solid var(--line);
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  z-index: 1;
+}
+
+.stage.done .dot {
+  background: var(--success);
+  border-color: var(--success);
+  color: #ffffff;
+}
+
+.stage.current .dot {
+  border-color: var(--brass);
+  color: var(--brass-deep);
+  background: #FBF4E7;
+}
+
+.stage .stitle {
+  font-size: 13.5px;
+  font-weight: 500;
+  margin-top: 1px;
+  color: var(--ink);
+}
+
+.stage.current .stitle {
+  color: var(--brass-deep);
+  font-weight: 600;
+}
+
+.stage .sdesc {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* ── Main Panel ─────────────────────────────────────────────── */
+.page-head {
+  margin-bottom: 28px;
+}
+
+.page-head h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 26px;
+  margin: 0 0 6px;
+  color: var(--ink);
+  animation: rise .5s ease both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-head p {
+  color: var(--muted);
+  margin: 0;
+  max-width: 52ch;
+  font-size: 14.5px;
+}
+
+section {
+  margin-bottom: 40px;
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.section-head h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 17px;
+  margin: 0;
+  color: var(--ink);
+}
+
+.section-head .count {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+/* Empty State Panel */
+.empty-panel {
+  border: 1px dashed var(--line);
+  border-radius: 4px;
+  background: var(--surface);
+  padding: 36px 32px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+@media (max-width: 600px) {
+  .empty-panel {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.empty-panel .tray {
+  flex-shrink: 0;
+}
+
+.empty-panel h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 17px;
+  margin: 0 0 6px;
+  color: var(--ink);
+}
+
+.empty-panel p {
+  color: var(--muted);
+  margin: 0 0 16px;
+  max-width: 46ch;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--ink);
+  color: #ffffff;
+  padding: 10px 18px;
+  border-radius: 3px;
+  border: none;
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'IBM Plex Sans', sans-serif;
+  transition: background .15s ease;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background: var(--ink-2);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  color: var(--ink);
+  padding: 8px 14px;
+  border-radius: 3px;
+  border: 1px solid var(--line);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'IBM Plex Sans', sans-serif;
+  transition: border-color .15s ease, color .15s ease, background .15s ease;
+  text-decoration: none;
+}
+
+.btn-ghost:hover {
+  border-color: var(--ink);
+  background: rgba(21, 34, 56, 0.04);
+}
+
+/* Filter Row */
+.filter-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.filter-row input[type=text] {
+  flex: 1;
+  min-width: 180px;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13.5px;
+  background: var(--surface);
+  color: var(--ink);
+  outline: none;
+  transition: border-color .15s ease;
+}
+
+.filter-row input[type=text]:focus {
+  border-color: var(--ink);
+}
+
+.chip {
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  font-size: 13px;
+  color: var(--muted);
+  cursor: pointer;
+  background: var(--surface);
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+  transition: all .15s ease;
+}
+
+.chip.active {
+  background: var(--ink);
+  color: #ffffff;
+  border-color: var(--ink);
+}
+
+.chip:hover:not(.active) {
+  border-color: var(--ink-2);
+  color: var(--ink);
+}
+
+/* Job List */
+.job-list {
+  border-top: 1px solid var(--line);
+}
+
+.job-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 4px;
+  border-bottom: 1px solid var(--line);
+  gap: 20px;
+  transition: background .12s ease;
+}
+
+@media (max-width: 600px) {
+  .job-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+.job-info .jtitle {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 15.5px;
+  color: var(--ink);
+}
+
+.job-info .jmeta {
+  font-size: 12.5px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.job-info .jmeta .sg {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 7px;
+  border-radius: 3px;
+  background: var(--success-bg);
+  color: var(--success);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.job-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-shrink: 0;
+}
+
+.job-right .deadline {
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.job-right .deadline b {
+  color: var(--ink);
+}
+
+.helpline {
+  margin-top: 8px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+/* ── Active Application Cards (when submitted) ─────────────── */
+.app-cards-container {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: 12px;
 }
 
-@media (min-width: 768px) {
-  .application-card__status-banner {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+.app-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  transition: border-color .15s ease;
+}
+
+.app-card:hover {
+  border-color: var(--ink-2);
+}
+
+@media (max-width: 680px) {
+  .app-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
   }
 }
 
-.recommended-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-3);
+.app-card__info {
+  min-width: 0;
 }
 
-@media (min-width: 768px) {
-  .recommended-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+.app-card__docket {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11.5px;
+  color: var(--brass-deep);
+  background: #FBF4E7;
+  border: 1px solid rgba(169, 124, 34, 0.25);
+  padding: 2px 8px;
+  border-radius: 3px;
+  display: inline-block;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.app-card__title {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--ink);
+  margin: 0 0 4px;
+}
+
+.app-card__meta {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.app-card__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.app-card__stage-pill {
+  padding: 3px 9px;
+  border-radius: 3px;
+  font-size: 11.5px;
+  font-weight: 600;
+  background: var(--success-bg);
+  color: var(--success);
 }
