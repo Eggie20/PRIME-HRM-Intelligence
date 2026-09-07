@@ -569,6 +569,29 @@ const DB_SEED = {
       updated_at: '2026-08-25T11:00:00+08:00'
     },
     {
+      id: 'app-old-001',
+      tracking_number: 'NBSC-APP-2025-08420',
+      applicant_id: 'usr-004',
+      applicant_name: 'Carlo Mendoza',
+      vacancy_id: 'vac-008',
+      vacancy_title: 'Administrative Assistant III',
+      vacancy_department: 'Office of the President',
+      stage: 'APPOINTED',
+      personal_info: { full_name: 'Carlo Mendoza', email: 'applicant@gmail.com', phone: '09171234567' },
+      education: { degree: 'BS Computer Science', school: 'MSU-IIT', year_graduated: 2024 },
+      documents: [
+        { name: 'PDS_2025.pdf', type: 'application/pdf', size: 240000, uploaded_at: '2025-05-12T10:00:00+08:00' }
+      ],
+      stage_history: [
+        { stage: 'APPLIED', timestamp: '2025-05-12T10:00:00+08:00', actor: 'applicant@gmail.com' },
+        { stage: 'SCREENING', timestamp: '2025-05-20T09:00:00+08:00', actor: 'admin@nbsc.edu.ph' },
+        { stage: 'DSS_SCORED', timestamp: '2025-06-01T11:00:00+08:00', actor: 'admin@nbsc.edu.ph' },
+        { stage: 'APPOINTED', timestamp: '2025-10-15T14:00:00+08:00', actor: 'president@nbsc.edu.ph' }
+      ],
+      created_at: '2025-05-12T10:00:00+08:00',
+      updated_at: '2025-10-15T14:00:00+08:00'
+    },
+    {
       id: 'app-002',
       tracking_number: 'NBSC-APP-2026-00002',
       applicant_id: 'usr-009',
@@ -887,10 +910,32 @@ const DB_SEED = {
       actor_email: 'admin@nbsc.edu.ph',
       actor_role: 'HR_ADMIN',
       target_id: 'app-001',
-      data: { application_id: 'app-001', plantillano: 'NBSC-PLANTILLA-2026-042', status: 'CONFIRMED' },
+      data: { application_id: 'app-001', plantillano: 'NBSC-PLANTILLA-2026-042', status: 'CONFIRMED', candidate_name: 'Carlo Mendoza', position: 'Instructor I (Computer Science)', salary_grade: 12 },
       previous_hash: 'e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6',
       prev_hash: 'e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6',
       hash: 'f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7'
+    },
+    {
+      id: 'blk-006',
+      index: 6,
+      block_index: 6,
+      timestamp: '2026-09-02T16:00:00+08:00',
+      action: 'PAYROLL_DISBURSED',
+      actor_email: 'payroll@nbsc.edu.ph',
+      actor_role: 'HR_ADMIN',
+      target_id: 'PR-2026-08-B',
+      data: {
+        batch_id: 'PR-2026-08-B',
+        period_label: 'August 16–31, 2026',
+        employee_count: 8,
+        total_gross: 248600.00,
+        total_deductions: 32450.00,
+        total_net: 216150.00,
+        certification: 'Certified compliant with DBM & CSC Salary Standardization Law (SSL V)'
+      },
+      previous_hash: 'f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7',
+      prev_hash: 'f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7',
+      hash: '0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b'
     }
   ],
 
@@ -1047,6 +1092,38 @@ const DB_SEED = {
   ],
 
   /**
+   * correction_requests table (Profile updates backed by valid government ID)
+   */
+  correction_requests: [
+    {
+      id: 'cr-001',
+      applicant_id: 'usr-004',
+      applicant_name: 'Carlo Mendoza',
+      applicant_email: 'applicant@gmail.com',
+      tracking_number: 'NBSC-APP-2026-10001',
+      field_name: 'full_name',
+      field_label: 'Full Legal Name',
+      current_value: 'Carlo Mendoza',
+      requested_value: 'Carlo D. Mendoza',
+      reason: 'Include legal middle initial per official PRC Teacher / Professional Certificate and National ID.',
+      id_type: 'PhilID / Philippine National ID',
+      id_number: 'PHILID-4921-8812-9014',
+      id_filename: 'PhilID_CarloMendoza_FrontBack.png',
+      proof_document: {
+        file_name: 'PhilID_CarloMendoza_FrontBack.png',
+        file_size: '842 KB',
+        data_url: 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 220" width="360" height="220"><rect width="360" height="220" rx="10" fill="#f0f7f4" stroke="#3F7D58" stroke-width="3"/><rect x="15" y="15" width="330" height="36" rx="4" fill="#152238"/><text x="180" y="38" fill="#ffffff" font-size="12" font-family="sans-serif" font-weight="bold" text-anchor="middle">REPUBLIC OF THE PHILIPPINES &bull; PHILID</text><rect x="25" y="65" width="80" height="100" rx="6" fill="#2B3B57" stroke="#A97C22" stroke-width="2"/><text x="65" y="120" fill="#ffffff" font-size="28" font-family="sans-serif" text-anchor="middle">CM</text><text x="120" y="82" fill="#5B6472" font-size="10" font-family="sans-serif">APPLICANT LEGAL NAME:</text><text x="120" y="100" fill="#152238" font-size="13" font-family="sans-serif" font-weight="bold">CARLO D. MENDOZA</text><text x="120" y="125" fill="#5B6472" font-size="10" font-family="sans-serif">CARD CONTROL NUMBER:</text><text x="120" y="142" fill="#A97C22" font-size="12" font-family="monospace" font-weight="bold">PHILID-4921-8812-9014</text><text x="120" y="165" fill="#3F7D58" font-size="9" font-family="sans-serif" font-weight="bold">&#10003; PHILIPPINE STATISTIC AUTHORITY AUTHENTICATED</text><rect x="25" y="180" width="310" height="24" rx="3" fill="#EEF0E9"/><text x="180" y="196" fill="#152238" font-size="9" font-family="monospace" text-anchor="middle">&lt;PHL49218812&lt;&lt;90142281&lt;&lt;MENDOZA&lt;&lt;CARLO&lt;D&lt;&lt;</text></svg>')
+      },
+      status: 'PENDING',
+      submitted_at: '2026-09-06T10:15:00+08:00',
+      created_at: '2026-09-06T10:15:00+08:00',
+      reviewed_at: null,
+      reviewed_by: null,
+      admin_notes: null
+    }
+  ],
+
+  /**
    * settings table (key-value configuration store)
    */
   settings: [
@@ -1107,7 +1184,7 @@ class NbscDB {
   init() {
     const isInitialized = localStorage.getItem(this.initKey);
     const dbVersion = localStorage.getItem('nbsc_db_version');
-    const CURRENT_VERSION = '2.2.0';
+    const CURRENT_VERSION = '2.3.0';
 
     Object.entries(DB_SEED).forEach(([table, rows]) => {
       const existing = localStorage.getItem(this.prefix + table);
@@ -1377,6 +1454,141 @@ class NbscDB {
     if (!token) return;
     const sessions = this.getTable('sessions').filter(s => s.token !== token);
     this.setTable('sessions', sessions);
+  }
+
+  /* ── Applicant Correction Requests ──────────────────────── */
+
+  /**
+   * Submits a correction request backed by valid ID proof.
+   * @param {Object} req
+   * @returns {Object}
+   */
+  submitCorrectionRequest(req) {
+    const list = this.getTable('correction_requests') || [];
+    const newReq = {
+      id: this._generateId('cr'),
+      applicant_id: req.applicant_id || 'usr-004',
+      applicant_name: req.applicant_name || 'Carlo Mendoza',
+      applicant_email: req.applicant_email || 'applicant@gmail.com',
+      tracking_number: req.tracking_number || 'NBSC-APP-2026-10001',
+      field_name: req.field_name,
+      field_label: req.field_label,
+      current_value: req.current_value,
+      requested_value: req.requested_value,
+      reason: req.reason,
+      id_type: req.id_type,
+      id_number: req.id_number,
+      id_filename: req.id_filename || (req.proof_document ? req.proof_document.file_name : 'ValidID_Proof.pdf'),
+      proof_document: req.proof_document || null,
+      status: 'PENDING',
+      submitted_at: new Date().toISOString(),
+      created_at: new Date().toISOString(),
+      reviewed_at: null,
+      reviewed_by: null,
+      admin_notes: null
+    };
+    list.unshift(newReq);
+    this.setTable('correction_requests', list);
+    return newReq;
+  }
+
+  /**
+   * Approves a correction request, updates the applicant's record across users and applications, and appends an audit block.
+   * @param {string} requestId
+   * @param {string} adminEmail
+   * @returns {boolean}
+   */
+  approveCorrectionRequest(requestId, adminEmail = 'admin@nbsc.edu.ph') {
+    const list = this.getTable('correction_requests') || [];
+    const req = list.find(r => r.id === requestId);
+    if (!req) return false;
+
+    req.status = 'APPROVED';
+    req.reviewed_at = new Date().toISOString();
+    req.reviewed_by = adminEmail;
+    this.setTable('correction_requests', list);
+
+    // Update applicant profile in users table
+    const users = this.getTable('users') || [];
+    const u = users.find(user => user.id === req.applicant_id || user.email === req.applicant_email);
+    if (u) {
+      if (req.field_name === 'full_name' || req.field_name === 'name') {
+        u.name = req.requested_value;
+      } else if (req.field_name === 'email') {
+        u.email = req.requested_value;
+      } else if (req.field_name === 'phone') {
+        u.phone = req.requested_value;
+      }
+      this.setTable('users', users);
+
+      // If active session is for this user, sync stored user
+      const currentUser = localStorage.getItem('nbsc_user');
+      if (currentUser) {
+        try {
+          const parsed = JSON.parse(currentUser);
+          if (parsed.id === u.id || parsed.email === u.email) {
+            Object.assign(parsed, u);
+            localStorage.setItem('nbsc_user', JSON.stringify(parsed));
+          }
+        } catch (e) {}
+      }
+    }
+
+    // Update in applications table
+    const apps = this.getTable('applications') || [];
+    apps.forEach(app => {
+      if (app.applicant_id === req.applicant_id || app.applicant_name === req.applicant_name) {
+        if (req.field_name === 'full_name' || req.field_name === 'name') {
+          app.applicant_name = req.requested_value;
+          if (app.personal_info) app.personal_info.full_name = req.requested_value;
+        } else if (req.field_name === 'email' && app.personal_info) {
+          app.personal_info.email = req.requested_value;
+        } else if (req.field_name === 'phone' && app.personal_info) {
+          app.personal_info.phone = req.requested_value;
+        }
+      }
+    });
+    this.setTable('applications', apps);
+
+    // Append to audit blocks
+    if (typeof this.addAuditBlock === 'function') {
+      this.addAuditBlock({
+        action: 'APPLICANT_INFO_CORRECTED',
+        actor_email: adminEmail,
+        actor_role: 'HR_ADMIN',
+        target_id: req.applicant_id,
+        data: {
+          request_id: req.id,
+          field: req.field_name,
+          old_value: req.current_value,
+          new_value: req.requested_value,
+          verified_id_type: req.id_type,
+          verified_id_number: req.id_number
+        }
+      });
+    }
+
+    return true;
+  }
+
+  /**
+   * Rejects a correction request with reason.
+   * @param {string} requestId
+   * @param {string} adminEmail
+   * @param {string} notes
+   * @returns {boolean}
+   */
+  rejectCorrectionRequest(requestId, adminEmail = 'admin@nbsc.edu.ph', notes = 'Insufficient identity proof.') {
+    const list = this.getTable('correction_requests') || [];
+    const req = list.find(r => r.id === requestId);
+    if (!req) return false;
+
+    req.status = 'REJECTED';
+    req.reviewed_at = new Date().toISOString();
+    req.reviewed_by = adminEmail;
+    req.admin_notes = notes;
+    this.setTable('correction_requests', list);
+    return true;
   }
 
   /* ── Export Utilities ────────────────────────────────────── */

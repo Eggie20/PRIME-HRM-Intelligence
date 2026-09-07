@@ -126,15 +126,41 @@
           <h1>Candidate Dossier &amp; Credentials</h1>
           <div class="sub">CSC Qualification Standards verification, authentic compliance documents, and applicant profile.</div>
         </div>
-        <div class="pipeline-stepper">
-          <a href="../hiring-pipeline/hiring-pipeline.html" class="stepper-item">&larr; Pipeline</a>
-          <a href="../applicant-review/applicant-review.html" class="stepper-item stepper-item--active" id="link-candidate-review">1. Dossier</a>
-          <a href="../dss-scoring/dss-scoring.html" class="stepper-item" id="link-dss-scoring">2. 4-Pillar DSS</a>
-          <a href="../evaluation/evaluation.html" class="stepper-item" id="link-dept-eval">3. Dept Head Rubric</a>
-          <a href="../deliberation/deliberation.html" class="stepper-item" id="link-deliberation">4. HRMPSB Deliberation</a>
-          <a href="../final-decision/final-decision.html" class="stepper-item stepper-item--gold" id="link-final-decision">5. Appointment Resolution &rarr;</a>
+        <div class="d-flex align-center gap-2">
+          <button type="button" class="btn btn--secondary btn--sm" id="btn-toggle-corrections" title="Review profile update requests with valid ID proof">
+            <span>&#128179; ID Corrections</span>
+            <span class="badge badge--danger ml-1 font-xs" id="badge-pending-corrections" style="display: none;">0</span>
+          </button>
+          <div class="pipeline-stepper">
+            <a href="../hiring-pipeline/hiring-pipeline.html" class="stepper-item">&larr; Pipeline</a>
+            <a href="../applicant-review/applicant-review.html" class="stepper-item stepper-item--active" id="link-candidate-review">1. Dossier</a>
+            <a href="../dss-scoring/dss-scoring.html" class="stepper-item" id="link-dss-scoring">2. 4-Pillar DSS</a>
+            <a href="../evaluation/evaluation.html" class="stepper-item" id="link-dept-eval">3. Dept Head Rubric</a>
+            <a href="../deliberation/deliberation.html" class="stepper-item" id="link-deliberation">4. HRMPSB Deliberation</a>
+            <a href="../final-decision/final-decision.html" class="stepper-item stepper-item--gold" id="link-final-decision">5. Appointment Resolution &rarr;</a>
+          </div>
         </div>
       </div>
+
+      <!-- Candidate Profile Correction & Government ID Verification Panel -->
+      <section class="card mb-4 d-none" id="panel-correction-requests" style="border-left: 4px solid #A97C22; background: #FFFDF9; box-shadow: 0 4px 16px rgba(0,0,0,0.06);">
+        <div class="card__header d-flex align-center justify-between" style="border-bottom: 1px solid #EFEAE1; padding-bottom: 12px;">
+          <div class="d-flex align-center gap-2">
+            <span style="font-size: 1.3rem;">&#128179;</span>
+            <div>
+              <h2 class="card__title" style="font-size: 1.1rem; color: #152238;">Applicant Profile Correction Requests &amp; Valid ID Verification</h2>
+              <div class="card__subtitle font-xs text-secondary">Verify applicant-reported information mistakes against attached government-issued photo identification before synchronizing database records.</div>
+            </div>
+          </div>
+          <div class="d-flex align-center gap-2">
+            <span class="badge badge--primary" id="panel-correction-count">0 Tickets</span>
+            <button type="button" class="btn btn--ghost btn--sm" id="btn-close-corrections" title="Close Panel" style="font-size: 1.2rem; line-height: 1;">&times;</button>
+          </div>
+        </div>
+        <div class="card__body" id="correction-requests-list" style="padding: 16px;">
+          <!-- Populated dynamically via applicant-review.js -->
+        </div>
+      </section>
 
       <!-- Universal Docket Selector Bar -->
       <section class="docket-selector-bar" aria-label="Docket Candidate and Vacancy Filter">

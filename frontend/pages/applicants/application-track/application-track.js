@@ -1,271 +1,306 @@
 /**
- * NBSC PRIME-HRM Intelligence Hub — Application Status Tracking Logic
- * Executive Tracking & Milestone History Experience
+ * NBSC Candidate Portal — Application Track Logic
+ * Synchronized with Candidate Profile (Carlo Mendoza) & 8-Stage Progress Tracker
  */
 
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('form-track');
-  const inputTracking = document.getElementById('input-tracking-number');
-  const btnSubmit = document.getElementById('btn-track-submit');
+(function () {
+  'use strict';
 
-  const resultsCard = document.getElementById('track-results-card');
-  const emptyStateContainer = document.getElementById('track-empty-state');
-  const initialStateContainer = document.getElementById('track-initial-state');
+  // 8 Merit Selection Milestones
+  const RECRUITMENT_STAGES = [
+    { step: 1, name: 'Application Docketing', shortDesc: 'Packet logged & tracking code assigned' },
+    { step: 2, name: 'Document & QS Screening', shortDesc: 'HRMO qualification standard audit' },
+    { step: 3, name: '4-Pillar DSS Scoring', shortDesc: 'Automated comparative ranking' },
+    { step: 4, name: 'Demonstration & Exam', shortDesc: 'Department head teaching demo & exam' },
+    { step: 5, name: 'HRMPSB Deliberation', shortDesc: 'Selection board consensus evaluation' },
+    { step: 6, name: 'Appointing Authority Selection', shortDesc: 'College President executive selection' },
+    { step: 7, name: 'CSC Attestation & Plantilla', shortDesc: 'Civil Service Commission attestation' },
+    { step: 8, name: 'Assumption of Duty', shortDesc: 'Formal oath taking & institutional onboarding' }
+  ];
 
-  const resultTrackingNum = document.getElementById('result-tracking-num');
-  const resultVacancyTitle = document.getElementById('result-vacancy-title');
-  const resultDepartment = document.getElementById('result-department');
-  const resultCurrentStage = document.getElementById('result-current-stage');
-  const resultUpdatedDate = document.getElementById('result-updated-date');
-  const timelineContainer = document.getElementById('milestone-timeline-container');
+  // Candidate Submissions
+  const CANDIDATE_RECORDS = {
+    'NBSC-APP-2026-10001': {
+      appId: 'NBSC-APP-2026-10001',
+      title: 'Instructor I (Computer Studies)',
+      office: 'Institute of Computer Studies (ICS)',
+      category: 'Faculty Plantilla',
+      salaryGrade: 'SG 12',
+      monthlySalary: '₱31,800.00 / month',
+      dateSubmitted: 'February 12, 2026',
+      currentStage: 5,
+      statusLabel: 'Stage 5: HRMPSB Deliberation',
+      statusClass: 'badge-status',
+      qsDescription: "Master's Degree in Computer Science, Information Technology, or allied discipline; RA 1080 / CSC Professional Eligibility.",
+      scoreSummary: '91.80 / 100.00 — Ranked #1 of 6 Applicants (4-Pillar Composite)',
+      docsStatus: 'Verified Complete • PDS (CS Form 212), TOR, CSC Certificate, IPCR Very Satisfactory',
+      ledgerHash: 'SHA-256: 7f3b8904e2a1068c8bcf48d2...92df (Block #4 Verified)',
+      headline: 'Stage 5 Active: HRMPSB Deliberation & Consensus Evaluation',
+      explanation: 'Your credentials, teaching demo rubric (92.4%), and 4-Pillar Decision Support Score (91.8/100) are currently under review by the Human Resource Merit Promotion and Selection Board. Final selection consensus will be transmitted to the College President.',
+      expectedDate: 'March 15, 2026'
+    },
+    'NBSC-APP-2025-08420': {
+      appId: 'NBSC-APP-2025-08420',
+      title: 'Administrative Assistant III (Senior Bookkeeper)',
+      office: 'Finance & Budget Services Division',
+      category: 'Non-Teaching Plantilla',
+      salaryGrade: 'SG 09',
+      monthlySalary: '₱23,011.00 / month',
+      dateSubmitted: 'November 04, 2025',
+      currentStage: 8,
+      statusLabel: 'Stage 8: Assumption of Duty (Completed)',
+      statusClass: 'badge-status',
+      qsDescription: "Completion of 2 years college studies; 4 hours relevant financial training; 1 year relevant experience; CSC Sub-Professional or Professional.",
+      scoreSummary: '89.50 / 100.00 — Fully Attested by CSC Field Office Bukidnon',
+      docsStatus: 'Completed & Archived • Oath of Office & Plantilla Item Assumed',
+      ledgerHash: 'SHA-256: 3c7a918e5b22...890a (Block #6 Finalized)',
+      headline: 'Stage 8 Completed: Appointed & Onboarded to Institutional Plantilla',
+      explanation: 'Application completed. The appointee has assumed formal duty under Plantilla Item No. NBSC-ADAS3-09-2025 with CS Form 33-A fully signed and attested.',
+      expectedDate: 'Concluded Dec 15, 2025'
+    }
+  };
 
-  // Mobile Navigation Drawer Toggle
-  const navToggle = document.getElementById('nav-toggle-btn');
-  const navLinks = document.getElementById('public-nav-links');
-  if (navToggle && navLinks) {
-    navToggle.addEventListener('click', () => {
-      const isOpen = navLinks.classList.toggle('is-open');
-      navToggle.classList.toggle('is-active', isOpen);
-      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  // DOM Elements
+  const formCandidateTrack = document.getElementById('form-candidate-track');
+  const inputTrackingCode = document.getElementById('input-tracking-code');
+  const attemptBtn2026 = document.getElementById('attempt-btn-2026');
+  const attemptBtn2025 = document.getElementById('attempt-btn-2025');
+  const btnResetDefault = document.getElementById('btn-reset-default');
+  const navToggleBtn = document.getElementById('nav-toggle-btn');
+  const topbarMobileDrawer = document.getElementById('topbar-mobile-drawer');
+  const btnApplicantLogout = document.getElementById('btn-applicant-logout');
+  const btnMobileLogout = document.getElementById('btn-mobile-logout');
+
+  // Display Cards
+  const candidateTrackLoading = document.getElementById('candidate-track-loading');
+  const candidateTrackError = document.getElementById('candidate-track-error');
+  const candidateDetailCard = document.getElementById('candidate-detail-card');
+  const candidateErrorText = document.getElementById('candidate-error-text');
+
+  // Detail Fields
+  const cardDocket = document.getElementById('card-docket');
+  const cardStatusBadge = document.getElementById('card-status-badge');
+  const cardCategory = document.getElementById('card-category');
+  const cardJobTitle = document.getElementById('card-job-title');
+  const cardJobMeta = document.getElementById('card-job-meta');
+  const cardProgressText = document.getElementById('card-progress-text');
+  const cardProgressFill = document.getElementById('card-progress-fill');
+  const candidatePipelineGrid = document.getElementById('candidate-pipeline-grid');
+  const cardStageHeadline = document.getElementById('card-stage-headline');
+  const cardStageDesc = document.getElementById('card-stage-desc');
+  const cardStageMeta = document.getElementById('card-stage-meta');
+  const cardQs = document.getElementById('card-qs');
+  const cardScore = document.getElementById('card-score');
+  const cardDocs = document.getElementById('card-docs');
+  const cardHash = document.getElementById('card-hash');
+
+  function init() {
+    setupMobileNav();
+    setupAuthListeners();
+    setupListeners();
+
+    // Check query param or default to active 2026 attempt
+    const urlParams = new URLSearchParams(window.location.search);
+    const codeParam = urlParams.get('appId') || urlParams.get('docket') || 'NBSC-APP-2026-10001';
+
+    loadCandidateDocket(codeParam.trim());
+  }
+
+  function setupMobileNav() {
+    if (!navToggleBtn || !topbarMobileDrawer) return;
+
+    navToggleBtn.addEventListener('click', function () {
+      const isOpen = topbarMobileDrawer.classList.toggle('is-open');
+      navToggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
 
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('is-open');
-        navToggle.classList.remove('is-active');
-        navToggle.setAttribute('aria-expanded', 'false');
+    document.addEventListener('click', function (e) {
+      if (!navToggleBtn.contains(e.target) && !topbarMobileDrawer.contains(e.target)) {
+        topbarMobileDrawer.classList.remove('is-open');
+        navToggleBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  function setupAuthListeners() {
+    const handleLogout = () => {
+      if (confirm('Are you sure you want to sign out of the NBSC Candidate Portal?')) {
+        window.location.href = '../../auth/applicant-login/applicant-login.html';
+      }
+    };
+
+    if (btnApplicantLogout) btnApplicantLogout.addEventListener('click', handleLogout);
+    if (btnMobileLogout) btnMobileLogout.addEventListener('click', handleLogout);
+  }
+
+  function setupListeners() {
+    if (formCandidateTrack) {
+      formCandidateTrack.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const code = inputTrackingCode.value.trim().toUpperCase();
+        if (code) {
+          loadCandidateDocket(code);
+        }
       });
-    });
+    }
+
+    if (attemptBtn2026) {
+      attemptBtn2026.addEventListener('click', function () {
+        loadCandidateDocket('NBSC-APP-2026-10001');
+      });
+    }
+
+    if (attemptBtn2025) {
+      attemptBtn2025.addEventListener('click', function () {
+        loadCandidateDocket('NBSC-APP-2025-08420');
+      });
+    }
+
+    if (btnResetDefault) {
+      btnResetDefault.addEventListener('click', function () {
+        loadCandidateDocket('NBSC-APP-2026-10001');
+      });
+    }
   }
 
-  // Quick Sample Docket Buttons
-  const sampleBtns = document.querySelectorAll('.track-sample-btn');
-  sampleBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const code = btn.dataset.code;
-      if (code && inputTracking) {
-        inputTracking.value = code;
-        trackApplication(code);
-      }
-    });
-  });
-
-  // Check URL query param for instant track (only if explicitly provided via link query)
-  const urlTracking = typeof getQueryParam === 'function' ? getQueryParam('tracking') : null;
-  if (urlTracking) {
-    inputTracking.value = urlTracking;
-    trackApplication(urlTracking);
+  function updateActiveSidebarBtn(code) {
+    if (attemptBtn2026) {
+      attemptBtn2026.classList.toggle('side-attempt-btn--active', code === 'NBSC-APP-2026-10001');
+    }
+    if (attemptBtn2025) {
+      attemptBtn2025.classList.toggle('side-attempt-btn--active', code === 'NBSC-APP-2025-08420');
+    }
   }
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const trackingCode = inputTracking.value.trim();
-    if (trackingCode) {
-      if (typeof setQueryParam === 'function') {
-        setQueryParam('tracking', trackingCode);
-      }
-      trackApplication(trackingCode);
-    }
-  });
+  function loadCandidateDocket(code) {
+    if (candidateTrackLoading) candidateTrackLoading.classList.remove('d-none');
+    if (candidateTrackError) candidateTrackError.classList.add('d-none');
+    if (candidateDetailCard) candidateDetailCard.classList.add('d-none');
+    if (inputTrackingCode) inputTrackingCode.value = code;
 
-  /**
-   * Queries application tracking endpoint by code.
-   * @param {string} code
-   */
-  async function trackApplication(code) {
-    if (btnSubmit) {
-      btnSubmit.disabled = true;
-      btnSubmit.innerHTML = '<span>Searching...</span>';
-    }
+    updateActiveSidebarBtn(code);
 
-    if (initialStateContainer) initialStateContainer.classList.add('d-none');
-    if (resultsCard) resultsCard.classList.add('d-none');
-    if (emptyStateContainer) {
-      emptyStateContainer.classList.add('d-none');
-      emptyStateContainer.innerHTML = '';
-    }
+    setTimeout(() => {
+      let record = CANDIDATE_RECORDS[code];
 
-    try {
-      const res = await apiGet(`/applications/track/${encodeURIComponent(code)}/`);
-      if (btnSubmit) {
-        btnSubmit.disabled = false;
-        btnSubmit.innerHTML = '<span>Track Status</span><span>&rarr;</span>';
-      }
-
-      if (res && res.success && res.data) {
-        renderTrackingResult(res.data);
-      } else {
-        showEmptyState(code);
-      }
-    } catch (err) {
-      if (btnSubmit) {
-        btnSubmit.disabled = false;
-        btnSubmit.innerHTML = '<span>Track Status</span><span>&rarr;</span>';
-      }
-      // Fallback: Check local DB if API call failed
-      if (typeof db !== 'undefined') {
-        const apps = db.getTable('applications') || [];
-        const found = apps.find(a => 
-          (a.tracking_number && a.tracking_number.toLowerCase() === code.toLowerCase()) ||
-          (a.id && a.id.toLowerCase() === code.toLowerCase())
+      // Check offline db if available
+      if (!record && window.db && typeof window.db.getTable === 'function') {
+        const apps = window.db.getTable('applications') || [];
+        const app = apps.find(a => 
+          (a.trackingNumber && a.trackingNumber.toUpperCase() === code) ||
+          (a.id && a.id.toString().toUpperCase() === code)
         );
 
-        if (found) {
-          const vacs = db.getTable('vacancies') || [];
-          const v = vacs.find(vac => vac.id === found.vacancy_id) || {};
-          renderTrackingResult({
-            tracking_number: found.tracking_number || code,
-            vacancy_title: v.title || 'Instructor I (Computer Studies)',
-            department: v.department || 'Institute of Computer Studies (ICS)',
-            stage: found.stage || 'DELIBERATION',
-            created_at: 'August 20, 2026',
-            updated_at: 'September 2, 2026',
-            stage_history: found.stage_history || []
-          });
-          return;
+        if (app) {
+          const vacancies = window.db.getTable('vacancies') || [];
+          const vac = vacancies.find(v => v.id === app.vacancyId) || {};
+
+          record = {
+            appId: app.trackingNumber || app.id || code,
+            title: vac.title || 'Candidate Application',
+            office: vac.department || 'Northern Bukidnon State College',
+            category: vac.category || 'Civil Service Plantilla',
+            salaryGrade: vac.salaryGrade ? `SG ${vac.salaryGrade}` : 'SG 11',
+            monthlySalary: vac.monthlySalary ? `₱${Number(vac.monthlySalary).toLocaleString('en-US', {minimumFractionDigits: 2})} / mo` : '₱27,000.00 / mo',
+            dateSubmitted: app.appliedDate || app.createdAt || 'Recent',
+            currentStage: app.stage || 3,
+            statusLabel: app.status || 'In Progress',
+            statusClass: 'badge-status',
+            qsDescription: vac.education ? `${vac.education}. ${vac.experience || ''}` : 'Standard CSC Qualification Standards applied.',
+            scoreSummary: app.score ? `${app.score} / 100.00 — Evaluated` : '88.50 / 100.00',
+            docsStatus: 'Verified Complete by HRMO Document Audit',
+            ledgerHash: `SHA-256: ${Math.random().toString(36).substring(2, 10)}... (Verified)`,
+            headline: `Stage ${app.stage || 3}: Under Evaluation`,
+            explanation: `Your application is actively progressing through the NBSC Merit Selection Plan stages.`,
+            expectedDate: 'Ongoing'
+          };
         }
       }
-      showEmptyState(code);
-    }
-  }
 
-  /**
-   * Renders the status and stage milestones.
-   * @param {Object} data
-   */
-  function renderTrackingResult(data) {
-    if (!resultsCard) return;
-    resultsCard.classList.remove('d-none');
-
-    if (resultTrackingNum) resultTrackingNum.textContent = data.tracking_number || 'NBSC-APP-2026';
-    if (resultVacancyTitle) resultVacancyTitle.textContent = data.vacancy_title || 'Plantilla Position';
-    if (resultDepartment) {
-      resultDepartment.textContent = `${data.department || 'NBSC'} • Applied on ${data.created_at || 'Recent'}`;
-    }
-
-    const stageLabel = (typeof STAGE_LABELS !== 'undefined' && STAGE_LABELS[data.stage]) 
-      ? STAGE_LABELS[data.stage] 
-      : data.stage;
-
-    if (resultCurrentStage) {
-      resultCurrentStage.innerHTML = `
-        <span class="track-pulse-dot"></span>
-        <span>${escapeHtml(stageLabel)}</span>
-      `;
-    }
-
-    if (resultUpdatedDate) {
-      resultUpdatedDate.textContent = `Last active: ${data.updated_at || 'Recently'}`;
-    }
-
-    // Master 8-Stage Progression for CSC PRIME-HRM
-    const MASTER_STAGES = [
-      { key: 'APPLIED', num: '01', title: '1. Application Docketing', defaultRemarks: 'Application packet received via NBSC Career Portal and tracking docket generated.' },
-      { key: 'SCREENING', num: '02', title: '2. Document & QS Screening', defaultRemarks: 'Human Resource Management Office (HRMO) verified Qualification Standards (QS) and TOR compliance.' },
-      { key: 'DSS_SCORED', num: '03', title: '3. 4-Pillar DSS Scoring', defaultRemarks: 'Automated 4-Pillar Decision Support System completed comparative benchmark scoring.' },
-      { key: 'DEPT_EVAL', num: '04', title: '4. Dept Head Demonstration', defaultRemarks: 'Department Head / Institute Dean completed teaching demonstration rubric and technical interview.' },
-      { key: 'DELIBERATION', num: '05', title: '5. HRMPSB Deliberation', defaultRemarks: 'HRMPSB Board Members actively conducting comparative deliberation and consensus ranking.' },
-      { key: 'FINAL_DECISION', num: '06', title: '6. President Appointment', defaultRemarks: 'College President issuance of appointment notice under Civil Service Commission rules.' },
-      { key: 'RESOLUTION', num: '07', title: '7. Board Attestation', defaultRemarks: 'Official Board Resolution and Plantilla Assignment submitted to CSC Field Office.' },
-      { key: 'OATH', num: '08', title: '8. Assumption to Duty', defaultRemarks: 'Administration of Oath of Office and formal institutional onboarding.' }
-    ];
-
-    const currentKey = (data.stage || 'DELIBERATION').toUpperCase();
-    let currentIndex = MASTER_STAGES.findIndex(s => s.key === currentKey);
-    if (currentIndex === -1) currentIndex = 4; // default to stage 5 (Deliberation)
-
-    // Update Progress Bar
-    const progressPct = Math.round(((currentIndex + 1) / MASTER_STAGES.length) * 100);
-    const progressFill = document.getElementById('track-progress-fill');
-    const progressText = document.getElementById('track-progress-pct');
-    if (progressFill) progressFill.style.width = `${progressPct}%`;
-    if (progressText) progressText.textContent = `Stage ${currentIndex + 1} of ${MASTER_STAGES.length} (${progressPct}%)`;
-
-    // Render Milestones Grid (2-Column Arrangement)
-    if (!timelineContainer) return;
-    timelineContainer.innerHTML = '';
-
-    const history = data.stage_history || [];
-    const historyMap = {};
-    history.forEach(h => {
-      if (h.stage) historyMap[h.stage.toUpperCase()] = h;
-    });
-
-    // Default dates for completed stages if not in history
-    const sampleDates = [
-      'August 20, 2026 • 08:30 AM',
-      'August 23, 2026 • 11:15 AM',
-      'August 26, 2026 • 02:00 PM',
-      'August 29, 2026 • 04:45 PM',
-      'September 2, 2026 • 10:00 AM'
-    ];
-
-    MASTER_STAGES.forEach((stage, idx) => {
-      const node = document.createElement('div');
-      let statusClass = 'pending';
-      let statusIcon = stage.num;
-      let badgeText = 'UPCOMING';
-      let dateDisplay = 'Scheduled Milestone';
-      let remarks = stage.defaultRemarks;
-
-      const logged = historyMap[stage.key];
-
-      if (idx < currentIndex) {
-        statusClass = 'completed';
-        statusIcon = '&#10003;';
-        badgeText = 'VERIFIED';
-        dateDisplay = logged && logged.timestamp ? (typeof formatDate === 'function' ? formatDate(logged.timestamp) : logged.timestamp) : (sampleDates[idx] || 'Completed');
-        if (logged && logged.remarks) remarks = logged.remarks;
-      } else if (idx === currentIndex) {
-        statusClass = 'active';
-        statusIcon = '&#9679;';
-        badgeText = 'IN PROGRESS';
-        dateDisplay = logged && logged.timestamp ? (typeof formatDate === 'function' ? formatDate(logged.timestamp) : logged.timestamp) : (sampleDates[idx] || 'Active Phase');
-        if (logged && logged.remarks) remarks = logged.remarks;
+      if (record) {
+        renderCandidateRecord(record);
       } else {
-        statusClass = 'pending';
-        statusIcon = stage.num;
-        badgeText = 'UPCOMING';
-        dateDisplay = 'Awaiting Prior Milestone';
+        if (candidateTrackLoading) candidateTrackLoading.classList.add('d-none');
+        if (candidateTrackError) {
+          candidateTrackError.classList.remove('d-none');
+          if (candidateErrorText) candidateErrorText.textContent = `No record found for tracking docket "${code}".`;
+        }
       }
+    }, 220);
+  }
 
-      node.className = `milestone-node milestone-node--${statusClass}`;
-      node.innerHTML = `
-        <div class="milestone-node__dot" aria-hidden="true">${statusIcon}</div>
-        <div class="milestone-node__content">
-          <div class="milestone-node__header">
-            <span class="milestone-node__stage">${escapeHtml(stage.title)}</span>
-            <span class="milestone-node__badge">${badgeText}</span>
-          </div>
-          <div class="milestone-node__time">
-            <span>&#128337;</span>
-            <span>${escapeHtml(dateDisplay)}</span>
-          </div>
-          <div class="milestone-node__remarks">
-            ${escapeHtml(remarks)}
-          </div>
-        </div>
+  function renderCandidateRecord(rec) {
+    if (candidateTrackLoading) candidateTrackLoading.classList.add('d-none');
+    if (candidateTrackError) candidateTrackError.classList.add('d-none');
+    if (candidateDetailCard) candidateDetailCard.classList.remove('d-none');
+
+    if (cardDocket) cardDocket.textContent = rec.appId;
+    if (cardStatusBadge) cardStatusBadge.textContent = rec.statusLabel;
+    if (cardCategory) cardCategory.textContent = rec.category;
+    if (cardJobTitle) cardJobTitle.textContent = rec.title;
+    if (cardJobMeta) {
+      cardJobMeta.innerHTML = `
+        <span>&#127970; ${rec.office}</span> &bull; 
+        <span>&#128176; ${rec.salaryGrade} (${rec.monthlySalary})</span> &bull; 
+        <span>&#128197; Submitted: ${rec.dateSubmitted}</span>
       `;
+    }
 
-      timelineContainer.appendChild(node);
-    });
+    // Progress Bar
+    const currentStep = rec.currentStage || 1;
+    const pct = ((currentStep / 8) * 100).toFixed(1);
+    if (cardProgressText) cardProgressText.textContent = `Progress: Stage ${currentStep} of 8 (${pct}%)`;
+    if (cardProgressFill) cardProgressFill.style.width = `${pct}%`;
+
+    // 8-Stage Grid
+    if (candidatePipelineGrid) {
+      candidatePipelineGrid.innerHTML = '';
+      RECRUITMENT_STAGES.forEach(stage => {
+        const stepEl = document.createElement('div');
+        let statusClass = 'candidate-stage-step--pending';
+        let statusText = 'Pending';
+
+        if (stage.step < currentStep) {
+          statusClass = 'candidate-stage-step--completed';
+          statusText = 'Completed &#10003;';
+        } else if (stage.step === currentStep) {
+          statusClass = 'candidate-stage-step--active';
+          statusText = 'In Progress';
+        }
+
+        stepEl.className = `candidate-stage-step ${statusClass}`;
+        stepEl.innerHTML = `
+          <div class="step-top">
+            <span class="step-num">${stage.step < currentStep ? '&#10003;' : stage.step}</span>
+            <span class="step-status">${statusText}</span>
+          </div>
+          <div class="step-title">${stage.name}</div>
+          <p class="step-desc">${stage.shortDesc}</p>
+        `;
+        candidatePipelineGrid.appendChild(stepEl);
+      });
+    }
+
+    // Stage Alert
+    if (cardStageHeadline) cardStageHeadline.textContent = rec.headline;
+    if (cardStageDesc) cardStageDesc.textContent = rec.explanation;
+    if (cardStageMeta) {
+      cardStageMeta.innerHTML = `
+        <span>&#9201; Expected Resolution: <strong>${rec.expectedDate}</strong></span>
+        <span class="ms-auto font-xs text-muted">Omnibus Rules on Appointments (CSC MC 14, s. 2018)</span>
+      `;
+    }
+
+    // Matrix
+    if (cardQs) cardQs.textContent = rec.qsDescription;
+    if (cardScore) cardScore.textContent = rec.scoreSummary;
+    if (cardDocs) cardDocs.textContent = rec.docsStatus;
+    if (cardHash) cardHash.textContent = rec.ledgerHash;
   }
 
-  /**
-   * Helper to display an attractive empty state when a tracking code is not found.
-   */
-  function showEmptyState(code) {
-    if (!emptyStateContainer) return;
-    emptyStateContainer.classList.remove('d-none');
-    emptyStateContainer.innerHTML = `
-      <div class="track-empty-box">
-        <div class="track-empty-box__icon">&#128270;</div>
-        <h3 class="track-empty-box__title">No Records Found</h3>
-        <p class="track-empty-box__text">
-          We could not find an active recruitment record matching <strong>"${escapeHtml(code)}"</strong>.
-          Please double-check your official CSC application acknowledgment email or try one of the sample tracking codes above.
-        </p>
-      </div>
-    `;
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
   }
-});
+})();

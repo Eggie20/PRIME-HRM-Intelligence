@@ -258,5 +258,162 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
+  // ── Profile Correction Requests Review Panel Logic ─────────
+  const btnToggleCorrections = document.getElementById('btn-toggle-corrections');
+  const badgePendingCorrections = document.getElementById('badge-pending-corrections');
+  const panelCorrections = document.getElementById('panel-correction-requests');
+  const btnCloseCorrections = document.getElementById('btn-close-corrections');
+  const listCorrections = document.getElementById('correction-requests-list');
+  const countCorrections = document.getElementById('panel-correction-count');
+
+  if (btnToggleCorrections && panelCorrections) {
+    btnToggleCorrections.addEventListener('click', () => {
+      panelCorrections.classList.toggle('d-none');
+    });
+  }
+
+  if (btnCloseCorrections && panelCorrections) {
+    btnCloseCorrections.addEventListener('click', () => {
+      panelCorrections.classList.add('d-none');
+    });
+  }
+
+  function updateCorrectionBadgeAndList() {
+    if (typeof db === 'undefined') return;
+    const tickets = db.getTable('correction_requests') || [];
+    const pendingTickets = tickets.filter(t => t.status === 'PENDING');
+
+    if (badgePendingCorrections) {
+      if (pendingTickets.length > 0) {
+        badgePendingCorrections.textContent = pendingTickets.length;
+        badgePendingCorrections.style.display = 'inline-block';
+      } else {
+        badgePendingCorrections.style.display = 'none';
+      }
+    }
+
+    if (countCorrections) {
+      countCorrections.textContent = `${tickets.length} Ticket${tickets.length === 1 ? '' : 's'} (${pendingTickets.length} Pending)`;
+    }
+
+    if (!listCorrections) return;
+
+    if (tickets.length === 0) {
+      listCorrections.innerHTML = `
+        <div style="text-align: center; padding: 24px; color: #64748b;">
+          <div style="font-size: 24px; margin-bottom: 6px;">&#128194;</div>
+          <strong>No Profile Correction Requests Submitted</strong>
+          <p class="font-xs mt-1">When candidates report mistaken biographical or qualification information, their requests and ID proof will appear here for verification.</p>
+        </div>
+      `;
+      return;
+    }
+
+    listCorrections.innerHTML = tickets.map(t => {
+      const isPending = t.status === 'PENDING';
+      const isApproved = t.status === 'APPROVED';
+      const statusBadge = isApproved
+        ? '<span class="badge badge--success">✓ Approved &amp; Synced</span>'
+        : t.status === 'REJECTED'
+        ? '<span class="badge badge--danger">✕ Rejected</span>'
+        : '<span class="badge badge--warning">⏳ Pending HRMO Verification</span>';
+
+      const proofImg = t.proof_document && t.proof_document.data_url
+        ? `<div style="margin-top: 8px; border: 1px solid #DBDECF; border-radius: 6px; padding: 8px; background: #ffffff; max-width: 320px;">
+             <div class="font-xs text-muted mb-1">Attached ID Document (${escapeHtml(t.id_type || 'Valid ID')}):</div>
+             <img src="${t.proof_document.data_url}" alt="Government ID Proof" style="width: 100%; max-height: 180px; object-fit: contain; border-radius: 4px; display: block;" />
+             <div class="font-xs font-bold text-primary mt-1">${escapeHtml(t.proof_document.file_name || 'ID-Scan')} &bull; Control #${escapeHtml(t.id_number || 'N/A')}</div>
+           </div>`
+        : `<div class="font-xs text-muted mt-1">ID Type: ${escapeHtml(t.id_type || 'Government ID')} &bull; Number: ${escapeHtml(t.id_number || 'N/A')}</div>`;
+
+      return `
+        <div class="ticket-review-card" style="background: #ffffff; border: 1px solid #E2E8F0; border-radius: 8px; padding: 14px 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+          <div class="d-flex align-center justify-between flex-wrap gap-2 mb-2 pb-2" style="border-bottom: 1px solid #F1F5F9;">
+            <div class="d-flex align-center gap-2">
+              <span class="font-bold text-primary font-sm code">${escapeHtml(t.id || 'CR-REQ')}</span>
+              <span>&bull;</span>
+              <strong>${escapeHtml(t.applicant_name || 'Applicant')}</strong>
+              <span class="text-secondary font-xs">(${escapeHtml(t.applicant_email || '')})</span>
+            </div>
+            <div>${statusBadge}</div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 10px;">
+            <div style="background: #F8FAFC; padding: 10px 12px; border-radius: 6px;">
+              <div class="font-xs text-muted uppercase font-bold">Field to Correct:</div>
+              <div class="font-sm font-bold text-primary">${escapeHtml(t.field_label || t.field_name || '')}</div>
+              
+              <div class="mt-2 font-xs text-muted uppercase font-bold">Current Record on File:</div>
+              <div class="font-sm text-secondary" style="text-decoration: line-through;">${escapeHtml(t.current_value || '—')}</div>
+
+              <div class="mt-2 font-xs text-muted uppercase font-bold">Requested Accurate Value:</div>
+              <div class="font-sm font-bold text-success">${escapeHtml(t.requested_value || '—')}</div>
+
+              <div class="mt-2 font-xs text-muted uppercase font-bold">Applicant Stated Reason:</div>
+              <div class="font-xs text-secondary">${escapeHtml(t.reason || 'None stated')}</div>
+            </div>
+
+            <div style="background: #F8FAFC; padding: 10px 12px; border-radius: 6px;">
+              <div class="font-xs text-muted uppercase font-bold">Identity Verification &amp; Document Proof:</div>
+              ${proofImg}
+            </div>
+          </div>
+
+          ${isPending ? `
+            <div class="d-flex align-center justify-end gap-2 pt-2" style="border-top: 1px dashed #E2E8F0;">
+              <button type="button" class="btn btn--danger btn--sm btn-reject-ticket" data-id="${t.id}">
+                ✕ Reject Request
+              </button>
+              <button type="button" class="btn btn--success btn--sm btn-approve-ticket" data-id="${t.id}">
+                ✓ Approve Correction &amp; Sync DB
+              </button>
+            </div>
+          ` : `
+            <div class="font-xs text-muted text-right pt-2" style="border-top: 1px dashed #E2E8F0;">
+              Processed by <strong>${escapeHtml(t.approved_by || t.rejected_by || 'HR Admin')}</strong> on ${t.updated_at ? new Date(t.updated_at).toLocaleString() : 'Recently'}
+            </div>
+          `}
+        </div>
+      `;
+    }).join('');
+
+    // Attach Approve / Reject event listeners
+    listCorrections.querySelectorAll('.btn-approve-ticket').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const ticketId = btn.dataset.id;
+        const currentAdmin = (user && (user.email || user.name)) ? (user.email || user.name) : 'admin@nbsc.edu.ph';
+        if (confirm(`Approve correction request #${ticketId}? This will immediately update the applicant's record across all tables and record an immutable SHA-256 audit entry.`)) {
+          const success = db.approveCorrectionRequest(ticketId, currentAdmin);
+          if (success) {
+            showToast(`Correction ticket #${ticketId} approved & database synchronized!`, 'success');
+            updateCorrectionBadgeAndList();
+            loadApplicationDocket();
+          } else {
+            showToast('Failed to approve ticket.', 'error');
+          }
+        }
+      });
+    });
+
+    listCorrections.querySelectorAll('.btn-reject-ticket').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const ticketId = btn.dataset.id;
+        const currentAdmin = (user && (user.email || user.name)) ? (user.email || user.name) : 'admin@nbsc.edu.ph';
+        const reason = prompt('Please enter the reason for rejecting this correction request:', 'Discrepancy between stated change and attached government ID');
+        if (reason) {
+          const success = db.rejectCorrectionRequest(ticketId, currentAdmin, reason);
+          if (success) {
+            showToast(`Correction ticket #${ticketId} rejected.`, 'info');
+            updateCorrectionBadgeAndList();
+          } else {
+            showToast('Failed to reject ticket.', 'error');
+          }
+        }
+      });
+    });
+  }
+
+  // Initial load
   loadApplicationDocket();
+  updateCorrectionBadgeAndList();
 });

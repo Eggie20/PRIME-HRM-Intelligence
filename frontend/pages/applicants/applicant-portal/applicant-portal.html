@@ -11,24 +11,73 @@
 </head>
 <body>
 
-  <!-- Top bar -->
+  <!-- Responsive Topbar Navigation -->
   <header class="topbar">
-    <div class="brand">
-      <div class="seal" aria-hidden="true">N</div>
-      <div class="brand-text">
-        <span class="name">NBSC Candidate Portal</span>
-        <span class="sub">PRIME-HRM Recruitment Suite</span>
+    <div class="topbar-inner">
+      <a href="applicant-portal.html" class="brand">
+        <div class="seal" aria-hidden="true">N</div>
+        <div class="brand-text">
+          <span class="name">NBSC Candidate Portal</span>
+          <span class="sub">PRIME-HRM Recruitment Suite &bull; Level II Accredited</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="topnav" aria-label="Candidate Navigation">
+        <a class="navlink active" href="applicant-portal.html" id="nav-dashboard">
+          <span class="nav-icon">&#9638;</span> Dashboard
+        </a>
+        <a class="navlink" href="../open-positions/open-positions.html" id="nav-open-positions">
+          <span class="nav-icon">&#128188;</span> Open positions
+        </a>
+        <a class="navlink" href="../application-track/application-track.html" id="nav-track-link">
+          <span class="nav-icon">&#128269;</span> Track an application
+        </a>
+        <div class="userchip">
+          <div class="avatar" id="nav-avatar">CM</div>
+          <span class="userchip-name" id="nav-username">Carlo Mendoza</span>
+          <a class="profile-link" href="../profile-settings/profile-settings.html" title="View Profile &amp; Settings">&#9881; Settings</a>
+          <button type="button" class="exit" id="btn-applicant-logout" aria-label="Sign out">Sign out &rarr;</button>
+        </div>
+      </nav>
+
+      <!-- Mobile Hamburger Button -->
+      <button type="button" class="nav-toggle-btn" id="nav-toggle-btn" aria-label="Toggle Navigation Menu" aria-expanded="false">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="topbar-mobile-drawer" id="topbar-mobile-drawer">
+      <div class="mobile-user-card">
+        <div class="avatar-lg" id="mobile-avatar">CM</div>
+        <div class="mobile-user-info">
+          <div class="mobile-user-name" id="mobile-username">Carlo Mendoza</div>
+          <div class="mobile-user-role code">Applicant &bull; APP-2026-00417</div>
+        </div>
+      </div>
+      <nav class="mobile-nav-links">
+        <a class="mobile-navlink active" href="applicant-portal.html">
+          <span>&#9638;</span> <span>Dashboard</span>
+        </a>
+        <a class="mobile-navlink" href="../open-positions/open-positions.html">
+          <span>&#128188;</span> <span>Open positions</span>
+        </a>
+        <a class="mobile-navlink" href="../application-track/application-track.html">
+          <span>&#128269;</span> <span>Track an application</span>
+        </a>
+        <a class="mobile-navlink" href="../profile-settings/profile-settings.html">
+          <span>&#9881;</span> <span>Profile Settings &amp; ID Proof</span>
+        </a>
+      </nav>
+      <div class="mobile-drawer-footer">
+        <button type="button" class="mobile-logout-btn" id="btn-mobile-logout">
+          <span>Sign Out</span> &rarr;
+        </button>
       </div>
     </div>
-    <nav class="topnav" aria-label="Candidate Navigation">
-      <a class="navlink" href="#jobs" id="nav-open-positions">Open positions</a>
-      <a class="navlink" href="../application-track/application-track.html">Track an application</a>
-      <div class="userchip">
-        <div class="avatar" id="nav-avatar">CM</div>
-        <span id="nav-username">Carlo Mendoza</span>
-        <button type="button" class="exit" id="btn-applicant-logout" aria-label="Sign out">Sign out</button>
-      </div>
-    </nav>
   </header>
 
   <!-- Shell (2-Column Grid Layout) -->
@@ -43,15 +92,20 @@
         <div class="progress-row">
           <div class="label">
             <span>Profile completeness</span>
-            <span id="profile-pct">35%</span>
+            <span id="profile-pct">90%</span>
           </div>
           <div class="progress-track">
-            <div class="progress-fill" id="profile-progress-fill" style="width: 35%;"></div>
+            <div class="progress-fill" id="profile-progress-fill" style="width: 90%;"></div>
           </div>
+        </div>
+        <div class="profile-edit-note">
+          <a href="../profile-settings/profile-settings.html" class="profile-settings-btn">
+            <span>&#9998; Review Info &amp; ID Proof</span> &rarr;
+          </a>
         </div>
       </div>
 
-      <div class="stage-block">
+      <div class="stage-block" id="recruitment-journey-block">
         <h4>Recruitment journey</h4>
         <div class="stage-sub">The 4 pillars of CSC PRIME-HRM Level 2 merit selection</div>
 
@@ -62,25 +116,25 @@
             <div class="sdesc">Profile registered with the portal</div>
           </div>
         </div>
-        <div class="stage current" id="stage-pillar-2">
-          <div class="dot">2</div>
+        <div class="stage done" id="stage-pillar-2">
+          <div class="dot">&#10003;</div>
           <div>
             <div class="stitle">Screening</div>
-            <div class="sdesc">Submit documents to a vacancy to begin</div>
+            <div class="sdesc">QS and documentary compliance passed</div>
           </div>
         </div>
-        <div class="stage" id="stage-pillar-3">
-          <div class="dot">3</div>
+        <div class="stage done" id="stage-pillar-3">
+          <div class="dot">&#10003;</div>
           <div>
             <div class="stitle">Assessment</div>
-            <div class="sdesc">Written exam or performance review</div>
+            <div class="sdesc">4-Pillar DSS Scoring &amp; Dept Demo</div>
           </div>
         </div>
-        <div class="stage" id="stage-pillar-4">
-          <div class="dot">4</div>
+        <div class="stage current" id="stage-pillar-4">
+          <div class="dot" id="stage-dot-4">4</div>
           <div>
-            <div class="stitle">Final selection</div>
-            <div class="sdesc">Panel interview and appointment</div>
+            <div class="stitle" id="stage-title-4">Final selection</div>
+            <div class="sdesc" id="stage-desc-4">HRMPSB Deliberation in progress</div>
           </div>
         </div>
       </div>
@@ -90,57 +144,59 @@
     <main>
       <div class="page-head">
         <h1 id="welcome-heading">Welcome back, Carlo</h1>
-        <p id="welcome-sub">You're registered but haven't applied to a position yet. Submit your first application to move into screening.</p>
+        <p id="welcome-sub">Explore tailored vacancy highlights matched to your verified credentials under PRIME-HRM Level 2 standards.</p>
       </div>
 
-      <!-- Section: My Active Applications -->
-      <section aria-labelledby="heading-active-apps">
+      <!-- Active Application Snapshot -->
+      <section class="active-snapshot-section" aria-labelledby="heading-snapshot">
         <div class="section-head">
-          <h2 id="heading-active-apps">My active applications</h2>
-          <span class="count" id="active-apps-count"></span>
+          <h2 id="heading-snapshot">Active Recruitment Status</h2>
+          <a href="../application-track/application-track.html" class="font-sm text-brass font-medium">Track Full Progression &rarr;</a>
         </div>
-
-        <!-- Application Cards Stack (when submitted) -->
-        <div id="applications-container" class="app-cards-container d-none"></div>
-
-        <!-- Empty State Panel (matches sample.html) -->
-        <div class="empty-panel" id="applications-empty-panel">
-          <svg class="tray" width="56" height="56" viewBox="0 0 56 56" fill="none" aria-hidden="true">
-            <rect x="4" y="14" width="48" height="34" rx="3" stroke="#A97C22" stroke-width="1.6"/>
-            <path d="M4 30h13.5a2 2 0 0 1 1.8 1.1l1.4 2.8a2 2 0 0 0 1.8 1.1h6.5a2 2 0 0 0 1.8-1.1l1.4-2.8a2 2 0 0 1 1.8-1.1H52" stroke="#A97C22" stroke-width="1.6"/>
-            <path d="M16 14V9a2 2 0 0 1 2-2h20a2 2 0 0 1 2 2v5" stroke="#A97C22" stroke-width="1.6"/>
-          </svg>
-          <div>
-            <h3>Your application tray is empty</h3>
-            <p>Applications you submit will appear here with their screening status, exam schedule, and results.</p>
-            <button type="button" class="btn-primary" id="btn-browse-jobs">Browse open positions</button>
+        <div class="snapshot-card">
+          <div class="snapshot-card__header">
+            <div>
+              <span class="app-card__docket">NBSC-APP-2026-10001</span>
+              <h3 class="snapshot-card__title">Instructor I (Computer Studies)</h3>
+              <div class="snapshot-card__dept">Institute of Computer Studies (ICS) &bull; Applied Aug 20, 2026</div>
+            </div>
+            <div class="snapshot-card__status">
+              <span class="inportal-status-pill inportal-status-pill--active">
+                <span class="track-pulse-dot"></span>
+                <span>Stage 5: HRMPSB Deliberation</span>
+              </span>
+              <div class="snapshot-pct font-mono">Progression: 62.5%</div>
+            </div>
+          </div>
+          <div class="snapshot-progress-track">
+            <div class="snapshot-progress-fill" style="width: 62.5%;"></div>
+          </div>
+          <div class="snapshot-footer">
+            <div class="snapshot-remarks">
+              <strong>Latest Milestone:</strong> HRMPSB Board Members actively conducting comparative consensus deliberation and scoring.
+            </div>
+            <a href="../application-track/application-track.html" class="btn-ghost btn--sm">
+              Inspect Timeline &rarr;
+            </a>
           </div>
         </div>
       </section>
 
-      <!-- Section: Open Opportunities -->
-      <section id="jobs" aria-labelledby="heading-open-jobs">
+      <!-- Highlights of Open Positions (Digit Salary, Date, & Applicant QS Match Matrix) -->
+      <section id="highlights" aria-labelledby="heading-highlights">
         <div class="section-head">
-          <h2 id="heading-open-jobs">Open opportunities</h2>
-          <span class="count" id="jobs-count">3 positions</span>
+          <div>
+            <h2 id="heading-highlights">Highlighted Open Opportunities</h2>
+            <p class="section-subhead">Positions matched to your academic credentials, experience, and Civil Service eligibility.</p>
+          </div>
+          <a href="../open-positions/open-positions.html" class="btn-ghost">
+            View All Open Positions &rarr;
+          </a>
         </div>
 
-        <!-- Filter Row -->
-        <div class="filter-row">
-          <input type="text" id="jobSearch" placeholder="Search by title or office" aria-label="Search by title or office">
-          <button type="button" class="chip active" data-dept="all">All offices</button>
-          <button type="button" class="chip" data-dept="fin">Finance</button>
-          <button type="button" class="chip" data-dept="admin">Administrative</button>
-          <button type="button" class="chip" data-dept="ibm">Academic</button>
-        </div>
-
-        <!-- Job List -->
-        <div class="job-list" id="jobList">
+        <!-- Highlights Grid -->
+        <div class="highlights-grid" id="highlights-grid">
           <!-- Populated dynamically via applicant-portal.js -->
-        </div>
-
-        <div class="helpline">
-          Need help with a requirement? Contact the HR Recruitment Unit for guidance before a vacancy closes.
         </div>
       </section>
     </main>

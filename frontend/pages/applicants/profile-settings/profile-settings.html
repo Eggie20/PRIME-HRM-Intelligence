@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Settings &amp; ID Verification — NBSC Candidate Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="profile-settings.css">
+</head>
+<body>
+
+  <!-- Responsive Topbar Navigation -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="../applicant-portal/applicant-portal.html" class="brand">
+        <div class="seal" aria-hidden="true">N</div>
+        <div class="brand-text">
+          <span class="name">NBSC Candidate Portal</span>
+          <span class="sub">PRIME-HRM Recruitment Suite &bull; Level II Accredited</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="topnav" aria-label="Candidate Navigation">
+        <a class="navlink" href="../applicant-portal/applicant-portal.html" id="nav-dashboard">
+          <span class="nav-icon">&#9638;</span> Dashboard
+        </a>
+        <a class="navlink" href="../open-positions/open-positions.html" id="nav-open-positions">
+          <span class="nav-icon">&#128188;</span> Open positions
+        </a>
+        <a class="navlink" href="../application-track/application-track.html" id="nav-track-link">
+          <span class="nav-icon">&#128269;</span> Track an application
+        </a>
+        <div class="userchip">
+          <div class="avatar" id="nav-avatar">CM</div>
+          <span class="userchip-name" id="nav-username">Carlo Mendoza</span>
+          <a class="profile-link active" href="profile-settings.html" title="View Profile &amp; Settings">&#9881; Settings</a>
+          <button type="button" class="exit" id="btn-applicant-logout" aria-label="Sign out">Sign out &rarr;</button>
+        </div>
+      </nav>
+
+      <!-- Mobile Hamburger Button -->
+      <button type="button" class="nav-toggle-btn" id="nav-toggle-btn" aria-label="Toggle Navigation Menu" aria-expanded="false">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="topbar-mobile-drawer" id="topbar-mobile-drawer">
+      <div class="mobile-user-card">
+        <div class="avatar-lg" id="mobile-avatar">CM</div>
+        <div class="mobile-user-info">
+          <div class="mobile-user-name" id="mobile-username">Carlo Mendoza</div>
+          <div class="mobile-user-role code">Applicant &bull; APP-2026-00417</div>
+        </div>
+      </div>
+      <nav class="mobile-nav-links">
+        <a class="mobile-navlink" href="../applicant-portal/applicant-portal.html">
+          <span>&#9638;</span> <span>Dashboard</span>
+        </a>
+        <a class="mobile-navlink" href="../open-positions/open-positions.html">
+          <span>&#128188;</span> <span>Open positions</span>
+        </a>
+        <a class="mobile-navlink" href="../application-track/application-track.html">
+          <span>&#128269;</span> <span>Track an application</span>
+        </a>
+        <a class="mobile-navlink active" href="profile-settings.html">
+          <span>&#9881;</span> <span>Profile Settings &amp; ID Proof</span>
+        </a>
+      </nav>
+      <div class="mobile-drawer-footer">
+        <button type="button" class="mobile-logout-btn" id="btn-mobile-logout">
+          <span>Sign Out</span> &rarr;
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Shell Layout -->
+  <div class="shell">
+
+    <!-- LEFT SIDEBAR: Candidate Profile & Civil Service Compliance Note -->
+    <aside aria-label="Applicant Profile Summary">
+      <div class="applicant-card">
+        <div class="avatar-lg" id="sidebar-avatar">CM</div>
+        <div class="aname" id="sidebar-name">Carlo Mendoza</div>
+        <div class="aid code" id="sidebar-id">Applicant ID &middot; APP-2026-00417</div>
+        <div class="verified-pill">
+          <span class="verified-dot"></span>
+          <span>CSC PRIME-HRM Registered Candidate</span>
+        </div>
+
+        <div class="card-divider"></div>
+
+        <div class="sidebar-section-title">Official Contact on Record</div>
+        <div class="sidebar-meta-item">
+          <span class="meta-label">Email:</span>
+          <span class="meta-val code" id="sidebar-email">carlo.mendoza@email.com</span>
+        </div>
+        <div class="sidebar-meta-item">
+          <span class="meta-label">Phone:</span>
+          <span class="meta-val code" id="sidebar-phone">+63 917 555 0192</span>
+        </div>
+        <div class="sidebar-meta-item">
+          <span class="meta-label">Civil Status:</span>
+          <span class="meta-val">Single</span>
+        </div>
+
+        <div class="card-divider"></div>
+
+        <div class="sidebar-section-title">Qualification Profile</div>
+        <div class="cred-chip">
+          <span class="cred-icon">&#127891;</span>
+          <span id="sidebar-degree">BS Computer Science</span>
+        </div>
+        <div class="cred-chip">
+          <span class="cred-icon">&#128188;</span>
+          <span id="sidebar-exp">2 Years Software Engineering</span>
+        </div>
+        <div class="cred-chip">
+          <span class="cred-icon">&#128220;</span>
+          <span id="sidebar-elig">CS Professional (RA 1080 Equiv.)</span>
+        </div>
+      </div>
+
+      <!-- Civil Service Audit & Compliance Rules Box -->
+      <div class="notice-card">
+        <div class="notice-head">
+          <span class="notice-icon">&#9878;</span>
+          <span class="notice-title">Civil Service Omnibus Rules</span>
+        </div>
+        <p class="notice-body">
+          Under <strong>CSC Memorandum Circular No. 14, s. 2018 (PRIME-HRM Level 2)</strong>, biographical and qualification data are audited for merit ranking. Corrections to official applicant records require verification against a valid government-issued photo ID by the HRMO before updating candidate rosters.
+        </p>
+      </div>
+
+      <!-- HRMO Support Contacts -->
+      <div class="support-card">
+        <div class="support-title">&#128222; HRMO Helpdesk</div>
+        <p class="support-desc">For urgent inquiries regarding submitted tickets or document compliance:</p>
+        <div class="support-item"><span>&#9993;</span> <strong>hrmo@nbsc.edu.ph</strong></div>
+        <div class="support-item"><span>&#128222;</span> <strong>(088) 356-4012 loc 108</strong></div>
+      </div>
+    </aside>
+
+    <!-- RIGHT MAIN CONTENT -->
+    <main class="main-content" id="main-content">
+
+      <!-- Page Header -->
+      <section class="page-head">
+        <div class="page-eyebrow">Northern Bukidnon State College &bull; Human Resource Management Office</div>
+        <h1 class="page-title">Profile Settings &amp; Record Corrections</h1>
+        <p class="page-lead">
+          Review your registered applicant credentials. If any biographical or qualification details contain errors, submit a formal correction request with an attached valid government ID for HRMO administrative verification and database synchronization.
+        </p>
+      </section>
+
+      <!-- SECTION 1: Registered Applicant Record (Read-Only Verified View) -->
+      <section class="content-panel" aria-labelledby="heading-registered-info">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title" id="heading-registered-info">Registered Candidate Information</h2>
+            <p class="panel-subtitle">Official biographical and qualification data currently on file with the NBSC Merit Selection System.</p>
+          </div>
+          <span class="status-badge-verified">&#10003; Audited &amp; Synchronized</span>
+        </div>
+
+        <div class="record-grid">
+          <div class="record-cell">
+            <span class="cell-label">Full Legal Name</span>
+            <span class="cell-value" id="disp-fullname">Carlo D. Mendoza</span>
+            <span class="cell-sub">As indicated in Civil Registry / Birth Certificate</span>
+          </div>
+          <div class="record-cell">
+            <span class="cell-label">Official Email Address</span>
+            <span class="cell-value code" id="disp-email">carlo.mendoza@email.com</span>
+            <span class="cell-sub">Primary channel for HRMPSB notices</span>
+          </div>
+          <div class="record-cell">
+            <span class="cell-label">Contact Phone Number</span>
+            <span class="cell-value code" id="disp-phone">+63 917 555 0192</span>
+            <span class="cell-sub">Active mobile for SMS status alerts</span>
+          </div>
+          <div class="record-cell">
+            <span class="cell-label">Highest Educational Attainment</span>
+            <span class="cell-value" id="disp-education">Bachelor of Science in Computer Science</span>
+            <span class="cell-sub">Commission on Higher Education (CHED) Accredited</span>
+          </div>
+          <div class="record-cell">
+            <span class="cell-label">Civil Service Eligibility / Board License</span>
+            <span class="cell-value" id="disp-eligibility">Career Service Professional / RA 1080 Equivalent</span>
+            <span class="cell-sub">CSC Rating: 86.40% &bull; Validated</span>
+          </div>
+          <div class="record-cell">
+            <span class="cell-label">Total Verified Relevant Experience</span>
+            <span class="cell-value" id="disp-experience">2 Years, 4 Months</span>
+            <span class="cell-sub">Software Development / Information Systems</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 2: Request Information Correction Form -->
+      <section class="content-panel" aria-labelledby="heading-correction-request">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title" id="heading-correction-request">&#9998; Submit Information Correction Request</h2>
+            <p class="panel-subtitle">Found a mistake or discrepancy in your record? File a correction request accompanied by valid government ID proof.</p>
+          </div>
+        </div>
+
+        <!-- Clarification / Warning Banner -->
+        <div class="info-banner">
+          <div class="banner-icon">&#9888;</div>
+          <div class="banner-text">
+            <strong>Mandatory Identity Proof Requirement:</strong> In compliance with the Philippine Data Privacy Act of 2012 (RA 10173) and Civil Service Commission authentication guidelines, requests without a clear, legible attachment of an approved government-issued ID (PhilID, PRC, Passport, Driver's License, or UMID) will not be acted upon by the HRMO.
+          </div>
+        </div>
+
+        <form id="form-correction" class="correction-form">
+          <div class="form-row form-row--2col">
+            <!-- Field Selector -->
+            <div class="form-group">
+              <label for="select-field" class="form-label">
+                Field Containing Mistake / Error <span class="required">*</span>
+              </label>
+              <select id="select-field" class="form-control" required>
+                <option value="" disabled selected>— Select Field to Correct —</option>
+                <option value="name">Full Legal Name</option>
+                <option value="email">Email Address</option>
+                <option value="phone">Contact Phone Number</option>
+                <option value="education">Educational Attainment / Degree</option>
+                <option value="eligibility">Civil Service Eligibility / License</option>
+                <option value="experience">Relevant Work Experience</option>
+              </select>
+              <span class="form-hint">Choose which registered field needs correction</span>
+            </div>
+
+            <!-- Current Value (Auto-populated) -->
+            <div class="form-group">
+              <label for="input-current-val" class="form-label">
+                Current Registered Value on File
+              </label>
+              <input type="text" id="input-current-val" class="form-control form-control--readonly" readonly placeholder="Will auto-populate from chosen field">
+              <span class="form-hint">Current data recorded in NBSC system</span>
+            </div>
+          </div>
+
+          <!-- New Value & Reason -->
+          <div class="form-row form-row--2col">
+            <div class="form-group">
+              <label for="input-new-val" class="form-label">
+                Corrected / Accurate Value <span class="required">*</span>
+              </label>
+              <input type="text" id="input-new-val" class="form-control" required placeholder="e.g. Carlo De Guzman Mendoza">
+              <span class="form-hint">Enter the exact, verified spelling or details</span>
+            </div>
+
+            <div class="form-group">
+              <label for="select-id-type" class="form-label">
+                Government ID Type for Verification <span class="required">*</span>
+              </label>
+              <select id="select-id-type" class="form-control" required>
+                <option value="" disabled selected>— Select Valid ID Type —</option>
+                <option value="PhilID / Philippine National ID">PhilID / Philippine National ID</option>
+                <option value="PRC Professional Identification Card">PRC Professional Identification Card</option>
+                <option value="Philippine Passport">Philippine Passport (DFA)</option>
+                <option value="LTO Driver's License">LTO Driver's License</option>
+                <option value="UMID / SSS ID">Unified Multi-Purpose ID (UMID / SSS)</option>
+                <option value="Voter's Certification / ID">COMELEC Voter's Certification</option>
+              </select>
+              <span class="form-hint">Must match the uploaded identification document</span>
+            </div>
+          </div>
+
+          <div class="form-row form-row--2col">
+            <div class="form-group">
+              <label for="input-id-number" class="form-label">
+                ID Document / Control Number <span class="required">*</span>
+              </label>
+              <input type="text" id="input-id-number" class="form-control code" required placeholder="e.g. 1928-8472-9014-2281">
+              <span class="form-hint">Serial, registration, or control number on the card</span>
+            </div>
+
+            <div class="form-group">
+              <label for="input-reason" class="form-label">
+                Reason for Correction / Explanation <span class="required">*</span>
+              </label>
+              <input type="text" id="input-reason" class="form-control" required placeholder="e.g. Typographical error during online encoding / Updated middle name">
+              <span class="form-hint">Brief justification for the HRMO review officer</span>
+            </div>
+          </div>
+
+          <!-- Proof of Government ID Upload Zone -->
+          <div class="form-group">
+            <label class="form-label">
+              Proof of Identification Attachment (Valid Government ID) <span class="required">*</span>
+            </label>
+            <div class="upload-dropzone" id="upload-dropzone">
+              <input type="file" id="file-id-proof" accept="image/png, image/jpeg, image/webp" class="file-input-hidden">
+              <div class="dropzone-content" id="dropzone-empty-state">
+                <div class="dropzone-icon">&#128247;</div>
+                <div class="dropzone-title">Upload Photo or Scan of Valid Government ID</div>
+                <p class="dropzone-desc">Drag and drop your file here, or <button type="button" class="btn-browse" id="btn-browse-file">Browse File</button></p>
+                <div class="dropzone-specs">Accepts JPG, PNG, WEBP (Max 5MB) &bull; Must show clear photo, full name, and document number</div>
+              </div>
+
+              <!-- Live Upload Preview Container -->
+              <div class="upload-preview d-none" id="upload-preview-container">
+                <div class="preview-img-wrap">
+                  <img id="preview-img" src="" alt="Valid Government ID Proof Preview">
+                </div>
+                <div class="preview-meta">
+                  <div class="preview-filename" id="preview-filename">PhilID-National-ID-Card.jpg</div>
+                  <div class="preview-filesize" id="preview-filesize">842 KB &bull; Image Attached</div>
+                  <div class="preview-badge">&#10003; Ready for HRMO verification</div>
+                  <button type="button" class="btn-remove-file" id="btn-remove-file">Remove / Choose Another</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Sample ID Buttons (For effortless simulation & testing) -->
+            <div class="sample-id-chips">
+              <span class="sample-id-label">Quick sample demo attachments:</span>
+              <button type="button" class="sample-id-btn" data-type="PhilID / Philippine National ID" data-num="1928-8472-9014-2281" data-sample="philid">Attach Sample PhilID</button>
+              <button type="button" class="sample-id-btn" data-type="PRC Professional Identification Card" data-num="PRC-0149821-IT" data-sample="prc">Attach Sample PRC Card</button>
+            </div>
+          </div>
+
+          <!-- Submit Button & Feedback -->
+          <div class="form-actions">
+            <button type="submit" class="btn-submit" id="btn-submit-correction">
+              <span>Submit Correction Request to HRMO</span>
+              <span>&rarr;</span>
+            </button>
+            <div class="form-message d-none" id="form-message"></div>
+          </div>
+        </form>
+      </section>
+
+      <!-- SECTION 3: Submitted Tickets & HRMO Verification Status -->
+      <section class="content-panel" aria-labelledby="heading-correction-history">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title" id="heading-correction-history">&#128203; Correction Request Log &amp; Verification Tickets</h2>
+            <p class="panel-subtitle">Monitor the approval status of your submitted change requests and administrative synchronization.</p>
+          </div>
+          <button type="button" class="btn-refresh" id="btn-refresh-tickets">&#8635; Refresh Status</button>
+        </div>
+
+        <div class="tickets-container" id="tickets-container">
+          <!-- Dynamic ticket cards populated via profile-settings.js -->
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Shared Scripts & Domain Logic -->
+  <script src="../../../shared/js/constants.js"></script>
+  <script src="../../../shared/js/utils.js"></script>
+  <script src="../../../shared/js/db.js"></script>
+  <script src="profile-settings.js"></script>
+</body>
+</html>

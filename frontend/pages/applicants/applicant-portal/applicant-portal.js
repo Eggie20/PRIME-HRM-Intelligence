@@ -1,17 +1,16 @@
 /**
- * NBSC Candidate Portal — Applicant Dashboard Logic
- * Aligned with C:\NBSC PRIME-HRM Intelligence Hub\sample\sample.html
+ * NBSC Candidate Portal — Main Dashboard Logic
+ * Highlights Open Positions with Exact Digit Salaries, Closing Dates, and Applicant QS Match Matrix
  */
 
-document.addEventListener('DOMContentLoaded', async () => {
-  // 1. Authenticated Profile Setup
+document.addEventListener('DOMContentLoaded', () => {
+  // ── 1. Authenticated Profile Setup ─────────────────────────────
   const user = typeof getUser === 'function' ? getUser() : null;
   const applicantName = user?.name || user?.email || 'Carlo Mendoza';
   const firstName = applicantName.split(' ')[0] || 'Carlo';
   const userInitials = getInitials(applicantName);
   const applicantId = user?.applicant_id || (user?.id ? `APP-2026-${String(user.id).replace(/\D/g, '').padStart(5, '0')}` : 'APP-2026-00417');
 
-  // Populate Header & Sidebar Identity
   const navAvatar = document.getElementById('nav-avatar');
   const navUsername = document.getElementById('nav-username');
   const sidebarAvatar = document.getElementById('sidebar-avatar');
@@ -19,18 +18,33 @@ document.addEventListener('DOMContentLoaded', async () => {
   const sidebarId = document.getElementById('sidebar-id');
   const welcomeHeading = document.getElementById('welcome-heading');
 
+  const mobileAvatar = document.getElementById('mobile-avatar');
+  const mobileUsername = document.getElementById('mobile-username');
+
   if (navAvatar) navAvatar.textContent = userInitials;
   if (navUsername) navUsername.textContent = applicantName;
+  if (mobileAvatar) mobileAvatar.textContent = userInitials;
+  if (mobileUsername) mobileUsername.textContent = applicantName;
   if (sidebarAvatar) sidebarAvatar.textContent = userInitials;
   if (sidebarName) sidebarName.textContent = applicantName;
   if (sidebarId) sidebarId.innerHTML = `Applicant ID &middot; ${escapeHtml(applicantId)}`;
   if (welcomeHeading) welcomeHeading.textContent = `Welcome back, ${firstName}`;
 
-  // 2. Navigation Actions
-  const btnLogout = document.getElementById('btn-applicant-logout');
-  if (btnLogout) {
-    btnLogout.addEventListener('click', (e) => {
-      e.preventDefault();
+  // Mobile Navigation Drawer Toggle
+  const navToggleBtn = document.getElementById('nav-toggle-btn');
+  const mobileDrawer = document.getElementById('topbar-mobile-drawer');
+  if (navToggleBtn && mobileDrawer) {
+    navToggleBtn.addEventListener('click', () => {
+      const isOpen = mobileDrawer.classList.toggle('is-open');
+      navToggleBtn.classList.toggle('is-active', isOpen);
+      navToggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  }
+
+  // Sign out buttons (Desktop & Mobile)
+  function handleSignOut(e) {
+    if (e) e.preventDefault();
+    if (confirm('Are you sure you want to sign out of the Candidate Portal?')) {
       if (typeof logout === 'function') {
         logout('../../auth/applicant-login/applicant-login.html');
       } else {
@@ -38,296 +52,149 @@ document.addEventListener('DOMContentLoaded', async () => {
         localStorage.removeItem('nbsc_user');
         window.location.href = '../../auth/applicant-login/applicant-login.html';
       }
-    });
+    }
   }
 
-  const btnBrowseJobs = document.getElementById('btn-browse-jobs');
-  const navOpenPositions = document.getElementById('nav-open-positions');
-  const scrollToJobs = (e) => {
-    e?.preventDefault();
-    const jobsSection = document.getElementById('jobs');
-    if (jobsSection) {
-      jobsSection.scrollIntoView({ behavior: 'smooth' });
-    }
+  const btnLogout = document.getElementById('btn-applicant-logout');
+  if (btnLogout) btnLogout.addEventListener('click', handleSignOut);
+
+  const btnMobileLogout = document.getElementById('btn-mobile-logout');
+  if (btnMobileLogout) btnMobileLogout.addEventListener('click', handleSignOut);
+
+  // ── 2. Candidate Credentials & Qualification Standards (QS) Matrix ──
+  const CANDIDATE_PROFILE = {
+    degree: 'BS Computer Science',
+    field: 'Computing & Information Technology',
+    experience_years: 2,
+    training_hours: 16,
+    eligibility: 'Career Service Professional (RA 1080 / CSC Level 2)'
   };
-  if (btnBrowseJobs) btnBrowseJobs.addEventListener('click', scrollToJobs);
-  if (navOpenPositions) navOpenPositions.addEventListener('click', scrollToJobs);
 
-  // 3. Applications Management
-  const appsContainer = document.getElementById('applications-container');
-  const emptyPanel = document.getElementById('applications-empty-panel');
-  const activeAppsCount = document.getElementById('active-apps-count');
-  const welcomeSub = document.getElementById('welcome-sub');
-
-  async function loadMyApplications() {
-    let applications = [];
-
-    // Attempt API Fetch
-    try {
-      if (typeof apiGet === 'function') {
-        const res = await apiGet('/applications/my-applications/');
-        if (res && res.success && res.data && Array.isArray(res.data.applications)) {
-          applications = res.data.applications;
-        }
-      }
-    } catch (err) {
-      // Fallback: Check local Database
-      if (typeof db !== 'undefined' && db.getTable) {
-        const allApps = db.getTable('applications') || [];
-        if (user && user.id) {
-          applications = allApps.filter(a => a.applicant_id === user.id || a.user_id === user.id);
-        }
-      }
-    }
-
-    renderApplications(applications);
-  }
-
-  function renderApplications(applications) {
-    if (!appsContainer || !emptyPanel) return;
-
-    if (!applications || applications.length === 0) {
-      appsContainer.classList.add('d-none');
-      appsContainer.innerHTML = '';
-      emptyPanel.classList.remove('d-none');
-      if (activeAppsCount) activeAppsCount.textContent = '';
-      if (welcomeSub) {
-        welcomeSub.textContent = "You're registered but haven't applied to a position yet. Submit your first application to move into screening.";
-      }
-      updatePillarJourney('REGISTERED');
-      return;
-    }
-
-    // Active applications exist
-    emptyPanel.classList.add('d-none');
-    appsContainer.classList.remove('d-none');
-    appsContainer.innerHTML = '';
-
-    if (activeAppsCount) {
-      activeAppsCount.textContent = `${applications.length} position${applications.length > 1 ? 's' : ''}`;
-    }
-    if (welcomeSub) {
-      welcomeSub.textContent = `You have ${applications.length} active application${applications.length > 1 ? 's' : ''} in progress under CSC PRIME-HRM Level 2 review.`;
-    }
-
-    const latestApp = applications[0];
-    updatePillarJourney(latestApp.stage || 'SCREENING');
-
-    applications.forEach(app => {
-      const card = document.createElement('div');
-      card.className = 'app-card';
-      const docket = app.tracking_number || app.id || 'NBSC-APP-2026';
-      const stageLabel = (typeof STAGE_LABELS !== 'undefined' && STAGE_LABELS[app.stage]) ? STAGE_LABELS[app.stage] : (app.stage || 'In Screening');
-
-      card.innerHTML = `
-        <div class="app-card__info">
-          <span class="app-card__docket">${escapeHtml(docket)}</span>
-          <h3 class="app-card__title">${escapeHtml(app.vacancy_title || 'Institutional Faculty / Staff Position')}</h3>
-          <div class="app-card__meta">${escapeHtml(app.vacancy_department || 'Northern Bukidnon State College')} &bull; Applied ${escapeHtml(app.created_at || 'August 2026')}</div>
-        </div>
-        <div class="app-card__actions">
-          <span class="app-card__stage-pill">${escapeHtml(stageLabel)}</span>
-          <a href="../application-track/application-track.html?tracking=${encodeURIComponent(docket)}" class="btn-ghost">
-            Track Status &rarr;
-          </a>
-        </div>
-      `;
-      appsContainer.appendChild(card);
-    });
-  }
-
-  // 4. Update 4-Pillar Recruitment Journey Sidebar
-  function updatePillarJourney(stageKey) {
-    const p1 = document.getElementById('stage-pillar-1');
-    const p2 = document.getElementById('stage-pillar-2');
-    const p3 = document.getElementById('stage-pillar-3');
-    const p4 = document.getElementById('stage-pillar-4');
-    if (!p1 || !p2 || !p3 || !p4) return;
-
-    // Reset all stages
-    [p1, p2, p3, p4].forEach(p => p.className = 'stage');
-
-    p1.className = 'stage done';
-    p1.querySelector('.dot').innerHTML = '&#10003;';
-
-    if (stageKey === 'REGISTERED' || !stageKey) {
-      p2.className = 'stage current';
-      p2.querySelector('.dot').textContent = '2';
-      p3.querySelector('.dot').textContent = '3';
-      p4.querySelector('.dot').textContent = '4';
-    } else if (['APPLIED', 'SCREENING', 'QS_PASS', 'QS_FAIL'].includes(stageKey)) {
-      p2.className = 'stage current';
-      p2.querySelector('.dot').textContent = '2';
-      p3.querySelector('.dot').textContent = '3';
-      p4.querySelector('.dot').textContent = '4';
-    } else if (['DSS_SCORED', 'DEPT_EVAL', 'ASSESSMENT'].includes(stageKey)) {
-      p2.className = 'stage done';
-      p2.querySelector('.dot').innerHTML = '&#10003;';
-      p3.className = 'stage current';
-      p3.querySelector('.dot').textContent = '3';
-      p4.querySelector('.dot').textContent = '4';
-    } else if (['DELIBERATION', 'FINAL_DECISION', 'APPOINTED', 'ASSUMPTION'].includes(stageKey)) {
-      p2.className = 'stage done';
-      p2.querySelector('.dot').innerHTML = '&#10003;';
-      p3.className = 'stage done';
-      p3.querySelector('.dot').innerHTML = '&#10003;';
-      p4.className = 'stage current';
-      p4.querySelector('.dot').textContent = '4';
-    }
-  }
-
-  // 5. Open Opportunities Loading & Filtering
-  const jobList = document.getElementById('jobList');
-  const jobsCount = document.getElementById('jobs-count');
-  const jobSearch = document.getElementById('jobSearch');
-  const chips = document.querySelectorAll('.chip');
-  let activeDept = 'all';
-
-  const DEFAULT_JOBS = [
+  // ── 3. Highlighted Vacancies with Digit Salaries & Deadlines ────
+  const HIGHLIGHTED_VACANCIES = [
     {
-      id: 'vac-005',
-      dept: 'fin',
-      title: 'Accountant II',
-      deptName: 'Finance & Accounting Division',
-      sg: 15,
-      deadline: 'Sep 25'
+      id: 'vac-001',
+      title: 'Instructor I (Computer Studies)',
+      department: 'Institute of Computer Studies (ICS)',
+      salary_grade: 15,
+      monthly_salary: 36619.00,
+      daily_rate: 1664.50,
+      deadline_date: 'Sep 30, 2026',
+      days_left: 23,
+      qs_match_pct: 100,
+      qs_badge_type: 'perfect',
+      qs_badge_label: '100% Match · Top Academic Fit',
+      qs_checklist: [
+        { label: 'Education', req: 'BS Computer Science / IT', match: true, text: 'Candidate: BS Computer Science (MSU-IIT)' },
+        { label: 'Experience', req: '1 Year Tech / Teaching', match: true, text: 'Candidate: 2 Years Experience' },
+        { label: 'Training', req: '8 Hours Computing / Pedagogy', match: true, text: 'Candidate: 16 Hours Training' },
+        { label: 'Eligibility', req: 'CS Professional / RA 1080', match: true, text: 'Candidate: CS Professional Certified' }
+      ]
     },
     {
       id: 'vac-008',
-      dept: 'admin',
       title: 'Administrative Assistant III',
-      deptName: 'Office of the President',
-      sg: 9,
-      deadline: 'Sep 18'
+      department: 'Office of the President',
+      salary_grade: 9,
+      monthly_salary: 21211.00,
+      daily_rate: 964.14,
+      deadline_date: 'Sep 18, 2026',
+      days_left: 11,
+      qs_match_pct: 90,
+      qs_badge_type: 'high',
+      qs_badge_label: '90% Match · Qualified',
+      qs_checklist: [
+        { label: 'Education', req: "Completion of 2 yrs College / Bachelor's", match: true, text: 'Candidate: Bachelor Degree Holder' },
+        { label: 'Experience', req: '1 Year Relevant Administrative Experience', match: true, text: 'Candidate: 2 Years Experience' },
+        { label: 'Training', req: '4 Hours Relevant Office Training', match: true, text: 'Candidate: 16 Hours Tech Training' },
+        { label: 'Eligibility', req: 'Career Service Sub-Prof / Professional', match: true, text: 'Candidate: CS Professional' }
+      ]
     },
     {
-      id: 'vac-007',
-      dept: 'ibm',
-      title: 'Associate Professor I, Business Administration',
-      deptName: 'Institute of Business & Management',
-      sg: 15,
-      deadline: 'Oct 2'
+      id: 'vac-005',
+      title: 'Accountant II',
+      department: 'Finance & Accounting Division',
+      salary_grade: 15,
+      monthly_salary: 36619.00,
+      daily_rate: 1664.50,
+      deadline_date: 'Sep 25, 2026',
+      days_left: 18,
+      qs_match_pct: 65,
+      qs_badge_type: 'partial',
+      qs_badge_label: '65% Match · License Required',
+      qs_checklist: [
+        { label: 'Education', req: "Bachelor's degree in Accountancy", match: false, text: 'Candidate: BS Computer Science' },
+        { label: 'Experience', req: '2 Years Relevant Experience', match: true, text: 'Candidate: 2 Years Tech Experience' },
+        { label: 'Training', req: '8 Hours Relevant Accounting Training', match: true, text: 'Candidate: 16 Hours Training' },
+        { label: 'Eligibility', req: 'RA 1080 (Certified Public Accountant)', match: false, text: 'Specialized Licensure Required' }
+      ]
     }
   ];
 
-  async function loadOpportunities() {
-    let vacancies = [];
+  // ── 4. Render Highlights Grid ──────────────────────────────────
+  const highlightsGrid = document.getElementById('highlights-grid');
+  if (highlightsGrid) {
+    highlightsGrid.innerHTML = '';
+    HIGHLIGHTED_VACANCIES.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'highlight-card';
 
-    // Attempt to load from database or API
-    try {
-      if (typeof apiGet === 'function') {
-        const res = await apiGet('/vacancies/public/');
-        if (res && res.success && res.data && Array.isArray(res.data.vacancies) && res.data.vacancies.length > 0) {
-          vacancies = res.data.vacancies;
-        }
-      }
-    } catch (err) {
-      if (typeof db !== 'undefined' && db.getTable) {
-        const dbVacs = db.getTable('vacancies') || [];
-        if (dbVacs.length > 0) vacancies = dbVacs;
-      }
-    }
+      // Format Digit Salary with commas and currency symbol
+      const formattedSalary = `₱${item.monthly_salary.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} / mo`;
 
-    renderJobList(vacancies.length > 0 ? vacancies : DEFAULT_JOBS);
-  }
-
-  function renderJobList(jobs) {
-    if (!jobList) return;
-    jobList.innerHTML = '';
-
-    const list = jobs.length > 0 ? jobs : DEFAULT_JOBS;
-    if (jobsCount) jobsCount.textContent = `${list.length} positions`;
-
-    list.forEach(job => {
-      const row = document.createElement('div');
-      row.className = 'job-row';
-
-      // Normalize department code
-      let deptCode = 'admin';
-      const rawDept = (job.dept || job.department_code || job.department || '').toLowerCase();
-      if (rawDept.includes('fin') || rawDept.includes('acc')) {
-        deptCode = 'fin';
-      } else if (rawDept.includes('ibm') || rawDept.includes('acad') || rawDept.includes('ite') || rawDept.includes('ics') || rawDept.includes('faculty') || rawDept.includes('professor')) {
-        deptCode = 'ibm';
-      } else {
-        deptCode = 'admin';
-      }
-
-      const jobTitle = job.title || 'Institutional Vacancy';
-      const deptDisplay = job.deptName || job.department || 'Northern Bukidnon State College';
-      const sg = job.sg || job.salary_grade || 11;
-      const deadline = job.deadline ? formatDeadline(job.deadline) : 'Sep 30';
-      const applyUrl = `../apply/apply.html?vacancy_id=${encodeURIComponent(job.id || 'vac-001')}`;
-
-      row.dataset.dept = deptCode;
-      row.dataset.title = `${jobTitle.toLowerCase()} ${deptDisplay.toLowerCase()}`;
-
-      row.innerHTML = `
-        <div class="job-info">
-          <div class="jtitle">${escapeHtml(jobTitle)}</div>
-          <div class="jmeta">${escapeHtml(deptDisplay)} <span class="sg">SG ${sg}</span></div>
+      // QS Checklist HTML
+      const checklistHtml = item.qs_checklist.map(c => `
+        <div class="matrix-mini-item">
+          <span>${c.label}:</span>
+          <span class="${c.match ? 'matrix-mini-check' : 'matrix-mini-warn'}">
+            ${c.match ? '✓ Meets Standard' : '⚠ ' + c.req}
+          </span>
         </div>
-        <div class="job-right">
-          <div class="deadline">Closes <b>${escapeHtml(deadline)}</b></div>
-          <a href="${applyUrl}" class="btn-ghost">Apply</a>
+      `).join('');
+
+      card.innerHTML = `
+        <div>
+          <div class="highlight-card__top">
+            <span class="qs-match-badge qs-match-badge--${item.qs_badge_type}">
+              ${item.qs_badge_label}
+            </span>
+            <span class="deadline-pill">
+              Closes <b>${escapeHtml(item.deadline_date)}</b> (${item.days_left}d left)
+            </span>
+          </div>
+
+          <h3 class="highlight-card__title">${escapeHtml(item.title)}</h3>
+          <div class="highlight-card__dept">${escapeHtml(item.department)}</div>
+
+          <!-- Numeric Digit Salary Block -->
+          <div class="salary-block">
+            <div>
+              <span class="text-muted font-xs d-block">Authorized Monthly Compensation:</span>
+              <span class="salary-digit">${formattedSalary}</span>
+            </div>
+            <span class="salary-grade-tag">Salary Grade ${item.salary_grade}</span>
+          </div>
+
+          <!-- Applicant QS Match Matrix Mini-Checklist -->
+          <div class="matrix-mini-checklist">
+            ${checklistHtml}
+          </div>
+        </div>
+
+        <div class="highlight-card__actions">
+          <a href="../open-positions/open-positions.html?highlight=${encodeURIComponent(item.id)}" class="btn-ghost btn--sm">
+            View Criteria Matrix &rarr;
+          </a>
+          <a href="../apply/apply.html?vacancy_id=${encodeURIComponent(item.id)}" class="btn-primary btn--sm">
+            Apply Now
+          </a>
         </div>
       `;
 
-      jobList.appendChild(row);
+      highlightsGrid.appendChild(card);
     });
-
-    filterJobs();
   }
 
-  function formatDeadline(dl) {
-    if (!dl) return 'Sep 30';
-    if (typeof dl === 'string' && dl.length <= 8 && dl.includes(' ')) return dl;
-    try {
-      const d = new Date(dl);
-      if (isNaN(d.getTime())) return dl;
-      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-    } catch {
-      return dl;
-    }
-  }
-
-  // 6. Search and Chip Filtering
-  function filterJobs() {
-    const q = (jobSearch ? jobSearch.value : '').toLowerCase().trim();
-    const rows = document.querySelectorAll('.job-row');
-    let visibleCount = 0;
-
-    rows.forEach(row => {
-      const matchesDept = activeDept === 'all' || row.dataset.dept === activeDept;
-      const matchesText = !q || row.dataset.title.includes(q);
-      const isVisible = matchesDept && matchesText;
-      row.style.display = isVisible ? 'flex' : 'none';
-      if (isVisible) visibleCount++;
-    });
-
-    if (jobsCount) {
-      jobsCount.textContent = `${visibleCount} position${visibleCount === 1 ? '' : 's'}`;
-    }
-  }
-
-  if (jobSearch) {
-    jobSearch.addEventListener('input', filterJobs);
-  }
-
-  chips.forEach(chip => {
-    chip.addEventListener('click', () => {
-      chips.forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      activeDept = chip.dataset.dept || 'all';
-      filterJobs();
-    });
-  });
-
-  // Init
-  loadMyApplications();
-  loadOpportunities();
-
-  // Helper Initials
   function getInitials(name) {
     if (!name) return 'CM';
     const parts = name.trim().split(/\s+/);

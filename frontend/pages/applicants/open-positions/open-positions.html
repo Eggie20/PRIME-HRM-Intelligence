@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open Positions — NBSC Candidate Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="open-positions.css">
+</head>
+<body>
+
+  <!-- Responsive Topbar Navigation -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="../applicant-portal/applicant-portal.html" class="brand">
+        <div class="seal" aria-hidden="true">N</div>
+        <div class="brand-text">
+          <span class="name">NBSC Candidate Portal</span>
+          <span class="sub">PRIME-HRM Recruitment Suite &bull; Level II Accredited</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="topnav" aria-label="Candidate Navigation">
+        <a class="navlink" href="../applicant-portal/applicant-portal.html" id="nav-dashboard">
+          <span class="nav-icon">&#9638;</span> Dashboard
+        </a>
+        <a class="navlink active" href="open-positions.html" id="nav-open-positions">
+          <span class="nav-icon">&#128188;</span> Open positions
+        </a>
+        <a class="navlink" href="../application-track/application-track.html" id="nav-track-link">
+          <span class="nav-icon">&#128269;</span> Track an application
+        </a>
+        <div class="userchip">
+          <div class="avatar" id="nav-avatar">CM</div>
+          <span class="userchip-name" id="nav-username">Carlo Mendoza</span>
+          <a class="profile-link" href="../profile-settings/profile-settings.html" title="View Profile &amp; Settings">&#9881; Settings</a>
+          <button type="button" class="exit" id="btn-applicant-logout" aria-label="Sign out">Sign out &rarr;</button>
+        </div>
+      </nav>
+
+      <!-- Mobile Hamburger Button -->
+      <button type="button" class="nav-toggle-btn" id="nav-toggle-btn" aria-label="Toggle Navigation Menu" aria-expanded="false">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="topbar-mobile-drawer" id="topbar-mobile-drawer">
+      <div class="mobile-user-card">
+        <div class="avatar-lg" id="mobile-avatar">CM</div>
+        <div class="mobile-user-info">
+          <div class="mobile-user-name" id="mobile-username">Carlo Mendoza</div>
+          <div class="mobile-user-role code">Applicant &bull; APP-2026-00417</div>
+        </div>
+      </div>
+      <nav class="mobile-nav-links">
+        <a class="mobile-navlink" href="../applicant-portal/applicant-portal.html">
+          <span>&#9638;</span> <span>Dashboard</span>
+        </a>
+        <a class="mobile-navlink active" href="open-positions.html">
+          <span>&#128188;</span> <span>Open positions</span>
+        </a>
+        <a class="mobile-navlink" href="../application-track/application-track.html">
+          <span>&#128269;</span> <span>Track an application</span>
+        </a>
+        <a class="mobile-navlink" href="../profile-settings/profile-settings.html">
+          <span>&#9881;</span> <span>Profile Settings &amp; ID Proof</span>
+        </a>
+      </nav>
+      <div class="mobile-drawer-footer">
+        <button type="button" class="mobile-logout-btn" id="btn-mobile-logout">
+          <span>Sign Out</span> &rarr;
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Shell Layout -->
+  <div class="shell">
+
+    <!-- SIDEBAR: Candidate Qualification Matrix Reference -->
+    <aside aria-label="Candidate Qualification Profile">
+      <div class="applicant-card">
+        <div class="avatar-lg" id="sidebar-avatar">CM</div>
+        <div class="aname" id="sidebar-name">Carlo Mendoza</div>
+        <div class="aid code" id="sidebar-id">Applicant ID &middot; APP-2026-00417</div>
+        
+        <div class="credentials-box">
+          <div class="credentials-box__header">
+            <span>&#127891;</span>
+            <span>Your Verified Credentials</span>
+          </div>
+          <ul class="credentials-list">
+            <li>
+              <strong>Education:</strong>
+              <span>BS Computer Science (MSU-IIT, 2024)</span>
+            </li>
+            <li>
+              <strong>Experience:</strong>
+              <span>2 Years Technical &amp; Instructional</span>
+            </li>
+            <li>
+              <strong>Training:</strong>
+              <span>16 Hours Pedagogy &amp; Computing</span>
+            </li>
+            <li>
+              <strong>Eligibility:</strong>
+              <span>Career Service Professional / RA 1080</span>
+            </li>
+          </ul>
+          <div class="credentials-note">
+            The matrix compares each opening against these registered credentials.
+          </div>
+          <a href="../profile-settings/profile-settings.html" class="credentials-edit-link">
+            <span>Notice an error? Submit Valid ID</span> &rarr;
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN: Vacancy Directory with Digit Salaries, Dates, and QS Matrix -->
+    <main>
+      <div class="page-head">
+        <h1>Open Career Opportunities</h1>
+        <p>Browse active faculty and staff plantilla vacancies. Review CSC-mandated Qualification Standards and authorized monthly compensations.</p>
+      </div>
+
+      <!-- Search & Filters -->
+      <section class="filter-section" aria-label="Vacancy Filters">
+        <div class="filter-row">
+          <input type="text" id="jobSearch" placeholder="Search by position title or office department..." aria-label="Search vacancies">
+          <button type="button" class="chip active" data-dept="all">All offices</button>
+          <button type="button" class="chip" data-dept="acad">Academic</button>
+          <button type="button" class="chip" data-dept="admin">Administrative</button>
+          <button type="button" class="chip" data-dept="fin">Finance</button>
+          <button type="button" class="chip chip--gold" id="btn-filter-top-match" data-match="top">Top Matches (100%)</button>
+        </div>
+      </section>
+
+      <!-- Vacancies Section -->
+      <section aria-labelledby="heading-vacancies-list">
+        <div class="section-head">
+          <h2 id="heading-vacancies-list">Active Postings</h2>
+          <span class="count" id="positions-count">Loading positions...</span>
+        </div>
+
+        <!-- Vacancies Stack -->
+        <div class="vacancies-stack" id="vacancies-stack">
+          <!-- Populated dynamically via open-positions.js -->
+        </div>
+
+        <div class="helpline">
+          Need assistance or accommodations for a vacancy? Contact the NBSC Human Resource Management Office (HRMO) at <strong>hrmo@nbsc.edu.ph</strong>.
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="../../../shared/js/constants.js"></script>
+  <script src="../../../shared/js/utils.js"></script>
+  <script src="../../../shared/js/db.js"></script>
+  <script src="../../../shared/js/api.js"></script>
+  <script src="../../../shared/js/auth.js"></script>
+  <script src="open-positions.js"></script>
+</body>
+</html>

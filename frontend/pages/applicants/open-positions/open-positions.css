@@ -1,7 +1,6 @@
 /**
- * NBSC Candidate Portal — Applicant Dashboard Styles
- * Precision Academic & Civil Service Design System
- * Replicates & Elevates C:\NBSC PRIME-HRM Intelligence Hub\sample\sample.html
+ * NBSC Candidate Portal — Open Positions Styles
+ * Fraunces + IBM Plex Design System with Qualification Standards (QS) Matrix
  */
 
 :root {
@@ -11,18 +10,10 @@
   --surface: #FFFFFF;
   --brass: #A97C22;
   --brass-deep: #7C5A18;
-  --brass-light: #FBF4E7;
   --line: #DBDECF;
   --muted: #5B6472;
   --success: #3F7D58;
   --success-bg: #E7F0E9;
-  --warning: #B45309;
-  --warning-bg: #FEF3C7;
-  --info: #1D4ED8;
-  --info-bg: #EFF6FF;
-  --shadow-sm: 0 1px 3px rgba(21, 34, 56, 0.05);
-  --shadow-md: 0 4px 14px rgba(21, 34, 56, 0.07);
-  --shadow-lg: 0 8px 24px rgba(21, 34, 56, 0.12);
 }
 
 * {
@@ -41,7 +32,6 @@ body {
   font-size: 15px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  min-height: 100vh;
 }
 
 a {
@@ -54,10 +44,7 @@ a {
   letter-spacing: 0.01em;
 }
 
-.d-none {
-  display: none !important;
-}
-
+/* ── Top Bar ────────────────────────────────────────────────── */
 /* ── Top Bar ────────────────────────────────────────────────── */
 .topbar {
   background: var(--ink);
@@ -418,14 +405,14 @@ a {
 .applicant-card {
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 22px;
-  box-shadow: var(--shadow-sm);
+  border-radius: 4px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .applicant-card .avatar-lg {
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: var(--ink-2);
   color: #ffffff;
@@ -434,17 +421,15 @@ a {
   justify-content: center;
   font-family: 'Fraunces', serif;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 16px;
   margin-bottom: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 }
 
 .applicant-card .aname {
   font-family: 'Fraunces', serif;
   font-weight: 600;
-  font-size: 19px;
+  font-size: 18px;
   color: var(--ink);
-  letter-spacing: -0.01em;
 }
 
 .applicant-card .aid {
@@ -453,177 +438,83 @@ a {
   margin-top: 2px;
 }
 
-.progress-row {
+.credentials-box {
   margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
 }
 
-.progress-row .label {
-  display: flex;
-  justify-content: space-between;
+.credentials-box__header {
   font-size: 12px;
-  color: var(--muted);
-  font-weight: 600;
-  margin-bottom: 6px;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-}
-
-.progress-track {
-  height: 6px;
-  background: var(--paper);
-  border-radius: 3px;
-  overflow: hidden;
-}
-
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--brass) 0%, #D4A843 100%);
-  width: 90%;
-  border-radius: 3px;
-  transition: width 0.3s ease;
-}
-
-.profile-edit-note {
-  margin-top: 16px;
-  padding-top: 14px;
-  border-top: 1px dashed var(--line);
-}
-
-.profile-settings-btn {
-  font-size: 12.5px;
-  color: var(--brass-deep);
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  text-decoration: none;
-  padding: 6px 8px;
-  border-radius: 4px;
-  background: var(--brass-light);
-  border: 1px solid rgba(169, 124, 34, 0.2);
-  transition: all 0.15s ease;
-}
-
-.profile-settings-btn:hover {
-  background: #F4E8D1;
-  color: var(--ink);
-}
-
-/* 4-Pillar Recruitment Journey */
-.stage-block {
-  margin-top: 24px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 22px;
-  box-shadow: var(--shadow-sm);
-}
-
-.stage-block h4 {
-  font-family: 'Fraunces', serif;
-  font-weight: 600;
-  font-size: 15.5px;
-  margin: 0 0 3px;
-  color: var(--ink);
-}
-
-.stage-block .stage-sub {
-  font-size: 12px;
-  color: var(--muted);
-  margin-bottom: 18px;
-  line-height: 1.4;
-}
-
-.stage {
-  display: flex;
-  gap: 12px;
-  position: relative;
-  padding-bottom: 22px;
-}
-
-.stage:last-child {
-  padding-bottom: 0;
-}
-
-.stage::before {
-  content: '';
-  position: absolute;
-  left: 11px;
-  top: 24px;
-  bottom: 0;
-  width: 2px;
-  background: var(--line);
-}
-
-.stage:last-child::before {
-  display: none;
-}
-
-.stage .dot {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  border: 2px solid var(--line);
-  background: var(--surface);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
   font-weight: 700;
-  color: var(--muted);
-  z-index: 1;
+  color: var(--ink-2);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.stage.done .dot {
-  background: var(--success);
-  border-color: var(--success);
-  color: #ffffff;
-}
-
-.stage.current .dot {
-  border-color: var(--brass);
-  color: var(--brass-deep);
-  background: #FBF4E7;
-  box-shadow: 0 0 0 3px rgba(169, 124, 34, 0.2);
-}
-
-.stage .stitle {
-  font-size: 13.5px;
-  font-weight: 600;
-  margin-top: 1px;
-  color: var(--ink);
-}
-
-.stage.current .stitle {
-  color: var(--brass-deep);
-}
-
-.stage .sdesc {
+.credentials-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   font-size: 12px;
-  color: var(--muted);
-  margin-top: 2px;
+}
+
+.credentials-list li {
   line-height: 1.35;
 }
 
-/* ── Main Panel ─────────────────────────────────────────────── */
+.credentials-list strong {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.credentials-list span {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.credentials-note {
+  font-size: 11.5px;
+  color: var(--muted);
+  line-height: 1.4;
+  padding: 8px 10px;
+  background: var(--paper);
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+
+.credentials-edit-link {
+  font-size: 11.5px;
+  color: var(--brass-deep);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.credentials-edit-link:hover {
+  text-decoration: underline;
+}
+
+/* ── Main Area ──────────────────────────────────────────────── */
 .page-head {
-  margin-bottom: 26px;
+  margin-bottom: 24px;
 }
 
 .page-head h1 {
   font-family: 'Fraunces', serif;
   font-weight: 600;
-  font-size: 27px;
+  font-size: 26px;
   margin: 0 0 6px;
   color: var(--ink);
-  letter-spacing: -0.02em;
-  animation: rise .45s ease both;
-}
-
-@keyframes rise {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 .page-head p {
@@ -631,20 +522,69 @@ a {
   margin: 0;
   max-width: 60ch;
   font-size: 14.5px;
-  line-height: 1.5;
 }
 
-section {
-  margin-bottom: 36px;
+/* Filter Row */
+.filter-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filter-row input[type=text] {
+  flex: 1;
+  min-width: 220px;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13.5px;
+  background: var(--surface);
+  color: var(--ink);
+  outline: none;
+}
+
+.filter-row input[type=text]:focus {
+  border-color: var(--ink);
+}
+
+.chip {
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  font-size: 13px;
+  color: var(--muted);
+  cursor: pointer;
+  background: var(--surface);
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+  transition: all .15s ease;
+}
+
+.chip.active {
+  background: var(--ink);
+  color: #ffffff;
+  border-color: var(--ink);
+}
+
+.chip--gold {
+  border-color: rgba(169, 124, 34, 0.4);
+  color: var(--brass-deep);
+  background: #FBF4E7;
+}
+
+.chip--gold.active {
+  background: var(--brass-deep);
+  color: #ffffff;
+  border-color: var(--brass-deep);
 }
 
 .section-head {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  margin-bottom: 14px;
-  flex-wrap: wrap;
-  gap: 8px;
+  margin-bottom: 16px;
 }
 
 .section-head h2 {
@@ -660,384 +600,240 @@ section {
   color: var(--muted);
 }
 
-.section-subhead {
-  font-size: 13px;
-  color: var(--muted);
-  margin: 4px 0 0;
+/* ── Vacancies Stack ────────────────────────────────────────── */
+.vacancies-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.text-brass {
-  color: var(--brass-deep) !important;
-}
-
-.font-medium {
-  font-weight: 500;
-}
-
-/* ── Active Application Snapshot (Executive Card) ──────────── */
-.snapshot-card {
-  background: linear-gradient(135deg, #FFFFFF 0%, #FAFBF8 100%);
+.vacancy-row-card {
+  background: var(--surface);
   border: 1px solid var(--line);
-  border-left: 4px solid var(--brass);
-  border-radius: 8px;
-  padding: 24px;
-  margin-bottom: 32px;
-  box-shadow: var(--shadow-sm);
+  border-radius: 4px;
+  padding: 22px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   transition: all 0.2s ease;
 }
 
-.snapshot-card:hover {
-  box-shadow: var(--shadow-md);
+.vacancy-row-card:hover {
+  border-color: var(--ink-2);
+  box-shadow: 0 4px 14px rgba(21, 34, 56, 0.08);
 }
 
-.snapshot-card__header {
+.vacancy-row-card__top {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 @media (max-width: 680px) {
-  .snapshot-card__header {
+  .vacancy-row-card__top {
     flex-direction: column;
   }
 }
 
-.app-card__docket {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11.5px;
-  color: var(--brass-deep);
-  background: var(--brass-light);
-  border: 1px solid rgba(169, 124, 34, 0.3);
-  padding: 3px 8px;
-  border-radius: 4px;
-  display: inline-block;
-  margin-bottom: 6px;
-  font-weight: 600;
-}
-
-.snapshot-card__title {
+.vacancy-title-group h3 {
   font-family: 'Fraunces', serif;
+  font-size: 18.5px;
   font-weight: 600;
-  font-size: 20px;
-  margin: 4px 0 3px;
   color: var(--ink);
+  margin: 0 0 4px;
 }
 
-.snapshot-card__dept {
+.vacancy-dept-meta {
   font-size: 13px;
   color: var(--muted);
 }
 
-.snapshot-card__status {
-  text-align: right;
-  flex-shrink: 0;
-}
-
-@media (max-width: 680px) {
-  .snapshot-card__status {
-    text-align: left;
-  }
-}
-
-.inportal-status-pill {
-  display: inline-flex;
+.vacancy-top-badges {
+  display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 4px 10px;
-  border-radius: 4px;
-  font-size: 12px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Digit Salary & Deadline Row */
+.vacancy-meta-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 3px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.salary-group {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.digit-salary {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 16.5px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.salary-grade-pill {
+  font-size: 11px;
   font-weight: 600;
+  color: var(--brass-deep);
+  background: #FBF4E7;
+  padding: 2px 7px;
+  border-radius: 3px;
 }
 
-.inportal-status-pill--active {
-  background: #FEF3C7;
-  color: #92400E;
-  border: 1px solid #FCD34D;
-}
-
-.track-pulse-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #D97706;
-  animation: pulseDot 1.5s infinite ease-in-out;
-}
-
-@keyframes pulseDot {
-  0% { transform: scale(0.9); opacity: 0.8; }
-  50% { transform: scale(1.3); opacity: 1; }
-  100% { transform: scale(0.9); opacity: 0.8; }
-}
-
-.snapshot-pct {
+.deadline-group {
   font-size: 12px;
   color: var(--muted);
-  margin-top: 5px;
-  font-weight: 600;
 }
 
-.snapshot-progress-track {
-  height: 7px;
-  background: #E5E7EB;
+.deadline-group b {
+  color: var(--ink);
+}
+
+/* QS Matrix Breakdown Table */
+.qs-matrix-box {
+  background: var(--paper);
   border-radius: 4px;
-  overflow: hidden;
+  padding: 14px 16px;
   margin-bottom: 16px;
 }
 
-.snapshot-progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--brass) 0%, #D4A843 100%);
-  border-radius: 4px;
-}
-
-.snapshot-footer {
+.qs-matrix-box__title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-2);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 16px;
-  padding-top: 14px;
-  border-top: 1px solid var(--line);
+  justify-content: space-between;
 }
 
-@media (max-width: 680px) {
-  .snapshot-footer {
-    flex-direction: column;
-    align-items: flex-start;
+.qs-matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+@media (max-width: 760px) {
+  .qs-matrix-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-.snapshot-remarks {
-  font-size: 13px;
-  color: var(--ink-2);
-  line-height: 1.45;
-}
-
-.snapshot-remarks strong {
-  color: var(--ink);
-}
-
-/* ── Highlighted Opportunities Grid (Digit Salary & QS Matrix) ── */
-.highlights-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 22px;
-}
-
-@media (max-width: 680px) {
-  .highlights-grid {
+@media (max-width: 500px) {
+  .qs-matrix-grid {
     grid-template-columns: 1fr;
   }
 }
 
-.highlight-card {
+.qs-matrix-item {
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 22px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  box-shadow: var(--shadow-sm);
-  transition: all 0.2s ease;
+  border-radius: 3px;
+  padding: 8px 10px;
+  font-size: 11.5px;
 }
 
-.highlight-card:hover {
-  border-color: var(--ink-2);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+.qs-matrix-item__label {
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 2px;
+  font-size: 10.5px;
+  text-transform: uppercase;
 }
 
-.highlight-card__top {
+.qs-matrix-item__val {
+  color: var(--ink);
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.qs-matrix-item__status {
+  margin-top: 4px;
+  font-weight: 600;
+  font-size: 11px;
+}
+
+.qs-matrix-item__status--pass {
+  color: #3F7D58;
+}
+
+.qs-matrix-item__status--check {
+  color: #D97706;
+}
+
+/* Card Actions */
+.vacancy-actions {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 14px;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
 }
 
-.qs-match-badge {
+.qs-badge {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 4px 9px;
-  border-radius: 4px;
+  padding: 3px 8px;
+  border-radius: 3px;
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.02em;
 }
 
-.qs-match-badge--perfect {
+.qs-badge--perfect {
   background: #E7F0E9;
   color: #3F7D58;
   border: 1px solid rgba(63, 125, 88, 0.3);
 }
 
-.qs-match-badge--high {
+.qs-badge--high {
   background: #EFF6FF;
   color: #1D4ED8;
   border: 1px solid rgba(29, 78, 216, 0.25);
 }
 
-.qs-match-badge--partial {
+.qs-badge--partial {
   background: #FEF3C7;
   color: #92400E;
   border: 1px solid rgba(245, 158, 11, 0.3);
 }
 
-.deadline-pill {
-  font-size: 11.5px;
-  color: var(--muted);
-  background: var(--paper);
-  padding: 3px 8px;
-  border-radius: 4px;
-  white-space: nowrap;
-}
-
-.deadline-pill b {
-  color: var(--ink);
-}
-
-.highlight-card__title {
-  font-family: 'Fraunces', serif;
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--ink);
-  margin: 0 0 4px;
-  line-height: 1.3;
-}
-
-.highlight-card__dept {
-  font-size: 12.5px;
-  color: var(--muted);
-  margin-bottom: 14px;
-}
-
-/* Numeric Digit Salary Block */
-.salary-block {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 14px;
-  background: #F8FAFC;
-  border: 1px solid #E2E8F0;
-  border-radius: 6px;
-  margin-bottom: 14px;
-  gap: 10px;
-}
-
-.salary-digit {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 16.5px;
-  font-weight: 700;
-  color: var(--ink);
-  letter-spacing: -0.01em;
-}
-
-.salary-grade-tag {
-  font-size: 11.5px;
-  font-weight: 600;
-  color: var(--brass-deep);
-  background: var(--brass-light);
-  border: 1px solid rgba(169, 124, 34, 0.25);
-  padding: 2px 7px;
-  border-radius: 4px;
-  white-space: nowrap;
-}
-
-/* Applicant QS Match Matrix Mini-Checklist */
-.matrix-mini-checklist {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  font-size: 12px;
-  color: var(--muted);
-  margin-bottom: 16px;
-  background: #FAFBF8;
-  border: 1px solid #E8EBE2;
-  padding: 10px 12px;
-  border-radius: 6px;
-}
-
-.matrix-mini-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-.matrix-mini-item span:first-child {
-  color: var(--ink-2);
-  font-weight: 500;
-}
-
-.matrix-mini-check {
-  color: #3F7D58;
-  font-weight: 600;
-}
-
-.matrix-mini-warn {
-  color: #D97706;
-  font-weight: 600;
-}
-
-.highlight-card__actions {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding-top: 14px;
-  border-top: 1px solid var(--line);
-}
-
-/* Button utilities */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   background: var(--ink);
   color: #ffffff;
-  padding: 9px 16px;
-  border-radius: 6px;
+  padding: 8px 16px;
+  border-radius: 3px;
   border: none;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
-  font-family: inherit;
-  transition: all .15s ease;
   text-decoration: none;
+  transition: background .15s ease;
 }
 
 .btn-primary:hover {
   background: var(--ink-2);
-  transform: translateY(-1px);
 }
 
-.btn-ghost {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: transparent;
-  color: var(--ink);
-  padding: 8px 12px;
-  border-radius: 6px;
-  border: 1px solid var(--line);
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  font-family: inherit;
-  transition: all .15s ease;
-  text-decoration: none;
-}
-
-.btn-ghost:hover {
-  border-color: var(--ink);
-  background: rgba(21, 34, 56, 0.04);
-}
-
-.btn--sm {
-  padding: 6px 12px;
+.helpline {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
   font-size: 12.5px;
+  color: var(--muted);
 }

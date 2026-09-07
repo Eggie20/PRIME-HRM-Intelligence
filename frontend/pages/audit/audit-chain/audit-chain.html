@@ -119,59 +119,129 @@
         </div>
         <div class="top-actions">
           <button class="btn-outline" id="btn-refresh-chain">&#8635; Refresh Chain</button>
-          <a href="../audit-verify/audit-verify.html" class="btn-gold" id="btn-goto-verify">Run Cryptographic Integrity Check &rarr;</a>
+          <a href="../audit-verify/audit-verify.html" class="btn-gold" id="btn-goto-verify">&#128737; Run Cryptographic Integrity Check &rarr;</a>
         </div>
       </div>
 
+      <!-- Educational Concept Explainer Card -->
+      <section class="audit-explainer-card" aria-label="About the Cryptographic Audit Trail">
+        <div class="audit-explainer-header" id="explainer-toggle-btn">
+          <div class="d-flex align-center gap-2">
+            <span class="explainer-icon">&#128737;</span>
+            <span class="explainer-title">What is the Cryptographic Audit Trail? &bull; Civil Service Compliance Guide</span>
+          </div>
+          <button class="btn-ghost-sm" id="btn-toggle-explainer" aria-expanded="false" aria-controls="explainer-content">
+            <span id="explainer-toggle-text">Show What This Means</span>
+            <span class="explainer-caret" id="explainer-caret">&#9662;</span>
+          </button>
+        </div>
+
+        <div class="audit-explainer-content is-collapsed" id="explainer-content">
+          <div class="audit-explainer-grid">
+            <div class="explainer-pillar">
+              <div class="pillar-head">
+                <span class="pillar-badge">&#128274; Immutable SHA-256 Ledger</span>
+              </div>
+              <p><strong>Permanent &amp; Tamper-Evident:</strong> Every action receives a unique 256-bit cryptographic fingerprint. Once committed, no record can be edited, deleted, or backdated without immediately breaking the verification chain.</p>
+            </div>
+
+            <div class="explainer-pillar">
+              <div class="pillar-head">
+                <span class="pillar-badge">&#9881; Administrative Mutations</span>
+              </div>
+              <p><strong>Full Personnel Traceability:</strong> Tracks every state change across the HR lifecycle &mdash; from vacancy publication and applicant qualification screening to verified ID profile corrections and plantilla appointments.</p>
+            </div>
+
+            <div class="explainer-pillar">
+              <div class="pillar-head">
+                <span class="pillar-badge">&#9878; Voting Ballots &amp; Payroll</span>
+              </div>
+              <p><strong>Fair Selection &amp; Statutory Accuracy:</strong> Records HRMPSB deliberation votes without backdoor alteration, and mathematically seals payroll disbursements to guarantee zero ghost employees and 100% SSL compliance.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- KPI Metrics Header -->
-      <div class="stats">
+      <div class="stats stats--four-col">
         <div class="stat-card">
+          <div class="stat-card-top">
+            <span class="stat-icon">&#128230;</span>
+            <span class="stat-flag flag-neutral">Genesis to Head</span>
+          </div>
           <div class="stat-num" id="kpi-total-blocks">0</div>
-          <div class="stat-lbl">Total Blocks Mined</div>
-          <span class="stat-flag flag-neutral">Genesis to Head</span>
+          <div class="stat-lbl">Total Sealed Blocks</div>
         </div>
 
         <div class="stat-card">
-          <div class="stat-num" style="font-size: 17px;">SHA-256</div>
-          <div class="stat-lbl">Cryptographic Standard</div>
-          <span class="stat-flag flag-green">Deterministic Chaining</span>
+          <div class="stat-card-top">
+            <span class="stat-icon">&#128274;</span>
+            <span class="stat-flag flag-blue">Deterministic Chaining</span>
+          </div>
+          <div class="stat-num stat-num--sm">SHA-256</div>
+          <div class="stat-lbl">Security Standard</div>
         </div>
 
         <div class="stat-card">
-          <div class="stat-num" style="font-size: 12px; font-family: monospace;" id="kpi-genesis-hash">000000000000...</div>
-          <div class="stat-lbl">Genesis Block Pointer</div>
-          <span class="stat-flag flag-green">&#10004; Root Established</span>
+          <div class="stat-card-top">
+            <span class="stat-icon">&#9989;</span>
+            <span class="stat-flag flag-green" id="kpi-chain-health-flag">&#10004; 100% Intact</span>
+          </div>
+          <div class="stat-num stat-num--sm text-success">Verified</div>
+          <div class="stat-lbl">Chain Integrity Status</div>
         </div>
 
         <div class="stat-card">
-          <div class="stat-num" style="font-size: 12px; font-family: monospace;" id="kpi-head-hash">Loading...</div>
-          <div class="stat-lbl">Current Chain Tip (Head)</div>
-          <span class="stat-flag flag-gold" id="kpi-head-time">Just now</span>
+          <div class="stat-card-top">
+            <span class="stat-icon">&#128279;</span>
+            <span class="stat-flag flag-gold" id="kpi-head-time">Just now</span>
+          </div>
+          <div class="stat-num stat-num--hash" id="kpi-head-hash">Loading...</div>
+          <div class="stat-lbl">Latest Chain Tip (Head)</div>
         </div>
       </div>
 
       <!-- Search & Filter Controls -->
-      <div class="controls">
-        <select id="select-action-filter" class="select">
-          <option value="">All Audited Actions</option>
-          <option value="GENESIS">GENESIS</option>
-          <option value="HIRING_APPOINTED">HIRING_APPOINTED</option>
-          <option value="HIRING_REJECTED">HIRING_REJECTED</option>
-          <option value="APPLICATION_SUBMITTED">APPLICATION_SUBMITTED</option>
-          <option value="STAGE_TRANSITION">STAGE_TRANSITION</option>
-        </select>
-        <div style="margin-left: auto;">
+      <div class="audit-filter-bar">
+        <div class="search-input-wrap">
+          <span class="search-icon">&#128269;</span>
+          <input type="text" id="input-search-chain" class="search-input" placeholder="Search by candidate, plantilla, target ID, or actor email..." autocomplete="off">
+          <button class="btn-clear-search is-hidden" id="btn-clear-search" title="Clear search" aria-label="Clear search">&times;</button>
+        </div>
+
+        <div class="filter-select-wrap">
+          <select id="select-action-filter" class="select audit-action-select" aria-label="Filter by action category">
+            <option value="">All Audited Actions</option>
+            <option value="HIRING_APPOINTED">&#127881; Plantilla Appointments (HIRING_APPOINTED)</option>
+            <option value="HRMPSB_DELIBERATION">&#9878; HRMPSB Deliberation Ballots (HRMPSB_DELIBERATION)</option>
+            <option value="DSS_SCORED">&#128202; Merit DSS Evaluations (DSS_SCORED)</option>
+            <option value="APPLICATION_SUBMITTED">&#128196; Applicant Filings (APPLICATION_SUBMITTED)</option>
+            <option value="VACANCY_CREATED">&#128188; Plantilla Vacancies (VACANCY_CREATED)</option>
+            <option value="PAYROLL_DISBURSED">&#128176; Payroll Disbursements (PAYROLL_DISBURSED)</option>
+            <option value="GENESIS">&#128274; Genesis Root Block (GENESIS)</option>
+          </select>
+        </div>
+
+        <div class="audit-filter-summary">
           <span class="badge badge--success" id="chain-status-indicator">&#9679; Chain Connected</span>
+          <span class="font-xs text-muted" id="chain-count-indicator">Loading blocks...</span>
         </div>
       </div>
 
-      <div class="mt-2">
-
+      <div class="mt-4">
         <!-- Blockchain Chronological Flow -->
         <section class="card" aria-labelledby="heading-chain-timeline">
           <div class="card__header d-flex justify-between align-center">
-            <h2 class="card__title font-md" id="heading-chain-timeline">Sequential Block Ledger</h2>
-            <span class="badge badge--success" id="chain-status-indicator">&#9679; Chain Connected</span>
+            <div>
+              <h2 class="card__title font-md" id="heading-chain-timeline">Sequential Block Ledger</h2>
+              <p class="font-xs text-muted mt-1">Chronological record of certified civil service mutations. Latest actions appear at the top.</p>
+            </div>
+            <div class="chain-legend d-flex align-center gap-3">
+              <span class="legend-item"><span class="legend-dot legend-dot--appointment"></span> Appointments</span>
+              <span class="legend-item"><span class="legend-dot legend-dot--voting"></span> Deliberation</span>
+              <span class="legend-item"><span class="legend-dot legend-dot--dss"></span> DSS Merit</span>
+              <span class="legend-item"><span class="legend-dot legend-dot--payroll"></span> Payroll</span>
+            </div>
           </div>
 
           <div class="card__body p-6">

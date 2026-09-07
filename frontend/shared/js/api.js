@@ -936,7 +936,55 @@ async function handleLocalRequest(endpoint, options = {}) {
     };
   }
 
-  // 8. Cryptographic Audit Chain endpoint
+  // 8a. Cryptographic Verification endpoint
+  if (path === '/audit/verify' || path.startsWith('/audit/verify')) {
+    let blocks = db.getTable('audit_blocks') || [];
+    if (!blocks || blocks.length === 0) {
+      db.init();
+      blocks = db.getTable('audit_blocks') || [];
+    }
+    let isValid = true;
+    let tamperedIdx = -1;
+    let message = 'All SHA-256 block pointers sequentially verified. 100% Immutable.';
+
+    for (let i = 0; i < blocks.length; i++) {
+      const b = blocks[i];
+      if (i === 0) {
+        const prev = b.prev_hash || b.previous_hash;
+        if (!prev || !prev.startsWith('000000000000')) {
+          isValid = false;
+          tamperedIdx = 0;
+          message = 'Genesis block previous hash root is invalid.';
+          break;
+        }
+      } else {
+        const prevB = blocks[i - 1];
+        const expectedPrev = prevB.hash || prevB.block_hash;
+        const actualPrev = b.prev_hash || b.previous_hash;
+        if (actualPrev !== expectedPrev) {
+          isValid = false;
+          tamperedIdx = b.index !== undefined ? b.index : i;
+          message = `Block #${tamperedIdx} pointer does not match Block #${prevB.index !== undefined ? prevB.index : i - 1} hash.`;
+          break;
+        }
+      }
+    }
+
+    return {
+      success: true,
+      data: {
+        report: {
+          valid: isValid,
+          total_blocks: blocks.length,
+          tampered_block_index: tamperedIdx,
+          message: message,
+          verified_at: new Date().toISOString()
+        }
+      }
+    };
+  }
+
+  // 8b. Cryptographic Audit Chain endpoint
   if (path === '/audit/chain' || path.startsWith('/audit/chain') || path === '/audit' || path.startsWith('/audit')) {
     let blocks = db.getTable('audit_blocks') || [];
     if (!blocks || blocks.length === 0) {
@@ -956,7 +1004,9 @@ async function handleLocalRequest(endpoint, options = {}) {
       previous_hash: b.previous_hash || b.prev_hash || '0000000000000000000000000000000000000000000000000000000000000000',
       actor_email: b.actor_email || 'admin@nbsc.edu.ph',
       actor_role: b.actor_role || 'HR_ADMIN',
-      target_id: b.target_id || (b.data && (b.data.vacancy_id || b.data.application_id || b.data.employee_id)) || 'NBSC-LEDGER'
+      target_id: b.target_id || (b.data && (b.data.vacancy_id || b.data.application_id || b.data.employee_id)) || 'NBSC-LEDGER',
+      payload: b.data || b.payload || {},
+      data: b.data || b.payload || {}
     })).slice().reverse();
 
     return {

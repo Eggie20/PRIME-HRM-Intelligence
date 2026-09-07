@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Check real-time status and deliberation progress for Northern Bukidnon State College vacancies with your tracking code. No login required.">
+  <title>Track Application Status — Northern Bukidnon State College</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../shared/css/global.css">
+  <link rel="stylesheet" href="../../shared/css/layout.css">
+  <link rel="stylesheet" href="../../shared/css/utilities.css">
+  <link rel="stylesheet" href="../../shared/css/buttons.css">
+  <link rel="stylesheet" href="track-application.css">
+</head>
+<body class="public-page">
+
+  <!-- Public Top Navigation Bar (Exact Home Job Board Design) -->
+  <header class="public-nav" role="banner">
+    <div class="public-nav__container">
+      <a href="../../index.html" class="public-nav__brand" id="nav-brand">
+        <div class="public-nav__logo">N</div>
+        <div class="public-nav__brand-text">
+          <span class="public-nav__title">Northern Bukidnon State College</span>
+          <span class="public-nav__subtitle">PRIME-HRM Career Portal</span>
+        </div>
+      </a>
+
+      <!-- Mobile Hamburger Button -->
+      <button class="public-nav__toggle" id="nav-toggle-btn" aria-label="Toggle Navigation Menu" aria-expanded="false">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+
+      <!-- Navigation Links -->
+      <nav class="public-nav__links" id="public-nav-links" aria-label="Public Navigation">
+        <a href="../../index.html" class="public-nav__link">
+          <span>Home</span>
+        </a>
+        <a href="../vacancies/job-board/job-board.html" class="public-nav__link">
+          <span>Open Vacancies</span>
+        </a>
+        <a href="track-application.html" class="public-nav__link public-nav__link--active" aria-current="page">
+          <span>Track Application</span>
+        </a>
+        <a href="../auth/applicant-login/applicant-login.html" class="public-nav__link" id="nav-applicant-portal-link">
+          <span>Applicant Portal</span>
+        </a>
+        <a href="../auth/admin-login/admin-login.html" class="public-nav__btn-staff" id="btn-portal-staff">
+          <span>Staff Portal</span>
+          <span>&rarr;</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="track-hero">
+    <div class="track-hero__container">
+      <div class="track-hero__badge">
+        <span>&#9733;</span>
+        <span>CSC PRIME-HRM Merit Selection Track</span>
+      </div>
+      <h1 class="track-hero__title">
+        Real-Time Application <span class="track-hero__title-accent">Status Tracker</span>
+      </h1>
+      <p class="track-hero__subtitle">
+        Public recruitment tracker &mdash; inspect document verification, 4-Pillar DSS score compilation, and HRMPSB deliberation milestones with your official tracking number without logging in.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Content Shell -->
+  <main class="track-main" id="main-content">
+    <div class="track-container">
+      <div class="track-layout-split">
+
+        <!-- LEFT SIDE: Merit Selection Stages & HRMO Inquiry / Guidance -->
+        <aside class="track-layout-sidebar" aria-label="Recruitment Information and Support">
+          <!-- Card 1: 8-Stage Merit Selection Stages -->
+          <div class="track-info-card">
+            <h3 class="track-info-card__title">
+              <span>&#128203;</span>
+              <span>Merit Selection Stages</span>
+            </h3>
+            <ul class="track-info-card__list">
+              <li><span>1.</span> <strong>Application Docketing:</strong> System logs submitted packet and assigns unique tracking ID.</li>
+              <li><span>2.</span> <strong>Document &amp; QS Screening:</strong> HRMO audits education, experience, and eligibility compliance.</li>
+              <li><span>3.</span> <strong>4-Pillar DSS Scoring:</strong> Automated multi-attribute benchmarking and comparative ranking.</li>
+              <li><span>4.</span> <strong>Dept Head Demonstration:</strong> Teaching demonstration rubric and specialized interview.</li>
+              <li><span>5.</span> <strong>HRMPSB Deliberation:</strong> Selection board comparative consensus and final ranking.</li>
+              <li><span>6.</span> <strong>President Appointment:</strong> Issuance of official appointment under Civil Service rules.</li>
+              <li><span>7.</span> <strong>Board Attestation:</strong> Submission of resolution and plantilla assignment to CSC.</li>
+              <li><span>8.</span> <strong>Assumption to Duty:</strong> Formal oath administration and institutional onboarding.</li>
+            </ul>
+          </div>
+
+          <!-- Card 2: Helpdesk & Data Privacy -->
+          <div class="track-info-card">
+            <h3 class="track-info-card__title">
+              <span>&#128222;</span>
+              <span>HRMO Inquiry &amp; Support</span>
+            </h3>
+            <p class="font-sm text-secondary mb-3">
+              For inquiries regarding interview schedules, document compliance, or appeal procedures, contact the Human Resource Management Office:
+            </p>
+            <ul class="track-info-card__list mb-3">
+              <li><span>&#9993;</span> <strong>Email:</strong> hrmo@nbsc.edu.ph</li>
+              <li><span>&#128222;</span> <strong>Direct Line:</strong> (088) 356-4012 local 108</li>
+              <li><span>&#128338;</span> <strong>Office Hours:</strong> Mon &ndash; Fri, 8:00 AM &ndash; 5:00 PM</li>
+              <li><span>&#128205;</span> <strong>Location:</strong> Admin Bldg., Kihare, Manolo Fortich, Bukidnon</li>
+            </ul>
+            <p class="font-xs text-muted mb-0" style="border-top: 1px dashed #e2e8f0; padding-top: 0.75rem;">
+              <em>All applicant personal records are protected under the <strong>Philippine Data Privacy Act of 2012 (RA 10173)</strong>.</em>
+            </p>
+          </div>
+
+          <!-- Card 3: Registered Candidate Portal Callout -->
+          <div class="track-info-card track-info-card--portal">
+            <h3 class="track-info-card__title text-gold">
+              <span>&#128100;</span>
+              <span>Registered Candidate?</span>
+            </h3>
+            <p class="font-sm text-secondary mb-3">
+              Sign in to your candidate dashboard to access your verified profile, upload replacement documents, and review all active submissions in one place.
+            </p>
+            <a href="../auth/applicant-login/applicant-login.html" class="btn-applicant-portal-link">
+              <span>Candidate Portal Login &rarr;</span>
+            </a>
+          </div>
+        </aside>
+
+        <!-- RIGHT SIDE: Search Card at Top, Preset Dockets, & Results -->
+        <div class="track-layout-main">
+
+          <!-- 1. Look Up Application Status Card (Primary Manual Search) -->
+          <section class="track-search-card" aria-label="Tracking Search">
+            <div class="track-search-card__header">
+              <h2 class="track-search-card__title">&#128269; Look Up Application Status</h2>
+              <p class="track-search-card__desc">
+                Enter your official 16-character tracking number issued during online application submission. No login required.
+              </p>
+            </div>
+
+            <form id="form-track" class="track-search-bar" role="search">
+              <div class="track-search-bar__input-wrap">
+                <span class="track-search-bar__icon">&#128270;</span>
+                <input type="text" id="input-tracking-number" class="track-search-bar__input" placeholder="Enter tracking code (e.g. NBSC-APP-2026-10001)" required aria-label="Application tracking number">
+              </div>
+              <button type="submit" class="track-search-bar__btn" id="btn-track-submit">
+                <span>Track Status</span>
+                <span>&rarr;</span>
+              </button>
+            </form>
+
+            <!-- Quick Sample Tracking Chips -->
+            <div class="track-samples">
+              <span>Try sample docket:</span>
+              <button type="button" class="track-sample-btn" data-code="NBSC-APP-2026-10001">NBSC-APP-2026-10001 (Faculty - Deliberation)</button>
+              <button type="button" class="track-sample-btn" data-code="NBSC-APP-2026-00001">NBSC-APP-2026-00001 (Staff - Appointed)</button>
+              <button type="button" class="track-sample-btn" data-code="NBSC-APP-2025-08420">NBSC-APP-2025-08420 (Archived Attempt)</button>
+            </div>
+          </section>
+
+          <!-- 2. Sample Application Dockets / Attempt Switcher -->
+          <section class="attempts-card" aria-label="Applicant Submissions History">
+            <div class="attempts-header">
+              <div class="attempts-title-group">
+                <span class="attempts-badge">&#128193; Demonstration Dockets</span>
+                <h3 class="attempts-title">Sample Application Dockets &amp; Milestone History</h3>
+              </div>
+              <span class="attempts-note">Click either docket below to test live milestone progression</span>
+            </div>
+            <div class="attempts-grid">
+              <!-- New Attempt (Active 2026) -->
+              <div class="attempt-item attempt-item--active" id="attempt-btn-2026" role="button" tabindex="0" data-code="NBSC-APP-2026-10001">
+                <div class="attempt-item__top">
+                  <span class="attempt-tag attempt-tag--active">🟢 New Attempt (2026 Active)</span>
+                  <span class="attempt-docket code">NBSC-APP-2026-10001</span>
+                </div>
+                <div class="attempt-position">Instructor I (Computer Studies)</div>
+                <div class="attempt-dept">Institute of Computer Studies (ICS) &bull; Plantilla Faculty</div>
+                <div class="attempt-footer">
+                  <span class="attempt-stage-text">Stage 5 &bull; HRMPSB Deliberation</span>
+                  <span class="attempt-badge badge--current">Active &bull; In Review</span>
+                </div>
+              </div>
+
+              <!-- Previous Attempt (Archived 2025) -->
+              <div class="attempt-item" id="attempt-btn-2025" role="button" tabindex="0" data-code="NBSC-APP-2025-08420">
+                <div class="attempt-item__top">
+                  <span class="attempt-tag attempt-tag--archived">📜 Previous Attempt (2025 Archived)</span>
+                  <span class="attempt-docket code">NBSC-APP-2025-08420</span>
+                </div>
+                <div class="attempt-position">Administrative Assistant III</div>
+                <div class="attempt-dept">Finance &amp; Budget Services &bull; Permanent</div>
+                <div class="attempt-footer">
+                  <span class="attempt-stage-text">Stage 8 &bull; Assumption of Duty</span>
+                  <span class="attempt-badge badge--success">100% Completed</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 3. Dynamic Result Container -->
+          <div id="track-result-wrapper" class="track-result-wrapper">
+            <!-- Loading State -->
+            <div id="track-loading" class="track-state-card d-none">
+              <div class="track-spinner"></div>
+              <p class="track-state-text">Querying CSC PRIME-HRM Recruitment Ledger...</p>
+            </div>
+
+            <!-- Error State -->
+            <div id="track-error" class="track-state-card track-state-card--error d-none">
+              <div class="track-state-icon">&#9888;</div>
+              <h3 class="track-state-title">Docket Reference Not Found</h3>
+              <p class="track-state-desc" id="track-error-msg">
+                We could not locate an application with tracking number <strong id="track-error-code"></strong>. Please check your submission confirmation email or enter a valid reference.
+              </p>
+              <button type="button" class="btn-outline mt-3" id="btn-error-reset">Try Sample Docket</button>
+            </div>
+
+            <!-- Detail Display Card -->
+            <article id="track-detail" class="track-detail-card">
+              <!-- Header with Status Pill and Vacancy Info -->
+              <div class="track-detail__header">
+                <div>
+                  <div class="track-detail__badges">
+                    <span class="badge badge--gold" id="detail-docket">NBSC-APP-2026-10001</span>
+                    <span class="badge badge--success" id="detail-status">Stage 5: HRMPSB Deliberation</span>
+                    <span class="badge badge--info" id="detail-category">Faculty Plantilla</span>
+                  </div>
+                  <h2 class="track-detail__title" id="detail-title">Instructor I (Computer Studies)</h2>
+                  <p class="track-detail__meta" id="detail-meta">
+                    <span id="detail-office">&#127970; Institute of Computer Studies (ICS)</span> &bull; 
+                    <span id="detail-sg">&#128176; Salary Grade 12 (₱31,800.00 / mo)</span> &bull; 
+                    <span id="detail-date">&#128197; Submitted: Feb 12, 2026</span>
+                  </p>
+                </div>
+                <div class="track-detail__seal">
+                  <div class="seal-icon">&#10003;</div>
+                  <span class="seal-text">PRIME-HRM L2 Verified</span>
+                </div>
+              </div>
+
+              <!-- 8-Stage Progress Tracker -->
+              <section class="pipeline-section" aria-label="Recruitment Milestone Progress">
+                <div class="pipeline-header">
+                  <h3 class="pipeline-title">&#128640; 8-Stage Recruitment Journey</h3>
+                  <span class="pipeline-pct" id="pipeline-progress-text">Progress: Stage 5 of 8 (62.5%)</span>
+                </div>
+                <div class="pipeline-progress-bar-wrap">
+                  <div class="pipeline-progress-bar" id="pipeline-progress-fill" style="width: 62.5%;"></div>
+                </div>
+
+                <!-- 8-Stage Grid -->
+                <div class="pipeline-stages" id="pipeline-stages-container">
+                  <!-- Generated via track-application.js -->
+                </div>
+              </section>
+
+              <!-- Current Stage Alert / Explainer Box -->
+              <div class="current-stage-alert" id="current-stage-box">
+                <div class="current-stage-alert__icon" id="stage-icon">&#128269;</div>
+                <div class="current-stage-alert__content">
+                  <h4 class="current-stage-alert__title" id="stage-headline">Stage 5 Active: HRMPSB Deliberation &amp; Consensus Evaluation</h4>
+                  <p class="current-stage-alert__desc" id="stage-explanation">
+                    Your credentials, teaching demo rubric (92.4%), and 4-Pillar Decision Support Score (91.8/100) are currently being reviewed by the Human Resource Merit Promotion and Selection Board. Final selection consensus will be transmitted to the College President.
+                  </p>
+                  <div class="current-stage-alert__footer" id="stage-actions">
+                    <span>&#9201; Expected Resolution: <strong>March 15, 2026</strong></span>
+                    <span class="ms-auto font-xs text-muted">Civil Service Omnibus Rules on Appointments (CSC MC 14, s. 2018)</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Vacancy Requirements & Documents Summary -->
+              <div class="track-specs-grid">
+                <div class="track-spec-box">
+                  <div class="track-spec-box__label">&#128218; Education &amp; Qualification Standard</div>
+                  <div class="track-spec-box__val" id="detail-qs">Master's Degree in Computer Science, Information Technology, or allied field. RA 1080 / CSC Professional Eligibility.</div>
+                </div>
+                <div class="track-spec-box">
+                  <div class="track-spec-box__label">&#128202; 4-Pillar Evaluation Score</div>
+                  <div class="track-spec-box__val text-gold font-bold" id="detail-score">91.80 / 100.00 &mdash; Ranked #1 of 6 Applicants</div>
+                </div>
+                <div class="track-spec-box">
+                  <div class="track-spec-box__label">&#128196; Submitted Packet Status</div>
+                  <div class="track-spec-box__val text-success font-semibold" id="detail-docs">Verified Complete &bull; PDS, Transcript of Records, CSC Cert, IPCR (Very Satisfactory)</div>
+                </div>
+                <div class="track-spec-box">
+                  <div class="track-spec-box__label">&#128279; Cryptographic Audit Ledger Reference</div>
+                  <div class="track-spec-box__val code font-xs text-muted" id="detail-hash">SHA-256: 7f3b8904e2a1068c8bcf...92df (Block #4 Verified)</div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Public Footer -->
+  <footer class="public-footer">
+    <div class="public-footer__container">
+      <div class="public-footer__info">
+        <div class="public-footer__logo">N</div>
+        <div>
+          <div class="public-footer__title">Northern Bukidnon State College</div>
+          <div class="public-footer__desc">Merit Selection Plan &bull; CSC PRIME-HRM Level II Accredited Agency</div>
+        </div>
+      </div>
+      <div class="public-footer__copy">
+        &copy; 2026 NBSC Human Resource Management Office. System compliant with CSC Resolution No. 1800692 and RA 10173 (Data Privacy Act).
+      </div>
+    </div>
+  </footer>
+
+  <!-- Core Scripts -->
+  <script src="../../shared/js/db.js"></script>
+  <script src="../../shared/js/api.js"></script>
+  <script src="track-application.js"></script>
+</body>
+</html>
