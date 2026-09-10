@@ -6,7 +6,8 @@
   <title>Profile Settings &amp; ID Verification — NBSC Candidate Portal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../candidate-nav.css">
   <link rel="stylesheet" href="profile-settings.css">
 </head>
 <body>
@@ -14,8 +15,8 @@
   <!-- Responsive Topbar Navigation -->
   <header class="topbar">
     <div class="topbar-inner">
-      <a href="../applicant-portal/applicant-portal.html" class="brand">
-        <div class="seal" aria-hidden="true">N</div>
+      <a href="../applicant-portal/applicant-portal.html" class="brand" title="Northern Bukidnon State College — Candidate Portal">
+        <img src="../../../logos/school_logo.png" alt="NBSC Shield Seal" class="brand-seal-img">
         <div class="brand-text">
           <span class="name">NBSC Candidate Portal</span>
           <span class="sub">PRIME-HRM Recruitment Suite &bull; Level II Accredited</span>
@@ -25,19 +26,109 @@
       <!-- Desktop Navigation Links -->
       <nav class="topnav" aria-label="Candidate Navigation">
         <a class="navlink" href="../applicant-portal/applicant-portal.html" id="nav-dashboard">
-          <span class="nav-icon">&#9638;</span> Dashboard
+          <svg class="nav-svg-icon" viewBox="0 0 24 24">
+            <rect x="3" y="3" width="7" height="7" rx="1.5"></rect>
+            <rect x="14" y="3" width="7" height="7" rx="1.5"></rect>
+            <rect x="14" y="14" width="7" height="7" rx="1.5"></rect>
+            <rect x="3" y="14" width="7" height="7" rx="1.5"></rect>
+          </svg>
+          <span>Dashboard</span>
         </a>
         <a class="navlink" href="../open-positions/open-positions.html" id="nav-open-positions">
-          <span class="nav-icon">&#128188;</span> Open positions
+          <svg class="nav-svg-icon" viewBox="0 0 24 24">
+            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+          </svg>
+          <span>Open positions</span>
         </a>
         <a class="navlink" href="../application-track/application-track.html" id="nav-track-link">
-          <span class="nav-icon">&#128269;</span> Track an application
+          <svg class="nav-svg-icon" viewBox="0 0 24 24">
+            <path d="M9 11l3 3L22 4"></path>
+            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+          </svg>
+          <span>My Applications</span>
         </a>
-        <div class="userchip">
-          <div class="avatar" id="nav-avatar">CM</div>
-          <span class="userchip-name" id="nav-username">Carlo Mendoza</span>
-          <a class="profile-link active" href="profile-settings.html" title="View Profile &amp; Settings">&#9881; Settings</a>
-          <button type="button" class="exit" id="btn-applicant-logout" aria-label="Sign out">Sign out &rarr;</button>
+        <!-- Candidate Profile User Dropdown -->
+        <div class="user-dropdown-container" id="user-dropdown-container">
+          <button type="button" class="userchip-btn" id="user-menu-btn" aria-haspopup="true" aria-expanded="false" aria-label="User profile menu">
+            <div class="avatar" id="nav-avatar">CM</div>
+            <div class="userchip-details">
+              <span class="userchip-name" id="nav-username">Carlo D. Mendoza</span>
+              <span class="userchip-role">Applicant</span>
+            </div>
+            <svg class="chevron-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+
+          <!-- Floating Dropdown Menu -->
+          <div class="user-dropdown-menu" id="user-dropdown-menu" role="menu" aria-labelledby="user-menu-btn">
+            <div class="dropdown-header">
+              <div class="dropdown-avatar" id="dropdown-avatar">CM</div>
+              <div class="dropdown-user-info">
+                <div class="dropdown-user-name" id="dropdown-username">Carlo D. Mendoza</div>
+                <div class="dropdown-user-role" id="dropdown-userrole">Applicant &bull; APP-2026-00417</div>
+                <div class="dropdown-user-email" id="dropdown-useremail">carlo.mendoza@email.com</div>
+              </div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-body">
+              <a class="dropdown-item" href="../applicant-portal/applicant-portal.html" role="menuitem">
+                <svg class="dropdown-icon" viewBox="0 0 24 24">
+                  <rect x="3" y="3" width="7" height="7" rx="1.5"></rect>
+                  <rect x="14" y="3" width="7" height="7" rx="1.5"></rect>
+                  <rect x="14" y="14" width="7" height="7" rx="1.5"></rect>
+                  <rect x="3" y="14" width="7" height="7" rx="1.5"></rect>
+                </svg>
+                <div class="dropdown-item-content">
+                  <span class="dropdown-item-title">Dashboard</span>
+                  <span class="dropdown-item-sub">Candidate overview &amp; summary</span>
+                </div>
+              </a>
+              <a class="dropdown-item" href="../open-positions/open-positions.html" role="menuitem">
+                <svg class="dropdown-icon" viewBox="0 0 24 24">
+                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                </svg>
+                <div class="dropdown-item-content">
+                  <span class="dropdown-item-title">Open positions</span>
+                  <span class="dropdown-item-sub">Explore active job vacancies</span>
+                </div>
+              </a>
+              <a class="dropdown-item" href="../application-track/application-track.html" role="menuitem">
+                <svg class="dropdown-icon" viewBox="0 0 24 24">
+                  <path d="M9 11l3 3L22 4"></path>
+                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                </svg>
+                <div class="dropdown-item-content">
+                  <span class="dropdown-item-title">My Applications</span>
+                  <span class="dropdown-item-sub">Status tracking &amp; interview dockets</span>
+                </div>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item active" href="profile-settings.html" role="menuitem">
+                <svg class="dropdown-icon" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="3"></circle>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+                <div class="dropdown-item-content">
+                  <span class="dropdown-item-title">Settings</span>
+                  <span class="dropdown-item-sub">Profile, credentials &amp; ID proof</span>
+                </div>
+              </a>
+            </div>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-footer">
+              <button type="button" class="dropdown-signout-btn" id="btn-applicant-logout" role="menuitem">
+                <svg class="dropdown-icon" viewBox="0 0 24 24">
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                  <polyline points="16 17 21 12 16 7"></polyline>
+                  <line x1="21" y1="12" x2="9" y2="12"></line>
+                </svg>
+                <span>Sign out</span>
+              </button>
+            </div>
+          </div>
         </div>
       </nav>
 
@@ -60,21 +151,59 @@
       </div>
       <nav class="mobile-nav-links">
         <a class="mobile-navlink" href="../applicant-portal/applicant-portal.html">
-          <span>&#9638;</span> <span>Dashboard</span>
+          <svg class="nav-svg-icon" viewBox="0 0 24 24">
+            <rect x="3" y="3" width="7" height="7" rx="1.5"></rect>
+            <rect x="14" y="3" width="7" height="7" rx="1.5"></rect>
+            <rect x="14" y="14" width="7" height="7" rx="1.5"></rect>
+            <rect x="3" y="14" width="7" height="7" rx="1.5"></rect>
+          </svg>
+          <div class="mobile-navlink-content">
+            <span class="mobile-navlink-title">Dashboard</span>
+            <span class="mobile-navlink-sub">Candidate overview &amp; summary</span>
+          </div>
         </a>
         <a class="mobile-navlink" href="../open-positions/open-positions.html">
-          <span>&#128188;</span> <span>Open positions</span>
+          <svg class="nav-svg-icon" viewBox="0 0 24 24">
+            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+          </svg>
+          <div class="mobile-navlink-content">
+            <span class="mobile-navlink-title">Open positions</span>
+            <span class="mobile-navlink-sub">Explore active job vacancies</span>
+          </div>
         </a>
         <a class="mobile-navlink" href="../application-track/application-track.html">
-          <span>&#128269;</span> <span>Track an application</span>
+          <svg class="nav-svg-icon" viewBox="0 0 24 24">
+            <path d="M9 11l3 3L22 4"></path>
+            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+          </svg>
+          <div class="mobile-navlink-content">
+            <span class="mobile-navlink-title">My Applications</span>
+            <span class="mobile-navlink-sub">Status tracking &amp; interview dockets</span>
+          </div>
         </a>
+        
+        <div class="dropdown-divider" style="margin: 4px 0;"></div>
+
         <a class="mobile-navlink active" href="profile-settings.html">
-          <span>&#9881;</span> <span>Profile Settings &amp; ID Proof</span>
+          <svg class="nav-svg-icon" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+          <div class="mobile-navlink-content">
+            <span class="mobile-navlink-title">Settings</span>
+            <span class="mobile-navlink-sub">Profile, credentials &amp; ID proof</span>
+          </div>
         </a>
       </nav>
       <div class="mobile-drawer-footer">
         <button type="button" class="mobile-logout-btn" id="btn-mobile-logout">
-          <span>Sign Out</span> &rarr;
+          <svg class="nav-svg-icon" viewBox="0 0 24 24">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+          <span>Sign Out</span>
         </button>
       </div>
     </div>
@@ -363,6 +492,7 @@
   <script src="../../../shared/js/constants.js"></script>
   <script src="../../../shared/js/utils.js"></script>
   <script src="../../../shared/js/db.js"></script>
+  <script src="../candidate-nav.js"></script>
   <script src="profile-settings.js"></script>
 </body>
 </html>

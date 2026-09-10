@@ -311,6 +311,39 @@ async function handleLocalRequest(endpoint, options = {}) {
 
   // 3. Vacancies endpoint
   if (path === '/vacancies' || path.startsWith('/vacancies')) {
+    const segments = path.split('/').filter(Boolean);
+    const isDetail = segments.length > 1 && segments[1] !== 'public';
+
+    // Detail endpoint: /vacancies/:id or /vacancies/:id/
+    if (method === 'GET' && isDetail) {
+      const vacId = segments[1];
+      let vacs = db.getTable('vacancies') || [];
+      if (!vacs || vacs.length === 0) {
+        db.init();
+        vacs = db.getTable('vacancies') || [];
+      }
+      let v = vacs.find(vac => vac.id === vacId);
+      if (!v && typeof DB_SEED !== 'undefined' && DB_SEED.vacancies) {
+        v = DB_SEED.vacancies.find(vac => vac.id === vacId);
+      }
+      if (!v) {
+        throw new Error(`Position details could not be found for ID: ${vacId}`);
+      }
+      return {
+        success: true,
+        data: {
+          vacancy: {
+            ...v,
+            department: v.department || v.department_code || 'General',
+            department_code: v.department_code || v.department || 'General',
+            monthly_salary: v.monthly_salary || (v.salary_grade ? v.salary_grade * 2450 : 28000),
+            slots: v.slots || 1,
+            employment_status: v.employment_status || (v.category === 'TEACHING' ? 'Permanent (Plantilla)' : 'Permanent (Plantilla)')
+          }
+        }
+      };
+    }
+
     const page = parseInt(params.get('page') || '1', 10);
     const rawPageSize = params.get('page_size');
     const pageSize = rawPageSize === 'all' ? 99999 : (parseInt(rawPageSize || '10', 10) || 10);
@@ -520,6 +553,83 @@ async function handleLocalRequest(endpoint, options = {}) {
         documents: docs
       };
     };
+
+    // Check if this is an application submission: POST /applications/submit or POST /applications
+    if ((method === 'POST' && segments[1] === 'submit') || (method === 'POST' && !isDetail)) {
+      const getField = (k) => (body instanceof FormData ? body.get(k) : body[k]);
+      const targetVacancyId = getField('vacancy_id') || getField('vacancyId') || 'vac-004';
+      const fullName = getField('full_name') || getField('fullName') || 'Applicant';
+      const email = getField('email') || '';
+      const phone = getField('phone') || '';
+      const birthdate = getField('birthdate') || '';
+      const address = getField('address') || '';
+      const highestEducation = getField('highest_education') || getField('highestEducation') || '';
+      const school = getField('school') || '';
+      const yearsExperience = getField('years_experience') || getField('yearsExperience') || '';
+      const eligibility = getField('eligibility') || '';
+      const coverLetter = getField('cover_letter') || getField('coverLetter') || '';
+
+      const trackingNumber = `NBSC-APP-2026-${Math.floor(10000 + Math.random() * 90000)}`;
+      const newAppId = `app-${Date.now().toString(36)}-${Math.random().toString(36).substring(2, 6)}`;
+
+      const newApp = {
+        id: newAppId,
+        appId: trackingNumber,
+        tracking_number: trackingNumber,
+        trackingNumber: trackingNumber,
+        vacancy_id: targetVacancyId,
+        vacancyId: targetVacancyId,
+        applicant_name: fullName,
+        applicant_email: email,
+        phone: phone,
+        stage: 1,
+        status: 'SUBMITTED',
+        appliedDate: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+        created_at: new Date().toISOString(),
+        personal_info: {
+          full_name: fullName,
+          email: email,
+          phone: phone,
+          birthdate: birthdate,
+          address: address,
+          highest_education: highestEducation,
+          school: school,
+          years_experience: yearsExperience,
+          eligibility: eligibility,
+          cover_letter: coverLetter
+        },
+        documents: [
+          { file_name: 'PDS_CS_Form_212.pdf', doc_type: 'Personal Data Sheet', file_size: 345000 },
+          { file_name: 'Transcript_of_Records.pdf', doc_type: 'Transcript of Records', file_size: 512000 }
+        ],
+        stage_history: [
+          {
+            stage: 'APPLIED',
+            timestamp: new Date().toISOString(),
+            remarks: 'Application packet received via NBSC Career Portal and tracking docket generated.'
+          }
+        ]
+      };
+
+      db.insert('applications', newApp);
+
+      // Increment applicant count for the target vacancy
+      let vacs = db.getTable('vacancies');
+      const vacIdx = vacs.findIndex(v => v.id === targetVacancyId);
+      if (vacIdx !== -1) {
+        vacs[vacIdx].applicant_count = (vacs[vacIdx].applicant_count || 0) + 1;
+        db.setTable('vacancies', vacs);
+      }
+
+      return {
+        success: true,
+        data: {
+          tracking_number: trackingNumber,
+          application: newApp
+        },
+        message: 'Application submitted successfully.'
+      };
+    }
 
     if (isDetail) {
       const app = apps.find(a => a.id === appId) || apps[0];

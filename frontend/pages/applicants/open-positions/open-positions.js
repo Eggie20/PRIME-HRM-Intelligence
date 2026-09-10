@@ -6,8 +6,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   // 1. User Profile Setup
   const user = typeof getUser === 'function' ? getUser() : null;
-  const applicantName = user?.name || user?.email || 'Carlo Mendoza';
-  const userInitials = getInitials(applicantName);
+  const applicantName = user?.name || user?.email || 'Carlo D. Mendoza';
+  const userInitials = 'CM';
   const applicantId = user?.applicant_id || (user?.id ? `APP-2026-${String(user.id).replace(/\D/g, '').padStart(5, '0')}` : 'APP-2026-00417');
 
   const navAvatar = document.getElementById('nav-avatar');
@@ -27,36 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (sidebarName) sidebarName.textContent = applicantName;
   if (sidebarId) sidebarId.innerHTML = `Applicant ID &middot; ${escapeHtml(applicantId)}`;
 
-  // Mobile Navigation Drawer Toggle
-  const navToggleBtn = document.getElementById('nav-toggle-btn');
-  const mobileDrawer = document.getElementById('topbar-mobile-drawer');
-  if (navToggleBtn && mobileDrawer) {
-    navToggleBtn.addEventListener('click', () => {
-      const isOpen = mobileDrawer.classList.toggle('is-open');
-      navToggleBtn.classList.toggle('is-active', isOpen);
-      navToggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    });
-  }
 
-  // Sign out buttons (Desktop & Mobile)
-  function handleSignOut(e) {
-    if (e) e.preventDefault();
-    if (confirm('Are you sure you want to sign out of the Candidate Portal?')) {
-      if (typeof logout === 'function') {
-        logout('../../auth/applicant-login/applicant-login.html');
-      } else {
-        localStorage.removeItem('nbsc_access_token');
-        localStorage.removeItem('nbsc_user');
-        window.location.href = '../../auth/applicant-login/applicant-login.html';
-      }
-    }
-  }
-
-  const btnLogout = document.getElementById('btn-applicant-logout');
-  if (btnLogout) btnLogout.addEventListener('click', handleSignOut);
-
-  const btnMobileLogout = document.getElementById('btn-mobile-logout');
-  if (btnMobileLogout) btnMobileLogout.addEventListener('click', handleSignOut);
 
   // 2. Candidate Verified Credentials
   const CANDIDATE = {

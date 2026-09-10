@@ -1672,3 +1672,9 @@ class NbscDB {
 /** @type {NbscDB} Singleton database instance */
 const db = new NbscDB();
 db.init();
+if (typeof window !== 'undefined') {
+  window.db = db;
+}
+if (typeof global !== 'undefined') {
+  global.db = db;
+}

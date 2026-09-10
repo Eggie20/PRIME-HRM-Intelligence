@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (statUnits) {
       const uniqueDepts = new Set(allVacancies.map(v => v.department).filter(Boolean));
       const count = uniqueDepts.size > 0 ? uniqueDepts.size : 5;
-      statUnits.textContent = `${count} Units`;
+      statUnits.textContent = `${count} Colleges & Divisions`;
     }
   }
 
@@ -468,6 +468,25 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   if (selectSort) {
     selectSort.addEventListener('change', filterAndRender);
+  }
+
+  // Floating Back-to-Top Institutional Button
+  const btnBackToTop = document.getElementById('btn-back-to-top');
+  if (btnBackToTop) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 280) {
+        btnBackToTop.classList.add('is-visible');
+      } else {
+        btnBackToTop.classList.remove('is-visible');
+      }
+    });
+
+    btnBackToTop.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
   }
 
   // Initial Fetch

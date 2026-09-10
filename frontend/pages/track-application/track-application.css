@@ -31,26 +31,26 @@
 
 /* ── Public Page Wrapper ─────────────────────────────────────── */
 .public-page {
-  background-color: var(--cream-bg);
+  background-color: #f8fafc;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  color: var(--text-dark);
-  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #1e293b;
+  font-family: 'Poppins', sans-serif;
   margin: 0;
   padding: 0;
 }
 
-/* ── Top Navigation Bar (Exact Home Job Board Design) ────────── */
+/* ── Top Navigation Bar (Official NBSC Minimalist Aesthetic) ── */
 .public-nav {
-  background: var(--navy-dark);
-  color: #ffffff;
-  padding: 0.85rem 0;
-  border-bottom: 2px solid var(--gold-primary);
+  background: #ffffff;
+  color: #000000;
+  padding: 0.65rem 0;
+  border-bottom: 2px solid #d4a843;
   position: sticky;
   top: 0;
-  z-index: 1000;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  z-index: 100;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
 }
 
 .public-nav__container {
@@ -70,52 +70,45 @@
   align-items: center;
   gap: 0.85rem;
   text-decoration: none;
-  color: #ffffff;
   min-width: 0;
+  transition: opacity 0.2s ease;
 }
 
 .public-nav__brand:hover {
   text-decoration: none;
-  opacity: 0.95;
+  opacity: 0.92;
 }
 
-.public-nav__logo {
-  width: 44px;
-  height: 44px;
-  background: linear-gradient(135deg, #d4a843 0%, #b3862a 100%);
-  color: #0f1b2d;
-  font-weight: 800;
-  font-size: 1.4rem;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 8px rgba(212, 168, 67, 0.4);
+.public-nav__logo-seal {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  display: block;
   flex-shrink: 0;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
 .public-nav__brand-text {
-  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
 }
 
-.public-nav__title {
-  display: block;
-  font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: #ffffff;
-  line-height: 1.2;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.public-nav__brand-main {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: #002b5c;
+  line-height: 1.1;
 }
 
-.public-nav__subtitle {
-  display: block;
-  font-size: 0.75rem;
-  color: #e2bc5c;
-  font-weight: 500;
-  letter-spacing: 0.04em;
+.public-nav__brand-sub {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 1.8px;
+  color: #475569;
   text-transform: uppercase;
   margin-top: 2px;
 }
@@ -123,11 +116,11 @@
 /* Hamburger Toggle Button */
 .public-nav__toggle {
   display: none;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(0, 43, 92, 0.05);
+  border: 1px solid rgba(0, 43, 92, 0.15);
   border-radius: 8px;
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   padding: 8px;
   cursor: pointer;
   flex-direction: column;
@@ -139,20 +132,20 @@
 }
 
 .public-nav__toggle:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(212, 168, 67, 0.15);
 }
 
 .nav-toggle-bar {
   display: block;
   width: 22px;
-  height: 2px;
-  background: #ffffff;
+  height: 2.5px;
+  background: #002b5c;
   border-radius: 2px;
   transition: all 0.25s ease;
 }
 
 .public-nav__toggle.is-active .nav-toggle-bar:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
+  transform: translateY(7.5px) rotate(45deg);
 }
 
 .public-nav__toggle.is-active .nav-toggle-bar:nth-child(2) {
@@ -160,73 +153,157 @@
 }
 
 .public-nav__toggle.is-active .nav-toggle-bar:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
+  transform: translateY(-7.5px) rotate(-45deg);
 }
 
 .public-nav__links {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.35rem;
 }
 
+/* Official 16px Poppins Navigation Links */
 .public-nav__link {
-  color: rgba(255, 255, 255, 0.85);
+  font-family: 'Poppins', sans-serif;
+  color: #000000;
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 16px;
   font-weight: 500;
-  padding: 0.5rem 0.9rem;
-  border-radius: 8px;
+  padding: 10px 15px;
+  border-radius: 6px;
   transition: all 0.2s ease;
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
+  line-height: 1.4;
 }
 
 .public-nav__link:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.08);
+  color: #b45309;
+  background: rgba(212, 168, 67, 0.08);
   text-decoration: none;
 }
 
 .public-nav__link--active {
-  color: #f6e05e !important;
-  background: rgba(212, 168, 67, 0.16) !important;
-  border: 1px solid rgba(212, 168, 67, 0.4);
-  font-weight: 700;
-  box-shadow: 0 0 12px rgba(212, 168, 67, 0.2);
+  color: #b45309 !important;
+  font-weight: 600;
+  background: rgba(212, 168, 67, 0.1) !important;
+  border-bottom: 2px solid #d4a843;
 }
 
 .public-nav__btn-staff {
-  background: transparent;
-  color: #e2bc5c !important;
-  border: 1px solid #d4a843;
-  padding: 0.5rem 1.15rem;
+  font-family: 'Poppins', sans-serif;
+  background: #002b5c;
+  color: #ffffff !important;
+  border: 1.5px solid #002b5c;
+  padding: 8px 18px;
   border-radius: 8px;
-  font-size: 0.88rem;
+  font-size: 15px;
   font-weight: 600;
   text-decoration: none;
   transition: all 0.2s ease;
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.5rem;
+  margin-left: 0.5rem;
 }
 
 .public-nav__btn-staff:hover {
   background: #d4a843;
+  border-color: #d4a843;
   color: #0f1b2d !important;
   text-decoration: none;
-  box-shadow: 0 2px 10px rgba(212, 168, 67, 0.35);
+  box-shadow: 0 3px 12px rgba(212, 168, 67, 0.35);
 }
 
-/* ── Hero Section ────────────────────────────────────────────── */
+/* Mobile Navigation Drawer (Consistent White Institutional Aesthetic) */
+@media (max-width: 900px) {
+  .public-nav {
+    padding: 0.65rem 0;
+  }
+
+  .public-nav__container {
+    position: relative;
+    gap: 0.5rem;
+  }
+
+  .public-nav__toggle {
+    display: flex;
+  }
+
+  .public-nav__links {
+    display: none;
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 0;
+    right: 0;
+    background: #ffffff !important;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.35rem;
+    padding: 1.25rem 1.5rem 1.5rem;
+    box-shadow: 0 16px 28px -4px rgba(0, 0, 0, 0.12);
+    border-bottom: 2px solid #d4a843;
+    z-index: 99;
+  }
+
+  .public-nav__links.is-open {
+    display: flex;
+  }
+
+  .public-nav__link {
+    width: 100%;
+    color: #1e293b !important;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+  }
+
+  .public-nav__link:hover {
+    color: #b45309 !important;
+    background: rgba(212, 168, 67, 0.08) !important;
+  }
+
+  .public-nav__link--active {
+    color: #002b5c !important;
+    font-weight: 700 !important;
+    background: rgba(212, 168, 67, 0.14) !important;
+    border-left: 3px solid #d4a843 !important;
+    border-bottom: none !important;
+    border-radius: 4px 8px 8px 4px !important;
+  }
+
+  .public-nav__btn-staff {
+    width: 100%;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+
+  .public-nav__logo-seal {
+    height: 40px;
+  }
+  .public-nav__brand-main {
+    font-size: 1.25rem;
+  }
+  .public-nav__brand-sub {
+    font-size: 0.58rem;
+    letter-spacing: 1.2px;
+  }
+}
+
+/* ── Hero Section (Minimalist White Layout) ──────────────────── */
 .track-hero {
-  background: radial-gradient(ellipse at 50% 0%, #1c3254 0%, #0b1320 85%);
-  color: #ffffff;
-  padding: 3.5rem 0 2.5rem;
+  background: #ffffff;
+  color: #1e293b;
+  padding: 4.5rem 1.5rem 3.5rem;
   text-align: center;
   position: relative;
   overflow: hidden;
-  border-bottom: 1px solid rgba(212, 168, 67, 0.3);
+  border-bottom: 1px solid #e2e8f0;
 }
 
 .track-hero::before {
@@ -236,10 +313,10 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: radial-gradient(rgba(212, 168, 67, 0.12) 1px, transparent 1px);
-  background-size: 24px 24px;
+  background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+  background-size: 28px 28px;
   pointer-events: none;
-  opacity: 0.6;
+  opacity: 0.35;
 }
 
 .track-hero__container {
@@ -254,38 +331,39 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(212, 168, 67, 0.15);
+  background: rgba(212, 168, 67, 0.1);
   border: 1px solid rgba(212, 168, 67, 0.4);
-  color: #f3dfa2;
+  color: #b45309;
   font-size: 0.82rem;
-  font-weight: 600;
-  padding: 0.35rem 1rem;
+  font-weight: 700;
+  padding: 0.45rem 1.25rem;
   border-radius: 9999px;
   margin-bottom: 1.25rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
 }
 
 .track-hero__title {
-  font-family: 'Fraunces', serif;
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.85rem;
+  font-weight: 800;
+  color: #002b5c;
   line-height: 1.2;
   margin: 0 0 1rem;
   letter-spacing: -0.02em;
 }
 
 .track-hero__title-accent {
-  background: linear-gradient(135deg, #f3dfa2 0%, #d4a843 100%);
+  color: #b45309;
+  background: linear-gradient(135deg, #002b5c 0%, #b45309 85%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .track-hero__subtitle {
-  font-size: 1.05rem;
-  color: #cbd5e1;
-  line-height: 1.6;
+  font-size: 1.125rem;
+  color: #475569;
+  line-height: 1.7;
   max-width: 720px;
   margin: 0 auto;
 }
@@ -1102,42 +1180,6 @@
   }
   .track-layout-main {
     order: 1;
-  }
-  
-  /* Mobile Header Navigation Drawer */
-  .public-nav__toggle {
-    display: flex;
-  }
-
-  .public-nav__links {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: #0b1320;
-    border-bottom: 2px solid var(--gold-primary);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-    padding: 1.25rem 1.5rem;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.75rem;
-    display: none;
-  }
-
-  .public-nav__links.is-open {
-    display: flex;
-  }
-
-  .public-nav__link {
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-  }
-
-  .public-nav__btn-staff {
-    text-align: center;
-    justify-content: center;
-    padding: 0.75rem 1rem;
-    margin-top: 0.5rem;
   }
 }
 

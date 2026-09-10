@@ -95,8 +95,6 @@
   const cardHash = document.getElementById('card-hash');
 
   function init() {
-    setupMobileNav();
-    setupAuthListeners();
     setupListeners();
 
     // Check query param or default to active 2026 attempt
@@ -104,33 +102,6 @@
     const codeParam = urlParams.get('appId') || urlParams.get('docket') || 'NBSC-APP-2026-10001';
 
     loadCandidateDocket(codeParam.trim());
-  }
-
-  function setupMobileNav() {
-    if (!navToggleBtn || !topbarMobileDrawer) return;
-
-    navToggleBtn.addEventListener('click', function () {
-      const isOpen = topbarMobileDrawer.classList.toggle('is-open');
-      navToggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    });
-
-    document.addEventListener('click', function (e) {
-      if (!navToggleBtn.contains(e.target) && !topbarMobileDrawer.contains(e.target)) {
-        topbarMobileDrawer.classList.remove('is-open');
-        navToggleBtn.setAttribute('aria-expanded', 'false');
-      }
-    });
-  }
-
-  function setupAuthListeners() {
-    const handleLogout = () => {
-      if (confirm('Are you sure you want to sign out of the NBSC Candidate Portal?')) {
-        window.location.href = '../../auth/applicant-login/applicant-login.html';
-      }
-    };
-
-    if (btnApplicantLogout) btnApplicantLogout.addEventListener('click', handleLogout);
-    if (btnMobileLogout) btnMobileLogout.addEventListener('click', handleLogout);
   }
 
   function setupListeners() {

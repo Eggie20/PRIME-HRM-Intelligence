@@ -1,0 +1,288 @@
+/**
+ * NBSC PRIME-HRM Intelligence Hub — Module: Navigation Header
+ * File: job-board-nav.css
+ * Path: frontend/pages/vacancies/job-board/job-board-nav.css
+ *
+ * Official NBSC Institutional Navigation styling, brand logo lockup,
+ * responsive mobile drawer, and top-level page wrappers.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap');
+
+/* ── Public Page Wrapper ─────────────────────────────────────── */
+.public-page {
+  background-color: #f8fafc;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: #1e293b;
+  font-family: 'Poppins', var(--font-body, -apple-system, sans-serif);
+}
+
+/* ── Top Navigation Bar (Official NBSC Minimalist Aesthetic) ── */
+.public-nav {
+  background: #ffffff;
+  color: #000000;
+  padding: 0.65rem 0;
+  border-bottom: 2px solid #d4a843;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+}
+
+.public-nav__container {
+  width: 95%;
+  max-width: 1680px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  position: relative;
+}
+
+.public-nav__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  text-decoration: none;
+  min-width: 0;
+  transition: opacity 0.2s ease;
+}
+
+.public-nav__brand:hover {
+  text-decoration: none;
+  opacity: 0.92;
+}
+
+.public-nav__logo-seal {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.public-nav__brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.public-nav__brand-main {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: #002b5c;
+  line-height: 1.1;
+}
+
+.public-nav__brand-sub {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 1.8px;
+  color: #475569;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+@media (max-width: 768px) {
+  .public-nav__logo-seal {
+    height: 40px;
+  }
+  .public-nav__brand-main {
+    font-size: 1.25rem;
+  }
+  .public-nav__brand-sub {
+    font-size: 0.58rem;
+    letter-spacing: 1.2px;
+  }
+}
+
+/* Hamburger Toggle Button */
+.public-nav__toggle {
+  display: none;
+  background: rgba(0, 43, 92, 0.05);
+  border: 1px solid rgba(0, 43, 92, 0.15);
+  border-radius: 8px;
+  width: 42px;
+  height: 42px;
+  padding: 8px;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.public-nav__toggle:hover {
+  background: rgba(212, 168, 67, 0.15);
+}
+
+.nav-toggle-bar {
+  display: block;
+  width: 22px;
+  height: 2.5px;
+  background: #002b5c;
+  border-radius: 2px;
+  transition: all 0.25s ease;
+}
+
+.public-nav__toggle.is-active .nav-toggle-bar:nth-child(1) {
+  transform: translateY(7.5px) rotate(45deg);
+}
+
+.public-nav__toggle.is-active .nav-toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.public-nav__toggle.is-active .nav-toggle-bar:nth-child(3) {
+  transform: translateY(-7.5px) rotate(-45deg);
+}
+
+.public-nav__links {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* Official 16px Poppins Navigation Links */
+.public-nav__link {
+  font-family: 'Poppins', sans-serif;
+  color: #000000;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 15px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  line-height: 1.4;
+}
+
+.public-nav__link:hover {
+  color: #b45309;
+  background: rgba(212, 168, 67, 0.08);
+  text-decoration: none;
+}
+
+.public-nav__link--active {
+  color: #b45309 !important;
+  font-weight: 600;
+  background: rgba(212, 168, 67, 0.1) !important;
+  border-bottom: 2px solid #d4a843;
+}
+
+.public-nav__btn-staff {
+  font-family: 'Poppins', sans-serif;
+  background: #002b5c;
+  color: #ffffff !important;
+  border: 1.5px solid #002b5c;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+.public-nav__btn-staff:hover {
+  background: #d4a843;
+  border-color: #d4a843;
+  color: #0f1b2d !important;
+  text-decoration: none;
+  box-shadow: 0 3px 12px rgba(212, 168, 67, 0.35);
+}
+
+/* ── Mobile Navigation Drawer Responsive ─────────────────────── */
+@media (max-width: 820px) {
+  .public-nav {
+    padding: 0.65rem 0;
+  }
+
+  .public-nav__container {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .public-nav__toggle {
+    display: flex;
+  }
+
+  .public-nav__links {
+    display: none;
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 0;
+    right: 0;
+    background: #ffffff !important;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.35rem;
+    padding: 1.25rem 1.5rem 1.5rem;
+    box-shadow: 0 16px 28px -4px rgba(0, 0, 0, 0.12);
+    border-bottom: 2px solid #d4a843;
+    z-index: 99;
+  }
+
+  .public-nav__links.is-open {
+    display: flex;
+    animation: navDrawerFadeIn 0.22s ease forwards;
+  }
+
+  .public-nav__link {
+    width: 100%;
+    color: #1e293b !important;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+  }
+
+  .public-nav__link:hover {
+    color: #b45309 !important;
+    background: rgba(212, 168, 67, 0.08) !important;
+  }
+
+  .public-nav__link--active {
+    color: #002b5c !important;
+    font-weight: 700 !important;
+    background: rgba(212, 168, 67, 0.14) !important;
+    border-left: 3px solid #d4a843 !important;
+    border-bottom: none !important;
+    border-radius: 4px 8px 8px 4px !important;
+  }
+
+  .public-nav__btn-staff {
+    width: 100%;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+    margin-top: 0.5rem;
+    margin-left: 0;
+  }
+}
+
+@keyframes navDrawerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

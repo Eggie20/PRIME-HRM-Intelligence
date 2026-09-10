@@ -266,35 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initial tickets render
   renderTickets();
 
-  // Mobile Navigation Drawer Toggle
-  const navToggleBtn = document.getElementById('nav-toggle-btn');
-  const mobileDrawer = document.getElementById('topbar-mobile-drawer');
-  if (navToggleBtn && mobileDrawer) {
-    navToggleBtn.addEventListener('click', () => {
-      const isOpen = mobileDrawer.classList.toggle('is-open');
-      navToggleBtn.classList.toggle('is-active', isOpen);
-      navToggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    });
-  }
 
-  // Sign out buttons (Desktop & Mobile)
-  function handleSignOut() {
-    if (confirm('Are you sure you want to sign out of the Candidate Portal?')) {
-      if (typeof logout === 'function') {
-        logout('../../auth/applicant-login/applicant-login.html');
-      } else {
-        localStorage.removeItem('nbsc_access_token');
-        localStorage.removeItem('nbsc_user');
-        window.location.href = '../../auth/applicant-login/applicant-login.html';
-      }
-    }
-  }
-
-  const btnLogout = document.getElementById('btn-applicant-logout');
-  if (btnLogout) btnLogout.addEventListener('click', handleSignOut);
-
-  const btnMobileLogout = document.getElementById('btn-mobile-logout');
-  if (btnMobileLogout) btnMobileLogout.addEventListener('click', handleSignOut);
 
   // ── Helper Functions ─────────────────────────────────────────
   function populateProfile(data) {

@@ -5,36 +5,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Submit your application for positions at Northern Bukidnon State College under CSC PRIME-HRM Level 2 standards.">
   <title>Application Wizard — Northern Bukidnon State College</title>
+
+  <!-- Google Fonts: Poppins & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="../../../shared/css/global.css">
   <link rel="stylesheet" href="../../../shared/css/components.css">
   <link rel="stylesheet" href="../../../shared/css/layout.css">
   <link rel="stylesheet" href="../../../shared/css/utilities.css">
+  <link rel="stylesheet" href="../../../shared/css/nbsc-footer.css">
   <link rel="stylesheet" href="apply.css">
 </head>
 <body class="public-page">
-  <!-- Header -->
+  <!-- Public Navigation (Responsive Institutional Header) -->
   <header class="public-nav" role="banner">
     <div class="public-nav__container">
-      <a href="../../../index.html" class="public-nav__brand">
-        <div class="public-nav__logo">N</div>
-        <div>
-          <span class="public-nav__title">Northern Bukidnon State College</span>
-          <span class="public-nav__subtitle">Merit Selection Application Portal</span>
+      <a href="../../../index.html" class="public-nav__brand" title="Northern Bukidnon State College — PRIME-HRM Intelligence Hub">
+        <img src="../../../logos/school_logo.png" alt="NBSC Seal" class="public-nav__logo-seal">
+        <div class="public-nav__brand-text">
+          <span class="public-nav__brand-main">NBSC</span>
+          <span class="public-nav__brand-sub">PRIME-HRM INTELLIGENCE HUB</span>
         </div>
       </a>
 
-      <nav class="public-nav__links">
-        <a href="../../vacancies/job-board/job-board.html" class="public-nav__link">&larr; Back to Job Board</a>
+      <!-- Mobile Hamburger Button -->
+      <button class="public-nav__toggle" id="nav-toggle-btn" aria-label="Toggle Navigation Menu" aria-expanded="false">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+
+      <!-- Navigation Links (Collapsible Drawer on Mobile) -->
+      <nav class="public-nav__links" id="public-nav-links" aria-label="Public Navigation">
+        <a href="../../../index.html" class="public-nav__link">
+          <span>Home</span>
+        </a>
+        <a href="../../vacancies/job-board/job-board.html" class="public-nav__link">
+          <span>Open Vacancies</span>
+        </a>
+        <a href="../../track-application/track-application.html" class="public-nav__link">
+          <span>Track Application</span>
+        </a>
+        <a href="../../auth/applicant-login/applicant-login.html" class="public-nav__link">
+          <span>Applicant Portal</span>
+        </a>
+        <a href="../../auth/admin-login/admin-login.html" class="public-nav__btn-staff">
+          <span>Staff Portal</span>
+          <span>&rarr;</span>
+        </a>
       </nav>
     </div>
   </header>
 
   <main class="wizard-main" id="main-content">
     <div class="wizard-container">
+      <!-- Breadcrumb & Back Link -->
+      <div class="wizard-back-nav mb-4">
+        <a href="../../vacancies/job-board/job-board.html" class="wizard-back-link">
+          &larr; Back to Open Vacancies
+        </a>
+      </div>
+
       <!-- Vacancy Target Header Card -->
       <section class="card mb-6" id="vacancy-target-card">
         <div class="target-vacancy">
-          <div>
+          <div class="target-vacancy__info">
             <span class="badge badge--teaching mb-1" id="target-category">Position Posting</span>
             <h1 class="target-vacancy__title" id="target-title">Loading vacancy details...</h1>
             <p class="target-vacancy__dept" id="target-dept">Northern Bukidnon State College</p>
@@ -70,7 +107,7 @@
         <!-- Step 1: Personal Details -->
         <fieldset class="wizard-pane wizard-pane--active" id="pane-step-1" aria-labelledby="heading-step-1">
           <legend class="wizard-pane__title" id="heading-step-1">Step 1: Personal & Contact Information</legend>
-          <p class="wizard-pane__subtitle">Please verify your legal personal details as they appear on your government records.</p>
+          <p class="wizard-pane__subtitle">Please verify your legal personal details as they appear on your government civil records and PDS.</p>
 
           <div class="form-row">
             <div class="form-group flex-1">
@@ -101,8 +138,8 @@
           </div>
 
           <div class="form-group">
-            <label for="input-address" class="form-label">Permanent Address <span class="text-danger">*</span></label>
-            <input type="text" id="input-address" class="form-control" placeholder="Barangay, Municipality/City, Province" required>
+            <label for="input-address" class="form-label">Permanent Residential Address <span class="text-danger">*</span></label>
+            <input type="text" id="input-address" class="form-control" placeholder="Barangay, Municipality/City, Province, ZIP" required>
             <div class="form-error" id="error-address"></div>
           </div>
 
@@ -125,25 +162,28 @@
 
             <div class="form-group flex-1">
               <label for="input-school" class="form-label">College / University <span class="text-danger">*</span></label>
-              <input type="text" id="input-school" class="form-control" placeholder="e.g. Central Mindanao University" required>
+              <input type="text" id="input-school" class="form-control" placeholder="e.g. Northern Bukidnon State College" required>
+              <div class="form-error" id="error-school"></div>
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group flex-1">
               <label for="input-years-experience" class="form-label">Years of Relevant Experience <span class="text-danger">*</span></label>
-              <input type="text" id="input-years-experience" class="form-control" placeholder="e.g. 3 years teaching tertiary CS courses" required>
+              <input type="text" id="input-years-experience" class="form-control" placeholder="e.g. 3 years relevant experience in public sector / teaching" required>
+              <div class="form-error" id="error-years-experience"></div>
             </div>
 
             <div class="form-group flex-1">
               <label for="input-eligibility-type" class="form-label">Civil Service Eligibility / PRC License <span class="text-danger">*</span></label>
-              <input type="text" id="input-eligibility-type" class="form-control" placeholder="e.g. RA 1080 (LET) / CS Professional" required>
+              <input type="text" id="input-eligibility-type" class="form-control" placeholder="e.g. RA 1080 (LET) / CS Professional / CSC Sub-Professional" required>
+              <div class="form-error" id="error-eligibility"></div>
             </div>
           </div>
 
           <div class="form-group">
             <label for="textarea-cover-letter" class="form-label">Statement of Interest & Core Competencies</label>
-            <textarea id="textarea-cover-letter" class="form-control" rows="4" placeholder="Briefly describe your dedication to public higher education and student mentorship..."></textarea>
+            <textarea id="textarea-cover-letter" class="form-control" rows="4" placeholder="Briefly describe your dedication to public service, alignment with NBSC core values, and key competencies..."></textarea>
           </div>
 
           <div class="wizard-actions">
@@ -155,43 +195,47 @@
         <!-- Step 3: PDS & Documents -->
         <fieldset class="wizard-pane" id="pane-step-3" aria-labelledby="heading-step-3">
           <legend class="wizard-pane__title" id="heading-step-3">Step 3: Document Uploads (Civil Service Requirements)</legend>
-          <p class="wizard-pane__subtitle">Upload clear scanned copies in PDF or Excel format. Maximum 10MB per file.</p>
+          <p class="wizard-pane__subtitle">Upload clear scanned copies in PDF or Excel format. Maximum 10MB per file. Authenticated copies will be verified during HRMPSB assessment.</p>
 
           <div class="upload-stack">
             <!-- PDS 212 -->
             <div class="upload-item">
               <div class="upload-item__info">
                 <span class="upload-item__title">Personal Data Sheet (CSC Form 212, Revised 2017) <span class="text-danger">*</span></span>
-                <span class="upload-item__desc">Include Work Experience Sheet attachment with recent passport photo.</span>
+                <span class="upload-item__desc">Include Work Experience Sheet attachment with recent passport-sized ID photo.</span>
               </div>
               <input type="file" id="file-pds" class="form-control-file" accept=".pdf,.xls,.xlsx" required>
+              <div class="upload-item__file-badge" id="badge-file-pds"></div>
             </div>
 
             <!-- Transcript of Records -->
             <div class="upload-item">
               <div class="upload-item__info">
                 <span class="upload-item__title">Official Transcript of Records (TOR) <span class="text-danger">*</span></span>
-                <span class="upload-item__desc">Undergraduate and Graduate School complete academic transcripts.</span>
+                <span class="upload-item__desc">Undergraduate and/or Graduate School complete official academic transcripts.</span>
               </div>
               <input type="file" id="file-tor" class="form-control-file" accept=".pdf" required>
+              <div class="upload-item__file-badge" id="badge-file-tor"></div>
             </div>
 
             <!-- PRC / CS Eligibility -->
             <div class="upload-item">
               <div class="upload-item__info">
                 <span class="upload-item__title">Certificate of Eligibility or Professional Board Rating / License</span>
-                <span class="upload-item__desc">Valid PRC ID card copy or authenticated CSC Certificate.</span>
+                <span class="upload-item__desc">Valid PRC License card copy or authenticated CSC Certificate of Eligibility.</span>
               </div>
               <input type="file" id="file-eligibility" class="form-control-file" accept=".pdf,.jpg,.png">
+              <div class="upload-item__file-badge" id="badge-file-eligibility"></div>
             </div>
 
             <!-- Certificates -->
             <div class="upload-item">
               <div class="upload-item__info">
                 <span class="upload-item__title">Certificates of Relevant Trainings, Seminars & Employment</span>
-                <span class="upload-item__desc">Proof of accredited trainings within the past 5 years.</span>
+                <span class="upload-item__desc">Proof of accredited civil service or academic trainings within the past 5 years.</span>
               </div>
               <input type="file" id="file-trainings" class="form-control-file" accept=".pdf">
+              <div class="upload-item__file-badge" id="badge-file-trainings"></div>
             </div>
           </div>
 
@@ -204,7 +248,7 @@
         <!-- Step 4: Review & Submit -->
         <fieldset class="wizard-pane" id="pane-step-4" aria-labelledby="heading-step-4">
           <legend class="wizard-pane__title" id="heading-step-4">Step 4: Review Application & Truthfulness Declaration</legend>
-          <p class="wizard-pane__subtitle">Review your information before official transmission to the NBSC Human Resource Selection Board.</p>
+          <p class="wizard-pane__subtitle">Review your details before official transmission to the NBSC Human Resource Merit Promotion and Selection Board.</p>
 
           <div class="review-box mb-5" id="review-summary-content">
             <!-- Dynamically populated via apply.js -->
@@ -215,7 +259,7 @@
               <input type="checkbox" id="check-oath" required>
               <span class="checkbox-label">
                 <strong>OATH OF TRUTHFULNESS & CIVIL SERVICE COMPLIANCE:</strong><br>
-                I hereby certify that all information submitted in this application and attached documents are true, correct, and complete to the best of my knowledge. I understand that any willful omission or false statement will result in immediate disqualification or administrative liability under Republic Act No. 6713 and Civil Service Commission rules.
+                I hereby certify that all information submitted in this application and attached documents are true, correct, and complete to the best of my knowledge. I understand that any willful omission or false statement will result in immediate disqualification or administrative liability under Republic Act No. 6713 and Civil Service Commission Omnibus Rules.
               </span>
             </label>
             <div class="form-error" id="error-oath"></div>
@@ -231,6 +275,164 @@
       </form>
     </div>
   </main>
+
+  <!-- Official NBSC 4-Column Institutional Footer (Exact nbsc.edu.ph replica) -->
+  <footer class="nbsc-footer" role="contentinfo">
+    <div class="nbsc-footer__container">
+      <!-- Column 1: Brand, Address, Contact & 4 Seals -->
+      <div class="nbsc-footer__col">
+        <div class="nbsc-footer__brand-header">
+          <img src="../../../logos/school_logo.png" alt="NBSC Seal" class="nbsc-footer__logo">
+          <span class="nbsc-footer__college-name">NORTHERN BUKIDNON<br>STATE COLLEGE</span>
+        </div>
+
+        <div class="nbsc-footer__contact-info">
+          <div class="nbsc-footer__contact-item">
+            <svg class="nbsc-footer__icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/>
+            </svg>
+            <span>Kihare, Tankulan, Manolo Fortich, Bukidnon, 8703, Philippines.</span>
+          </div>
+          <div class="nbsc-footer__contact-item">
+            <svg class="nbsc-footer__icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+            <a href="mailto:nbscadmin@nbsc.edu.ph" class="nbsc-footer__link">nbscadmin@nbsc.edu.ph</a>
+          </div>
+          <div class="nbsc-footer__contact-item">
+            <svg class="nbsc-footer__icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+            </svg>
+            <a href="tel:+639473815311" class="nbsc-footer__link">+63 947 381 5311</a>
+          </div>
+        </div>
+
+        <!-- Official Accreditation & Transparency Badges -->
+        <div class="nbsc-footer__badges" aria-label="Institutional Accreditations and Compliance Seals">
+          <a href="https://www.foi.gov.ph" target="_blank" rel="noopener noreferrer" class="nbsc-footer__badge-link" title="Philippine Transparency Seal — Full Compliance">
+            <img src="../../../logos/Transparency-seal-circle-300x300-2-e1694067634412.png" alt="Philippine Transparency Seal" class="nbsc-footer__badge-img nbsc-footer__badge-img--round">
+          </a>
+          <a href="https://privacy.gov.ph" target="_blank" rel="noopener noreferrer" class="nbsc-footer__badge-link" title="National Privacy Commission — Registered DPO/DPS">
+            <img src="../../../logos/the_transparency_seal2_footer.png" alt="NPC Registered DPO/DPS" class="nbsc-footer__badge-img nbsc-footer__badge-img--keyhole">
+          </a>
+          <a href="https://www.foi.gov.ph" target="_blank" rel="noopener noreferrer" class="nbsc-footer__badge-link" title="Freedom of Information — Republic of the Philippines">
+            <img src="../../../logos/FOI-Logo-2.png" alt="Freedom of Information Philippines" class="nbsc-footer__badge-img nbsc-footer__badge-img--round">
+          </a>
+          <a href="https://www.socotec.com" target="_blank" rel="noopener noreferrer" class="nbsc-footer__badge-link" title="SOCOTEC ISO 9001:2015 Certified Quality Management System">
+            <img src="../../../logos/ISO-Secondary-Version1.png" alt="SOCOTEC ISO 9001" class="nbsc-footer__badge-img nbsc-footer__badge-img--rect">
+          </a>
+        </div>
+      </div>
+
+      <!-- Column 2: Direct Contact Lines -->
+      <div class="nbsc-footer__col">
+        <div class="nbsc-footer__group">
+          <h4 class="nbsc-footer__section-title">ADMISSION</h4>
+          <div class="nbsc-footer__gold-bar"></div>
+          <div class="nbsc-footer__phone-list">
+            <a href="tel:+639276890065" class="nbsc-footer__phone-link">
+              <svg class="nbsc-footer__phone-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+              </svg>
+              <span>+63 927 689 0065</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="nbsc-footer__group">
+          <h4 class="nbsc-footer__section-title">GUIDANCE</h4>
+          <div class="nbsc-footer__gold-bar"></div>
+          <div class="nbsc-footer__phone-list">
+            <a href="tel:+639176203340" class="nbsc-footer__phone-link">
+              <svg class="nbsc-footer__phone-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+              </svg>
+              <span>+63 917 620 3340</span>
+            </a>
+            <a href="tel:+639169084806" class="nbsc-footer__phone-link">
+              <svg class="nbsc-footer__phone-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+              </svg>
+              <span>+63 916 908 4806</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="nbsc-footer__group">
+          <h4 class="nbsc-footer__section-title">REGISTRAR</h4>
+          <div class="nbsc-footer__gold-bar"></div>
+          <div class="nbsc-footer__phone-list">
+            <a href="tel:+639753032951" class="nbsc-footer__phone-link">
+              <svg class="nbsc-footer__phone-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+              </svg>
+              <span>+63 975 303 2951</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 3: Government Links -->
+      <div class="nbsc-footer__col">
+        <div class="nbsc-footer__dotted-header">
+          <h4 class="nbsc-footer__section-title">GOVERNMENT LINKS</h4>
+          <div class="nbsc-footer__gold-bar"></div>
+        </div>
+        <ul class="nbsc-footer__nav-list">
+          <li><a href="https://op-proper.gov.ph" target="_blank" rel="noopener noreferrer" class="nbsc-footer__nav-link">Office of the President</a></li>
+          <li><a href="https://ovp.gov.ph" target="_blank" rel="noopener noreferrer" class="nbsc-footer__nav-link">Office of the Vice-President</a></li>
+          <li><a href="https://legacy.senate.gov.ph" target="_blank" rel="noopener noreferrer" class="nbsc-footer__nav-link">Senate of the Philippines</a></li>
+          <li><a href="https://www.congress.gov.ph" target="_blank" rel="noopener noreferrer" class="nbsc-footer__nav-link">House of the Representative</a></li>
+          <li><a href="https://arta.gov.ph" target="_blank" rel="noopener noreferrer" class="nbsc-footer__nav-link">Anti-Red Tape Authority</a></li>
+          <li><a href="https://dict.gov.ph" target="_blank" rel="noopener noreferrer" class="nbsc-footer__nav-link">Department of Information and Communications Technology</a></li>
+          <li><a href="https://privacy.gov.ph" target="_blank" rel="noopener noreferrer" class="nbsc-footer__nav-link">National Privacy Commission</a></li>
+          <li><a href="https://ched.gov.ph" target="_blank" rel="noopener noreferrer" class="nbsc-footer__nav-link">Commission on Higher Education</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 4: Online Services -->
+      <div class="nbsc-footer__col">
+        <div class="nbsc-footer__dotted-header">
+          <h4 class="nbsc-footer__section-title">ONLINE SERVICES</h4>
+          <div class="nbsc-footer__gold-bar"></div>
+        </div>
+        <ul class="nbsc-footer__nav-list">
+          <li><a href="https://castle.nbsc.edu.ph" target="_blank" rel="noopener noreferrer" class="nbsc-footer__nav-link">NBSC Castle LMS</a></li>
+          <li><a href="https://www.facebook.com/nbscofficial" target="_blank" rel="noopener noreferrer" class="nbsc-footer__nav-link">NBSC Facebook Page</a></li>
+          <li><a href="https://is.nbsc.edu.ph" target="_blank" rel="noopener noreferrer" class="nbsc-footer__nav-link">NBSC Integrated System</a></li>
+          <li><a href="https://sis.nbsc.edu.ph" target="_blank" rel="noopener noreferrer" class="nbsc-footer__nav-link">NBSC Student Information System</a></li>
+          <li><a href="https://nbsc.edu.ph/invitation-to-bid" target="_blank" rel="noopener noreferrer" class="nbsc-footer__nav-link">Invitation to BID</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Sub-footer / Copyright & Attribution Bar -->
+    <div class="nbsc-footer__bottom">
+      <div class="nbsc-footer__bottom-container">
+        <a href="https://www.facebook.com/nbscofficial" target="_blank" rel="noopener noreferrer" class="nbsc-footer__social-link" aria-label="NBSC Official Facebook Page">
+          <svg class="nbsc-footer__fb-svg" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+        </a>
+
+        <div class="nbsc-footer__center-block">
+          <div class="nbsc-footer__copyright">
+            &copy;2026 Northern Bukidnon State College All Right Reserved.
+          </div>
+          <div class="nbsc-footer__attribution">
+            Powered by: Information and Communication Technology Management Office
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Institutional Back to Top Button -->
+  <button type="button" class="nbsc-back-to-top" id="btn-back-to-top" aria-label="Scroll to top of page" title="Back to Top">
+    <svg class="nbsc-back-to-top__arrow" viewBox="0 0 24 24">
+      <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
+    </svg>
+  </button>
 
   <script src="../../../shared/js/constants.js"></script>
   <script src="../../../shared/js/utils.js"></script>

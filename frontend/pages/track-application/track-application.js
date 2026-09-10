@@ -161,9 +161,9 @@
     setupMobileNav();
     setupEventListeners();
     
-    // Check URL parameters for ?appId=...
+    // Check URL parameters for ?appId=... or ?tracking=...
     const urlParams = new URLSearchParams(window.location.search);
-    const codeParam = urlParams.get('appId') || urlParams.get('docket') || 'NBSC-APP-2026-10001';
+    const codeParam = urlParams.get('appId') || urlParams.get('tracking') || urlParams.get('docket') || urlParams.get('code') || 'NBSC-APP-2026-10001';
     
     loadDocket(codeParam.trim());
   }
@@ -233,6 +233,22 @@
         loadDocket('NBSC-APP-2026-10001');
       });
     }
+
+    // Floating Back to Top Button
+    const backToTopBtn = document.getElementById('btn-back-to-top');
+    if (backToTopBtn) {
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          backToTopBtn.classList.add('is-visible');
+        } else {
+          backToTopBtn.classList.remove('is-visible');
+        }
+      }, { passive: true });
+
+      backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
   }
 
   function setActiveAttempt(code) {
@@ -259,6 +275,7 @@
       if (!record && window.db && typeof window.db.getTable === 'function') {
         const applications = window.db.getTable('applications') || [];
         const app = applications.find(a => 
+          (a.tracking_number && a.tracking_number.toUpperCase() === trackingCode) ||
           (a.trackingNumber && a.trackingNumber.toUpperCase() === trackingCode) ||
           (a.id && a.id.toString().toUpperCase() === trackingCode) ||
           (a.appId && a.appId.toUpperCase() === trackingCode)
@@ -266,16 +283,17 @@
 
         if (app) {
           const vacancies = window.db.getTable('vacancies') || [];
-          const vac = vacancies.find(v => v.id === app.vacancyId) || {};
+          const vacId = app.vacancy_id || app.vacancyId;
+          const vac = vacancies.find(v => v.id === vacId) || {};
           
           record = {
-            appId: app.trackingNumber || app.id || trackingCode,
-            title: vac.title || 'Applicant Position',
-            office: vac.department || 'Northern Bukidnon State College',
+            appId: app.tracking_number || app.trackingNumber || app.id || trackingCode,
+            title: vac.title || app.position_title || 'Applicant Position',
+            office: vac.department || vac.department_code || 'Northern Bukidnon State College',
             category: vac.category || 'Civil Service Plantilla',
-            salaryGrade: vac.salaryGrade ? `SG ${vac.salaryGrade}` : 'SG 11',
-            monthlySalary: vac.monthlySalary ? `₱${Number(vac.monthlySalary).toLocaleString('en-US', {minimumFractionDigits: 2})} / mo` : '₱27,000.00 / mo',
-            dateSubmitted: app.appliedDate || app.createdAt || 'Recent',
+            salaryGrade: (vac.salary_grade || vac.salaryGrade) ? `SG ${vac.salary_grade || vac.salaryGrade}` : 'SG 11',
+            monthlySalary: (vac.monthly_salary || vac.monthlySalary) ? `₱${Number(vac.monthly_salary || vac.monthlySalary).toLocaleString('en-US', {minimumFractionDigits: 2})} / mo` : '₱27,000.00 / mo',
+            dateSubmitted: app.applied_at || app.appliedDate || app.createdAt || 'Recent',
             currentStage: app.stage || 3,
             statusLabel: app.status || 'In Evaluation',
             statusClass: 'badge--info',

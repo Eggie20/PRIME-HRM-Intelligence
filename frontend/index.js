@@ -59,4 +59,21 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // Floating Back to Top Button
+  const backToTopBtn = document.getElementById('btn-back-to-top');
+  if (backToTopBtn) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopBtn.classList.add('is-visible');
+      } else {
+        backToTopBtn.classList.remove('is-visible');
+      }
+    }, { passive: true });
+
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
 });
+

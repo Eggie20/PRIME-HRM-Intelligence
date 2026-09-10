@@ -5,21 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Explore academic faculty and administrative career opportunities at Northern Bukidnon State College. Apply online under CSC PRIME-HRM standards.">
   <title>Career Opportunities — Northern Bukidnon State College</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../../shared/css/global.css">
   <link rel="stylesheet" href="../../../shared/css/components.css">
   <link rel="stylesheet" href="../../../shared/css/layout.css">
-  <link rel="stylesheet" href="../../../shared/css/utilities.css">
+  <link rel="stylesheet" href="job-board-nav.css">
+  <link rel="stylesheet" href="job-board-hero.css">
+  <link rel="stylesheet" href="job-board-filters.css">
+  <link rel="stylesheet" href="job-board-cards.css">
+  <link rel="stylesheet" href="job-board-modal.css">
+  <link rel="stylesheet" href="job-board-footer.css">
   <link rel="stylesheet" href="job-board.css">
 </head>
 <body class="public-page">
-  <!-- Public Navigation (Responsive Header with Mobile Toggle) -->
+  <!-- Public Navigation (Responsive Institutional Header) -->
   <header class="public-nav" role="banner">
     <div class="public-nav__container">
-      <a href="../../../index.html" class="public-nav__brand">
-        <div class="public-nav__logo">N</div>
+      <a href="../../../index.html" class="public-nav__brand" title="Northern Bukidnon State College — PRIME-HRM Intelligence Hub">
+        <img src="../../../logos/school_logo.png" alt="NBSC Seal" class="public-nav__logo-seal">
         <div class="public-nav__brand-text">
-          <span class="public-nav__title">Northern Bukidnon State College</span>
-          <span class="public-nav__subtitle">PRIME-HRM Career Portal</span>
+          <span class="public-nav__brand-main">NBSC</span>
+          <span class="public-nav__brand-sub">PRIME-HRM INTELLIGENCE HUB</span>
         </div>
       </a>
 
@@ -68,41 +76,55 @@
     </div>
   </section>
 
-  <!-- Executive Institutional Job Summary Strip -->
-  <section class="job-stats-strip" aria-label="Job Summary Highlights">
+  <!-- Executive Institutional Job Summary Strip (Informative & Professional) -->
+  <section class="job-stats-strip" aria-label="Institutional Recruitment Highlights">
     <!-- Metric 1: Total Active Vacancies -->
     <div class="job-stat-card">
-      <div class="job-stat-card__icon job-stat-card__icon--gold">&#128188;</div>
-      <div class="job-stat-card__content">
-        <div class="job-stat-card__value" id="stat-total-vacancies">6</div>
-        <div class="job-stat-card__label">Active Vacancies</div>
+      <div class="job-stat-card__top">
+        <div class="job-stat-card__icon job-stat-card__icon--gold">&#128188;</div>
+        <span class="job-stat-card__tag job-stat-card__tag--gold">Plantilla Openings</span>
+      </div>
+      <div class="job-stat-card__main">
+        <div class="job-stat-card__value">
+          <span id="stat-total-vacancies">6</span> Active Positions
+        </div>
+        <div class="job-stat-card__desc">Permanent civil service appointments with full state benefits</div>
       </div>
     </div>
 
     <!-- Metric 2: Career Stream Breakdown -->
     <div class="job-stat-card">
-      <div class="job-stat-card__icon job-stat-card__icon--navy">&#127891;</div>
-      <div class="job-stat-card__content">
+      <div class="job-stat-card__top">
+        <div class="job-stat-card__icon job-stat-card__icon--navy">&#127891;</div>
+        <span class="job-stat-card__tag job-stat-card__tag--navy">Career Streams</span>
+      </div>
+      <div class="job-stat-card__main">
         <div class="job-stat-card__value" id="stat-streams">4 Faculty &bull; 2 Staff</div>
-        <div class="job-stat-card__label">Academic &amp; Admin</div>
+        <div class="job-stat-card__desc">Academic teaching faculty and administrative support items</div>
       </div>
     </div>
 
     <!-- Metric 3: Academic & Administrative Units -->
     <div class="job-stat-card">
-      <div class="job-stat-card__icon job-stat-card__icon--green">&#127963;</div>
-      <div class="job-stat-card__content">
-        <div class="job-stat-card__value" id="stat-units">5 Units</div>
-        <div class="job-stat-card__label">Colleges &amp; Divisions</div>
+      <div class="job-stat-card__top">
+        <div class="job-stat-card__icon job-stat-card__icon--green">&#127963;</div>
+        <span class="job-stat-card__tag job-stat-card__tag--green">Deploying Units</span>
+      </div>
+      <div class="job-stat-card__main">
+        <div class="job-stat-card__value" id="stat-units">5 Colleges &amp; Divisions</div>
+        <div class="job-stat-card__desc">ICS, IBM, ITE, DGEC &amp; Executive Support Offices</div>
       </div>
     </div>
 
     <!-- Metric 4: Government Accreditation -->
     <div class="job-stat-card">
-      <div class="job-stat-card__icon job-stat-card__icon--blue">&#9878;</div>
-      <div class="job-stat-card__content">
-        <div class="job-stat-card__value">Level 2</div>
-        <div class="job-stat-card__label">PRIME-HRM Accredited</div>
+      <div class="job-stat-card__top">
+        <div class="job-stat-card__icon job-stat-card__icon--blue">&#9878;</div>
+        <span class="job-stat-card__tag job-stat-card__tag--blue">CSC Accredited</span>
+      </div>
+      <div class="job-stat-card__main">
+        <div class="job-stat-card__value">Level 2 Maturity</div>
+        <div class="job-stat-card__desc">Civil Service Commission Recruitment, Selection &amp; Placement</div>
       </div>
     </div>
   </section>
@@ -193,16 +215,163 @@
     </div>
   </div>
 
-  <!-- Public Footer -->
-  <footer class="public-footer">
-    <div class="public-footer__container">
-      <p>
-        &copy; 2026 Northern Bukidnon State College &bull; 
-        <span class="public-footer__accreditation">Civil Service Commission PRIME-HRM Level 2 Accredited</span>
-      </p>
-      <p class="public-footer__sub">Kihare, Manolo Fortich, Bukidnon, Philippines 8703 &bull; Merit Promotion &amp; Selection Plan Compliant</p>
+  <!-- Official NBSC 4-Column Institutional Footer (Exact nbsc.edu.ph replica) -->
+  <footer class="nbsc-footer" role="contentinfo">
+    <div class="nbsc-footer__container">
+      <!-- Column 1: Brand, Address, Contact & 4 Seals -->
+      <div class="nbsc-footer__col">
+        <div class="nbsc-footer__brand-header">
+          <img src="../../../logos/school_logo.png" alt="NBSC Seal" class="nbsc-footer__logo">
+          <span class="nbsc-footer__college-name">NORTHERN BUKIDNON<br>STATE COLLEGE</span>
+        </div>
+
+        <div class="nbsc-footer__contact-info">
+          <div class="nbsc-footer__contact-item">
+            <svg class="nbsc-footer__icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/>
+            </svg>
+            <span>Kihare, Tankulan, Manolo Fortich, Bukidnon, 8703, Philippines.</span>
+          </div>
+          <div class="nbsc-footer__contact-item">
+            <svg class="nbsc-footer__icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+            <a href="mailto:nbscadmin@nbsc.edu.ph" class="nbsc-footer__link">nbscadmin@nbsc.edu.ph</a>
+          </div>
+          <div class="nbsc-footer__contact-item">
+            <svg class="nbsc-footer__icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+            </svg>
+            <a href="tel:+639473815311" class="nbsc-footer__link">+63 947 381 5311</a>
+          </div>
+        </div>
+
+        <!-- Official Accreditation & Transparency Badges -->
+        <div class="nbsc-footer__badges" aria-label="Institutional Accreditations and Compliance Seals">
+          <a href="https://www.foi.gov.ph" target="_blank" rel="noopener noreferrer" class="nbsc-footer__badge-link" title="Philippine Transparency Seal — Full Compliance">
+            <img src="../../../logos/Transparency-seal-circle-300x300-2-e1694067634412.png" alt="Philippine Transparency Seal" class="nbsc-footer__badge-img nbsc-footer__badge-img--round">
+          </a>
+          <a href="https://privacy.gov.ph" target="_blank" rel="noopener noreferrer" class="nbsc-footer__badge-link" title="National Privacy Commission — Registered DPO/DPS">
+            <img src="../../../logos/the_transparency_seal2_footer.png" alt="NPC Registered DPO/DPS" class="nbsc-footer__badge-img nbsc-footer__badge-img--keyhole">
+          </a>
+          <a href="https://www.foi.gov.ph" target="_blank" rel="noopener noreferrer" class="nbsc-footer__badge-link" title="Freedom of Information — Republic of the Philippines">
+            <img src="../../../logos/FOI-Logo-2.png" alt="Freedom of Information Philippines" class="nbsc-footer__badge-img nbsc-footer__badge-img--round">
+          </a>
+          <a href="https://www.socotec.com" target="_blank" rel="noopener noreferrer" class="nbsc-footer__badge-link" title="SOCOTEC ISO 9001:2015 Certified Quality Management System">
+            <img src="../../../logos/ISO-Secondary-Version1.png" alt="SOCOTEC ISO 9001" class="nbsc-footer__badge-img nbsc-footer__badge-img--rect">
+          </a>
+        </div>
+      </div>
+
+      <!-- Column 2: Direct Contact Lines -->
+      <div class="nbsc-footer__col">
+        <div class="nbsc-footer__group">
+          <h4 class="nbsc-footer__section-title">ADMISSION</h4>
+          <div class="nbsc-footer__gold-bar"></div>
+          <div class="nbsc-footer__phone-list">
+            <a href="tel:+639276890065" class="nbsc-footer__phone-link">
+              <svg class="nbsc-footer__phone-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+              </svg>
+              <span>+63 927 689 0065</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="nbsc-footer__group">
+          <h4 class="nbsc-footer__section-title">GUIDANCE</h4>
+          <div class="nbsc-footer__gold-bar"></div>
+          <div class="nbsc-footer__phone-list">
+            <a href="tel:+639176203340" class="nbsc-footer__phone-link">
+              <svg class="nbsc-footer__phone-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+              </svg>
+              <span>+63 917 620 3340</span>
+            </a>
+            <a href="tel:+639169084806" class="nbsc-footer__phone-link">
+              <svg class="nbsc-footer__phone-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+              </svg>
+              <span>+63 916 908 4806</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="nbsc-footer__group">
+          <h4 class="nbsc-footer__section-title">REGISTRAR</h4>
+          <div class="nbsc-footer__gold-bar"></div>
+          <div class="nbsc-footer__phone-list">
+            <a href="tel:+639753032951" class="nbsc-footer__phone-link">
+              <svg class="nbsc-footer__phone-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+              </svg>
+              <span>+63 975 303 2951</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 3: Government Links -->
+      <div class="nbsc-footer__col">
+        <div class="nbsc-footer__dotted-header">
+          <h4 class="nbsc-footer__section-title">GOVERNMENT LINKS</h4>
+          <div class="nbsc-footer__gold-bar"></div>
+        </div>
+        <ul class="nbsc-footer__nav-list">
+          <li><a href="https://op-proper.gov.ph" target="_blank" rel="noopener noreferrer" class="nbsc-footer__nav-link">Office of the President</a></li>
+          <li><a href="https://ovp.gov.ph" target="_blank" rel="noopener noreferrer" class="nbsc-footer__nav-link">Office of the Vice-President</a></li>
+          <li><a href="https://legacy.senate.gov.ph" target="_blank" rel="noopener noreferrer" class="nbsc-footer__nav-link">Senate of the Philippines</a></li>
+          <li><a href="https://www.congress.gov.ph" target="_blank" rel="noopener noreferrer" class="nbsc-footer__nav-link">House of the Representative</a></li>
+          <li><a href="https://arta.gov.ph" target="_blank" rel="noopener noreferrer" class="nbsc-footer__nav-link">Anti-Red Tape Authority</a></li>
+          <li><a href="https://dict.gov.ph" target="_blank" rel="noopener noreferrer" class="nbsc-footer__nav-link">Department of Information and Communications Technology</a></li>
+          <li><a href="https://privacy.gov.ph" target="_blank" rel="noopener noreferrer" class="nbsc-footer__nav-link">National Privacy Commission</a></li>
+          <li><a href="https://ched.gov.ph" target="_blank" rel="noopener noreferrer" class="nbsc-footer__nav-link">Commission on Higher Education</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 4: Online Services -->
+      <div class="nbsc-footer__col">
+        <div class="nbsc-footer__dotted-header">
+          <h4 class="nbsc-footer__section-title">ONLINE SERVICES</h4>
+          <div class="nbsc-footer__gold-bar"></div>
+        </div>
+        <ul class="nbsc-footer__nav-list">
+          <li><a href="https://castle.nbsc.edu.ph" target="_blank" rel="noopener noreferrer" class="nbsc-footer__nav-link">NBSC Castle LMS</a></li>
+          <li><a href="https://www.facebook.com/nbscofficial" target="_blank" rel="noopener noreferrer" class="nbsc-footer__nav-link">NBSC Facebook Page</a></li>
+          <li><a href="https://is.nbsc.edu.ph" target="_blank" rel="noopener noreferrer" class="nbsc-footer__nav-link">NBSC Integrated System</a></li>
+          <li><a href="https://sis.nbsc.edu.ph" target="_blank" rel="noopener noreferrer" class="nbsc-footer__nav-link">NBSC Student Information System</a></li>
+          <li><a href="https://nbsc.edu.ph/invitation-to-bid" target="_blank" rel="noopener noreferrer" class="nbsc-footer__nav-link">Invitation to BID</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Sub-footer / Copyright & Attribution Bar -->
+    <div class="nbsc-footer__bottom">
+      <div class="nbsc-footer__bottom-container">
+        <a href="https://www.facebook.com/nbscofficial" target="_blank" rel="noopener noreferrer" class="nbsc-footer__social-link" aria-label="NBSC Official Facebook Page">
+          <svg class="nbsc-footer__fb-svg" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+        </a>
+
+        <div class="nbsc-footer__center-block">
+          <div class="nbsc-footer__copyright">
+            &copy;2026 Northern Bukidnon State College All Right Reserved.
+          </div>
+          <div class="nbsc-footer__attribution">
+            Powered by: Information and Communication Technology Management Office
+          </div>
+        </div>
+      </div>
     </div>
   </footer>
+
+  <!-- Floating Institutional Back to Top Button -->
+  <button type="button" class="nbsc-back-to-top" id="btn-back-to-top" aria-label="Scroll to top of page" title="Back to Top">
+    <svg class="nbsc-back-to-top__arrow" viewBox="0 0 24 24">
+      <path d="M12 4l-8 8h5v8h6v-8h5z"/>
+    </svg>
+  </button>
 
   <script src="../../../shared/js/constants.js"></script>
   <script src="../../../shared/js/utils.js"></script>

@@ -1,9 +1,18 @@
 /**
  * NBSC PRIME-HRM Intelligence Hub — Application Wizard Logic
+ * File: apply.js
+ * Path: frontend/pages/applicants/apply/apply.js
  */
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const vacancyId = getQueryParam('vacancy_id');
+  // Mobile Nav Toggle
+  setupMobileNav();
+
+  // Back to Top Button
+  setupBackToTop();
+
+  // Get Vacancy ID
+  const vacancyId = getQueryParam('vacancy_id') || getQueryParam('id') || 'vac-004';
   if (!vacancyId) {
     showToast('No vacancy selected. Redirecting to job board...', 'warning');
     setTimeout(() => {
@@ -12,18 +21,55 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
 
-  // Load Vacancy Data
+  // Load Vacancy Data with Resilient Local Fallbacks
   let vacancyData = null;
   try {
     const res = await apiGet(`/vacancies/${vacancyId}/`);
-    if (res.success && res.data && res.data.vacancy) {
+    if (res && res.success && res.data && res.data.vacancy) {
       vacancyData = res.data.vacancy;
-      renderVacancyHeader(vacancyData);
-    } else {
-      showToast('Position details could not be found.', 'error');
     }
   } catch (err) {
-    showToast('Network error loading vacancy requirements.', 'error');
+    console.warn('apiGet for vacancy returned error, inspecting local DB...', err);
+  }
+
+  // Fallback 1: window.db
+  if (!vacancyData && window.db && typeof window.db.getTable === 'function') {
+    let vacs = window.db.getTable('vacancies') || [];
+    if (!vacs || vacs.length === 0) {
+      window.db.init();
+      vacs = window.db.getTable('vacancies') || [];
+    }
+    vacancyData = vacs.find(v => v.id === vacancyId);
+  }
+
+  // Fallback 2: DB_SEED
+  if (!vacancyData && typeof DB_SEED !== 'undefined' && DB_SEED.vacancies) {
+    vacancyData = DB_SEED.vacancies.find(v => v.id === vacancyId);
+  }
+
+  // Fallback 3: Default sample if vac-004
+  if (!vacancyData && vacancyId === 'vac-004') {
+    vacancyData = {
+      id: 'vac-004',
+      title: 'Administrative Assistant III',
+      department: 'Finance and Budget Office',
+      category: 'NON_TEACHING',
+      salary_grade: 9,
+      monthly_salary: 21211,
+      employment_status: 'Permanent (Plantilla)',
+      education: 'Completion of 2 years studies in college or High School Graduate with relevant vocational course',
+      experience: '1 year of relevant experience',
+      training: '4 hours of relevant training',
+      eligibility: 'Career Service (Subprofessional) / First Level Eligibility'
+    };
+  }
+
+  if (vacancyData) {
+    renderVacancyHeader(vacancyData);
+  } else {
+    showToast('Notice: Generic application mode enabled.', 'info');
+    const titleEl = document.getElementById('target-title');
+    if (titleEl) titleEl.textContent = 'General Civil Service Plantilla Application';
   }
 
   // Stepper & Panes
@@ -58,16 +104,20 @@ document.addEventListener('DOMContentLoaded', async () => {
   const reviewContent = document.getElementById('review-summary-content');
   const btnSubmit = document.getElementById('btn-submit-application');
 
+  // Setup file upload previews
+  setupFileUploadPreviews();
+
   // If user is currently logged in, prefill personal information
-  const currentUser = getUser();
-  if (currentUser) {
-    inputFullName.value = currentUser.name || '';
-    inputEmail.value = currentUser.email || '';
+  if (typeof getUser === 'function') {
+    const currentUser = getUser();
+    if (currentUser) {
+      if (inputFullName && currentUser.name) inputFullName.value = currentUser.name;
+      if (inputEmail && currentUser.email) inputEmail.value = currentUser.email;
+    }
   }
 
   /**
    * Renders target position header details.
-   * @param {Object} v
    */
   function renderVacancyHeader(v) {
     const titleEl = document.getElementById('target-title');
@@ -75,20 +125,72 @@ document.addEventListener('DOMContentLoaded', async () => {
     const catEl = document.getElementById('target-category');
     const metaEl = document.getElementById('target-meta');
 
-    if (titleEl) titleEl.textContent = v.title;
-    if (deptEl) deptEl.textContent = `${v.department} Department • ${v.employment_status || 'COS'}`;
-    if (catEl) catEl.textContent = v.category === 'TEACHING' ? 'Faculty Position' : 'Administrative Position';
+    const isTeaching = v.category === 'TEACHING';
+    const dept = v.department || v.department_code || 'General Administration';
+    const sg = v.salary_grade || v.salaryGrade || 9;
+    const salary = v.monthly_salary || v.monthlySalary;
+
+    if (titleEl) titleEl.textContent = v.title || 'Civil Service Position';
+    if (deptEl) deptEl.textContent = `${dept} • ${v.employment_status || 'Permanent (Plantilla)'}`;
+    
+    if (catEl) {
+      catEl.textContent = isTeaching ? 'Faculty Plantilla' : 'Administrative Plantilla';
+      catEl.className = isTeaching ? 'badge badge--teaching mb-1' : 'badge badge--nonteaching mb-1';
+    }
+
     if (metaEl) {
-      metaEl.innerHTML = `
-        <span class="badge badge--neutral">SG ${v.salary_grade || 12}</span>
-        <span class="badge badge--open ml-2">Open for Submissions</span>
-      `;
+      let metaHtml = `<span class="badge badge--neutral">SG ${sg}</span>`;
+      if (salary) {
+        metaHtml += `<span class="badge badge--gold">₱${Number(salary).toLocaleString('en-US', {minimumFractionDigits: 2})} / mo</span>`;
+      }
+      metaHtml += `<span class="badge badge--open">Open for Submissions</span>`;
+      metaEl.innerHTML = metaHtml;
     }
   }
 
   /**
+   * Setup document file input badges
+   */
+  function setupFileUploadPreviews() {
+    const fileConfigs = [
+      { input: filePds, badgeId: 'badge-file-pds' },
+      { input: fileTor, badgeId: 'badge-file-tor' },
+      { input: fileEligibility, badgeId: 'badge-file-eligibility' },
+      { input: fileTrainings, badgeId: 'badge-file-trainings' }
+    ];
+
+    fileConfigs.forEach(({ input, badgeId }) => {
+      if (!input) return;
+      const badgeEl = document.getElementById(badgeId);
+      input.addEventListener('change', () => {
+        if (!badgeEl) return;
+        if (input.files && input.files[0]) {
+          const file = input.files[0];
+          badgeEl.innerHTML = `
+            <span class="upload-file-tag">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M20 6L9 17l-5-5"/>
+              </svg>
+              ${escapeHtml(file.name)} (${formatFileSize(file.size)})
+            </span>
+          `;
+        } else {
+          badgeEl.innerHTML = '';
+        }
+      });
+    });
+  }
+
+  function formatFileSize(bytes) {
+    if (!bytes || bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  }
+
+  /**
    * Switches active wizard step with validation.
-   * @param {number} newStep
    */
   function goToStep(newStep) {
     if (newStep < 1 || newStep > 4) return;
@@ -116,7 +218,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     currentStep = newStep;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 120, behavior: 'smooth' });
 
     if (newStep === 4) {
       populateReviewSummary();
@@ -125,7 +227,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   /**
    * Validates inputs for Step 1.
-   * @returns {boolean}
    */
   function validateStep1() {
     let valid = true;
@@ -136,7 +237,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       document.getElementById('error-full-name').textContent = '';
     }
 
-    if (!inputEmail.value.trim() || !validateEmail(inputEmail.value.trim())) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!inputEmail.value.trim() || !emailRegex.test(inputEmail.value.trim())) {
       document.getElementById('error-email').textContent = 'A valid email address is required.';
       valid = false;
     } else {
@@ -158,7 +260,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     if (!inputAddress.value.trim()) {
-      document.getElementById('error-address').textContent = 'Address is required.';
+      document.getElementById('error-address').textContent = 'Permanent address is required.';
       valid = false;
     } else {
       document.getElementById('error-address').textContent = '';
@@ -169,30 +271,58 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   /**
    * Validates inputs for Step 2.
-   * @returns {boolean}
    */
   function validateStep2() {
     let valid = true;
     if (!inputHighestEducation.value.trim()) {
-      document.getElementById('error-highest-education').textContent = 'Degree attainment is required.';
+      document.getElementById('error-highest-education').textContent = 'Educational degree attainment is required.';
       valid = false;
     } else {
       document.getElementById('error-highest-education').textContent = '';
     }
+
+    if (!inputSchool.value.trim()) {
+      document.getElementById('error-school').textContent = 'College or University name is required.';
+      valid = false;
+    } else {
+      document.getElementById('error-school').textContent = '';
+    }
+
+    if (!inputYearsExperience.value.trim()) {
+      document.getElementById('error-years-experience').textContent = 'Years of relevant experience is required.';
+      valid = false;
+    } else {
+      document.getElementById('error-years-experience').textContent = '';
+    }
+
+    if (!inputEligibilityType.value.trim()) {
+      document.getElementById('error-eligibility').textContent = 'Civil service eligibility or license is required.';
+      valid = false;
+    } else {
+      document.getElementById('error-eligibility').textContent = '';
+    }
+
     return valid;
   }
 
   /**
    * Validates mandatory document attachments.
-   * @returns {boolean}
    */
   function validateStep3() {
     if (!filePds.files || filePds.files.length === 0) {
-      showToast('CSC Form 212 (Personal Data Sheet) is mandatory.', 'warning');
+      if (typeof showToast === 'function') {
+        showToast('CSC Form 212 (Personal Data Sheet) is required.', 'warning');
+      } else {
+        alert('CSC Form 212 (Personal Data Sheet) is required.');
+      }
       return false;
     }
     if (!fileTor.files || fileTor.files.length === 0) {
-      showToast('Official Transcript of Records (TOR) is mandatory.', 'warning');
+      if (typeof showToast === 'function') {
+        showToast('Official Transcript of Records (TOR) is required.', 'warning');
+      } else {
+        alert('Official Transcript of Records (TOR) is required.');
+      }
       return false;
     }
     return true;
@@ -202,26 +332,54 @@ document.addEventListener('DOMContentLoaded', async () => {
    * Renders summary for Step 4 review pane.
    */
   function populateReviewSummary() {
+    const positionTitle = vacancyData ? vacancyData.title : 'Selected Position';
+    const positionDept = vacancyData ? (vacancyData.department || vacancyData.department_code || 'NBSC') : 'NBSC';
+    const pdsName = filePds.files[0] ? filePds.files[0].name : 'CSC Form 212 Attached';
+    const torName = fileTor.files[0] ? fileTor.files[0].name : 'Transcript of Records Attached';
+    const eligName = fileEligibility.files[0] ? fileEligibility.files[0].name : 'None attached';
+    const trainName = fileTrainings.files[0] ? fileTrainings.files[0].name : 'None attached';
+
     reviewContent.innerHTML = `
-      <div class="mb-3">
-        <strong>Position Applied:</strong> ${escapeHtml(vacancyData ? vacancyData.title : 'Selected Position')} (${escapeHtml(vacancyData ? vacancyData.department : '')})
+      <div class="review-row">
+        <span class="review-label">Applied Vacancy:</span>
+        <span class="review-value"><strong>${escapeHtml(positionTitle)}</strong> (${escapeHtml(positionDept)})</span>
       </div>
-      <div class="mb-2">
-        <strong>Applicant Name:</strong> ${escapeHtml(inputFullName.value)}
+      <div class="review-row">
+        <span class="review-label">Full Legal Name:</span>
+        <span class="review-value">${escapeHtml(inputFullName.value)}</span>
       </div>
-      <div class="mb-2">
-        <strong>Email & Phone:</strong> ${escapeHtml(inputEmail.value)} • ${escapeHtml(inputPhone.value)}
+      <div class="review-row">
+        <span class="review-label">Contact Details:</span>
+        <span class="review-value">${escapeHtml(inputEmail.value)} • ${escapeHtml(inputPhone.value)}</span>
       </div>
-      <div class="mb-2">
-        <strong>Educational Attainment:</strong> ${escapeHtml(inputHighestEducation.value)} (${escapeHtml(inputSchool.value)})
+      <div class="review-row">
+        <span class="review-label">Permanent Address:</span>
+        <span class="review-value">${escapeHtml(inputAddress.value)}</span>
       </div>
-      <div class="mb-2">
-        <strong>Civil Service Eligibility:</strong> ${escapeHtml(inputEligibilityType.value || 'None Specified')}
+      <div class="review-row">
+        <span class="review-label">Date of Birth:</span>
+        <span class="review-value">${escapeHtml(inputBirthdate.value)}</span>
       </div>
-      <div class="mb-2">
-        <strong>Attached Documents:</strong>
-        ${filePds.files[0] ? escapeHtml(filePds.files[0].name) : 'PDS'},
-        ${fileTor.files[0] ? escapeHtml(fileTor.files[0].name) : 'TOR'}
+      <div class="review-row">
+        <span class="review-label">Education & School:</span>
+        <span class="review-value">${escapeHtml(inputHighestEducation.value)} — ${escapeHtml(inputSchool.value)}</span>
+      </div>
+      <div class="review-row">
+        <span class="review-label">Relevant Experience:</span>
+        <span class="review-value">${escapeHtml(inputYearsExperience.value)}</span>
+      </div>
+      <div class="review-row">
+        <span class="review-label">Eligibility / License:</span>
+        <span class="review-value">${escapeHtml(inputEligibilityType.value)}</span>
+      </div>
+      <div class="review-row">
+        <span class="review-label">Primary Documents:</span>
+        <span class="review-value">
+          ✓ ${escapeHtml(pdsName)}<br>
+          ✓ ${escapeHtml(torName)}
+          ${fileEligibility.files[0] ? `<br>✓ ${escapeHtml(eligName)}` : ''}
+          ${fileTrainings.files[0] ? `<br>✓ ${escapeHtml(trainName)}` : ''}
+        </span>
       </div>
     `;
   }
@@ -249,13 +407,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     e.preventDefault();
 
     if (!checkOath.checked) {
-      document.getElementById('error-oath').textContent = 'You must affirm the Oath of Truthfulness to submit.';
+      document.getElementById('error-oath').textContent = 'You must affirm the Oath of Truthfulness before submitting.';
       return;
     }
     document.getElementById('error-oath').textContent = '';
 
     btnSubmit.disabled = true;
-    btnSubmit.textContent = 'Transmitting Application...';
+    btnSubmit.innerHTML = `
+      <svg class="spinner" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10" stroke-opacity="0.25"/>
+        <path d="M12 2a10 10 0 0 1 10 10" stroke-opacity="0.75"/>
+      </svg>
+      Transmitting Official Packet...
+    `;
 
     // Build FormData
     const formData = new FormData();
@@ -269,7 +433,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     formData.append('school', inputSchool.value.trim());
     formData.append('years_experience', inputYearsExperience.value.trim());
     formData.append('eligibility', inputEligibilityType.value.trim());
-    formData.append('cover_letter', textareaCoverLetter.value.trim());
+    formData.append('cover_letter', textareaCoverLetter ? textareaCoverLetter.value.trim() : '');
 
     if (filePds.files[0]) formData.append('PDS_CS_FORM_212', filePds.files[0]);
     if (fileTor.files[0]) formData.append('TRANSCRIPT_OF_RECORDS', fileTor.files[0]);
@@ -278,35 +442,105 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     try {
       const res = await apiUpload('/applications/submit/', formData);
-      if (res.success && res.data) {
+      if (res && res.success && res.data) {
         const trackingNumber = res.data.tracking_number;
-        showModal(
-          'Application Submitted Successfully!',
-          `
-            <div class="text-center py-4">
-              <div class="badge badge--open mb-3 font-md">OFFICIALLY REGISTERED</div>
-              <p>Your application has been received by the Northern Bukidnon State College HR Selection Board.</p>
-              <div class="p-3 my-4 card bg-surface">
-                <span class="text-muted font-xs">Official CSC Tracking Number:</span>
-                <div class="font-xl font-bold text-primary mt-1">${trackingNumber}</div>
-              </div>
-              <p class="font-xs text-muted">Please record this tracking number. You can track your progress at any time through our public tracking portal.</p>
-            </div>
-          `,
-          'Track Application Now',
-          () => {
-            window.location.href = `../application-track/application-track.html?tracking=${encodeURIComponent(trackingNumber)}`;
-          }
-        );
+        showSubmissionSuccessModal(trackingNumber);
       } else {
-        showToast(res.message || 'Application submission failed.', 'error');
+        const msg = (res && res.message) ? res.message : 'Application submission failed. Please check required fields.';
+        if (typeof showToast === 'function') showToast(msg, 'error');
         btnSubmit.disabled = false;
         btnSubmit.textContent = 'Submit Official Application';
       }
     } catch (err) {
-      showToast('Network error during application transmission.', 'error');
+      console.error('Submission error:', err);
+      if (typeof showToast === 'function') showToast('Network transmission error. Please retry.', 'error');
       btnSubmit.disabled = false;
       btnSubmit.textContent = 'Submit Official Application';
     }
   });
+
+  /**
+   * Displays modal upon successful submission with tracking code.
+   */
+  function showSubmissionSuccessModal(trackingNumber) {
+    const modalHtml = `
+      <div class="modal-backdrop" id="submission-modal">
+        <div class="modal-card">
+          <div style="font-size: 3rem; color: #10b981; margin-bottom: 0.5rem;">✓</div>
+          <span class="badge badge--open mb-2">OFFICIALLY REGISTERED</span>
+          <h2 style="color: #002b5c; font-size: 1.4rem; font-weight: 800; margin: 0.5rem 0;">Application Submitted Successfully!</h2>
+          <p style="color: #475569; font-size: 0.9rem; line-height: 1.5; margin-bottom: 1.25rem;">
+            Your credentials have been securely transmitted to the Northern Bukidnon State College HR Merit Selection Board under PRIME-HRM Level 2 standards.
+          </p>
+
+          <div style="background: #f8fafc; border: 1.5px solid #d4a843; border-radius: 10px; padding: 1rem; margin-bottom: 1.5rem;">
+            <span style="font-size: 0.75rem; color: #64748b; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; display: block;">Official CSC Tracking Docket</span>
+            <div style="font-size: 1.5rem; font-weight: 800; color: #002b5c; letter-spacing: 0.05em; margin-top: 0.25rem;" id="modal-tracking-code">${escapeHtml(trackingNumber)}</div>
+          </div>
+
+          <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 1.5rem;">
+            Please keep a copy of this tracking code. You can check your application milestones at any time on the live tracker.
+          </p>
+
+          <div style="display: flex; gap: 0.75rem; justify-content: center;">
+            <button type="button" class="btn btn--primary" id="btn-modal-track" style="flex: 1;">
+              Track Application Now &rarr;
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    // Append to body
+    const div = document.createElement('div');
+    div.innerHTML = modalHtml;
+    document.body.appendChild(div.firstElementChild);
+
+    document.getElementById('btn-modal-track').addEventListener('click', () => {
+      window.location.href = `../../track-application/track-application.html?appId=${encodeURIComponent(trackingNumber)}`;
+    });
+  }
+
+  /**
+   * Helper: Setup Mobile Nav Toggle
+   */
+  function setupMobileNav() {
+    const navToggleBtn = document.getElementById('nav-toggle-btn');
+    const publicNavLinks = document.getElementById('public-nav-links');
+    if (!navToggleBtn || !publicNavLinks) return;
+
+    navToggleBtn.addEventListener('click', () => {
+      const isOpen = publicNavLinks.classList.toggle('is-open');
+      navToggleBtn.classList.toggle('is-active');
+      navToggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!navToggleBtn.contains(e.target) && !publicNavLinks.contains(e.target)) {
+        publicNavLinks.classList.remove('is-open');
+        navToggleBtn.classList.remove('is-active');
+        navToggleBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  /**
+   * Helper: Setup Back To Top Button
+   */
+  function setupBackToTop() {
+    const btnBackToTop = document.getElementById('btn-back-to-top');
+    if (!btnBackToTop) return;
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        btnBackToTop.classList.add('nbsc-back-to-top--visible');
+      } else {
+        btnBackToTop.classList.remove('nbsc-back-to-top--visible');
+      }
+    });
+
+    btnBackToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
 });

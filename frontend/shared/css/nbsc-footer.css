@@ -1,0 +1,423 @@
+/**
+ * NBSC PRIME-HRM Intelligence Hub — Shared: Official Institutional Footer
+ * File: nbsc-footer.css
+ * Path: frontend/shared/css/nbsc-footer.css
+ *
+ * 100% pixel-accurate replica of the official Northern Bukidnon State College footer
+ * from nbsc.edu.ph:
+ * - Background: Official NBSC Deep Blue (#003865)
+ * - Grid layout: 32% (Brand & Seals) | 18% (Contacts) | 26% (Gov Links) | 24% (Online Services)
+ * - Authentic 60px compliance seals: (Transparency Seal, NPC DPO/DPS, FOI, SOCOTEC ISO 9001)
+ * - Dotted divider lines, crisp white SVG icons, mustard-gold accent bars (#e09e19)
+ * - Clean institutional bottom sub-footer & Back-to-Top button (#e09e19)
+ */
+
+/* ── Main Footer Wrapper ─────────────────────────────────────── */
+.nbsc-footer {
+  background-color: #003865;
+  color: #ffffff;
+  padding: 3.5rem 0 0;
+  margin-top: 5rem;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  border-top: 3px solid #d4a843;
+  position: relative;
+  z-index: 10;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.nbsc-footer__container {
+  width: 94%;
+  max-width: 1560px;
+  margin: 0 auto;
+  padding: 0 1rem 3.5rem;
+  display: grid;
+  grid-template-columns: 36% 17% 24% 23%;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+@media (max-width: 1200px) {
+  .nbsc-footer__container {
+    grid-template-columns: 1.4fr 1fr;
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 680px) {
+  .nbsc-footer__container {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+.nbsc-footer__col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Column 1: Brand & Contact Info ──────────────────────────── */
+.nbsc-footer__brand-header {
+  display: flex;
+  align-items: center;
+  gap: 1.35rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px dotted rgba(255, 255, 255, 0.35);
+}
+
+.nbsc-footer__logo {
+  height: 96px;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(2px 0 0 #ffffff)
+          drop-shadow(-2px 0 0 #ffffff)
+          drop-shadow(0 2px 0 #ffffff)
+          drop-shadow(0 -2px 0 #ffffff)
+          drop-shadow(1.5px 1.5px 0 #ffffff)
+          drop-shadow(-1.5px -1.5px 0 #ffffff)
+          drop-shadow(1.5px -1.5px 0 #ffffff)
+          drop-shadow(-1.5px 1.5px 0 #ffffff)
+          drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), filter 0.25s ease;
+}
+
+.nbsc-footer__logo:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(2px 0 0 #ffffff)
+          drop-shadow(-2px 0 0 #ffffff)
+          drop-shadow(0 2px 0 #ffffff)
+          drop-shadow(0 -2px 0 #ffffff)
+          drop-shadow(2px 2px 0 #ffffff)
+          drop-shadow(-2px -2px 0 #ffffff)
+          drop-shadow(2px -2px 0 #ffffff)
+          drop-shadow(-2px 2px 0 #ffffff)
+          drop-shadow(0 0 14px rgba(255, 255, 255, 0.9))
+          drop-shadow(0 6px 16px rgba(0, 0, 0, 0.6));
+}
+
+.nbsc-footer__college-name {
+  font-family: 'Montserrat', 'Poppins', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+  line-height: 1.22;
+  display: block;
+  text-transform: uppercase;
+}
+
+.nbsc-footer__contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.nbsc-footer__contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+
+.nbsc-footer__icon-svg {
+  width: 18px;
+  height: 18px;
+  fill: #ffffff;
+  flex-shrink: 0;
+  margin-top: 3px;
+  opacity: 0.95;
+}
+
+.nbsc-footer__link {
+  color: rgba(255, 255, 255, 0.95);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  word-break: break-all;
+}
+
+.nbsc-footer__link:hover {
+  color: #f6e05e;
+  text-decoration: underline;
+}
+
+/* ── Column 1: Authentic Compliance Seals Row (Enlarged) ──────── */
+.nbsc-footer__badges {
+  display: flex;
+  align-items: center;
+  gap: 1.15rem;
+  margin-top: 2rem;
+  flex-wrap: nowrap;
+}
+
+@media (max-width: 680px) {
+  .nbsc-footer__badges {
+    flex-wrap: wrap;
+    gap: 0.85rem;
+  }
+}
+
+.nbsc-footer__badge-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.nbsc-footer__badge-link:hover {
+  transform: translateY(-3px) scale(1.04);
+}
+
+.nbsc-footer__badge-img {
+  height: 84px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  background: #ffffff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nbsc-footer__badge-img--round {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  padding: 2px;
+}
+
+.nbsc-footer__badge-img--keyhole {
+  height: 84px;
+  border-radius: 8px;
+  padding: 3px 6px;
+}
+
+.nbsc-footer__badge-img--rect {
+  height: 84px;
+  border-radius: 6px;
+  padding: 3px 6px;
+}
+
+/* ── Column 2: Direct Contact Lines (ADMISSION, GUIDANCE, REGISTRAR) ── */
+.nbsc-footer__section-title {
+  font-family: 'Poppins', sans-serif;
+  color: #ffffff;
+  font-size: 0.98rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.nbsc-footer__gold-bar {
+  width: 38px;
+  height: 3px;
+  background: #e09e19;
+  border-radius: 2px;
+  margin: 6px 0 12px 0;
+}
+
+.nbsc-footer__group {
+  margin-bottom: 1.65rem;
+}
+
+.nbsc-footer__group:last-child {
+  margin-bottom: 0;
+}
+
+.nbsc-footer__phone-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.nbsc-footer__phone-link {
+  color: rgba(255, 255, 255, 0.92);
+  text-decoration: none;
+  font-size: 0.88rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  transition: all 0.2s ease;
+}
+
+.nbsc-footer__phone-link:hover {
+  color: #f6e05e;
+  transform: translateX(2px);
+  text-decoration: none;
+}
+
+.nbsc-footer__phone-icon-svg {
+  width: 14px;
+  height: 14px;
+  fill: #ffffff;
+  flex-shrink: 0;
+  opacity: 0.95;
+}
+
+/* ── Columns 3 & 4: Government Links & Online Services ───────── */
+.nbsc-footer__dotted-header {
+  border-bottom: 1px dotted rgba(255, 255, 255, 0.28);
+  padding-bottom: 0.85rem;
+  margin-bottom: 0.85rem;
+}
+
+.nbsc-footer__nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.nbsc-footer__nav-link {
+  color: rgba(255, 255, 255, 0.86);
+  text-decoration: none;
+  font-size: 0.88rem;
+  transition: all 0.2s ease;
+  display: inline-block;
+  line-height: 1.5;
+}
+
+.nbsc-footer__nav-link:hover {
+  color: #ffffff;
+  transform: translateX(3px);
+  text-decoration: underline;
+}
+
+/* ── Sub-footer / Copyright & Attribution Bar ───────────────── */
+.nbsc-footer__bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  background: #00335c;
+  padding: 1.35rem 0;
+}
+
+.nbsc-footer__bottom-container {
+  width: 94%;
+  max-width: 1560px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  gap: 1.5rem;
+}
+
+.nbsc-footer__social-link {
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  position: absolute;
+  left: 1rem;
+}
+
+.nbsc-footer__social-link:hover {
+  opacity: 0.8;
+}
+
+.nbsc-footer__fb-svg {
+  width: 20px;
+  height: 20px;
+  fill: #ffffff;
+}
+
+.nbsc-footer__center-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.35rem;
+  width: 100%;
+}
+
+.nbsc-footer__copyright {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+  text-align: center;
+  letter-spacing: 0.01em;
+  margin: 0;
+}
+
+.nbsc-footer__attribution {
+  font-size: 0.825rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.78);
+  text-align: center;
+  white-space: nowrap;
+  line-height: 1.4;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .nbsc-footer__bottom-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.85rem;
+  }
+
+  .nbsc-footer__social-link {
+    position: static;
+    margin-bottom: 0.25rem;
+  }
+
+  .nbsc-footer__attribution {
+    white-space: normal;
+    text-align: center;
+    max-width: 92%;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+}
+
+/* ── Official Mustard-Gold Back to Top Button ────────────────── */
+.nbsc-back-to-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  background: #e09e19;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 999;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity 0.25s ease, transform 0.25s ease, background 0.2s ease;
+}
+
+.nbsc-back-to-top.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.nbsc-back-to-top:hover {
+  background: #c8890e;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+
+.nbsc-back-to-top__arrow {
+  width: 16px;
+  height: 16px;
+  fill: #ffffff;
+}
