@@ -19,6 +19,7 @@ let visualizerState = 'idle'; // 'idle', 'listening', 'speaking'
  * Initializes SARA interface, voice APIs, canvas animation, and event listeners.
  */
 function initSaraChat() {
+  requireAuth([ROLES.HR_ADMIN, ROLES.HRMPSB_MEMBER, ROLES.DEPT_HEAD]);
   initSpeechRecognition();
   initCanvasVisualizer();
 

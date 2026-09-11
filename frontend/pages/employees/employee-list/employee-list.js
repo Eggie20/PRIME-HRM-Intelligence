@@ -28,8 +28,22 @@ document.addEventListener('DOMContentLoaded', async () => {
   const selectCat = document.getElementById('select-filter-category');
   const selectStatus = document.getElementById('select-filter-status');
   const btnLogout = document.getElementById('btn-logout');
-  const btnResetFilters = document.getElementById('btn-reset-filters');
   const btnExportRoster = document.getElementById('btn-export-roster');
+  const btnImportRoster = document.getElementById('btn-import-roster');
+  const btnAddEmployee = document.getElementById('btn-add-employee');
+  const btnResetFilters = document.getElementById('btn-reset-filters');
+
+  // Role-Based UI Action Controls
+  if (user && user.role !== ROLES.HR_ADMIN) {
+    if (btnImportRoster) btnImportRoster.style.display = 'none';
+    if (btnAddEmployee) btnAddEmployee.style.display = 'none';
+  }
+
+  // If logged in as Department Head, auto-scope department filter to their assigned department
+  if (user && user.role === ROLES.DEPT_HEAD && user.department_code && selectDept) {
+    selectDept.value = user.department_code;
+    selectDept.disabled = true; // prevent changing to other departments
+  }
 
   // Live top indicator elements
   const employeeCountNum = document.getElementById('employee-count-num');
@@ -476,16 +490,220 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  // Export roster handler
+  // Export roster handler (CSV + JSON options)
   if (btnExportRoster) {
     btnExportRoster.addEventListener('click', () => {
-      if (typeof db !== 'undefined' && db.downloadExport) {
+      if (typeof db !== 'undefined' && db.exportRosterCsv) {
+        db.exportRosterCsv();
+        showToast('NBSC personnel roster downloaded as CSV!', 'success');
+      } else if (typeof db !== 'undefined' && db.downloadExport) {
         db.downloadExport();
-        showToast('NBSC personnel roster downloaded as JSON/PostgreSQL export', 'success');
+        showToast('NBSC database exported as JSON!', 'success');
       } else {
         showToast('Exporting roster...', 'info');
       }
     });
+  }
+
+  // Add Employee In-Page Modal Handler
+  if (btnAddEmployee) {
+    btnAddEmployee.addEventListener('click', (e) => {
+      e.preventDefault();
+      openAddEmployeeModal();
+    });
+  }
+
+  function openAddEmployeeModal() {
+    const modalHtml = `
+      <form id="modal-employee-form" style="display: flex; flex-direction: column; gap: 1rem;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem;">
+          <div>
+            <label style="font-size: 0.8rem; font-weight: 600; color: #1e293b; display: block; margin-bottom: 4px;">First Name *</label>
+            <input type="text" id="m-emp-first" class="form-group__input" placeholder="e.g. Jonathan" required style="width: 100%;" />
+          </div>
+          <div>
+            <label style="font-size: 0.8rem; font-weight: 600; color: #1e293b; display: block; margin-bottom: 4px;">Last Name *</label>
+            <input type="text" id="m-emp-last" class="form-group__input" placeholder="e.g. Cruz" required style="width: 100%;" />
+          </div>
+          <div>
+            <label style="font-size: 0.8rem; font-weight: 600; color: #1e293b; display: block; margin-bottom: 4px;">Middle Name</label>
+            <input type="text" id="m-emp-mid" class="form-group__input" placeholder="e.g. Santos" style="width: 100%;" />
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 0.75rem;">
+          <div>
+            <label style="font-size: 0.8rem; font-weight: 600; color: #1e293b; display: block; margin-bottom: 4px;">Institutional Email *</label>
+            <input type="email" id="m-emp-email" class="form-group__input" placeholder="e.g. jcruz@nbsc.edu.ph" required style="width: 100%;" />
+          </div>
+          <div>
+            <label style="font-size: 0.8rem; font-weight: 600; color: #1e293b; display: block; margin-bottom: 4px;">Contact Number</label>
+            <input type="text" id="m-emp-phone" class="form-group__input" placeholder="0917-xxx-xxxx" value="0917-482-9011" style="width: 100%;" />
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+          <div>
+            <label style="font-size: 0.8rem; font-weight: 600; color: #1e293b; display: block; margin-bottom: 4px;">Department / Office *</label>
+            <select id="m-emp-dept" class="form-group__input" style="width: 100%;">
+              <option value="ICS">Institute of Computer Studies (ICS)</option>
+              <option value="IBM">Institute of Business and Management (IBM)</option>
+              <option value="ITE">Institute of Teacher Education (ITE)</option>
+              <option value="DGEC">Dept. of General Education (DGEC)</option>
+              <option value="ADMIN">Administrative & General Support (ADMIN)</option>
+              <option value="FIN">Finance & Accounting Division (FIN)</option>
+              <option value="REG">Office of the College Registrar (REG)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size: 0.8rem; font-weight: 600; color: #1e293b; display: block; margin-bottom: 4px;">Position Title *</label>
+            <input type="text" id="m-emp-title" class="form-group__input" placeholder="e.g. Assistant Professor I" required style="width: 100%;" />
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+          <div>
+            <label style="font-size: 0.8rem; font-weight: 600; color: #1e293b; display: block; margin-bottom: 4px;">Category *</label>
+            <select id="m-emp-cat" class="form-group__input" style="width: 100%;">
+              <option value="TEACHING">Teaching / Faculty</option>
+              <option value="NON_TEACHING">Non-Teaching / Staff</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size: 0.8rem; font-weight: 600; color: #1e293b; display: block; margin-bottom: 4px;">Appointment Status *</label>
+            <select id="m-emp-status" class="form-group__input" style="width: 100%;">
+              <option value="PERMANENT">Permanent (Plantilla)</option>
+              <option value="COS">Contract of Service (COS)</option>
+              <option value="TEMPORARY">Temporary</option>
+              <option value="JOB_ORDER">Job Order (JO)</option>
+              <option value="PART_TIME">Part-Time Faculty</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+          <div>
+            <label style="font-size: 0.8rem; font-weight: 600; color: #1e293b; display: block; margin-bottom: 4px;">Monthly Salary Rate (₱)</label>
+            <input type="number" id="m-emp-salary" class="form-group__input" value="38400" style="width: 100%;" />
+          </div>
+          <div>
+            <label style="font-size: 0.8rem; font-weight: 600; color: #1e293b; display: block; margin-bottom: 4px;">Daily Rate Equivalent (₱)</label>
+            <input type="number" id="m-emp-daily" class="form-group__input" value="1745.45" step="0.01" style="width: 100%;" />
+          </div>
+        </div>
+      </form>
+    `;
+
+    showModal(
+      '✚ Add New Employee (CSC Form 212)',
+      modalHtml,
+      'Save Personnel Record',
+      async () => {
+        const first = document.getElementById('m-emp-first')?.value?.trim();
+        const last = document.getElementById('m-emp-last')?.value?.trim();
+        const email = document.getElementById('m-emp-email')?.value?.trim();
+        const title = document.getElementById('m-emp-title')?.value?.trim();
+
+        if (!first || !last || !email || !title) {
+          showToast('Please fill in First Name, Last Name, Email, and Position Title.', 'error');
+          return false;
+        }
+
+        const newEmpData = {
+          first_name: first,
+          last_name: last,
+          middle_name: document.getElementById('m-emp-mid')?.value?.trim() || '',
+          full_name: `${first} ${last}`,
+          email: email,
+          phone: document.getElementById('m-emp-phone')?.value?.trim() || '',
+          department: document.getElementById('m-emp-dept')?.value || 'ADMIN',
+          department_code: document.getElementById('m-emp-dept')?.value || 'ADMIN',
+          position_title: title,
+          category: document.getElementById('m-emp-cat')?.value || 'TEACHING',
+          employment_status: document.getElementById('m-emp-status')?.value || 'PERMANENT',
+          monthly_salary: Number(document.getElementById('m-emp-salary')?.value) || 38400,
+          daily_rate: Number(document.getElementById('m-emp-daily')?.value) || 1745.45
+        };
+
+        if (typeof db !== 'undefined' && db.addEmployee) {
+          const created = db.addEmployee(newEmpData);
+          updateKPIs();
+          await fetchEmployees(1);
+          showToast(`Successfully added ${created.full_name} to NBSC personnel roster!`, 'success', 3500);
+          return true;
+        } else {
+          showToast('Database engine unavailable.', 'error');
+          return false;
+        }
+      },
+      'Cancel'
+    );
+  }
+
+  // Import Excel In-Page Modal Handler
+  if (btnImportRoster) {
+    btnImportRoster.addEventListener('click', (e) => {
+      e.preventDefault();
+      openImportEmployeeModal();
+    });
+  }
+
+  function openImportEmployeeModal() {
+    const modalHtml = `
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        <div style="border: 2px dashed rgba(212, 168, 67, 0.4); background: rgba(212, 168, 67, 0.04); border-radius: 12px; padding: 2rem; text-align: center;">
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">📂</div>
+          <h4 style="margin: 0 0 0.25rem 0; color: #0f172a;">Upload Masterlist Spreadsheet (.xlsx / .csv)</h4>
+          <p style="margin: 0 0 1rem 0; font-size: 0.85rem; color: #64748b;">Complies with CSC Plantilla & DBM Salary Grade format</p>
+          <input type="file" id="modal-import-file" accept=".csv,.xlsx" style="display: none;" />
+          <button type="button" class="btn btn--outline btn--sm" onclick="document.getElementById('modal-import-file').click()">Select Local File</button>
+        </div>
+
+        <div style="background: #f8fafc; border-radius: 8px; padding: 1rem; border: 1px solid #e2e8f0;">
+          <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: #0f172a;">⚡ Fast Demo Ingestion</div>
+          <p style="font-size: 0.8rem; color: #64748b; margin: 0 0 0.75rem 0;">Click below to simulate parsing and staging 3 verified personnel records:</p>
+          <button type="button" class="btn btn--secondary btn--sm" id="btn-load-demo-import">
+            ＋ Load 3 Sample Faculty & Staff Records
+          </button>
+        </div>
+        <div id="modal-import-status" style="font-size: 0.85rem; color: #16a34a; font-weight: 600; display: none;"></div>
+      </div>
+    `;
+
+    showModal(
+      '↑ Bulk Excel Roster Ingestion',
+      modalHtml,
+      'Process Roster Batch',
+      async () => {
+        const sampleRecords = [
+          { first_name: 'Engr. Dindo', last_name: 'Bautista', email: 'dbautista@nbsc.edu.ph', department: 'ICS', position_title: 'Assistant Professor II', category: 'TEACHING', employment_status: 'PERMANENT', monthly_salary: 42000, daily_rate: 1909.09 },
+          { first_name: 'Dr. Clarice', last_name: 'Montemayor', email: 'cmontemayor@nbsc.edu.ph', department: 'IBM', position_title: 'Associate Professor I', category: 'TEACHING', employment_status: 'PERMANENT', monthly_salary: 51350, daily_rate: 2334.09 },
+          { first_name: 'Ronaldo', last_name: 'Macaraeg', email: 'rmacaraeg@nbsc.edu.ph', department: 'FIN', position_title: 'Budget Officer I', category: 'NON_TEACHING', employment_status: 'COS', monthly_salary: 27000, daily_rate: 1227.27 }
+        ];
+
+        if (typeof db !== 'undefined' && db.bulkImportEmployees) {
+          const res = db.bulkImportEmployees(sampleRecords);
+          updateKPIs();
+          await fetchEmployees(1);
+          showToast(`Bulk ingested ${res.count} personnel records into active roster!`, 'success', 3500);
+          return true;
+        }
+        return true;
+      },
+      'Cancel'
+    );
+
+    setTimeout(() => {
+      const btnDemo = document.getElementById('btn-load-demo-import');
+      const statusEl = document.getElementById('modal-import-status');
+      if (btnDemo && statusEl) {
+        btnDemo.addEventListener('click', () => {
+          statusEl.style.display = 'block';
+          statusEl.textContent = '✓ 3 records parsed and staged for batch ingestion: Engr. Dindo Bautista, Dr. Clarice Montemayor, Ronaldo Macaraeg.';
+          showToast('3 demo records staged for ingestion', 'info', 2000);
+        });
+      }
+    }, 100);
   }
 
   // Initial load

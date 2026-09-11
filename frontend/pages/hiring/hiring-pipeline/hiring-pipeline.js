@@ -87,7 +87,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
       const res = await apiGet('/vacancies/');
       if (res.success && res.data && res.data.vacancies) {
-        res.data.vacancies.forEach(v => {
+        let vacancies = res.data.vacancies;
+        if (user && user.role === ROLES.DEPT_HEAD && user.department_code) {
+          const deptVacancies = vacancies.filter(v => v.department === user.department_code);
+          if (deptVacancies.length > 0) {
+            vacancies = [...deptVacancies, ...vacancies.filter(v => v.department !== user.department_code)];
+            if (!initialVacancyId) {
+              initialVacancyId = deptVacancies[0].id;
+            }
+          }
+        }
+        vacancies.forEach(v => {
           const opt = document.createElement('option');
           opt.value = v.id;
           opt.textContent = `${v.title} (${v.department} • SG ${v.salary_grade})`;

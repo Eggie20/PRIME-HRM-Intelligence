@@ -11,6 +11,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   const selectSort = document.getElementById('select-sort-order');
   const tabs = document.querySelectorAll('.job-tab');
   const resultsSummary = document.getElementById('job-results-summary');
+  const paginationContainer = document.getElementById('job-pagination-container');
+  const btnClearSearch = document.getElementById('btn-clear-search');
+  const btnResetFilters = document.getElementById('btn-reset-filters');
+  const btnMobileFilterToggle = document.getElementById('btn-mobile-filter-toggle');
+  const filtersCollapsible = document.getElementById('job-filters-collapsible');
+  const mobileFilterCount = document.getElementById('mobile-filter-count');
 
   const countAll = document.getElementById('count-all');
   const countTeaching = document.getElementById('count-teaching');
@@ -49,8 +55,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
+  // Mobile Refine Filters Collapsible Toggle
+  if (btnMobileFilterToggle && filtersCollapsible) {
+    btnMobileFilterToggle.addEventListener('click', () => {
+      const isOpen = filtersCollapsible.classList.toggle('is-open');
+      btnMobileFilterToggle.classList.toggle('is-active', isOpen);
+      btnMobileFilterToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  }
+
   let activeCategory = '';
   let allVacancies = [];
+  let currentPage = 1;
+  const pageSize = 8;
 
   // Populate Department filter options safely
   if (selectDept && typeof DEPARTMENTS !== 'undefined') {
@@ -104,25 +121,40 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   /**
-   * Updates category tab counters and institutional job summary metrics.
+   * Updates category tab counters dynamically based on active search & unit filters,
+   * while keeping institutional highlights reflecting total vacancies.
    */
   function updateCountsAndStats() {
-    const teachingCount = allVacancies.filter(v => v.category === 'TEACHING').length;
-    const nonTeachingCount = allVacancies.filter(v => v.category === 'NON_TEACHING').length;
+    const searchTerm = inputSearch ? inputSearch.value.trim().toLowerCase() : '';
+    const deptCode = selectDept ? selectDept.value : '';
 
-    if (countAll) countAll.textContent = allVacancies.length;
-    if (countTeaching) countTeaching.textContent = teachingCount;
-    if (countNonTeaching) countNonTeaching.textContent = nonTeachingCount;
+    // Calculate dynamic counts matching active search and department (category independent)
+    const matchingVacancies = allVacancies.filter(v => {
+      const matchDept = !deptCode || v.department === deptCode;
+      const matchSearch = !searchTerm ||
+        (v.title && v.title.toLowerCase().includes(searchTerm)) ||
+        (v.description && v.description.toLowerCase().includes(searchTerm)) ||
+        (v.education && v.education.toLowerCase().includes(searchTerm)) ||
+        (v.eligibility && v.eligibility.toLowerCase().includes(searchTerm));
+      return matchDept && matchSearch;
+    });
 
-    // Summary Metric 1: Total Open Vacancies
+    const dynamicAll = matchingVacancies.length;
+    const dynamicTeaching = matchingVacancies.filter(v => v.category === 'TEACHING').length;
+    const dynamicNonTeaching = matchingVacancies.filter(v => v.category === 'NON_TEACHING').length;
+
+    if (countAll) countAll.textContent = dynamicAll;
+    if (countTeaching) countTeaching.textContent = dynamicTeaching;
+    if (countNonTeaching) countNonTeaching.textContent = dynamicNonTeaching;
+
+    // Overall Institutional Metrics (Unfiltered Database Figures)
+    const totalTeaching = allVacancies.filter(v => v.category === 'TEACHING').length;
+    const totalNonTeaching = allVacancies.filter(v => v.category === 'NON_TEACHING').length;
+
     if (statTotal) statTotal.textContent = allVacancies.length;
-    
-    // Summary Metric 2: Academic & Administrative Breakdown
     if (statStreams) {
-      statStreams.innerHTML = `${teachingCount} Faculty &bull; ${nonTeachingCount} Staff`;
+      statStreams.innerHTML = `${totalTeaching} Faculty &bull; ${totalNonTeaching} Staff`;
     }
-
-    // Summary Metric 3: Academic & Administrative Units
     if (statUnits) {
       const uniqueDepts = new Set(allVacancies.map(v => v.department).filter(Boolean));
       const count = uniqueDepts.size > 0 ? uniqueDepts.size : 5;
@@ -131,12 +163,56 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   /**
-   * Filters and sorts vacancies.
+   * Filters and sorts vacancies, slices for 8-per-page pagination, and renders.
+   * @param {boolean} resetPage - If true, resets to page 1
    */
-  function filterAndRender() {
+  function filterAndRender(resetPage = false) {
+    if (resetPage) {
+      currentPage = 1;
+    }
+
     const searchTerm = inputSearch ? inputSearch.value.trim().toLowerCase() : '';
     const deptCode = selectDept ? selectDept.value : '';
-    const sortOrder = selectSort ? selectSort.value : 'default';
+    const sortOrder = selectSort ? selectSort.value : 'newest';
+
+    updateCountsAndStats();
+
+    // Toggle clear search button
+    if (btnClearSearch) {
+      if (searchTerm) {
+        btnClearSearch.classList.remove('d-none');
+      } else {
+        btnClearSearch.classList.add('d-none');
+      }
+    }
+
+    // Toggle reset all filters button
+    if (btnResetFilters) {
+      const hasActiveFilters = Boolean(searchTerm || deptCode || activeCategory || (sortOrder && sortOrder !== 'newest'));
+      if (hasActiveFilters) {
+        btnResetFilters.classList.remove('d-none');
+      } else {
+        btnResetFilters.classList.add('d-none');
+      }
+    }
+
+    // Update mobile filter toggle badge count
+    if (mobileFilterCount && btnMobileFilterToggle) {
+      let activeRefineCount = 0;
+      if (deptCode) activeRefineCount++;
+      if (sortOrder && sortOrder !== 'newest') activeRefineCount++;
+
+      if (activeRefineCount > 0) {
+        mobileFilterCount.textContent = activeRefineCount;
+        mobileFilterCount.classList.remove('d-none');
+        btnMobileFilterToggle.classList.add('is-active');
+      } else {
+        mobileFilterCount.classList.add('d-none');
+        if (!filtersCollapsible || !filtersCollapsible.classList.contains('is-open')) {
+          btnMobileFilterToggle.classList.remove('is-active');
+        }
+      }
+    }
 
     let filtered = allVacancies.filter(v => {
       const matchCategory = !activeCategory || v.category === activeCategory;
@@ -157,23 +233,45 @@ document.addEventListener('DOMContentLoaded', async () => {
       filtered.sort((a, b) => new Date(a.deadline || '9999-12-31') - new Date(b.deadline || '9999-12-31'));
     } else if (sortOrder === 'title-asc') {
       filtered.sort((a, b) => (a.title || '').localeCompare(b.title || ''));
+    } else if (sortOrder === 'newest') {
+      filtered.sort((a, b) => (b.id || '').localeCompare(a.id || ''));
     }
 
-    renderGrid(filtered);
+    const totalItems = filtered.length;
+    const totalPages = Math.ceil(totalItems / pageSize) || 1;
+    if (currentPage > totalPages) {
+      currentPage = totalPages;
+    }
+
+    // Slice for 8 items per page
+    const startIndex = (currentPage - 1) * pageSize;
+    const endIndex = Math.min(startIndex + pageSize, totalItems);
+    const pagedVacancies = filtered.slice(startIndex, endIndex);
+
+    renderGrid(pagedVacancies, totalItems, startIndex, endIndex);
+    renderPagination(totalItems, totalPages);
   }
 
   /**
    * Renders vacancy cards into the grid container.
    * @param {Array<Object>} vacancies
+   * @param {number} totalItems
+   * @param {number} startIndex
+   * @param {number} endIndex
    */
-  function renderGrid(vacancies) {
+  function renderGrid(vacancies, totalItems = 0, startIndex = 0, endIndex = 0) {
     if (!gridContainer) return;
     gridContainer.innerHTML = '';
 
-    // Update results summary label
+    // Update contextual results summary label
     if (resultsSummary) {
-      const count = vacancies ? vacancies.length : 0;
-      resultsSummary.innerHTML = `Showing <strong>${count}</strong> active ${count === 1 ? 'opportunity' : 'opportunities'}`;
+      if (totalItems === 0) {
+        resultsSummary.innerHTML = `Showing <strong>0</strong> active opportunities`;
+      } else if (totalItems <= pageSize) {
+        resultsSummary.innerHTML = `Showing <strong>${totalItems}</strong> active ${totalItems === 1 ? 'opportunity' : 'opportunities'}`;
+      } else {
+        resultsSummary.innerHTML = `Showing <strong>${startIndex + 1}–${endIndex}</strong> of <strong>${totalItems}</strong> active opportunities`;
+      }
     }
 
     if (!vacancies || vacancies.length === 0) {
@@ -181,6 +279,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         'No Matching Positions Found',
         'No career opportunities match your specific search parameters or selected filters. Try broadening your criteria or resetting filters.'
       );
+      if (paginationContainer) paginationContainer.innerHTML = '';
       return;
     }
 
@@ -440,6 +539,101 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
+  /**
+   * Builds numbered pagination controls.
+   * @param {number} totalItems
+   * @param {number} totalPages
+   */
+  function renderPagination(totalItems, totalPages) {
+    if (!paginationContainer) return;
+    paginationContainer.innerHTML = '';
+
+    if (totalItems <= pageSize) {
+      // Only 1 page — show page info but no navigation buttons
+      const info = document.createElement('div');
+      info.className = 'job-pagination-info';
+      info.textContent = `Page 1 of 1 (${totalItems} total ${totalItems === 1 ? 'opportunity' : 'opportunities'})`;
+      paginationContainer.appendChild(info);
+      return;
+    }
+
+    const nav = document.createElement('div');
+    nav.className = 'job-pagination';
+
+    // Previous Button
+    const btnPrev = document.createElement('button');
+    btnPrev.type = 'button';
+    btnPrev.className = 'job-page-btn job-page-btn--nav';
+    btnPrev.innerHTML = `&larr; Prev`;
+    btnPrev.disabled = (currentPage === 1);
+    btnPrev.setAttribute('aria-label', 'Go to previous page');
+    btnPrev.addEventListener('click', () => {
+      if (currentPage > 1) {
+        goToPage(currentPage - 1);
+      }
+    });
+    nav.appendChild(btnPrev);
+
+    // Numbered Buttons
+    for (let p = 1; p <= totalPages; p++) {
+      const btnPage = document.createElement('button');
+      btnPage.type = 'button';
+      btnPage.className = `job-page-btn ${p === currentPage ? 'job-page-btn--active' : ''}`;
+      btnPage.textContent = p;
+      btnPage.setAttribute('aria-label', `Page ${p}`);
+      if (p === currentPage) {
+        btnPage.setAttribute('aria-current', 'page');
+      }
+      btnPage.addEventListener('click', () => {
+        if (p !== currentPage) {
+          goToPage(p);
+        }
+      });
+      nav.appendChild(btnPage);
+    }
+
+    // Next Button
+    const btnNext = document.createElement('button');
+    btnNext.type = 'button';
+    btnNext.className = 'job-page-btn job-page-btn--nav';
+    btnNext.innerHTML = `Next &rarr;`;
+    btnNext.disabled = (currentPage === totalPages);
+    btnNext.setAttribute('aria-label', 'Go to next page');
+    btnNext.addEventListener('click', () => {
+      if (currentPage < totalPages) {
+        goToPage(currentPage + 1);
+      }
+    });
+    nav.appendChild(btnNext);
+
+    paginationContainer.appendChild(nav);
+
+    // Contextual Page Range Indicator
+    const info = document.createElement('div');
+    info.className = 'job-pagination-info';
+    info.textContent = `Page ${currentPage} of ${totalPages} (${totalItems} total opportunities)`;
+    paginationContainer.appendChild(info);
+  }
+
+  /**
+   * Switches to target page and smoothly scrolls back to the top of the grid.
+   * @param {number} pageNumber
+   */
+  function goToPage(pageNumber) {
+    currentPage = pageNumber;
+    filterAndRender(false);
+
+    // Smooth scroll to top of job grid (controls bar top)
+    const target = document.querySelector('.job-controls-bar') || gridContainer;
+    if (target) {
+      const targetPos = target.getBoundingClientRect().top + window.scrollY - 90;
+      window.scrollTo({
+        top: Math.max(0, targetPos),
+        behavior: 'smooth'
+      });
+    }
+  }
+
   // Category Tabs Click Handling
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
@@ -450,24 +644,54 @@ document.addEventListener('DOMContentLoaded', async () => {
       tab.classList.add('job-tab--active');
       tab.setAttribute('aria-selected', 'true');
       activeCategory = tab.dataset.category || '';
-      filterAndRender();
+      filterAndRender(true);
     });
   });
 
-  // Search, Filter & Sort Event Listeners
+  // Search Input Handling with Debounce
   if (inputSearch) {
     const handleInput = typeof debounce === 'function' 
-      ? debounce(filterAndRender, 250) 
-      : filterAndRender;
+      ? debounce(() => filterAndRender(true), 250) 
+      : () => filterAndRender(true);
     inputSearch.addEventListener('input', handleInput);
   }
 
+  // Clear Search Button
+  if (btnClearSearch) {
+    btnClearSearch.addEventListener('click', () => {
+      if (inputSearch) {
+        inputSearch.value = '';
+        inputSearch.focus();
+      }
+      filterAndRender(true);
+    });
+  }
+
+  // Unit and Sort Dropdown Listeners
   if (selectDept) {
-    selectDept.addEventListener('change', filterAndRender);
+    selectDept.addEventListener('change', () => filterAndRender(true));
   }
 
   if (selectSort) {
-    selectSort.addEventListener('change', filterAndRender);
+    selectSort.addEventListener('change', () => filterAndRender(true));
+  }
+
+  // Reset All Filters Button
+  if (btnResetFilters) {
+    btnResetFilters.addEventListener('click', () => {
+      if (inputSearch) inputSearch.value = '';
+      if (selectDept) selectDept.value = '';
+      if (selectSort) selectSort.value = 'newest';
+      activeCategory = '';
+
+      tabs.forEach(t => {
+        const isAll = !t.dataset.category;
+        t.classList.toggle('job-tab--active', isAll);
+        t.setAttribute('aria-selected', isAll ? 'true' : 'false');
+      });
+
+      filterAndRender(true);
+    });
   }
 
   // Floating Back-to-Top Institutional Button

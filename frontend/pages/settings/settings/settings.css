@@ -1,27 +1,216 @@
 /* ==========================================================================
-   NBSC PRIME-HRM Intelligence Hub — Settings Styles
-   BEM naming conventions, weight sliders, and validation indicators.
+   NBSC PRIME-HRM Intelligence Hub — System Settings Styles
+   Harmonized with the Executive Design System (Pipeline Main, Cards, Sliders)
    ========================================================================== */
 
+/* ── Content Grid ─────────────────────────────────────────── */
 .settings-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: var(--spacing-6, 1.5rem);
+  grid-template-columns: 1.65fr 1fr;
+  gap: 20px;
+  align-items: start;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1100px) {
   .settings-grid {
     grid-template-columns: 1fr;
   }
 }
 
+.settings-side-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── 4-Pillar DSS Visual Spectrum Bar ─────────────────────── */
+.dss-distribution-container {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 1.15rem;
+  margin-bottom: 1.5rem;
+}
+
+.dss-distribution-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.dss-distribution-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.dss-spectrum-bar {
+  display: flex;
+  height: 28px;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.08);
+  background-color: #E2E8F0;
+  border: 1px solid #CBD5E1;
+  transition: all 0.3s ease;
+}
+
+.dss-spectrum-segment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ffffff;
+  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  user-select: none;
+}
+
+.dss-segment-merit {
+  background: linear-gradient(180deg, #3B82F6 0%, #1D4ED8 100%);
+}
+
+.dss-segment-comp {
+  background: linear-gradient(180deg, #F59E0B 0%, #B45309 100%);
+}
+
+.dss-segment-ethics {
+  background: linear-gradient(180deg, #10B981 0%, #047857 100%);
+}
+
+.dss-segment-service {
+  background: linear-gradient(180deg, #8B5CF6 0%, #6D28D9 100%);
+}
+
+.dss-spectrum-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-top: 0.75rem;
+  padding-top: 0.5rem;
+}
+
+.dss-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.dss-legend-color {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+/* ── Pillar Weight Cards & Sliders ────────────────────────── */
+.pillar-card {
+  background: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 1.15rem;
+  margin-bottom: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pillar-card:hover {
+  border-color: #CBD5E1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.pillar-card--merit { border-left: 4px solid #3B82F6; }
+.pillar-card--comp { border-left: 4px solid #F59E0B; }
+.pillar-card--ethics { border-left: 4px solid #10B981; }
+.pillar-card--service { border-left: 4px solid #8B5CF6; }
+
+.pillar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.65rem;
+}
+
+.pillar-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pillar-badge-num {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.pillar-card--merit .pillar-badge-num { background: #DBEAFE; color: #1E40AF; }
+.pillar-card--comp .pillar-badge-num { background: #FEF3C7; color: #92400E; }
+.pillar-card--ethics .pillar-badge-num { background: #D1FAE5; color: #065F46; }
+.pillar-card--service .pillar-badge-num { background: #EDE9FE; color: #5B21B6; }
+
+.pillar-name {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #1E293B;
+  cursor: pointer;
+}
+
+.weight-pct-pill {
+  font-size: 0.9375rem;
+  font-weight: 800;
+  padding: 3px 12px;
+  border-radius: 9999px;
+  letter-spacing: 0.02em;
+}
+
+.pillar-card--merit .weight-pct-pill { background: #EFF6FF; color: #1D4ED8; border: 1px solid #BFDBFE; }
+.pillar-card--comp .weight-pct-pill { background: #FFFBEB; color: #B45309; border: 1px solid #FDE68A; }
+.pillar-card--ethics .weight-pct-pill { background: #ECFDF5; color: #047857; border: 1px solid #A7F3D0; }
+.pillar-card--service .weight-pct-pill { background: #F5F3FF; color: #6D28D9; border: 1px solid #DDD6FE; }
+
+.form-range {
+  width: 100%;
+  height: 6px;
+  border-radius: 4px;
+  background: #E2E8F0;
+  outline: none;
+  cursor: pointer;
+  accent-color: #0448AC;
+  margin: 0.5rem 0;
+}
+
+.pillar-breakdown {
+  font-size: 0.75rem;
+  color: #64748B;
+  line-height: 1.4;
+  margin-top: 0.25rem;
+}
+
+/* ── Sum Badge & Validation Banner ────────────────────────── */
 .weight-total-indicator {
-  padding: 4px 12px;
-  border-radius: var(--radius-sm, 6px);
+  padding: 5px 14px;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  border: 1px solid #FDE047;
   background-color: #FEF9C3;
   color: #854D0E;
-  font-size: 0.8125rem;
-  border: 1px solid #FDE047;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
 }
 
 .weight-total-indicator--valid {
@@ -36,20 +225,95 @@
   border-color: #FCA5A5;
 }
 
-.weight-pct-pill {
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: var(--color-accent, #D4A843);
-  background-color: var(--color-bg-subtle, #F8FAFC);
-  padding: 2px 10px;
-  border-radius: 9999px;
-  border: 1px solid var(--color-border, #CBD5E1);
+.validation-banner {
+  border-radius: 8px;
+  padding: 0.875rem 1rem;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.bg-subtle {
-  background-color: var(--color-bg-subtle, #F8FAFC);
+.validation-banner--valid {
+  background: #F0FDF4;
+  border: 1px solid #BBF7D0;
+  color: #166534;
 }
 
-.rounded {
-  border-radius: var(--radius-md, 8px);
+.validation-banner--invalid {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  color: #991B1B;
+}
+
+/* ── Form Inputs in Cards ─────────────────────────────────── */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #CBD5E1;
+  border-radius: 7px;
+  font-size: 0.8125rem;
+  color: #1E293B;
+  background: #ffffff;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #0448AC;
+  box-shadow: 0 0 0 3px rgba(4, 72, 172, 0.12);
+}
+
+.card__desc {
+  font-size: 0.8125rem;
+  color: #64748B;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.btn-primary-blue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 16px;
+  background: #0448AC;
+  color: #ffffff;
+  border: 1px solid #0448AC;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-primary-blue:hover {
+  background: #033682;
+  border-color: #033682;
+  color: #ffffff;
+}
+
+.w-100 {
+  width: 100%;
+  box-sizing: border-box;
 }

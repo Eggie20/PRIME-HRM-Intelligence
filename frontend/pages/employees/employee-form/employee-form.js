@@ -29,20 +29,35 @@ document.addEventListener('DOMContentLoaded', async () => {
   async function loadEmployeeData(id) {
     try {
       const response = await apiGet(`/employees/${id}/`);
-      const emp = response.data.employee;
+      const emp = response.data?.employee || response.data;
       if (!emp) return;
 
-      document.getElementById('input-first-name').value = emp.first_name || '';
-      document.getElementById('input-last-name').value = emp.last_name || '';
-      document.getElementById('input-middle-name').value = emp.middle_name || '';
+      let firstName = emp.first_name || '';
+      let lastName = emp.last_name || '';
+      let middleName = emp.middle_name || '';
+
+      if (!firstName && !lastName && emp.full_name) {
+        const cleanName = emp.full_name.split(',')[0].trim();
+        const parts = cleanName.split(' ');
+        if (parts.length > 1) {
+          lastName = parts.pop();
+          firstName = parts.join(' ');
+        } else {
+          firstName = cleanName;
+        }
+      }
+
+      document.getElementById('input-first-name').value = firstName;
+      document.getElementById('input-last-name').value = lastName;
+      document.getElementById('input-middle-name').value = middleName;
       document.getElementById('input-email').value = emp.email || '';
       document.getElementById('input-phone').value = emp.phone || '';
-      document.getElementById('select-department').value = emp.department || '';
-      document.getElementById('input-position').value = emp.position || '';
+      document.getElementById('select-department').value = emp.department || emp.department_code || '';
+      document.getElementById('input-position').value = emp.position || emp.position_title || '';
       document.getElementById('select-category').value = emp.category || 'TEACHING';
       document.getElementById('select-status').value = emp.employment_status || 'COS';
       document.getElementById('input-daily-rate').value = emp.daily_rate || '';
-      document.getElementById('input-monthly-salary').value = emp.monthly_salary || '';
+      document.getElementById('input-monthly-salary').value = emp.monthly_salary || (emp.daily_rate ? (emp.daily_rate * 22).toFixed(2) : '');
     } catch (err) {
       showToast('Error loading employee record: ' + err.message, 'error');
     }
@@ -61,14 +76,22 @@ document.addEventListener('DOMContentLoaded', async () => {
       return;
     }
 
+    const firstName = document.getElementById('input-first-name').value.trim();
+    const lastName = document.getElementById('input-last-name').value.trim();
+    const middleName = document.getElementById('input-middle-name').value.trim();
+    const fullName = [firstName, middleName, lastName].filter(Boolean).join(' ');
+
     const payload = {
-      first_name: document.getElementById('input-first-name').value.trim(),
-      last_name: document.getElementById('input-last-name').value.trim(),
-      middle_name: document.getElementById('input-middle-name').value.trim(),
+      first_name: firstName,
+      last_name: lastName,
+      middle_name: middleName,
+      full_name: fullName,
       email: document.getElementById('input-email').value.trim().toLowerCase(),
       phone: document.getElementById('input-phone').value.trim(),
       department: document.getElementById('select-department').value,
+      department_code: document.getElementById('select-department').value,
       position: document.getElementById('input-position').value.trim(),
+      position_title: document.getElementById('input-position').value.trim(),
       category: document.getElementById('select-category').value,
       employment_status: document.getElementById('select-status').value,
       daily_rate: parseFloat(document.getElementById('input-daily-rate').value) || 0.0,

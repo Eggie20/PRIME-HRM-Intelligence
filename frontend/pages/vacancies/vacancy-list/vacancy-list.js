@@ -28,6 +28,18 @@ document.addEventListener('DOMContentLoaded', async () => {
   const selectStatus = document.getElementById('select-filter-status');
   const btnReset = document.getElementById('btn-reset-filters');
   const btnLogout = document.getElementById('btn-logout');
+  const btnCreateVacancy = document.getElementById('btn-create-vacancy');
+
+  // Role-Based UI Action Controls
+  if (user && user.role !== ROLES.HR_ADMIN) {
+    if (btnCreateVacancy) btnCreateVacancy.style.display = 'none';
+  }
+
+  // Auto-scope for Department Head
+  if (user && user.role === ROLES.DEPT_HEAD && user.department_code && selectDept) {
+    selectDept.value = user.department_code;
+    selectDept.disabled = true;
+  }
 
   // Top live indicator elements
   const vacanciesCountNum = document.getElementById('vacancies-count-num');
@@ -196,8 +208,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       const isTeaching = v.category === 'TEACHING';
       const categoryBadge = isTeaching
-        ? '<span class="badge--teaching">Teaching</span>'
-        : '<span class="badge--non-teaching">Non-Teaching</span>';
+        ? '<span class="badge badge--teaching">Teaching</span>'
+        : '<span class="badge badge--non-teaching">Non-Teaching</span>';
 
       let statusBadge = '<span class="badge--open">Open</span>';
       if (v.status === 'DELIBERATION') {
@@ -449,12 +461,131 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (selectStatus) selectStatus.value = '';
       currentSortBy = 'title';
       currentSortOrder = 'asc';
-      if (selectPageSize) selectPageSize.value = '10';
       pageSize = '10';
+      if (selectPageSize) selectPageSize.value = '10';
       fetchVacancies(1);
-      showToast('Filters and sorting reset to default', 'info', 1500);
+      showToast('Filters reset to default', 'info', 1500);
     });
   }
 
+  // Create Vacancy In-Page Modal Handler
+  if (btnCreateVacancy) {
+    btnCreateVacancy.addEventListener('click', (e) => {
+      e.preventDefault();
+      openCreateVacancyModal();
+    });
+  }
+
+  function openCreateVacancyModal() {
+    const modalHtml = `
+      <form id="modal-vacancy-form" style="display: flex; flex-direction: column; gap: 1rem;">
+        <div>
+          <label style="font-size: 0.8rem; font-weight: 600; color: #1e293b; display: block; margin-bottom: 4px;">Position Title *</label>
+          <input type="text" id="m-vac-title" class="form-group__input" placeholder="e.g. Instructor I (Information Technology)" required style="width: 100%;" />
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+          <div>
+            <label style="font-size: 0.8rem; font-weight: 600; color: #1e293b; display: block; margin-bottom: 4px;">Department / Academic Institute *</label>
+            <select id="m-vac-dept" class="form-group__input" style="width: 100%;">
+              <option value="ICS">Institute of Computer Studies (ICS)</option>
+              <option value="IBM">Institute of Business and Management (IBM)</option>
+              <option value="ITE">Institute of Teacher Education (ITE)</option>
+              <option value="DGEC">Dept. of General Education (DGEC)</option>
+              <option value="ADMIN">Administrative & General Support (ADMIN)</option>
+              <option value="FIN">Finance & Accounting Division (FIN)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size: 0.8rem; font-weight: 600; color: #1e293b; display: block; margin-bottom: 4px;">Category *</label>
+            <select id="m-vac-cat" class="form-group__input" style="width: 100%;">
+              <option value="TEACHING">Teaching / Faculty</option>
+              <option value="NON_TEACHING">Non-Teaching / Staff</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem;">
+          <div>
+            <label style="font-size: 0.8rem; font-weight: 600; color: #1e293b; display: block; margin-bottom: 4px;">Appointment Status *</label>
+            <select id="m-vac-status" class="form-group__input" style="width: 100%;">
+              <option value="Contract of Service (COS)">Contract of Service (COS)</option>
+              <option value="Permanent (Plantilla)">Permanent (Plantilla)</option>
+              <option value="Temporary">Temporary</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size: 0.8rem; font-weight: 600; color: #1e293b; display: block; margin-bottom: 4px;">Authorized Slots *</label>
+            <input type="number" id="m-vac-slots" class="form-group__input" value="1" min="1" style="width: 100%;" />
+          </div>
+          <div>
+            <label style="font-size: 0.8rem; font-weight: 600; color: #1e293b; display: block; margin-bottom: 4px;">Salary Grade *</label>
+            <input type="number" id="m-vac-sg" class="form-group__input" value="12" style="width: 100%;" />
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+          <div>
+            <label style="font-size: 0.8rem; font-weight: 600; color: #1e293b; display: block; margin-bottom: 4px;">Monthly Compensation (₱)</label>
+            <input type="number" id="m-vac-rate" class="form-group__input" value="29165" style="width: 100%;" />
+          </div>
+          <div>
+            <label style="font-size: 0.8rem; font-weight: 600; color: #1e293b; display: block; margin-bottom: 4px;">Application Deadline</label>
+            <input type="date" id="m-vac-deadline" class="form-group__input" style="width: 100%;" />
+          </div>
+        </div>
+
+        <div>
+          <label style="font-size: 0.8rem; font-weight: 600; color: #1e293b; display: block; margin-bottom: 4px;">Education Requirement (CSC QS)</label>
+          <input type="text" id="m-vac-edu" class="form-group__input" placeholder="e.g. Master's degree in field of specialization or allied discipline" value="Bachelor's degree in field of specialization" style="width: 100%;" />
+        </div>
+      </form>
+    `;
+
+    showModal(
+      '✚ Create New Vacancy Posting',
+      modalHtml,
+      'Publish Vacancy',
+      async () => {
+        const title = document.getElementById('m-vac-title')?.value?.trim();
+        if (!title) {
+          showToast('Position Title is required.', 'error');
+          return false;
+        }
+
+        const vacData = {
+          title: title,
+          department: document.getElementById('m-vac-dept')?.value || 'ICS',
+          category: document.getElementById('m-vac-cat')?.value || 'TEACHING',
+          appointment_status: document.getElementById('m-vac-status')?.value || 'Contract of Service (COS)',
+          slots: Number(document.getElementById('m-vac-slots')?.value) || 1,
+          salary_grade: Number(document.getElementById('m-vac-sg')?.value) || 12,
+          salary_rate: Number(document.getElementById('m-vac-rate')?.value) || 29165,
+          deadline: document.getElementById('m-vac-deadline')?.value || '2026-10-15',
+          education: document.getElementById('m-vac-edu')?.value || "Bachelor's degree in relevant discipline",
+          status: 'OPEN'
+        };
+
+        if (typeof db !== 'undefined' && db.createVacancy) {
+          const created = db.createVacancy(vacData);
+          await fetchVacancies(1);
+          showToast(`Successfully published vacancy: ${created.title}!`, 'success', 3500);
+          return true;
+        }
+        return true;
+      },
+      'Cancel'
+    );
+
+    setTimeout(() => {
+      const deadlineInput = document.getElementById('m-vac-deadline');
+      if (deadlineInput) {
+        const d = new Date(Date.now() + 30 * 86400000);
+        deadlineInput.value = d.toISOString().slice(0, 10);
+      }
+    }, 100);
+  }
+
+  // Initial load
   await fetchVacancies(1);
 });

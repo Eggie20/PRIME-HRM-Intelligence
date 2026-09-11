@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="../../../shared/css/layout.css">
   <link rel="stylesheet" href="../../../shared/css/utilities.css">
   <link rel="stylesheet" href="applicant-login.css">
+  <script src="../../../shared/js/auth-guard.js"></script>
 </head>
 <body class="auth-body">
   <!-- Split Screen Authentication Layout: Form on Left, Brand on Right (Full 100vh) -->
@@ -22,27 +23,13 @@
             <img src="../../../logos/school_name-logo.png" alt="Northern Bukidnon State College" class="auth-form-school-logo">
           </a>
           <h2 class="auth-form-title">Applicant Sign In</h2>
-          <p class="auth-form-subtitle">Track your application, submit requirements, and view DSS review status.</p>
+          <p class="auth-form-subtitle">Enter your registered email and official application tracking number.</p>
         </header>
-
-        <!-- Demo Quick-Fill Access Chip -->
-        <div class="demo-selector" aria-label="Demo Applicant Access">
-          <div class="demo-selector__header">
-            <span class="demo-selector__icon">&#9889;</span>
-            <span class="demo-selector__label">Quick Demo Access</span>
-          </div>
-          <div class="demo-selector__buttons">
-            <button type="button" class="btn-demo-chip" id="btn-demo-applicant" title="Log in as Carlo Mendoza">
-              <span class="demo-chip-badge demo-chip-badge--applicant">Demo</span>
-              <span class="demo-chip-name">Carlo Mendoza (Faculty Applicant)</span>
-            </button>
-          </div>
-        </div>
 
         <!-- Login Form -->
         <form id="form-applicant-login" novalidate>
           <div class="form-group">
-            <label for="input-applicant-email" class="form-group__label form-group__label--required">Email Address</label>
+            <label for="input-applicant-email" class="form-group__label form-group__label--required">Registered Email Address</label>
             <div class="input-with-icon">
               <span class="input-icon" aria-hidden="true">&#9993;</span>
               <input
@@ -60,23 +47,25 @@
 
           <div class="form-group">
             <div class="form-label-row">
-              <label for="input-applicant-password" class="form-group__label form-group__label--required m-0">Password</label>
-              <a href="../forgot-password/forgot-password.html" class="forgot-link" id="link-forgot-pass">Forgot password?</a>
+              <label for="input-applicant-tracking" class="form-group__label form-group__label--required m-0">Application Tracking Number</label>
+              <button type="button" class="forgot-link-btn" id="link-forgot-tracking" aria-haspopup="dialog">Forgot your tracking number?</button>
             </div>
-            <div class="input-with-icon password-input-wrapper">
-              <span class="input-icon" aria-hidden="true">&#128274;</span>
+            <div class="input-with-icon tracking-input-wrapper">
+              <span class="input-icon" aria-hidden="true">&#128203;</span>
               <input
-                type="password"
-                id="input-applicant-password"
-                name="password"
-                class="form-group__input form-group__input--icon"
-                placeholder="Enter your password"
-                autocomplete="current-password"
+                type="text"
+                id="input-applicant-tracking"
+                name="tracking_number"
+                class="form-group__input form-group__input--icon tracking-input"
+                placeholder="e.g. NBSC-APP-2026-10001"
+                autocomplete="off"
+                autocapitalize="characters"
+                spellcheck="false"
                 required
               >
-              <button type="button" class="btn-toggle-password" id="btn-toggle-password" aria-label="Toggle password visibility">&#128065;</button>
             </div>
-            <span class="form-group__error" id="input-applicant-password-error"></span>
+            <span class="form-group__error" id="input-applicant-tracking-error"></span>
+            <span class="form-hint-text">&#128233; Dispatched via email upon application submission.</span>
           </div>
 
           <div class="form-actions">
@@ -85,23 +74,29 @@
               <span class="btn-arrow" aria-hidden="true">&rarr;</span>
             </button>
           </div>
+
+          <!-- Subtle Demo / Evaluator Helper (Below primary CTA) -->
+          <div class="demo-test-helper" aria-label="System Testing Note">
+            <span class="demo-test-helper__label">Evaluating system?</span>
+            <button type="button" class="btn-demo-inline" id="btn-demo-applicant" title="Quick-fill Carlo Mendoza demo credentials">
+              <span class="demo-chip-badge">Demo</span> Fill Demo Details
+            </button>
+          </div>
         </form>
 
         <footer class="auth-form-footer">
           <div class="register-switch">
-            <span>Don't have an applicant account?</span>
-            <a href="../register/register.html" class="register-switch__link" id="link-create-account">Register here</a>
+            <span>Haven't submitted an application yet?</span>
+            <a href="../../vacancies/job-board/job-board.html" class="register-switch__link" id="link-browse-vacancies">Browse Open Vacancies &rarr;</a>
           </div>
           <div class="staff-switch">
             <span>Are you an NBSC employee?</span>
             <a href="../admin-login/admin-login.html" class="staff-switch__link" id="link-staff-portal">Go to Staff Portal &rarr;</a>
           </div>
           <div class="auth-quick-nav">
-            <a href="../../../index.html" class="quick-nav-link">&larr; Home</a>
+            <a href="../../../index.html" class="quick-nav-link">&larr; Return to NBSC Homepage</a>
             <span class="quick-nav-sep">&bull;</span>
-            <a href="../../vacancies/job-board/job-board.html" class="quick-nav-link">Open Vacancies</a>
-            <span class="quick-nav-sep">&bull;</span>
-            <a href="../../applicants/application-track/application-track.html" class="quick-nav-link">Track Application</a>
+            <a href="../../track-application/track-application.html" class="quick-nav-link">Check Application Status</a>
           </div>
         </footer>
       </div>
@@ -156,6 +151,57 @@
       </div>
     </section>
   </main>
+
+  <!-- Modal: Retrieve Tracking Number by Email -->
+  <div class="recovery-modal-backdrop" id="modal-forgot-tracking" aria-hidden="true" role="dialog" aria-labelledby="modal-forgot-title">
+    <div class="recovery-modal-card">
+      <header class="recovery-modal-header">
+        <div class="recovery-modal-icon-badge">&#128233;</div>
+        <div class="recovery-modal-title-wrap">
+          <h3 class="recovery-modal-title" id="modal-forgot-title">Retrieve Tracking Number</h3>
+          <p class="recovery-modal-subtitle">Enter your registered email address and we will locate and send your official application tracking number(s).</p>
+        </div>
+        <button type="button" class="recovery-modal-close" id="btn-close-recovery-modal" aria-label="Close dialog">&times;</button>
+      </header>
+
+      <form id="form-recovery-tracking" novalidate>
+        <div class="form-group mb-3">
+          <label for="input-recovery-email" class="form-group__label form-group__label--required">Registered Email Address</label>
+          <div class="input-with-icon">
+            <span class="input-icon" aria-hidden="true">&#9993;</span>
+            <input
+              type="email"
+              id="input-recovery-email"
+              class="form-group__input form-group__input--icon"
+              placeholder="e.g. applicant@gmail.com"
+              required
+            >
+          </div>
+          <span class="form-group__error" id="recovery-email-error"></span>
+        </div>
+
+        <!-- Demo Helper Tip -->
+        <div class="recovery-demo-tip">
+          <span class="recovery-demo-tip__icon">&#128161;</span>
+          <div class="recovery-demo-tip__content">
+            <span>Testing demo? Click to auto-fill:</span>
+            <button type="button" class="btn-demo-recovery" id="btn-fill-recovery-demo">Fill applicant@gmail.com</button>
+          </div>
+        </div>
+
+        <!-- Result Box (Hidden by default, populated dynamically) -->
+        <div id="recovery-result-box" class="recovery-result-box" style="display: none;"></div>
+
+        <div class="recovery-modal-actions">
+          <button type="button" class="btn-cancel-modal" id="btn-cancel-recovery">Cancel</button>
+          <button type="submit" class="btn-submit-modal" id="btn-submit-recovery">
+            <span id="btn-recovery-text">Send Tracking Number</span>
+            <span class="btn-arrow" aria-hidden="true">&rarr;</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <script src="../../../shared/js/constants.js"></script>
   <script src="../../../shared/js/utils.js"></script>

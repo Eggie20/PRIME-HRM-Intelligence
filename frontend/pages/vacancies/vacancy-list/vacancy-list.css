@@ -197,24 +197,41 @@
 }
 
 /* ── Badges ───────────────────────────────────────────────── */
+.badge,
+.badge--teaching,
+.badge--non-teaching,
+.badge--open,
+.badge--deliberation,
+.badge--closed {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  line-height: 1.25 !important;
+  box-sizing: border-box !important;
+}
+
 .badge--teaching {
-  background-color: rgba(212, 168, 67, 0.16);
-  color: #8D6B14;
-  border: 1px solid rgba(212, 168, 67, 0.35);
-  font-weight: 600;
-  font-size: 0.75rem;
-  padding: 0.25rem 0.65rem;
-  border-radius: var(--radius-full);
+  background-color: #FEF3C7 !important;
+  color: #92400E !important;
+  border: 1px solid #FCD34D !important;
+  font-weight: 700 !important;
+  font-size: 0.75rem !important;
+  padding: 3px 11px !important;
+  border-radius: 9999px !important;
+  letter-spacing: 0.01em !important;
 }
 
 .badge--non-teaching {
-  background-color: rgba(15, 27, 45, 0.08);
-  color: var(--color-primary-800);
-  border: 1px solid rgba(15, 27, 45, 0.18);
-  font-weight: 600;
-  font-size: 0.75rem;
-  padding: 0.25rem 0.65rem;
-  border-radius: var(--radius-full);
+  background-color: #F1F5F9 !important;
+  color: #334155 !important;
+  border: 1px solid #CBD5E1 !important;
+  font-weight: 700 !important;
+  font-size: 0.75rem !important;
+  padding: 3px 11px !important;
+  border-radius: 9999px !important;
+  letter-spacing: 0.01em !important;
 }
 
 .badge--open {

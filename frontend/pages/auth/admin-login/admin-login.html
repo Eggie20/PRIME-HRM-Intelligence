@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="../../../shared/css/layout.css">
   <link rel="stylesheet" href="../../../shared/css/utilities.css">
   <link rel="stylesheet" href="admin-login.css">
+  <script src="../../../shared/js/auth-guard.js"></script>
 </head>
 <body class="auth-body">
   <main class="auth-split">
@@ -151,16 +152,49 @@
             </a>
           </div>
           <div class="auth-quick-nav">
-            <a href="../../../index.html" class="quick-nav-link">&larr; Home</a>
+            <a href="../../../index.html" class="quick-nav-link">&larr; Return to NBSC Homepage</a>
             <span class="quick-nav-sep">&bull;</span>
             <a href="../../vacancies/job-board/job-board.html" class="quick-nav-link">Open Vacancies</a>
-            <span class="quick-nav-sep">&bull;</span>
-            <a href="../../applicants/application-track/application-track.html" class="quick-nav-link">Track Application</a>
           </div>
         </footer>
       </div>
     </section>
   </main>
+
+  <!-- Mobile Viewport Advisory Modal -->
+  <div class="mobile-advisory-overlay" id="mobile-advisory-modal" aria-hidden="true">
+    <div class="mobile-advisory-dialog" role="dialog" aria-labelledby="advisory-title" aria-modal="true">
+      <div class="mobile-advisory-header">
+        <div class="mobile-advisory-badge">
+          <span class="mobile-advisory-badge__dot"></span>
+          Display Notice
+        </div>
+        <button type="button" class="btn-advisory-close" id="btn-advisory-close" aria-label="Close advisory">&times;</button>
+      </div>
+      <div class="mobile-advisory-icon-wrap">
+        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#FAC775" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+          <line x1="8" y1="21" x2="16" y2="21"></line>
+          <line x1="12" y1="17" x2="12" y2="21"></line>
+        </svg>
+      </div>
+      <h2 class="mobile-advisory-title" id="advisory-title">Desktop &amp; Tablet Experience</h2>
+      <p class="mobile-advisory-text">
+        This administrative portal is <strong>not intended for mobile screen sizes</strong>. The NBSC PRIME-HRM Hub features multi-panel applicant review matrices, 4-pillar compliance modules, and high-density institutional data tables optimized for <strong>desktop or tablet displays (1024px+)</strong>.
+      </p>
+      <p class="mobile-advisory-note">
+        You may continue if you want to proceed on this device, or switch to the mobile-optimized Applicant Portal.
+      </p>
+      <div class="mobile-advisory-actions">
+        <button type="button" class="btn-advisory-continue" id="btn-advisory-continue">
+          Continue to Portal Anyway &rarr;
+        </button>
+        <a href="../applicant-login/applicant-login.html" class="btn-advisory-portal">
+          Switch to Applicant Portal (Mobile-Ready)
+        </a>
+      </div>
+    </div>
+  </div>
 
   <script src="../../../shared/js/constants.js"></script>
   <script src="../../../shared/js/utils.js"></script>

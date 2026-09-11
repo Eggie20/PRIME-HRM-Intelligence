@@ -14,6 +14,7 @@ let allBatches = [];
  * Initializes batch fetch, search, filter, and modal bindings.
  */
 function initPayrollList() {
+  requireAuth([ROLES.HR_ADMIN]);
   fetchBatches();
 
   const searchInput = document.getElementById('input-search-batch');

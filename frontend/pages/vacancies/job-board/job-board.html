@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="job-board-modal.css">
   <link rel="stylesheet" href="job-board-footer.css">
   <link rel="stylesheet" href="job-board.css">
+  <script src="../../../shared/js/auth-guard.js"></script>
 </head>
 <body class="public-page">
   <!-- Public Navigation (Responsive Institutional Header) -->
@@ -115,65 +116,69 @@
         <div class="job-stat-card__desc">ICS, IBM, ITE, DGEC &amp; Executive Support Offices</div>
       </div>
     </div>
-
-    <!-- Metric 4: Government Accreditation -->
-    <div class="job-stat-card">
-      <div class="job-stat-card__top">
-        <div class="job-stat-card__icon job-stat-card__icon--blue">&#9878;</div>
-        <span class="job-stat-card__tag job-stat-card__tag--blue">CSC Accredited</span>
-      </div>
-      <div class="job-stat-card__main">
-        <div class="job-stat-card__value">Level 2 Maturity</div>
-        <div class="job-stat-card__desc">Civil Service Commission Recruitment, Selection &amp; Placement</div>
-      </div>
-    </div>
   </section>
 
   <!-- Main Listings Section -->
   <main class="job-board-content" id="main-content">
     <div class="job-board-container">
-      <!-- Full-Width Responsive Filter Toolbar -->
+      <!-- Full-Width Responsive Filter Toolbar (2-Row Hierarchy) -->
       <div class="job-controls-bar">
-        <!-- Horizontal Scrollable Category Filter Tabs -->
-        <div class="job-tabs" role="tablist">
-          <button class="job-tab job-tab--active" data-category="" role="tab" aria-selected="true">
-            <span>All Opportunities</span>
-            <span class="job-tab__badge" id="count-all">0</span>
-          </button>
-          <button class="job-tab" data-category="TEACHING" role="tab" aria-selected="false">
-            <span>Faculty / Teaching</span>
-            <span class="job-tab__badge" id="count-teaching">0</span>
-          </button>
-          <button class="job-tab" data-category="NON_TEACHING" role="tab" aria-selected="false">
-            <span>Staff / Administrative</span>
-            <span class="job-tab__badge" id="count-non-teaching">0</span>
-          </button>
+        <!-- Row 1: Primary Stream Filter Tabs -->
+        <div class="job-controls-row job-controls-row--primary">
+          <div class="job-tabs" role="tablist" aria-label="Position Category Filter">
+            <button class="job-tab job-tab--active" data-category="" role="tab" aria-selected="true">
+              <span>All Opportunities</span>
+              <span class="job-tab__badge" id="count-all">0</span>
+            </button>
+            <button class="job-tab" data-category="TEACHING" role="tab" aria-selected="false">
+              <span>Faculty / Teaching</span>
+              <span class="job-tab__badge" id="count-teaching">0</span>
+            </button>
+            <button class="job-tab" data-category="NON_TEACHING" role="tab" aria-selected="false">
+              <span>Staff / Administrative</span>
+              <span class="job-tab__badge" id="count-non-teaching">0</span>
+            </button>
+          </div>
         </div>
 
-        <!-- Search, Department, and Sorting Group -->
-        <div class="job-search-group">
+        <!-- Row 2: All Controls in One Compact Row (Desktop: flat inline | Mobile: collapsible) -->
+        <div class="job-controls-row job-controls-row--refine">
           <div class="job-search-input-wrap">
-            <span style="color: #64748b; font-size: 1rem;">&#128269;</span>
+            <span class="job-search-icon" aria-hidden="true">&#128269;</span>
             <input type="text" id="input-search-jobs" placeholder="Search position or qualification..." aria-label="Search open jobs">
+            <button type="button" id="btn-clear-search" class="job-search-clear-btn d-none" aria-label="Clear search text">&times;</button>
           </div>
 
-          <!-- Dual Select Row for Mobile & Tablet -->
-          <div class="job-select-row">
-            <select id="select-dept-filter" class="job-select-dept" aria-label="Filter by department">
-              <option value="">All Academic &amp; Administrative Units</option>
-            </select>
-            <select id="select-sort-order" class="job-select-sort" aria-label="Sort vacancies">
-              <option value="default">Default Order</option>
-              <option value="title-asc">Position Title (A &rarr; Z)</option>
-              <option value="deadline-asc">Closing Soonest</option>
-              <option value="sg-desc">Salary Grade (Highest)</option>
-            </select>
-          </div>
-        </div>
+          <!-- Mobile-only Filter Toggle Button -->
+          <button type="button" id="btn-mobile-filter-toggle" class="job-mobile-filter-toggle-btn" aria-expanded="false" aria-controls="job-filters-collapsible" aria-label="Toggle filter options">
+            <span class="job-mobile-filter-icon">&#9881;</span>
+            <span class="job-mobile-filter-text">Filters</span>
+            <span class="job-mobile-filter-badge d-none" id="mobile-filter-count">0</span>
+            <span class="job-mobile-filter-arrow" aria-hidden="true">&#9662;</span>
+          </button>
 
-        <!-- Live Results Count -->
-        <div class="job-results-summary" id="job-results-summary">
-          Showing <strong>6 active opportunities</strong>
+          <!-- Dropdowns + Reset (Desktop: visible inline | Mobile: collapsible) -->
+          <div class="job-filters-collapsible" id="job-filters-collapsible">
+            <div class="job-select-wrap">
+              <select id="select-dept-filter" class="job-select" aria-label="Filter by department">
+                <option value="">All Units</option>
+              </select>
+            </div>
+
+            <div class="job-select-wrap">
+              <select id="select-sort-order" class="job-select" aria-label="Sort vacancies">
+                <option value="newest">Sort by: Newest Posted</option>
+                <option value="deadline-asc">Sort by: Closing Soonest</option>
+                <option value="sg-desc">Sort by: Salary (Highest)</option>
+                <option value="title-asc">Sort by: Position Title (A &rarr; Z)</option>
+              </select>
+            </div>
+
+            <button type="button" id="btn-reset-filters" class="job-reset-filters-btn d-none" title="Reset all filters">
+              <span aria-hidden="true">&times;</span>
+              <span>Reset</span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -184,6 +189,18 @@
 
       <!-- Empty State Container -->
       <div id="job-empty-state" class="d-none"></div>
+
+      <!-- 8-Item Pagination Controls Container -->
+      <nav class="job-pagination-container" id="job-pagination-container" aria-label="Vacancies Pagination">
+        <!-- Injected via job-board.js -->
+      </nav>
+
+      <!-- Results Counter Strip (Anchored at Bottom, after job cards and pagination) -->
+      <div class="job-results-bar" id="job-results-bar">
+        <div class="job-results-summary" id="job-results-summary">
+          Showing <strong>6 active opportunities</strong>
+        </div>
+      </div>
     </div>
   </main>
 

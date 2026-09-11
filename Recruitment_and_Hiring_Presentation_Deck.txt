@@ -1,0 +1,186 @@
+================================================================================
+NBSC PRIME-HRM INTELLIGENCE HUB: RECRUITMENT & HIRING PIPELINE
+Executive Presentation & Architectural Blueprint (10 Slides)
+================================================================================
+
+--------------------------------------------------------------------------------
+SLIDE 1: Title & Executive Overview
+--------------------------------------------------------------------------------
+Header: NBSC PRIME-HRM Intelligence Hub
+Subtitle: Automated Recruitment, Merit Selection, and Appointment Pipeline
+
+Visual Concept:
+Northern Bukidnon State College official seal with a gold-accented digital pipeline badge and system accreditation tag: "CSC PRIME-HRM Pillar 1 Certified".
+
+Key Highlights:
+• Transforming public sector faculty and staff recruitment into a merit-based, transparent, and digitally verifiable workflow.
+• Complete end-to-end integration: From initial candidate dossier review to official presidential appointment.
+• Multi-Role Governance: Collaborative synergy between HR Administrator, Department Head (Dean), HRMPSB Board Members, and the College President.
+
+
+--------------------------------------------------------------------------------
+SLIDE 2: The Challenge & Strategic Vision
+--------------------------------------------------------------------------------
+Header: From Fragmented Paperwork to Automated Merit Selection
+Subtitle: Aligning Institutional Recruitment with Civil Service ORAOHRA Standards
+
+Visual Concept:
+Side-by-side comparative architecture:
+- Traditional Recruitment: Paper dossiers, manual scoring sheets, delayed board tallies, lack of tamper-evidence.
+- NBSC Intelligence Hub: Instant dossier retrieval, live 4-Pillar DSS calculations, real-time committee balloting, and zero-trust audit trail.
+
+Key Highlights:
+• The Challenge: High applicant volumes, fragmented evaluation rubrics, manual score recalculations, and prolonged deliberation cycles.
+• The Solution: A unified 5-stage sequential pipeline that guides candidates seamlessly across qualification verification, algorithmic merit scoring, faculty rubrics, committee balloting, and executive appointment.
+• Core Tenets: 100% Client-Side Reactivity, Zero Backend Database Vulnerabilities, and Instant Cross-Stage Data Synchronization.
+
+
+--------------------------------------------------------------------------------
+SLIDE 3: The 5-Stage Pipeline Workflow Architecture
+--------------------------------------------------------------------------------
+Header: The 5-Stage Interconnected Hiring Pipeline
+Subtitle: Linear Progression with Universal Applicant State Synchronization
+
+Visual Concept:
+Unified top stepper navigation strip:
+[← Pipeline] → [1. Dossier] → [2. 4-Pillar DSS] → [3. Dept Head Rubric] → [4. HRMPSB Deliberation] → [5. Appointment Resolution →]
+
+Key Highlights:
+• Stage 1 (Dossier): Document compliance & CSC Qualification Standards (QS) verification.
+• Stage 2 (4-Pillar DSS): Multi-dimensional Decision Support System scoring against the 70.00 benchmark.
+• Stage 3 (Dept Head Rubric): Discipline-specific 5-point Likert teaching demonstration and technical evaluation.
+• Stage 4 (HRMPSB Deliberation): Multi-member secret balloting, rank prioritization, and live vote tallies.
+• Stage 5 (Appointment Resolution): Appointing Authority sign-off, CSC Form 33 generation, and cryptographic seal.
+
+
+--------------------------------------------------------------------------------
+SLIDE 4: Stage 1 — Candidate Dossier & Document Screening
+--------------------------------------------------------------------------------
+Header: Stage 1: Candidate Dossier & Credentials
+Subtitle: Civil Service Commission Qualification Standards (QS) Authentication
+
+Visual Concept:
+Candidate profile card layout featuring full credentials, embedded compliance document viewer (PDS Form 212, Official Transcript of Records), and interactive qualification checklist.
+
+Key Role:
+HR Administrator (Screening Evaluator)
+
+Key Highlights:
+• Instant QS Validation: One-click verification for Education, Experience, Training, and Civil Service / Professional License.
+• Integrated Document Inspection: In-browser verification of PDS Form 212 and Official Transcripts.
+• Profile Correction Management: Review applicant-submitted ID correction requests with valid government photo proof before advancing.
+• Stage Advancement: Formal candidate promotion to Stage 2 upon fulfilling documentary thresholds.
+
+
+--------------------------------------------------------------------------------
+SLIDE 5: Stage 2 — 4-Pillar Decision Support System (DSS)
+--------------------------------------------------------------------------------
+Header: Stage 2: 4-Pillar DSS Merit Scoring
+Subtitle: Algorithmic Decision Support with Multi-Dimensional Radar Analysis
+
+Visual Concept:
+Interactive weighted scoring sliders, dynamic SVG 4-Pillar Competency Radar Map canvas, and live score benchmark banner: "Computed Overall Merit Index: 86.2 / 100 (QS Compliant)".
+
+Key Role:
+HR Administrator & Committee Secretariat
+
+Key Highlights:
+• Pillar 1: Merit & Fitness (30% weight): Education attainment, relevant experience, and specialized accredited training.
+• Pillar 2: Technical Competence (30% weight): Written examinations, skill mastery, and teaching demonstration benchmarks.
+• Pillar 3: Behavioral Ethics & Governance (20% weight): Psychological tests, character references, and administrative integrity.
+• Pillar 4: Public Service Orientation (20% weight): Institutional interview and community extension commitment.
+• Statutory Benchmark: Real-time visual indicator enforcing the mandatory 70.00 minimum merit score threshold.
+
+
+--------------------------------------------------------------------------------
+SLIDE 6: Stage 3 — Department Head Rubric Evaluation
+--------------------------------------------------------------------------------
+Header: Stage 3: Department Head Rubric Evaluation
+Subtitle: Academic Faculty Assessment & Teaching Demonstration Grading
+
+Visual Concept:
+5-point Likert assessment sliders for pedagogy and subject mastery, accompanied by the Formal Recommendation Card displaying real-time total score calculation (85.5 / 100).
+
+Key Role:
+Department Head / Institute Dean (e.g. Dean of Computer Studies)
+
+Key Highlights:
+• Discipline-Specific Assessment: Teaching demonstration lecture delivery, subject matter mastery, outcomes-based syllabus formulation, and classroom pedagogy.
+• Formal Recommendation Tiers:
+  - RECOMMEND (Strongly Recommended for Appointment)
+  - RECOMMEND WITH RESERVATION (Requires Conditional Mentorship)
+  - DO NOT RECOMMEND (Fails Academic Benchmarks)
+• Qualitative Justification: Structured documentation of candidate strengths and faculty development areas submitted directly to the selection board.
+
+
+--------------------------------------------------------------------------------
+SLIDE 7: Stage 4 — HRMPSB Deliberation Chamber
+--------------------------------------------------------------------------------
+Header: Stage 4: HRMPSB Deliberation Chamber
+Subtitle: Collaborative Board Balloting & Real-Time Vote Aggregation
+
+Visual Concept:
+Candidate summary identity cards, live vote tally indicators (2 APPROVED, 0 DISAPPROVED, 0 ABSTAINED), and the official confidential board balloting panel.
+
+Key Role:
+HRMPSB Board Members & Committee Chair
+
+Key Highlights:
+• Holistic Candidate Docket: Single-screen visibility of Dossier credentials, 4-Pillar DSS scores, and Department Head rubric recommendations.
+• Deliberative Ballot Casting:
+  - Secret vote submission: APPROVE, DISAPPROVE, or ABSTAIN.
+  - Candidate priority ranking for the plantilla item: Rank 1 (Top Choice), Rank 2, or Rank 3.
+  - Confidential board member deliberation remarks.
+• Quorum & Consensus Checking: Live tally verification ensuring majority board consensus before endorsement.
+
+
+--------------------------------------------------------------------------------
+SLIDE 8: Stage 5 — Appointing Authority (Presidential Resolution)
+--------------------------------------------------------------------------------
+Header: Stage 5: Final Appointment Resolution
+Subtitle: Executive Sign-off, CSC Form 33 Generation, and Cryptographic Sealing
+
+Visual Concept:
+Comparative candidate matrix, CSC Form 33 Appointment Resolution preview with institutional seal, dual signature blocks (HR Administrator & College President), and emerald SHA-256 audit badge.
+
+Key Role:
+College President (Appointing Authority) & HR Administrator
+
+Key Highlights:
+• Appointing Authority Review: Final comparative evaluation of top-ranked candidates endorsed by the HRMPSB.
+• Statutory Plantilla Assignment: Assignment of Plantilla Item Number, Salary Grade, Step Increment, and Official Employment Date.
+• Dual Signatory Protocol: HR Administrator attestation paired with official College President executive signature and institutional seal.
+• Cryptographic Commit: Instant generation of a SHA-256 hash committed directly to the immutable institutional audit chain.
+
+
+--------------------------------------------------------------------------------
+SLIDE 9: High-Capacity 🔍 Docket Filter Architecture
+--------------------------------------------------------------------------------
+Header: High-Capacity 🔍 Docket Filter Architecture
+Subtitle: Intelligent Disambiguation & Flawless Navigation for Large Applicant Pools
+
+Visual Concept:
+Architectural layout of the Universal Docket Filter bar illustrating kinetic horizontal scrolling, left/right carousel navigation arrows (‹ / ›), typeahead search, and the "+N More" candidate browse drawer.
+
+Key Highlights:
+• Horizontal Kinetic Scroll Carousel: Eliminates vertical page bloat; smoothly scrolls through dozens of candidates while keeping the active applicant centered.
+• Multi-Field Real-Time Search: Instant debounce search across candidate name, tracking ID (#28881), position title, email, and filing date.
+• Applicant Disambiguation: Accurately differentiates candidates with identical names using unique tracking numbers, submission dates, and target plantilla items.
+• Universal State Synchronization: Selecting an applicant instantly updates URL parameters and localStorage, ensuring the candidate stays active across all 5 pages.
+
+
+--------------------------------------------------------------------------------
+SLIDE 10: Technical Excellence & Institutional Impact
+--------------------------------------------------------------------------------
+Header: Technical Architecture & Institutional Impact
+Subtitle: Pure Client-Side Reactivity, Zero Backend Vulnerabilities, and Total Transparency
+
+Visual Concept:
+Summary system architecture triad: Pure JS Client-Side Reactivity (NbscDB), Tamper-Evident SHA-256 Audit Trail, and Civil Service Commission PRIME-HRM Compliance.
+
+Key Highlights:
+• Pure Client-Side Architecture: Zero server-side database dependencies. Operates seamlessly in offline or file:// environments via reactive localStorage.
+• Role-Based Security: Strict role gating ensures Dept Heads only grade assigned rubrics, board members cast authorized ballots, and only the President issues appointments.
+• Institutional Trust: Every scoring change, ballot, and resolution is permanently timestamped and logged in the immutable system audit trail.
+• NBSC Excellence: Positioned as a flagship institutional showcase for Civil Service Commission PRIME-HRM accreditation.
+================================================================================

@@ -1,3 +1,5 @@
+@import './sidebar.css';
+
 /**
  * NBSC PRIME-HRM Intelligence Hub — Layout System
  * App shell, sidebar navigation, top header, page containers, and responsive grids.
@@ -10,318 +12,15 @@
   background-color: var(--color-neutral-50);
 }
 
-/* ── Sidebar Navigation ───────────────────────────────────── */
-.sidebar {
-  width: var(--sidebar-width);
-  background: linear-gradient(180deg, #0A111E 0%, #060B14 100%);
-  color: var(--color-neutral-300);
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 100;
-  border-right: 1px solid rgba(212, 168, 67, 0.14);
-  box-shadow: 4px 0 28px rgba(0, 0, 0, 0.35);
-  transition: transform var(--transition-base);
-}
-
-.sidebar__brand {
-  height: var(--header-height);
-  padding: 0 1.25rem;
-  display: flex;
-  align-items: center;
-  gap: 0.875rem;
-  border-bottom: 1px solid rgba(212, 168, 67, 0.12);
-  background: linear-gradient(180deg, rgba(212, 168, 67, 0.08) 0%, rgba(15, 27, 45, 0.4) 100%);
-}
-
-.sidebar__logo-icon {
-  width: 38px;
-  height: 38px;
-  min-width: 38px;
-  background: linear-gradient(135deg, #E2BC5C 0%, #B88E28 100%);
-  color: #0B1320;
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 1.15rem;
-  font-family: var(--font-heading);
-  box-shadow: 0 0 16px rgba(212, 168, 67, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.5);
-  letter-spacing: -0.02em;
-}
-
-.sidebar__brand-text {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.sidebar__brand-title {
-  font-family: var(--font-heading);
-  font-size: 0.9375rem;
-  font-weight: 800;
-  color: var(--color-white);
-  letter-spacing: 0.02em;
-  line-height: 1.2;
-}
-
-.sidebar__brand-badge {
-  display: inline-flex;
-  align-items: center;
-  width: fit-content;
-  padding: 1px 6px;
-  border-radius: 9999px;
-  background: rgba(212, 168, 67, 0.14);
-  border: 1px solid rgba(212, 168, 67, 0.32);
-  font-size: 0.59rem;
-  font-weight: 700;
-  color: #E2BC5C;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.sidebar__nav {
-  flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 1rem 0.75rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.sidebar__nav::-webkit-scrollbar {
-  width: 4px;
-}
-
-.sidebar__nav::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-}
-
-.sidebar__section-title {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.65rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #64748B;
-  padding: 1.125rem 0.625rem 0.375rem;
-  margin-top: 0.25rem;
-  line-height: 1;
-}
-
-.sidebar__section-title::before {
-  content: '';
-  display: inline-block;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background-color: var(--color-accent-500);
-  opacity: 0.75;
-  flex-shrink: 0;
-}
-
-.sidebar__link {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.625rem 0.875rem;
-  border-radius: var(--radius-md);
-  color: #94A3B8;
-  font-size: 0.85rem;
-  font-weight: 500;
-  transition: all var(--transition-fast);
-  text-decoration: none;
-  position: relative;
-  user-select: none;
-  border: 1px solid transparent;
-}
-
-.sidebar__link-content {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  white-space: nowrap;
-}
-
-.sidebar__link-icon {
-  width: 22px;
-  height: 22px;
-  min-width: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #94A3B8;
-  transition: all var(--transition-fast);
-}
-
-.sidebar__link-icon svg {
-  width: 18px;
-  height: 18px;
-  stroke: currentColor;
-  stroke-width: 2;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.sidebar__link-badge {
-  font-size: 0.65rem;
-  font-weight: 700;
-  padding: 1px 6px;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--color-neutral-300);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.sidebar__link:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-  color: var(--color-white);
-  transform: translateX(2px);
-}
-
-.sidebar__link:hover .sidebar__link-icon {
-  color: #E2BC5C;
-}
-
-.sidebar__link--active {
-  background: linear-gradient(90deg, rgba(212, 168, 67, 0.16) 0%, rgba(212, 168, 67, 0.03) 100%);
-  color: #E2BC5C;
-  font-weight: 600;
-  border: 1px solid rgba(212, 168, 67, 0.25);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-.sidebar__link--active::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 3.5px;
-  height: 22px;
-  border-radius: 0 4px 4px 0;
-  background: linear-gradient(180deg, #E2BC5C 0%, #D4A843 100%);
-  box-shadow: 0 0 10px rgba(212, 168, 67, 0.8);
-}
-
-.sidebar__link--active .sidebar__link-icon {
-  color: #E2BC5C;
-  filter: drop-shadow(0 0 6px rgba(212, 168, 67, 0.5));
-}
-
-.sidebar__link--active .sidebar__link-badge {
-  background: rgba(212, 168, 67, 0.2);
-  color: #E2BC5C;
-  border-color: rgba(212, 168, 67, 0.35);
-}
-
-.sidebar__footer {
-  padding: 0.875rem 0.875rem;
-  border-top: 1px solid rgba(212, 168, 67, 0.14);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
-  background: rgba(6, 11, 20, 0.85);
-  backdrop-filter: blur(8px);
-}
-
-.sidebar__user {
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
-  overflow: hidden;
-  position: relative;
-}
-
-.sidebar__user-avatar-wrap {
-  position: relative;
-  width: 36px;
-  height: 36px;
-  min-width: 36px;
-}
-
-.sidebar__user-avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-full);
-  background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
-  border: 1.5px solid var(--color-accent-500);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 0.8125rem;
-  color: var(--color-accent-400);
-  box-shadow: 0 0 10px rgba(212, 168, 67, 0.2);
-}
-
-.sidebar__user-status {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background-color: var(--color-success-500);
-  border: 1.5px solid #060B14;
-}
-
-.sidebar__user-info {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.sidebar__user-name {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--color-white);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.sidebar__user-role {
-  font-size: 0.675rem;
-  color: var(--color-accent-400);
-  font-weight: 500;
-}
-
-.sidebar__logout-btn {
-  width: 32px;
-  height: 32px;
-  min-width: 32px;
-  border-radius: var(--radius-sm);
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #94A3B8;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.sidebar__logout-btn:hover {
-  background: rgba(239, 68, 68, 0.15);
-  border-color: rgba(239, 68, 68, 0.35);
-  color: #EF4444;
-}
+/* ── Sidebar Navigation (Modularized in sidebar.css) ──────── */
+/* All sidebar styles, CSS tokens, and brand styling are maintained in frontend/shared/css/sidebar.css */
 
 /* ── Main Content Area ────────────────────────────────────── */
 .app-main,
 .main-content,
-.sara-main {
+.sara-main,
+.pipeline-main,
+.exec-main {
   flex: 1;
   margin-left: var(--sidebar-width);
   min-height: 100vh;
@@ -330,6 +29,8 @@
   width: calc(100% - var(--sidebar-width));
   min-width: 0;
   box-sizing: border-box;
+  transition: margin-left var(--sidebar-transition-duration, 250ms) var(--ease-drawer, cubic-bezier(0.22, 1, 0.36, 1)),
+              width var(--sidebar-transition-duration, 250ms) var(--ease-drawer, cubic-bezier(0.22, 1, 0.36, 1));
 }
 
 /* Top App Header */
@@ -572,3 +273,143 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ── Zero-Flicker Role-Based Access Control ──────────────── */
+/* Hide unpopulated user text during initial paint to eliminate admin flicker */
+html[data-role]:not([data-auth-ready]) .sidebar__user-name,
+html[data-role]:not([data-auth-ready]) .sidebar__user-role,
+html[data-role]:not([data-auth-ready]) .sidebar__user-avatar {
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+
+html[data-auth-ready] .sidebar__user-name,
+html[data-auth-ready] .sidebar__user-role,
+html[data-auth-ready] .sidebar__user-avatar {
+  opacity: 1;
+}
+
+/* Department Head instant CSS gating */
+html[data-role="DEPT_HEAD"] #nav-deliberation,
+html[data-role="DEPT_HEAD"] #nav-audit,
+html[data-role="DEPT_HEAD"] #nav-payroll-batches,
+html[data-role="DEPT_HEAD"] #nav-payroll-upload,
+html[data-role="DEPT_HEAD"] #nav-settings,
+html[data-role="DEPT_HEAD"] #btn-create-vacancy,
+html[data-role="DEPT_HEAD"] #btn-add-employee,
+html[data-role="DEPT_HEAD"] #btn-import-roster,
+html[data-role="DEPT_HEAD"] #btn-add-program,
+html[data-role="DEPT_HEAD"] #btn-quick-import {
+  display: none !important;
+}
+
+/* Board / HRMPSB Member instant CSS gating */
+html[data-role="HRMPSB_MEMBER"] #nav-evaluation,
+html[data-role="HRMPSB_MEMBER"] #nav-payroll-batches,
+html[data-role="HRMPSB_MEMBER"] #nav-payroll-upload,
+html[data-role="HRMPSB_MEMBER"] #nav-settings,
+html[data-role="HRMPSB_MEMBER"] #btn-create-vacancy,
+html[data-role="HRMPSB_MEMBER"] #btn-add-employee,
+html[data-role="HRMPSB_MEMBER"] #btn-import-roster,
+html[data-role="HRMPSB_MEMBER"] #btn-add-program,
+html[data-role="HRMPSB_MEMBER"] #btn-quick-import {
+  display: none !important;
+}
+
+/* ── Institutional Module Readiness Banner (Future Use / Staged for Public) ── */
+.module-readiness-banner {
+  background: linear-gradient(135deg, #091E3A 0%, #122B52 60%, #163660 100%);
+  border: 1px solid rgba(212, 168, 67, 0.35);
+  border-left: 4px solid #D4A843;
+  border-radius: 12px;
+  padding: 0.875rem 1.25rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: #FFFFFF;
+  box-shadow: 0 4px 16px rgba(11, 23, 39, 0.12);
+  flex-wrap: wrap;
+}
+
+.module-readiness-banner__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(212, 168, 67, 0.2);
+  color: #FAC775;
+  border: 1px solid rgba(212, 168, 67, 0.4);
+}
+
+.readiness-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 8px #10B981;
+  animation: pulseGreen 2s infinite ease-in-out;
+}
+
+@keyframes pulseGreen {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.85); }
+}
+
+.module-readiness-banner__content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 260px;
+}
+
+.module-readiness-banner__icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.module-readiness-banner__text {
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: #CBD5E1;
+}
+
+.module-readiness-banner__text strong {
+  color: #FFFFFF;
+}
+
+.module-readiness-banner__tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #10B981;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 4px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.page-title-badge--future {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(212, 168, 67, 0.16);
+  color: #B88B2A;
+  border: 1px solid rgba(212, 168, 67, 0.35);
+  margin-left: 0.625rem;
+}
+
+

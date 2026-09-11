@@ -141,3 +141,124 @@ function logout(redirectTo = null) {
     : resolveFrontendPath('pages/auth/admin-login/admin-login.html');
   window.location.href = target;
 }
+
+/**
+ * Checks if the current user has at least one of the specified roles.
+ * @param {Array<string>|string} allowedRoles
+ * @returns {boolean}
+ */
+function hasPermission(allowedRoles) {
+  const role = getUserRole();
+  if (!role) return false;
+  if (!allowedRoles || allowedRoles.length === 0) return true;
+  const rolesArray = Array.isArray(allowedRoles) ? allowedRoles : [allowedRoles];
+  return rolesArray.includes(role);
+}
+
+/**
+ * Initializes and dynamically adapts the sidebar navigation according to the active user role.
+ * Updates user profile badge, initials, and toggles nav links and section headers.
+ */
+function initAppNavigation() {
+  const sidebar = document.getElementById('app-sidebar');
+  if (!sidebar) return;
+
+  const user = getUser();
+  const role = getUserRole() || (user ? user.role : null);
+
+  // Update User Profile Footer in Sidebar
+  const nameEl = document.getElementById('user-display-name');
+  const roleEl = document.getElementById('user-display-role');
+  const avatarEl = document.getElementById('user-avatar');
+
+  if (user) {
+    if (nameEl) nameEl.textContent = user.full_name || 'Staff User';
+    if (roleEl) {
+      if (typeof ROLE_LABELS !== 'undefined' && ROLE_LABELS[role]) {
+        roleEl.textContent = ROLE_LABELS[role];
+      } else {
+        roleEl.textContent = role || 'Staff';
+      }
+    }
+    if (avatarEl) {
+      const parts = (user.full_name || 'User').trim().split(/\s+/);
+      const initials = parts.length > 1
+        ? (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
+        : parts[0].slice(0, 2).toUpperCase();
+      avatarEl.textContent = initials;
+    }
+  }
+
+  // Attach Logout Button
+  const btnLogout = document.getElementById('btn-logout');
+  if (btnLogout && !btnLogout.dataset.boundLogout) {
+    btnLogout.dataset.boundLogout = 'true';
+    btnLogout.addEventListener('click', () => logout());
+  }
+
+  // Apply Role-Based Navigation Filtering
+  if (typeof NAV_PERMISSIONS !== 'undefined' && role) {
+    const alwaysVisibleCoreLinks = ['nav-dashboard', 'nav-employees', 'nav-programs', 'nav-vacancies', 'nav-hiring-pipeline'];
+    Object.keys(NAV_PERMISSIONS).forEach(navId => {
+      const linkEl = document.getElementById(navId);
+      if (linkEl) {
+        if (alwaysVisibleCoreLinks.includes(navId)) {
+          linkEl.style.display = '';
+          return;
+        }
+        const allowed = NAV_PERMISSIONS[navId];
+        if (allowed.includes(role)) {
+          linkEl.style.display = '';
+        } else {
+          linkEl.style.display = 'none';
+        }
+      }
+    });
+
+    // Role-specific label adjustments for personalized clarity
+    if (role === 'DEPT_HEAD') {
+      const empLabel = document.querySelector('#nav-employees .sidebar__link-content span:last-child');
+      if (empLabel) empLabel.textContent = 'Department Staff';
+      const progLabel = document.querySelector('#nav-programs .sidebar__link-content span:last-child');
+      if (progLabel) progLabel.textContent = 'Institute Programs';
+      const vacLabel = document.querySelector('#nav-vacancies .sidebar__link-content span:last-child');
+      if (vacLabel) vacLabel.textContent = 'Unit Vacancies';
+    } else if (role === 'HRMPSB_MEMBER') {
+      const empLabel = document.querySelector('#nav-employees .sidebar__link-content span:last-child');
+      if (empLabel) empLabel.textContent = 'Staff Directory';
+    }
+
+    // Hide section titles whose sibling links are completely hidden
+    const navContainer = sidebar.querySelector('.sidebar__nav');
+    if (navContainer) {
+      const sectionTitles = navContainer.querySelectorAll('.sidebar__section-title');
+      sectionTitles.forEach(title => {
+        let sibling = title.nextElementSibling;
+        let hasVisibleChild = false;
+        while (sibling && !sibling.classList.contains('sidebar__section-title')) {
+          if (sibling.classList.contains('sidebar__link') && sibling.style.display !== 'none') {
+            hasVisibleChild = true;
+            break;
+          }
+          sibling = sibling.nextElementSibling;
+        }
+        title.style.display = hasVisibleChild ? '' : 'none';
+      });
+    }
+  }
+
+  // Signal that auth & navigation state is ready to smoothly reveal user details
+  document.documentElement.setAttribute('data-auth-ready', 'true');
+  if (role) {
+    document.documentElement.setAttribute('data-role', role);
+  }
+}
+
+// Auto-run navigation initialization when DOM is loaded
+if (typeof document !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAppNavigation);
+  } else {
+    initAppNavigation();
+  }
+}

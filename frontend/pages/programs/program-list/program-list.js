@@ -32,6 +32,18 @@ document.addEventListener('DOMContentLoaded', async () => {
   const inputSearch = document.getElementById('input-search-program');
   const btnReset = document.getElementById('btn-reset-filters');
   const kpiTotalEl = document.getElementById('kpi-total-programs');
+  const btnAddProgram = document.getElementById('btn-add-program');
+
+  // Role-Based UI Action Controls
+  if (user && user.role !== ROLES.HR_ADMIN) {
+    if (btnAddProgram) btnAddProgram.style.display = 'none';
+  }
+
+  // Auto-scope for Department Head
+  if (user && user.role === ROLES.DEPT_HEAD && user.department_code && selectDept) {
+    selectDept.value = user.department_code;
+    selectDept.disabled = true;
+  }
 
   // Live top indicator elements
   const programsCountNum = document.getElementById('programs-count-num');
@@ -399,6 +411,100 @@ document.addEventListener('DOMContentLoaded', async () => {
       renderFilteredPrograms(1);
       showToast('Filters and sorting reset to default', 'info', 1500);
     });
+  }
+
+  // Add Program In-Page Modal Handler
+  if (btnAddProgram) {
+    btnAddProgram.addEventListener('click', (e) => {
+      e.preventDefault();
+      openAddProgramModal();
+    });
+  }
+
+  function openAddProgramModal() {
+    const modalHtml = `
+      <form id="modal-program-form" style="display: flex; flex-direction: column; gap: 1rem;">
+        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 0.75rem;">
+          <div>
+            <label style="font-size: 0.8rem; font-weight: 600; color: #1e293b; display: block; margin-bottom: 4px;">Program Code *</label>
+            <input type="text" id="m-prog-code" class="form-group__input" placeholder="e.g. BSIS" required style="width: 100%; text-transform: uppercase;" />
+          </div>
+          <div>
+            <label style="font-size: 0.8rem; font-weight: 600; color: #1e293b; display: block; margin-bottom: 4px;">Program Title *</label>
+            <input type="text" id="m-prog-name" class="form-group__input" placeholder="e.g. Bachelor of Science in Information Systems" required style="width: 100%;" />
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 0.75rem;">
+          <div>
+            <label style="font-size: 0.8rem; font-weight: 600; color: #1e293b; display: block; margin-bottom: 4px;">Collegiate Institute / Department *</label>
+            <select id="m-prog-dept" class="form-group__input" style="width: 100%;">
+              <option value="ICS">Institute of Computer Studies (ICS)</option>
+              <option value="IBM">Institute of Business and Management (IBM)</option>
+              <option value="ITE">Institute of Teacher Education (ITE)</option>
+              <option value="DGEC">Dept. of General Education (DGEC)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size: 0.8rem; font-weight: 600; color: #1e293b; display: block; margin-bottom: 4px;">Degree Level *</label>
+            <select id="m-prog-level" class="form-group__input" style="width: 100%;">
+              <option value="Baccalaureate">Baccalaureate (Undergraduate)</option>
+              <option value="Post-Baccalaureate">Post-Baccalaureate / Diploma</option>
+              <option value="Masteral">Master's Degree</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label style="font-size: 0.8rem; font-weight: 600; color: #1e293b; display: block; margin-bottom: 4px;">Major Tracks / Specializations (comma separated)</label>
+          <input type="text" id="m-prog-majors" class="form-group__input" placeholder="e.g. Enterprise Systems, Data Analytics" style="width: 100%;" />
+        </div>
+
+        <div>
+          <label style="font-size: 0.8rem; font-weight: 600; color: #1e293b; display: block; margin-bottom: 4px;">CHED Accreditation Status</label>
+          <input type="text" id="m-prog-ched" class="form-group__input" value="Compliant (COPC Recognized)" style="width: 100%;" />
+        </div>
+      </form>
+    `;
+
+    showModal(
+      '✚ Add Degree Program',
+      modalHtml,
+      'Save Degree Program',
+      async () => {
+        const code = document.getElementById('m-prog-code')?.value?.trim();
+        const name = document.getElementById('m-prog-name')?.value?.trim();
+
+        if (!code || !name) {
+          showToast('Program Code and Title are required.', 'error');
+          return false;
+        }
+
+        const deptSelect = document.getElementById('m-prog-dept');
+        const deptCode = deptSelect ? deptSelect.value : 'ICS';
+        const deptName = deptSelect ? deptSelect.options[deptSelect.selectedIndex].text : 'Institute of Computer Studies';
+
+        const progData = {
+          code: code,
+          name: name,
+          department_code: deptCode,
+          department_name: deptName,
+          degree_level: document.getElementById('m-prog-level')?.value || 'Baccalaureate',
+          majors: document.getElementById('m-prog-majors')?.value || '',
+          ched_status: document.getElementById('m-prog-ched')?.value || 'Compliant (COPC Recognized)',
+          status: 'ACTIVE'
+        };
+
+        if (typeof db !== 'undefined' && db.addProgram) {
+          const created = db.addProgram(progData);
+          await fetchPrograms();
+          showToast(`Successfully added program: ${created.code} — ${created.name}!`, 'success', 3500);
+          return true;
+        }
+        return true;
+      },
+      'Cancel'
+    );
   }
 
   await fetchPrograms();

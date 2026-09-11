@@ -11,9 +11,12 @@
   overflow-x: auto;
   background: var(--canvas, #F5F6F9);
   min-height: 100vh;
-  margin-left: var(--sidebar-width) !important;
-  width: calc(100% - var(--sidebar-width)) !important;
+  margin-left: var(--sidebar-width);
+  width: calc(100% - var(--sidebar-width));
+  min-width: 0;
   box-sizing: border-box;
+  transition: margin-left var(--sidebar-transition-duration, 250ms) var(--ease-drawer, cubic-bezier(0.22, 1, 0.36, 1)),
+              width var(--sidebar-transition-duration, 250ms) var(--ease-drawer, cubic-bezier(0.22, 1, 0.36, 1));
 }
 
 .topbar {

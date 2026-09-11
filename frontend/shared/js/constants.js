@@ -75,3 +75,21 @@ const VACANCY_TYPES = {
   TEACHING: 'Teaching / Faculty',
   NON_TEACHING: 'Non-Teaching / Staff'
 };
+
+const NAV_PERMISSIONS = {
+  'nav-dashboard': [ROLES.HR_ADMIN, ROLES.HRMPSB_MEMBER, ROLES.DEPT_HEAD],
+  'nav-employees': [ROLES.HR_ADMIN, ROLES.HRMPSB_MEMBER, ROLES.DEPT_HEAD],
+  'nav-programs': [ROLES.HR_ADMIN, ROLES.HRMPSB_MEMBER, ROLES.DEPT_HEAD],
+  'nav-vacancies': [ROLES.HR_ADMIN, ROLES.HRMPSB_MEMBER, ROLES.DEPT_HEAD],
+  'nav-hiring-pipeline': [ROLES.HR_ADMIN, ROLES.HRMPSB_MEMBER, ROLES.DEPT_HEAD],
+  'nav-deliberation': [ROLES.HR_ADMIN, ROLES.HRMPSB_MEMBER],
+  'nav-evaluation': [ROLES.HR_ADMIN, ROLES.DEPT_HEAD],
+  'nav-audit': [ROLES.HR_ADMIN, ROLES.HRMPSB_MEMBER],
+  'nav-payroll-batches': [ROLES.HR_ADMIN],
+  'nav-payroll-upload': [ROLES.HR_ADMIN],
+  'nav-payslip-download': [ROLES.HR_ADMIN, ROLES.HRMPSB_MEMBER, ROLES.DEPT_HEAD, ROLES.EMPLOYEE],
+  'nav-sara': [ROLES.HR_ADMIN, ROLES.HRMPSB_MEMBER, ROLES.DEPT_HEAD],
+  'nav-settings': [ROLES.HR_ADMIN],
+  'nav-data-logs': [ROLES.HR_ADMIN]
+};
+

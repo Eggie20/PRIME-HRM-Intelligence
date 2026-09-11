@@ -115,6 +115,114 @@ def applicant_login_view(request):
 
 
 @csrf_exempt
+def applicant_login_tracking_view(request):
+    """
+    Applicant sign in via Email + Application Tracking Number (Passwordless Docket Auth).
+    POST /api/v1/auth/applicant/login-tracking/
+    Body: { email, tracking_number }
+    """
+    if request.method != 'POST':
+        return api_error("Method not allowed", status=405)
+
+    init_mongo()
+    data = _parse_json(request)
+    email = data.get('email', '').strip().lower()
+    tracking_number = data.get('tracking_number', '').strip().upper()
+
+    if not email or not tracking_number:
+        return api_error("Email and application tracking number are required.", status=400)
+
+    try:
+        from apps.applicants.models import Application
+        app = Application.objects(
+            applicant_email=email,
+            tracking_number__iexact=tracking_number
+        ).first()
+    except Exception as e:
+        app = None
+
+    if not app:
+        return api_error(
+            f"No active application found matching tracking number '{tracking_number}' for {email}.",
+            status=404
+        )
+
+    # Find or create applicant user record
+    user = User.objects(email=email).first()
+    if not user:
+        user = User(
+            email=email,
+            first_name=app.applicant_name.split()[0] if app.applicant_name else 'Applicant',
+            last_name=' '.join(app.applicant_name.split()[1:]) if len(app.applicant_name.split()) > 1 else '',
+            role='APPLICANT',
+            is_active=True
+        )
+        user.set_unusable_password()
+        user.save()
+
+    user.last_login = datetime.utcnow()
+    user.save()
+
+    access_token = create_access_token(user)
+    refresh_token = create_refresh_token(user)
+
+    user_dict = user.to_dict()
+    user_dict['tracking_number'] = app.tracking_number
+    user_dict['application_id'] = str(app.id)
+
+    return api_success(
+        data={
+            'access_token': access_token,
+            'refresh_token': refresh_token,
+            'user': user_dict,
+            'application': app.to_dict()
+        },
+        message="Docket verified. Applicant login successful."
+    )
+
+
+@csrf_exempt
+def applicant_forgot_tracking_view(request):
+    """
+    Looks up tracking number(s) by email and returns or emails them.
+    POST /api/v1/auth/applicant/forgot-tracking/
+    Body: { email }
+    """
+    if request.method != 'POST':
+        return api_error("Method not allowed", status=405)
+
+    init_mongo()
+    data = _parse_json(request)
+    email = data.get('email', '').strip().lower()
+
+    if not email:
+        return api_error("Email address is required.", status=400)
+
+    dockets = []
+    try:
+        from apps.applicants.models import Application
+        apps = Application.objects(applicant_email=email).order_by('-created_at')
+        for a in apps:
+            dockets.append({
+                'tracking_number': a.tracking_number,
+                'stage': a.stage,
+                'created_at': a.created_at.strftime('%Y-%m-%d') if a.created_at else ''
+            })
+    except Exception:
+        pass
+
+    return api_success(
+        data={
+            'email': email,
+            'count': len(dockets),
+            'dockets': dockets
+        },
+        message=f"Found {len(dockets)} application docket(s) for {email}." if dockets else "No active dockets found."
+    )
+
+
+
+@csrf_exempt
 def applicant_register_view(request):
     """
     Applicant self-registration.

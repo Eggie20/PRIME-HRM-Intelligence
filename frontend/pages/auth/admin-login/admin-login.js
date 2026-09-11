@@ -142,4 +142,46 @@ document.addEventListener('DOMContentLoaded', () => {
   if (loginForm) {
     loginForm.addEventListener('submit', handleAdminLogin);
   }
+
+  /**
+   * Initializes the Mobile Viewport Advisory popup modal.
+   * Warns users that the administrative hub is intended for desktop/tablet displays,
+   * while allowing them to continue if they wish.
+   */
+  function initMobileAdvisory() {
+    const modal = document.getElementById('mobile-advisory-modal');
+    const btnContinue = document.getElementById('btn-advisory-continue');
+    const btnClose = document.getElementById('btn-advisory-close');
+    if (!modal) return;
+
+    function checkAndShow() {
+      const isMobile = window.innerWidth <= 768;
+      const alreadyDismissed = sessionStorage.getItem('nbsc_mobile_advisory_dismissed') === 'true';
+      if (isMobile && !alreadyDismissed) {
+        modal.classList.add('mobile-advisory-overlay--visible');
+        modal.setAttribute('aria-hidden', 'false');
+      }
+    }
+
+    function dismissModal() {
+      modal.classList.remove('mobile-advisory-overlay--visible');
+      modal.setAttribute('aria-hidden', 'true');
+      sessionStorage.setItem('nbsc_mobile_advisory_dismissed', 'true');
+    }
+
+    if (btnContinue) btnContinue.addEventListener('click', dismissModal);
+    if (btnClose) btnClose.addEventListener('click', dismissModal);
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) dismissModal();
+    });
+
+    // Check on initial load
+    checkAndShow();
+
+    // Check on window resize
+    window.addEventListener('resize', checkAndShow);
+  }
+
+  initMobileAdvisory();
 });

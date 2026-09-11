@@ -1,7 +1,7 @@
 /**
  * NBSC PRIME-HRM Intelligence Hub — System Settings Logic
- * Manages 4-Pillar DSS weight sliders, validation of 100% total sum,
- * institutional profile changes, and cryptographic audit ledger export.
+ * Manages 4-Pillar DSS weight sliders, live multi-segment visual spectrum bar,
+ * validation of 100% total sum, institutional profile, and cryptographic audit export.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -9,9 +9,13 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
- * Initializes sliders, listeners, and load stored preferences.
+ * Initializes sliders, listeners, and loads stored preferences.
  */
 function initSettings() {
+  if (typeof requireAuth === 'function' && typeof ROLES !== 'undefined') {
+    requireAuth([ROLES.HR_ADMIN]);
+  }
+
   const sliderMerit = document.getElementById('slider-weight-merit');
   const sliderComp = document.getElementById('slider-weight-competence');
   const sliderEthics = document.getElementById('slider-weight-ethics');
@@ -28,6 +32,11 @@ function initSettings() {
     btnSave.addEventListener('click', saveSettings);
   }
 
+  const btnReset = document.getElementById('btn-reset-defaults');
+  if (btnReset) {
+    btnReset.addEventListener('click', resetDefaultWeights);
+  }
+
   const btnExport = document.getElementById('btn-export-audit');
   if (btnExport) {
     btnExport.addEventListener('click', exportAuditChain);
@@ -42,7 +51,7 @@ function initSettings() {
 }
 
 /**
- * Handles slider changes and updates percentage labels and sum badge.
+ * Handles slider changes and updates percentage labels, visual spectrum bar, KPI stats, and sum badge.
  */
 function handleWeightChange() {
   const merit = parseInt(document.getElementById('slider-weight-merit')?.value || 30, 10);
@@ -61,23 +70,82 @@ function handleWeightChange() {
   if (pEthics) pEthics.textContent = `${ethics}%`;
   if (pService) pService.textContent = `${service}%`;
 
+  // Update visual distribution spectrum bar segments
+  const bMerit = document.getElementById('bar-merit');
+  const bComp = document.getElementById('bar-comp');
+  const bEthics = document.getElementById('bar-ethics');
+  const bService = document.getElementById('bar-service');
+
+  if (bMerit) {
+    bMerit.style.width = `${merit}%`;
+    bMerit.textContent = merit >= 7 ? `${merit}%` : '';
+    bMerit.title = `Merit & Qualifications: ${merit}%`;
+  }
+  if (bComp) {
+    bComp.style.width = `${comp}%`;
+    bComp.textContent = comp >= 7 ? `${comp}%` : '';
+    bComp.title = `Competence & Skills: ${comp}%`;
+  }
+  if (bEthics) {
+    bEthics.style.width = `${ethics}%`;
+    bEthics.textContent = ethics >= 7 ? `${ethics}%` : '';
+    bEthics.title = `Ethics & Integrity: ${ethics}%`;
+  }
+  if (bService) {
+    bService.style.width = `${service}%`;
+    bService.textContent = service >= 7 ? `${service}%` : '';
+    bService.title = `Service Orientation: ${service}%`;
+  }
+
   // Sum check
   const total = merit + comp + ethics + service;
   const sumVal = document.getElementById('val-weight-sum');
   const sumBadge = document.getElementById('weight-total-badge');
   const validationMsg = document.getElementById('weight-validation-message');
+  const kpiSum = document.getElementById('stat-dss-sum');
+  const kpiFlag = document.getElementById('kpi-sum-flag');
 
   if (sumVal) sumVal.textContent = `${total}%`;
+  if (kpiSum) kpiSum.textContent = `${total}%`;
 
   if (sumBadge && validationMsg) {
     sumBadge.className = 'weight-total-indicator';
+    validationMsg.className = 'validation-banner';
+
     if (total === 100) {
       sumBadge.classList.add('weight-total-indicator--valid');
-      validationMsg.innerHTML = '<span class="text-success font-bold">&#10004; Valid:</span> Weight distribution equals exactly 100%. Balanced for Merit Selection Plan.';
+      validationMsg.classList.add('validation-banner--valid');
+      validationMsg.innerHTML = '<span style="font-size: 1.1rem; line-height: 1;">&#10004;</span> <div><strong>Valid Distribution:</strong> Sum equals exactly 100%. Distribution meets CSC PRIME-HRM Merit Selection standards.</div>';
+      if (kpiFlag) {
+        kpiFlag.className = 'stat-flag flag-green';
+        kpiFlag.textContent = '100% Balanced';
+      }
     } else {
       sumBadge.classList.add('weight-total-indicator--invalid');
-      validationMsg.innerHTML = `<span class="text-danger font-bold">&#9888; Warning:</span> Current sum is ${total}%. The total weight must equal exactly 100% to save.`;
+      validationMsg.classList.add('validation-banner--invalid');
+      const diff = Math.abs(100 - total);
+      const direction = total > 100 ? 'exceeds by' : 'is short by';
+      validationMsg.innerHTML = `<span style="font-size: 1.1rem; line-height: 1;">&#9888;</span> <div><strong>Distribution Alert:</strong> Sum is <strong>${total}%</strong> (${direction} ${diff}%). Total weight across all 4 pillars must equal exactly 100% to save.</div>`;
+      if (kpiFlag) {
+        kpiFlag.className = 'stat-flag flag-neutral';
+        kpiFlag.textContent = `${total}% Unbalanced`;
+      }
     }
+  }
+}
+
+/**
+ * Resets weights back to default standard: 30%, 30%, 20%, 20%.
+ */
+function resetDefaultWeights() {
+  if (document.getElementById('slider-weight-merit')) document.getElementById('slider-weight-merit').value = 30;
+  if (document.getElementById('slider-weight-competence')) document.getElementById('slider-weight-competence').value = 30;
+  if (document.getElementById('slider-weight-ethics')) document.getElementById('slider-weight-ethics').value = 20;
+  if (document.getElementById('slider-weight-service')) document.getElementById('slider-weight-service').value = 20;
+  handleWeightChange();
+
+  if (typeof showToast === 'function') {
+    showToast('4-Pillar weights reset to standard defaults (30-30-20-20).', 'info');
   }
 }
 
@@ -97,6 +165,22 @@ function loadSavedSettings() {
     } catch (e) {
       console.warn('Error parsing saved weights:', e);
     }
+  } else {
+    handleWeightChange();
+  }
+
+  // Load institutional profile if stored
+  const savedProfile = localStorage.getItem('nbsc_inst_profile');
+  if (savedProfile) {
+    try {
+      const p = JSON.parse(savedProfile);
+      if (document.getElementById('input-inst-name') && p.name) document.getElementById('input-inst-name').value = p.name;
+      if (document.getElementById('input-inst-address') && p.address) document.getElementById('input-inst-address').value = p.address;
+      if (document.getElementById('input-president-name') && p.president) document.getElementById('input-president-name').value = p.president;
+      if (document.getElementById('input-hrmo-name') && p.hrmo) document.getElementById('input-hrmo-name').value = p.hrmo;
+    } catch (e) {
+      console.warn('Error parsing institutional profile:', e);
+    }
   }
 }
 
@@ -112,7 +196,9 @@ function saveSettings() {
   const total = merit + comp + ethics + service;
   if (total !== 100) {
     if (typeof showToast === 'function') {
-      showToast(`Cannot save: 4-Pillar DSS weights sum to ${total}%, must be 100%.`, 'error');
+      showToast(`Cannot save: 4-Pillar DSS weights sum to ${total}%, must equal 100%.`, 'error');
+    } else {
+      alert(`Cannot save: 4-Pillar DSS weights sum to ${total}%, must equal 100%.`);
     }
     return;
   }
@@ -120,14 +206,31 @@ function saveSettings() {
   const weights = { merit, competence: comp, ethics, service };
   localStorage.setItem('nbsc_dss_weights', JSON.stringify(weights));
 
+  // Save institutional profile
+  const instName = document.getElementById('input-inst-name')?.value || 'Northern Bukidnon State College';
+  const instAddress = document.getElementById('input-inst-address')?.value || 'Kihare, Manolo Fortich, Bukidnon 8703';
+  const presName = document.getElementById('input-president-name')?.value || 'Dr. Jovelyn G. Delosa';
+  const hrmoName = document.getElementById('input-hrmo-name')?.value || 'Maria Teresa Santos';
+
+  const profile = { name: instName, address: instAddress, president: presName, hrmo: hrmoName };
+  localStorage.setItem('nbsc_inst_profile', JSON.stringify(profile));
+
+  const btnSave = document.getElementById('btn-save-settings');
+  if (btnSave) {
+    const originalText = btnSave.innerHTML;
+    btnSave.innerHTML = '&#10004; Settings Saved!';
+    setTimeout(() => {
+      btnSave.innerHTML = originalText;
+    }, 2000);
+  }
+
   if (typeof showToast === 'function') {
     showToast('System settings and 4-Pillar DSS weights successfully saved!', 'success');
   }
 }
 
 /**
- * Fetches the entire cryptographic audit chain from /api/v1/audit/chain/ and triggers a download.
- * @returns {Promise<void>}
+ * Fetches the cryptographic audit chain and triggers a download.
  */
 async function exportAuditChain() {
   try {
@@ -137,16 +240,27 @@ async function exportAuditChain() {
       }
     });
 
-    const json = await response.json();
-    if (!response.ok) throw new Error(json.message || 'Failed to export audit chain');
+    let chainData = {};
+    if (response.ok) {
+      const json = await response.json();
+      chainData = json.data || {};
+    } else {
+      if (typeof db !== 'undefined' && db.getTable) {
+        chainData = {
+          audit_ledger: db.getTable('audit_logs') || [],
+          exported_at: new Date().toISOString(),
+          system: 'NBSC PRIME-HRM Intelligence Hub',
+          status: 'OFFLINE_CACHE_SNAPSHOT'
+        };
+      }
+    }
 
-    const chainData = json.data || {};
     const blob = new Blob([JSON.stringify(chainData, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
 
     const a = document.createElement('a');
     a.href = url;
-    a.download = `NBSC_Audit_Chain_Snapshot_${new Date().toISOString().slice(0,10)}.json`;
+    a.download = `NBSC_Audit_Chain_Snapshot_${new Date().toISOString().slice(0, 10)}.json`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -157,7 +271,25 @@ async function exportAuditChain() {
     }
   } catch (err) {
     console.error('Error exporting audit chain:', err);
-    if (typeof showToast === 'function') {
+    if (typeof db !== 'undefined' && db.getTable) {
+      const chainData = {
+        audit_ledger: db.getTable('audit_logs') || [],
+        exported_at: new Date().toISOString(),
+        system: 'NBSC PRIME-HRM Intelligence Hub'
+      };
+      const blob = new Blob([JSON.stringify(chainData, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `NBSC_Audit_Chain_Snapshot_${new Date().toISOString().slice(0, 10)}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      if (typeof showToast === 'function') {
+        showToast('Local audit ledger snapshot exported.', 'success');
+      }
+    } else if (typeof showToast === 'function') {
       showToast('Error exporting audit ledger.', 'error');
     }
   }

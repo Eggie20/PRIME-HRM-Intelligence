@@ -39,7 +39,7 @@ def get_kpi_metrics() -> dict:
         'applicants_in_pipeline': pipeline_count if pipeline_count > 0 else 8,
         'pending_deliberations': pending_delib if pending_delib > 0 else 2,
         'prime_hrm_status': {
-            'level': 'Level 2 (Accredited)',
+            'level': 'Level 2 (Process-Defined)',
             'pillars': {
                 'rssp': 96.5,   # Recruitment, Selection, Placement
                 'lnd': 92.0,    # Learning & Development

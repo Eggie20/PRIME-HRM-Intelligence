@@ -15,6 +15,7 @@ let currentBatchId = null;
  * Initializes dropzone events, file input listeners, and button bindings.
  */
 function initPayrollUpload() {
+  requireAuth([ROLES.HR_ADMIN]);
   const dropzone = document.getElementById('payroll-dropzone');
   const fileInput = document.getElementById('input-payroll-file');
   const fileInfo = document.getElementById('dropzone-file-info');

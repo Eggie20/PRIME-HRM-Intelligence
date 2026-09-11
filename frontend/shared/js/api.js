@@ -53,6 +53,41 @@ async function apiLoginLocal(email, password) {
 }
 
 /**
+ * Authenticates applicant via email and official application tracking number.
+ * Supports local NbscDB offline/file:// mode and remote API fallback.
+ * @param {string} email
+ * @param {string} trackingNumber
+ * @returns {Promise<{ success: boolean, data?: Object, error?: string }>}
+ */
+async function apiApplicantLoginByTracking(email, trackingNumber) {
+  if (typeof db !== 'undefined' && db.authenticateApplicantByTracking) {
+    return db.authenticateApplicantByTracking(email, trackingNumber);
+  }
+  try {
+    return await apiPost('/auth/applicant/login-tracking/', { email, tracking_number: trackingNumber });
+  } catch (err) {
+    return { success: false, error: err.message || 'Docket verification failed.' };
+  }
+}
+
+/**
+ * Looks up / retrieves tracking numbers associated with an applicant email.
+ * @param {string} email
+ * @returns {Promise<{ success: boolean, count: number, dockets: Array<Object> }>}
+ */
+async function apiRecoverTrackingNumber(email) {
+  if (typeof db !== 'undefined' && db.lookupTrackingNumbersByEmail) {
+    return db.lookupTrackingNumbersByEmail(email);
+  }
+  try {
+    return await apiPost('/auth/applicant/forgot-tracking/', { email });
+  } catch (err) {
+    return { success: false, count: 0, dockets: [] };
+  }
+}
+
+
+/**
  * Builds standard request headers with Authorization Bearer token.
  * @param {boolean} isJson - Whether content-type should be application/json
  * @returns {Headers}
@@ -251,7 +286,7 @@ async function handleLocalRequest(endpoint, options = {}) {
     if (method === 'GET' && isDetail) {
       const emp = db.findOne('employees', e => e.id === id || e.employee_id === id || e.employee_number === id);
       if (!emp) throw new Error(`Employee with ID ${id} not found.`);
-      return { success: true, data: emp };
+      return { success: true, data: { employee: emp, ...emp } };
     }
 
     if (method === 'POST') {
@@ -269,7 +304,7 @@ async function handleLocalRequest(endpoint, options = {}) {
 
     if (method === 'PUT' || method === 'PATCH') {
       const updated = db.update('employees', id, body);
-      return { success: true, data: updated };
+      return { success: true, data: { employee: updated, ...updated } };
     }
 
     if (method === 'DELETE') {
@@ -297,7 +332,7 @@ async function handleLocalRequest(endpoint, options = {}) {
         applicants_in_pipeline: applications.length,
         prime_hrm_status: {
           overall_score: 94.2,
-          maturity_level: 'Level 2 Accredited',
+          maturity_level: 'Level 2 (Process-Defined)',
           pillars: {
             rsp: 96.0,
             pm: 92.5,

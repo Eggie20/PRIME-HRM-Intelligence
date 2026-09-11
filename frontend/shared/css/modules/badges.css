@@ -7,25 +7,31 @@
 .badge {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.25rem;
-  padding: 0.25rem 0.625rem;
+  padding: 3px 11px;
   font-size: 0.75rem;
   font-weight: 700;
-  line-height: 1;
+  line-height: 1.25;
   border-radius: var(--radius-full);
   white-space: nowrap;
+  box-sizing: border-box;
 }
 
 .badge--teaching {
   background-color: #FEF3C7;
   color: #92400E;
   border: 1px solid #FCD34D;
+  white-space: nowrap;
+  font-weight: 700;
 }
 
 .badge--non-teaching {
-  background-color: #EEF2FF;
-  color: #4338CA;
-  border: 1px solid #C7D2FE;
+  background-color: #F1F5F9;
+  color: #334155;
+  border: 1px solid #CBD5E1;
+  white-space: nowrap;
+  font-weight: 700;
 }
 
 .badge--permanent {

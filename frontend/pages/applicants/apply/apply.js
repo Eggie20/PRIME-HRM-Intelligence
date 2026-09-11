@@ -473,18 +473,25 @@ document.addEventListener('DOMContentLoaded', async () => {
             Your credentials have been securely transmitted to the Northern Bukidnon State College HR Merit Selection Board under PRIME-HRM Level 2 standards.
           </p>
 
-          <div style="background: #f8fafc; border: 1.5px solid #d4a843; border-radius: 10px; padding: 1rem; margin-bottom: 1.5rem;">
+          <div style="background: #f8fafc; border: 1.5px solid #d4a843; border-radius: 10px; padding: 1rem; margin-bottom: 1.25rem;">
             <span style="font-size: 0.75rem; color: #64748b; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; display: block;">Official CSC Tracking Docket</span>
             <div style="font-size: 1.5rem; font-weight: 800; color: #002b5c; letter-spacing: 0.05em; margin-top: 0.25rem;" id="modal-tracking-code">${escapeHtml(trackingNumber)}</div>
           </div>
 
+          <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 8px; padding: 0.75rem; margin-bottom: 1.25rem; font-size: 0.82rem; color: #065f46; text-align: left;">
+            <strong>&#9993; Email Confirmation Sent:</strong> A copy of this tracking docket has been dispatched to <strong>${escapeHtml(inputEmail.value.trim())}</strong>. Use your email and this tracking number to sign in to your Candidate Portal anytime.
+          </div>
+
           <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 1.5rem;">
-            Please keep a copy of this tracking code. You can check your application milestones at any time on the live tracker.
+            Please keep a record of this tracking code to monitor your qualification screening, DSS scoring, and HRMPSB deliberation status.
           </p>
 
-          <div style="display: flex; gap: 0.75rem; justify-content: center;">
-            <button type="button" class="btn btn--primary" id="btn-modal-track" style="flex: 1;">
-              Track Application Now &rarr;
+          <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+            <button type="button" class="btn btn--outline" id="btn-modal-portal" style="flex: 1; min-width: 170px;">
+              Applicant Sign In &rarr;
+            </button>
+            <button type="button" class="btn btn--primary" id="btn-modal-track" style="flex: 1; min-width: 170px;">
+              Live Status Tracker &rarr;
             </button>
           </div>
         </div>
@@ -499,6 +506,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('btn-modal-track').addEventListener('click', () => {
       window.location.href = `../../track-application/track-application.html?appId=${encodeURIComponent(trackingNumber)}`;
     });
+
+    const btnPortal = document.getElementById('btn-modal-portal');
+    if (btnPortal) {
+      btnPortal.addEventListener('click', () => {
+        window.location.href = `../../auth/applicant-login/applicant-login.html`;
+      });
+    }
+  }
   }
 
   /**

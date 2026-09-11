@@ -407,18 +407,24 @@ const NAV_ICONS_SVG = {
   programs: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>`,
   vacancies: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>`,
   pipeline: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><path d="M13 6h3a2 2 0 0 1 2 2v7"></path><line x1="6" y1="9" x2="6" y2="21"></line></svg>`,
-  deliberation: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="M7 21h10"></path><path d="M12 3v18"></path><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"></path></svg>`,
-  audit: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>`,
+  deliberation: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="M7 21h10"></path><path d="M12 3v18"></path></svg>`,
+  evaluation: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>`,
+  audit: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>`,
   payroll: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="12" x="2" y="6" rx="2"></rect><circle cx="12" cy="12" r="2"></circle><path d="M6 12h.01M18 12h.01"></path></svg>`,
-  sara: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"></path><rect width="16" height="12" x="4" y="8" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path></svg>`,
+  upload: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>`,
+  payslips: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>`,
+  sara: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>`,
+  settings: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>`,
+  datalogs: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>`,
   logout: `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>`
 };
 
 /**
  * Automatically upgrades the sidebar navigation to executive-grade standards:
  * - Injects crisp vector SVG icons, eliminating mismatched raw emojis.
- * - Adds status indicator and sleek wrapper to user profile footer.
- * - Formats badge indicators for live module status.
+ * - Handles collapsible toggle button and smooth state transitions.
+ * - Generates hover tooltips in collapsed state.
+ * - Restores persisted collapsed state from localStorage.
  */
 function enhanceSidebarNav() {
   const sidebar = document.getElementById('app-sidebar');
@@ -431,17 +437,38 @@ function enhanceSidebarNav() {
     { matcher: /vacanc/i, icon: NAV_ICONS_SVG.vacancies, badge: '4' },
     { matcher: /pipeline|applicant/i, icon: NAV_ICONS_SVG.pipeline },
     { matcher: /deliberation|voting/i, icon: NAV_ICONS_SVG.deliberation },
-    { matcher: /audit/i, icon: NAV_ICONS_SVG.audit },
-    { matcher: /payroll|payslip/i, icon: NAV_ICONS_SVG.payroll },
-    { matcher: /sara/i, icon: NAV_ICONS_SVG.sara, badge: 'AI' }
+    { matcher: /evaluation/i, icon: NAV_ICONS_SVG.evaluation },
+    { matcher: /audit-chain|audit/i, icon: NAV_ICONS_SVG.audit },
+    { matcher: /payroll-batches/i, icon: NAV_ICONS_SVG.payroll },
+    { matcher: /payroll-upload/i, icon: NAV_ICONS_SVG.upload },
+    { matcher: /payslip/i, icon: NAV_ICONS_SVG.payslips },
+    { matcher: /sara/i, icon: NAV_ICONS_SVG.sara, badge: 'AI' },
+    { matcher: /data-logs|datalogs/i, icon: NAV_ICONS_SVG.datalogs },
+    { matcher: /settings/i, icon: NAV_ICONS_SVG.settings }
   ];
 
   const links = sidebar.querySelectorAll('.sidebar__link');
   links.forEach(link => {
     const href = link.getAttribute('href') || '';
     const id = link.id || '';
-    const text = link.textContent || '';
-    const targetStr = `${href} ${id} ${text}`;
+    const labelEl = link.querySelector('.sidebar__link-label');
+    const labelText = labelEl ? labelEl.textContent.trim() : (link.textContent || '').trim();
+    const targetStr = `${href} ${id} ${labelText}`;
+
+    // Ensure data-tooltip attribute for collapsed state
+    if (!link.getAttribute('data-tooltip') && labelText) {
+      link.setAttribute('data-tooltip', labelText);
+    }
+
+    // Set aria-current if active
+    if (link.classList.contains('sidebar__link--active')) {
+      link.setAttribute('aria-current', 'page');
+    }
+
+    // Ensure core items (Dashboard, Employees, Vacancies, Programs, Hiring Pipeline) are always visible and undisrupted
+    if (['nav-dashboard', 'nav-employees', 'nav-programs', 'nav-vacancies', 'nav-hiring-pipeline'].includes(id)) {
+      link.style.removeProperty('display');
+    }
 
     for (const mapping of iconMappings) {
       if (mapping.matcher.test(targetStr)) {
@@ -451,9 +478,9 @@ function enhanceSidebarNav() {
         }
 
         // Add badge counter if available and not already added
-        if (mapping.badge && !link.querySelector('.sidebar__link-badge')) {
+        if (mapping.badge && !link.querySelector('.sidebar__link-badge, .sidebar__badge-ai, .sidebar__link-badge--ai')) {
           const badgeEl = document.createElement('span');
-          badgeEl.className = 'sidebar__link-badge';
+          badgeEl.className = mapping.badge === 'AI' ? 'sidebar__badge-ai' : 'sidebar__link-badge';
           badgeEl.textContent = mapping.badge;
           link.appendChild(badgeEl);
         }
@@ -462,14 +489,113 @@ function enhanceSidebarNav() {
     }
   });
 
-  // Upgrade logout button with SVG icon
+  // Upgrade brand logo icon to official school logo image
+  const logoIcon = sidebar.querySelector('.sidebar__logo-icon');
+  if (logoIcon) {
+    const img = document.createElement('img');
+    img.src = (typeof resolveFrontendPath === 'function')
+      ? resolveFrontendPath('logos/school_logo.png')
+      : '../../../logos/school_logo.png';
+    img.alt = 'NBSC Seal';
+    img.className = 'sidebar__logo-img';
+    logoIcon.replaceWith(img);
+  }
+
+  // Ensure "Level 2" is erased from brand badge
+  const brandBadge = sidebar.querySelector('.sidebar__brand-badge');
+  if (brandBadge && brandBadge.textContent.includes('Level 2')) {
+    brandBadge.textContent = 'PRIME-HRM';
+  }
+
+  // Tag "Compliance & Payroll" section as Future Use / Staged for Public Release
+  const sectionTitles = sidebar.querySelectorAll('.sidebar__section-title');
+  sectionTitles.forEach(title => {
+    if (/compliance/i.test(title.textContent) && !title.querySelector('.sidebar__section-tag--future')) {
+      const tag = document.createElement('span');
+      tag.className = 'sidebar__section-tag--future';
+      tag.textContent = 'Future Use';
+      tag.setAttribute('title', 'Module staged and verified for upcoming public release');
+      title.appendChild(tag);
+    }
+  });
+
+  // Ensure brand structure has brand-left wrapper and toggle button
+  const brandHeader = sidebar.querySelector('.sidebar__brand');
+  if (brandHeader) {
+    let brandLeft = brandHeader.querySelector('.sidebar__brand-left');
+    if (!brandLeft) {
+      const logoImg = brandHeader.querySelector('.sidebar__logo-img');
+      const brandText = brandHeader.querySelector('.sidebar__brand-text');
+      brandLeft = document.createElement('div');
+      brandLeft.className = 'sidebar__brand-left';
+      if (logoImg) brandLeft.appendChild(logoImg);
+      if (brandText) brandLeft.appendChild(brandText);
+      brandHeader.prepend(brandLeft);
+    }
+
+    let toggleBtn = brandHeader.querySelector('#btn-sidebar-toggle');
+    if (!toggleBtn) {
+      toggleBtn = document.createElement('button');
+      toggleBtn.id = 'btn-sidebar-toggle';
+      toggleBtn.className = 'sidebar__toggle';
+      toggleBtn.setAttribute('aria-label', 'Toggle Sidebar');
+      toggleBtn.setAttribute('title', 'Collapse sidebar');
+      toggleBtn.setAttribute('aria-expanded', 'true');
+      toggleBtn.innerHTML = `
+        <svg class="sidebar__toggle-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      `;
+      brandHeader.appendChild(toggleBtn);
+    }
+
+    // Toggle logic with orchestrated animation
+    const setCollapsed = (collapsed, animate = true) => {
+      if (animate) {
+        sidebar.classList.add('sidebar--animating');
+        setTimeout(() => sidebar.classList.remove('sidebar--animating'), 350);
+      }
+      if (collapsed) {
+        sidebar.classList.add('sidebar--collapsed');
+        document.documentElement.classList.add('sidebar-is-collapsed');
+        document.body.classList.add('sidebar-is-collapsed');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        toggleBtn.setAttribute('title', 'Expand sidebar');
+      } else {
+        sidebar.classList.remove('sidebar--collapsed');
+        document.documentElement.classList.remove('sidebar-is-collapsed');
+        document.body.classList.remove('sidebar-is-collapsed');
+        toggleBtn.setAttribute('aria-expanded', 'true');
+        toggleBtn.setAttribute('title', 'Collapse sidebar');
+      }
+      try {
+        localStorage.setItem('nbsc_sidebar_collapsed', collapsed ? 'true' : 'false');
+      } catch (e) {}
+    };
+
+    // Restore saved state (without animation trigger on page paint)
+    const isInitiallyCollapsed = localStorage.getItem('nbsc_sidebar_collapsed') === 'true';
+    setCollapsed(isInitiallyCollapsed, false);
+
+    // Event listener
+    toggleBtn.onclick = (e) => {
+      e.stopPropagation();
+      const current = sidebar.classList.contains('sidebar--collapsed');
+      setCollapsed(!current, true);
+    };
+  }
+
+  // Upgrade logout button with SVG icon and tooltip
   const logoutBtn = sidebar.querySelector('#btn-logout');
   if (logoutBtn) {
     logoutBtn.className = 'sidebar__logout-btn';
+    logoutBtn.style.removeProperty('display');
     logoutBtn.innerHTML = NAV_ICONS_SVG.logout;
+    logoutBtn.setAttribute('data-tooltip', 'Sign out');
+    logoutBtn.setAttribute('title', 'Sign out');
   }
 
-  // Upgrade user avatar with status indicator
+  // Upgrade user avatar
   const userAvatar = sidebar.querySelector('#user-avatar');
   if (userAvatar && !userAvatar.parentElement.classList.contains('sidebar__user-avatar-wrap')) {
     const parent = userAvatar.parentElement;
@@ -477,10 +603,29 @@ function enhanceSidebarNav() {
     wrap.className = 'sidebar__user-avatar-wrap';
     parent.insertBefore(wrap, userAvatar);
     wrap.appendChild(userAvatar);
+  }
 
-    const statusDot = document.createElement('span');
-    statusDot.className = 'sidebar__user-status';
-    wrap.appendChild(statusDot);
+  // Ensure user display info is filled across all pages
+  const storedUserRaw = localStorage.getItem('nbsc_user');
+  let userObj = null;
+  if (storedUserRaw) {
+    try { userObj = JSON.parse(storedUserRaw); } catch (e) {}
+  }
+  if (!userObj) {
+    userObj = { full_name: 'Dr. Maria Santos', role: 'HR_ADMIN' };
+  }
+
+  const nameEl = sidebar.querySelector('#user-display-name');
+  const roleEl = sidebar.querySelector('#user-display-role');
+
+  if (nameEl && (!nameEl.textContent.trim() || nameEl.textContent === '—' || nameEl.innerHTML.trim() === '&nbsp;')) {
+    nameEl.textContent = userObj.full_name || 'Dr. Maria Santos';
+  }
+  if (roleEl && (!roleEl.textContent.trim() || roleEl.textContent === '—' || roleEl.innerHTML.trim() === '&nbsp;')) {
+    roleEl.textContent = (typeof ROLE_LABELS !== 'undefined' && ROLE_LABELS[userObj.role]) || userObj.role || 'HR Administrator';
+  }
+  if (userAvatar && (!userAvatar.textContent.trim() || userAvatar.textContent === '—' || userAvatar.innerHTML.trim() === '&nbsp;')) {
+    userAvatar.textContent = 'DM';
   }
 }
 

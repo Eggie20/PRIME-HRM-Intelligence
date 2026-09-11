@@ -15,6 +15,7 @@ let activeRecord = null;
  * Initializes payslip retrieval, period dropdown event binding, and download listener.
  */
 function initPayslipDownload() {
+  requireAuth([ROLES.HR_ADMIN, ROLES.HRMPSB_MEMBER, ROLES.DEPT_HEAD, ROLES.EMPLOYEE]);
   fetchMyPayslips();
 
   const periodSelect = document.getElementById('select-pay-period');
